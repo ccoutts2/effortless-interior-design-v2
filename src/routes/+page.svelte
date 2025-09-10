@@ -1,3 +1,6 @@
+<script lang="ts">
+</script>
+
 <svelte:head>
 	<title>Effortless Interior Design | Home</title>
 	<meta
@@ -6,5 +9,6 @@
 	/>
 </svelte:head>
 
-<h1>Welcome to SvelteKit</h1>
-<p>Visit <a href="https://svelte.dev/docs/kit">svelte.dev/docs/kit</a> to read the documentation</p>
+<div class="h-[80vh] w-full">
+	<img class="h-full w-full object-cover" src="/assets/images/eid15 (1).webp" alt="placeholder" />
+</div>
