@@ -26,10 +26,10 @@
 
 <Header>
 	<ul class="flex flex-1 justify-start gap-8">
-		<li><NavLink href="/">Services</NavLink></li>
+		<li><NavLink href="/services">Services</NavLink></li>
 		<li><NavLink href="/about">About</NavLink></li>
-		<li><NavLink href="/about">Off-The-Peg-Schemes</NavLink></li>
-		<li><NavLink href="/about">Contact</NavLink></li>
+		<li><NavLink href="/off-the-peg-scehemes">Off-The-Peg-Schemes</NavLink></li>
+		<li><NavLink href="/contact">Contact</NavLink></li>
 	</ul>
 </Header>
 {@render children?.()}

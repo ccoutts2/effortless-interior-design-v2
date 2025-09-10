@@ -20,17 +20,17 @@
 		top: 0;
 		left: 0;
 		width: 100%;
-		height: 100%;
-		background-color: rgba(0, 0, 0, 0.7);
+		height: auto;
+		padding-bottom: 10vh;
+		background-color: #f3eee8;
 		display: flex;
 		justify-content: center;
 		align-items: center;
 		z-index: 1000;
 		clip-path: polygon(0% 0%, 100% 0%, 100% 0%, 0% 0%);
-		transition: all 0.5s;
+		transition: clip-path 1s;
 
 		&.reveal {
-			background-color: red;
 			clip-path: polygon(0% 0%, 100% 0%, 100% 100%, 0% 100%);
 		}
 
