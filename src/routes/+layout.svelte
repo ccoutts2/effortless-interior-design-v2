@@ -1,12 +1,23 @@
 <script lang="ts">
 	import '../lib/styles/globals.css';
 	import favicon from '$lib/assets/favicon.svg';
-	import type { Snippet } from 'svelte';
+	import { type Snippet } from 'svelte';
 
 	import Header from '$lib/components/layout/Header.svelte';
 	import NavLink from '$lib/components/navigation/NavLink.svelte';
+	import Overlay from '$lib/components/ui/Overlay.svelte';
 
 	let { children }: { children: Snippet } = $props();
+
+	import { setContext } from 'svelte';
+	import type { OverlayProps } from '$lib/types';
+
+	const overlayState = $state<OverlayProps>({
+		isOpen: false,
+		overlayContent: null
+	});
+
+	setContext('overlay-ctx', overlayState);
 </script>
 
 <svelte:head>
@@ -22,3 +33,5 @@
 	</ul>
 </Header>
 {@render children?.()}
+
+<Overlay />

@@ -1,21 +1,36 @@
 <script lang="ts">
 	import { ShoppingCart, User } from '@lucide/svelte';
-	import type { Snippet } from 'svelte';
+	import { getContext, type Snippet } from 'svelte';
 	import NavLink from '../navigation/NavLink.svelte';
 	import Button from '../buttons/Button.svelte';
 
 	interface HeaderProps {
 		children: Snippet;
 		dataIsAdmin?: boolean;
-		onClick?: () => void;
 	}
 
-	let { children, dataIsAdmin = false, onClick }: HeaderProps = $props();
+	let { children, dataIsAdmin = false }: HeaderProps = $props();
+
+	import MobileMenu from '../navigation/MobileMenu.svelte';
+	import type { OverlayProps } from '$lib/types';
+	import ShoppingBasket from '../ShoppingBasket.svelte';
+
+	const overlay = getContext('overlay-ctx') as OverlayProps;
+
+	function openMobileOverlay() {
+		overlay.isOpen = true;
+		overlay.overlayContent = MobileMenu;
+	}
+
+	function openShoppingOverlay() {
+		overlay.isOpen = true;
+		overlay.overlayContent = ShoppingBasket;
+	}
 </script>
 
 <header class="NavBar">
 	<div class="NavBar__button">
-		<Button data-content="Menu">Menu</Button>
+		<Button data-content="Menu" onclick={openMobileOverlay}>Menu</Button>
 	</div>
 	<nav class="NavBar__navEl">
 		{@render children?.()}
@@ -27,7 +42,7 @@
 	</div>
 	<div class="NavBar__icon">
 		{#if !dataIsAdmin}
-			<button onclick={onClick}>
+			<button onclick={openShoppingOverlay}>
 				<ShoppingCart />
 			</button>
 		{:else}
