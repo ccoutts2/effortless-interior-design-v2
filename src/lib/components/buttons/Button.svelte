@@ -23,7 +23,8 @@
 		color: #403a34;
 		flex: 1;
 		justify-content: center;
-		max-width: 5rem;
+		max-width: 12rem;
+		min-width: 5rem;
 		padding: 0.5rem;
 		position: relative;
 		text-transform: uppercase;
@@ -32,7 +33,7 @@
 			content: '';
 			align-items: center;
 			background-color: #403a34;
-			color: #f6f1eb;
+			color: #f3eee8 !important;
 			display: flex;
 			inset: 0;
 			justify-content: center;
