@@ -25,6 +25,8 @@
 
 	const allSchemes = $derived(data.schemes);
 
+	const allAvailableSchemes = $derived(data.allSchemes);
+
 	const openShoppingBasket = () => {
 		overlay.isOpen = true;
 		overlay.overlayContent = ShoppingBasket;
@@ -35,6 +37,10 @@
 	};
 
 	const filteredProducts = $derived(allSchemes.filter((schemeId) => schemeId.id !== scheme.id));
+
+	const filteredAlProducts = $derived(
+		allAvailableSchemes.filter((schemeId) => schemeId.id !== scheme.id)
+	);
 </script>
 
 <main class="Scheme">
@@ -66,6 +72,29 @@
 					<article class="RelatedScheme">
 						<h4>{product.name}</h4>
 						<span>£{product.price}</span>
+						<div>
+							<img src={product.images[0].url} alt="{product.name} image" />
+						</div>
+						<a href="/off-the-peg-schemes/{product.roomTypeName?.toLowerCase()}/{product.id}"
+							><span class="visually-hidden">View {product.name}'s page</span></a
+						>
+					</article>
+				</li>
+			{/each}
+		</ul>
+	</section>
+	<section>
+		<h2>More Schemes</h2>
+		<ul class="flex gap-8">
+			{#each filteredAlProducts as product}
+				<li>
+					<article class="RelatedScheme">
+						<div>
+							<h4>{product.name}</h4>
+							<span class="block">£{product.price}</span>
+							<span class="text-sm">{product.roomTypeName}</span>
+						</div>
+
 						<div>
 							<img src={product.images[0].url} alt="{product.name} image" />
 						</div>

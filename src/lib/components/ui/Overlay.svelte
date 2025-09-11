@@ -13,7 +13,7 @@
 	{/if}
 
 	<div class="Overlay__button {overlay.overlayContent === MobileMenu ? 'bottom' : 'top'}">
-		<Button onclick={() => (overlay.isOpen = false)}>Close</Button>
+		<Button data-content="Close" onclick={() => (overlay.isOpen = false)}>Close</Button>
 	</div>
 </div>
 

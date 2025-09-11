@@ -38,11 +38,29 @@ const fetchSchemes = async (roomTypeName: string) => {
 	return schemes;
 };
 
+const fetchAllSchemes = async () => {
+	const allSchemes = await prisma.scheme.findMany({
+		where: {
+			isAvailable: true
+		},
+		include: {
+			images: {
+				orderBy: { schemeIndex: 'asc' }
+			}
+		}
+	});
+
+	return allSchemes;
+};
+
 export const load: PageServerLoad = async ({ params }: SchemeProps) => {
 	const scheme = await fetchScheme(Number(params.scheme));
 	const schemes = await fetchSchemes(params.roomTypeName);
+
+	const allSchemes = await fetchAllSchemes();
 	return {
 		scheme,
-		schemes
+		schemes,
+		allSchemes
 	};
 };
