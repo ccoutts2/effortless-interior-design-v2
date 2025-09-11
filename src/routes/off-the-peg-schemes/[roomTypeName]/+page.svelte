@@ -3,6 +3,7 @@
 	import type { PageData } from './$types';
 	import Button from '$lib/components/buttons/Button.svelte';
 	import ClipImage from '$lib/components/ClipImage.svelte';
+	import { slugify } from '$lib/utils/slugify';
 
 	let { data }: { data: PageData } = $props();
 
@@ -27,7 +28,8 @@
 
 				<p>{scheme.description}</p>
 
-				<a href="/off-the-peg-schemes/{scheme.roomTypeName?.toLowerCase()}/{scheme.id}"
+				<!-- Slugify not working for living room - need to fix -->
+				<a href="/off-the-peg-schemes/{slugify(scheme.roomTypeName!)}/{scheme.id}"
 					><Button data-content="Visit">Visit</Button><span class="visually-hidden"
 						>Link to {scheme.name} page</span
 					></a

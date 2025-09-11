@@ -3,6 +3,7 @@
 	import ClipImage from '$lib/components/ClipImage.svelte';
 	import ShoppingBasket from '$lib/components/ShoppingBasket.svelte';
 	import type { OverlayProps } from '$lib/types';
+	import { slugify } from '$lib/utils/slugify';
 	import type { PageData } from './$types';
 
 	import { getContext, onMount } from 'svelte';
@@ -75,7 +76,8 @@
 						<div>
 							<img src={product.images[0].url} alt="{product.name} image" />
 						</div>
-						<a href="/off-the-peg-schemes/{product.roomTypeName?.toLowerCase()}/{product.id}"
+						<!-- Slugify not working for living room - need to fix -->
+						<a href="/off-the-peg-schemes/{slugify(product.roomTypeName!)}/{product.id}"
 							><span class="visually-hidden">View {product.name}'s page</span></a
 						>
 					</article>
@@ -98,7 +100,7 @@
 						<div>
 							<img src={product.images[0].url} alt="{product.name} image" />
 						</div>
-						<a href="/off-the-peg-schemes/{product.roomTypeName?.toLowerCase()}/{product.id}"
+						<a href="/off-the-peg-schemes/{slugify(product.roomTypeName!)}/{product.id}"
 							><span class="visually-hidden">View {product.name}'s page</span></a
 						>
 					</article>
