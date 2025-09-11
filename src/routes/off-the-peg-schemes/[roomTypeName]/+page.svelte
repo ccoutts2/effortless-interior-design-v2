@@ -1,8 +1,8 @@
 <script lang="ts">
-	import NavLink from '$lib/components/navigation/NavLink.svelte';
 	import { onMount } from 'svelte';
 	import type { PageData } from './$types';
 	import Button from '$lib/components/buttons/Button.svelte';
+	import ClipImage from '$lib/components/ClipImage.svelte';
 
 	let { data }: { data: PageData } = $props();
 
@@ -20,7 +20,7 @@
 		{#each data.schemes as scheme}
 			<li class="RoomTypeName__item">
 				<div class="RoomTypeName__imageWrapper">
-					<img class={isPageReady ? 'ready' : ''} src={scheme.images[0].url} alt="" />
+					<ClipImage isComponentReady={isPageReady} src={scheme.images[0].url} description="" />
 				</div>
 
 				<h3>Our {scheme.name} schemes</h3>
@@ -86,20 +86,6 @@
 			max-height: 30rem;
 			overflow: hidden;
 			width: 100%;
-
-			img {
-				clip-path: polygon(0% 0%, 0% 0%, 0% 100%, 0% 100%);
-				display: block;
-				height: 100%;
-				object-fit: cover;
-				scale: 1.1;
-				transition: all 1s cubic-bezier(0.43, 1.09, 0.51, 1.01);
-				width: 100%;
-			}
-			img.ready {
-				clip-path: polygon(0% 0%, 100% 0%, 100% 100%, 0% 100%);
-				scale: 1;
-			}
 		}
 	}
 </style>

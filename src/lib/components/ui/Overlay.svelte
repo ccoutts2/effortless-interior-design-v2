@@ -11,11 +11,10 @@
 	{#if overlay.overlayContent}
 		<svelte:component this={overlay.overlayContent} />
 	{/if}
-	{#if overlay.overlayContent === MobileMenu}
-		<div class="Overlay__button">
-			<Button onclick={() => (overlay.isOpen = false)}>Close</Button>
-		</div>
-	{/if}
+
+	<div class="Overlay__button {overlay.overlayContent === MobileMenu ? 'bottom' : 'top'}">
+		<Button onclick={() => (overlay.isOpen = false)}>Close</Button>
+	</div>
 </div>
 
 <style lang="scss">
@@ -40,9 +39,17 @@
 
 		&__button {
 			position: absolute;
-			right: 0.5rem;
-			bottom: 1rem;
-			z-index: 10001;
+			z-index: 1000;
+
+			&.top {
+				right: 0.5rem;
+				top: 1rem;
+			}
+
+			&.bottom {
+				right: 0.5rem;
+				bottom: 1rem;
+			}
 		}
 	}
 </style>

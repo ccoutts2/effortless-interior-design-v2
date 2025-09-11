@@ -23,7 +23,7 @@
 		color: #403a34;
 		flex: 1;
 		justify-content: center;
-		max-width: 12rem;
+		max-width: fit-content;
 		min-width: 5rem;
 		padding: 0.5rem;
 		position: relative;

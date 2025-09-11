@@ -1,13 +1,129 @@
 <script lang="ts">
+	import Button from '$lib/components/buttons/Button.svelte';
+	import ClipImage from '$lib/components/ClipImage.svelte';
+	import ShoppingBasket from '$lib/components/ShoppingBasket.svelte';
+	import type { OverlayProps } from '$lib/types';
 	import type { PageData } from './$types';
 
-	let { data }: { data: PageData } = $props();
+	import { getContext, onMount } from 'svelte';
 
-	const scheme = data.scheme;
+	interface SchemeProps {
+		data: PageData;
+	}
+
+	const overlay = getContext('overlay-ctx') as OverlayProps;
+
+	let { data }: SchemeProps = $props();
+
+	let isPageReady: boolean = $state(false);
+
+	onMount(() => {
+		isPageReady = true;
+	});
+
+	const scheme = $derived(data.scheme);
+
+	const allSchemes = $derived(data.schemes);
+
+	const openShoppingBasket = () => {
+		overlay.isOpen = true;
+		overlay.overlayContent = ShoppingBasket;
+	};
+
+	const discountedPrice = (price: number, discount: number) => {
+		return price * (1 - discount);
+	};
+
+	const filteredProducts = $derived(allSchemes.filter((schemeId) => schemeId.id !== scheme.id));
 </script>
 
-<main>
-	<h1>{scheme.name}</h1>
-	<h2>{scheme.description}</h2>
-	<h3>£{scheme.price}</h3>
+<main class="Scheme">
+	<section class="Scheme__product Product">
+		<article class="Product__information">
+			<div>
+				<span>{scheme.roomTypeName}</span>
+				<h1>{scheme.name}</h1>
+				<div class="Product__price">
+					<span class="Product__oldPrice">£{scheme.price}</span><span
+						><strong>£{discountedPrice(Number(scheme.price), 0.3)}</strong></span
+					>
+				</div>
+				<p>{scheme.description}</p>
+			</div>
+			<div>
+				<Button data-content="Add to basket" onclick={openShoppingBasket}>Add to basket</Button>
+			</div>
+		</article>
+		<div class="overflow-hidden">
+			<ClipImage isComponentReady={isPageReady} src={scheme.images[0].url} description="" />
+		</div>
+	</section>
+	<section>
+		<h2>Related {scheme.roomTypeName} Schemes</h2>
+		<ul class="flex gap-8">
+			{#each filteredProducts as product}
+				<li>
+					<article class="RelatedScheme">
+						<h4>{product.name}</h4>
+						<span>£{product.price}</span>
+						<div>
+							<img src={product.images[0].url} alt="{product.name} image" />
+						</div>
+						<a href="/off-the-peg-schemes/{product.roomTypeName?.toLowerCase()}/{product.id}"
+							><span class="visually-hidden">View {product.name}'s page</span></a
+						>
+					</article>
+				</li>
+			{/each}
+		</ul>
+	</section>
 </main>
+
+<style lang="scss">
+	@use '../../../../lib/styles/partials/breakpoints';
+
+	.Scheme {
+		display: flex;
+		flex-direction: column;
+
+		&__product {
+			display: flex;
+			flex-direction: column;
+		}
+	}
+
+	.Product {
+		display: flex;
+		justify-content: space-between;
+
+		@include breakpoints.desktop {
+			flex-direction: row-reverse;
+		}
+		&__information {
+			display: flex;
+			flex-direction: column;
+			gap: 2rem;
+		}
+
+		&__price {
+			display: flex;
+			gap: 1rem;
+		}
+
+		&__oldPrice {
+			text-decoration: line-through;
+		}
+	}
+
+	.RelatedScheme {
+		display: flex;
+		flex-direction: column-reverse;
+		position: relative;
+
+		a::after {
+			content: '';
+			inset: 0;
+			position: absolute;
+		}
+	}
+</style>
