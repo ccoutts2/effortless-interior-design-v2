@@ -16,7 +16,6 @@
 	import ShoppingBasket from '../ShoppingBasket.svelte';
 
 	const overlay = getContext('overlay-ctx') as OverlayProps;
-	const isLked = getContext('liked-state');
 
 	function openMobileOverlay() {
 		overlay.isOpen = true;
