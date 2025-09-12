@@ -148,6 +148,7 @@ exports.Prisma.RoomTypeScalarFieldEnum = {
 };
 
 exports.Prisma.UserScalarFieldEnum = {
+  id: 'id',
   email: 'email',
   name: 'name',
   password: 'password',
@@ -161,7 +162,7 @@ exports.Prisma.UserScalarFieldEnum = {
 exports.Prisma.OrderScalarFieldEnum = {
   id: 'id',
   totalPrice: 'totalPrice',
-  userEmail: 'userEmail',
+  userId: 'userId',
   withConsultation: 'withConsultation',
   createdAt: 'createdAt',
   updatedAt: 'updatedAt'

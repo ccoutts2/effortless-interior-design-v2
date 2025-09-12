@@ -1355,13 +1355,13 @@ export namespace Prisma {
    */
 
   export type RoomTypeCountOutputType = {
-    schemes: number
     images: number
+    schemes: number
   }
 
   export type RoomTypeCountOutputTypeSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    schemes?: boolean | RoomTypeCountOutputTypeCountSchemesArgs
     images?: boolean | RoomTypeCountOutputTypeCountImagesArgs
+    schemes?: boolean | RoomTypeCountOutputTypeCountSchemesArgs
   }
 
   // Custom InputTypes
@@ -1378,15 +1378,15 @@ export namespace Prisma {
   /**
    * RoomTypeCountOutputType without action
    */
-  export type RoomTypeCountOutputTypeCountSchemesArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    where?: SchemeWhereInput
+  export type RoomTypeCountOutputTypeCountImagesArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: ImageWhereInput
   }
 
   /**
    * RoomTypeCountOutputType without action
    */
-  export type RoomTypeCountOutputTypeCountImagesArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    where?: ImageWhereInput
+  export type RoomTypeCountOutputTypeCountSchemesArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: SchemeWhereInput
   }
 
 
@@ -1683,8 +1683,8 @@ export namespace Prisma {
     createdAt?: boolean
     updatedAt?: boolean
     images?: boolean | Scheme$imagesArgs<ExtArgs>
-    roomType?: boolean | Scheme$roomTypeArgs<ExtArgs>
     orders?: boolean | Scheme$ordersArgs<ExtArgs>
+    roomType?: boolean | Scheme$roomTypeArgs<ExtArgs>
     _count?: boolean | SchemeCountOutputTypeDefaultArgs<ExtArgs>
   }, ExtArgs["result"]["scheme"]>
 
@@ -1726,8 +1726,8 @@ export namespace Prisma {
   export type SchemeOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "name" | "description" | "price" | "isAvailable" | "roomTypeName" | "createdAt" | "updatedAt", ExtArgs["result"]["scheme"]>
   export type SchemeInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     images?: boolean | Scheme$imagesArgs<ExtArgs>
-    roomType?: boolean | Scheme$roomTypeArgs<ExtArgs>
     orders?: boolean | Scheme$ordersArgs<ExtArgs>
+    roomType?: boolean | Scheme$roomTypeArgs<ExtArgs>
     _count?: boolean | SchemeCountOutputTypeDefaultArgs<ExtArgs>
   }
   export type SchemeIncludeCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
@@ -1741,8 +1741,8 @@ export namespace Prisma {
     name: "Scheme"
     objects: {
       images: Prisma.$ImagePayload<ExtArgs>[]
-      roomType: Prisma.$RoomTypePayload<ExtArgs> | null
       orders: Prisma.$OrdersOnSchemesPayload<ExtArgs>[]
+      roomType: Prisma.$RoomTypePayload<ExtArgs> | null
     }
     scalars: $Extensions.GetPayloadResult<{
       id: number
@@ -2148,8 +2148,8 @@ export namespace Prisma {
   export interface Prisma__SchemeClient<T, Null = never, ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> extends Prisma.PrismaPromise<T> {
     readonly [Symbol.toStringTag]: "PrismaPromise"
     images<T extends Scheme$imagesArgs<ExtArgs> = {}>(args?: Subset<T, Scheme$imagesArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$ImagePayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
-    roomType<T extends Scheme$roomTypeArgs<ExtArgs> = {}>(args?: Subset<T, Scheme$roomTypeArgs<ExtArgs>>): Prisma__RoomTypeClient<$Result.GetResult<Prisma.$RoomTypePayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
     orders<T extends Scheme$ordersArgs<ExtArgs> = {}>(args?: Subset<T, Scheme$ordersArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$OrdersOnSchemesPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+    roomType<T extends Scheme$roomTypeArgs<ExtArgs> = {}>(args?: Subset<T, Scheme$roomTypeArgs<ExtArgs>>): Prisma__RoomTypeClient<$Result.GetResult<Prisma.$RoomTypePayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
     /**
      * Attaches callbacks for the resolution and/or rejection of the Promise.
      * @param onfulfilled The callback to execute when the Promise is resolved.
@@ -2607,25 +2607,6 @@ export namespace Prisma {
   }
 
   /**
-   * Scheme.roomType
-   */
-  export type Scheme$roomTypeArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * Select specific fields to fetch from the RoomType
-     */
-    select?: RoomTypeSelect<ExtArgs> | null
-    /**
-     * Omit specific fields from the RoomType
-     */
-    omit?: RoomTypeOmit<ExtArgs> | null
-    /**
-     * Choose, which related nodes to fetch as well
-     */
-    include?: RoomTypeInclude<ExtArgs> | null
-    where?: RoomTypeWhereInput
-  }
-
-  /**
    * Scheme.orders
    */
   export type Scheme$ordersArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
@@ -2647,6 +2628,25 @@ export namespace Prisma {
     take?: number
     skip?: number
     distinct?: OrdersOnSchemesScalarFieldEnum | OrdersOnSchemesScalarFieldEnum[]
+  }
+
+  /**
+   * Scheme.roomType
+   */
+  export type Scheme$roomTypeArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the RoomType
+     */
+    select?: RoomTypeSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the RoomType
+     */
+    omit?: RoomTypeOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: RoomTypeInclude<ExtArgs> | null
+    where?: RoomTypeWhereInput
   }
 
   /**
@@ -2890,8 +2890,8 @@ export namespace Prisma {
     roomTypeName?: boolean
     createdAt?: boolean
     updatedAt?: boolean
-    scheme?: boolean | SchemeDefaultArgs<ExtArgs>
     roomType?: boolean | Image$roomTypeArgs<ExtArgs>
+    scheme?: boolean | SchemeDefaultArgs<ExtArgs>
   }, ExtArgs["result"]["image"]>
 
   export type ImageSelectCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
@@ -2902,8 +2902,8 @@ export namespace Prisma {
     roomTypeName?: boolean
     createdAt?: boolean
     updatedAt?: boolean
-    scheme?: boolean | SchemeDefaultArgs<ExtArgs>
     roomType?: boolean | Image$roomTypeArgs<ExtArgs>
+    scheme?: boolean | SchemeDefaultArgs<ExtArgs>
   }, ExtArgs["result"]["image"]>
 
   export type ImageSelectUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
@@ -2914,8 +2914,8 @@ export namespace Prisma {
     roomTypeName?: boolean
     createdAt?: boolean
     updatedAt?: boolean
-    scheme?: boolean | SchemeDefaultArgs<ExtArgs>
     roomType?: boolean | Image$roomTypeArgs<ExtArgs>
+    scheme?: boolean | SchemeDefaultArgs<ExtArgs>
   }, ExtArgs["result"]["image"]>
 
   export type ImageSelectScalar = {
@@ -2930,23 +2930,23 @@ export namespace Prisma {
 
   export type ImageOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "url" | "schemeId" | "schemeIndex" | "roomTypeName" | "createdAt" | "updatedAt", ExtArgs["result"]["image"]>
   export type ImageInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    scheme?: boolean | SchemeDefaultArgs<ExtArgs>
     roomType?: boolean | Image$roomTypeArgs<ExtArgs>
+    scheme?: boolean | SchemeDefaultArgs<ExtArgs>
   }
   export type ImageIncludeCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    scheme?: boolean | SchemeDefaultArgs<ExtArgs>
     roomType?: boolean | Image$roomTypeArgs<ExtArgs>
+    scheme?: boolean | SchemeDefaultArgs<ExtArgs>
   }
   export type ImageIncludeUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    scheme?: boolean | SchemeDefaultArgs<ExtArgs>
     roomType?: boolean | Image$roomTypeArgs<ExtArgs>
+    scheme?: boolean | SchemeDefaultArgs<ExtArgs>
   }
 
   export type $ImagePayload<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     name: "Image"
     objects: {
-      scheme: Prisma.$SchemePayload<ExtArgs>
       roomType: Prisma.$RoomTypePayload<ExtArgs> | null
+      scheme: Prisma.$SchemePayload<ExtArgs>
     }
     scalars: $Extensions.GetPayloadResult<{
       id: number
@@ -3350,8 +3350,8 @@ export namespace Prisma {
    */
   export interface Prisma__ImageClient<T, Null = never, ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> extends Prisma.PrismaPromise<T> {
     readonly [Symbol.toStringTag]: "PrismaPromise"
-    scheme<T extends SchemeDefaultArgs<ExtArgs> = {}>(args?: Subset<T, SchemeDefaultArgs<ExtArgs>>): Prisma__SchemeClient<$Result.GetResult<Prisma.$SchemePayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
     roomType<T extends Image$roomTypeArgs<ExtArgs> = {}>(args?: Subset<T, Image$roomTypeArgs<ExtArgs>>): Prisma__RoomTypeClient<$Result.GetResult<Prisma.$RoomTypePayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+    scheme<T extends SchemeDefaultArgs<ExtArgs> = {}>(args?: Subset<T, SchemeDefaultArgs<ExtArgs>>): Prisma__SchemeClient<$Result.GetResult<Prisma.$SchemePayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
     /**
      * Attaches callbacks for the resolution and/or rejection of the Promise.
      * @param onfulfilled The callback to execute when the Promise is resolved.
@@ -3969,8 +3969,8 @@ export namespace Prisma {
     name?: boolean
     createdAt?: boolean
     updatedAt?: boolean
-    schemes?: boolean | RoomType$schemesArgs<ExtArgs>
     images?: boolean | RoomType$imagesArgs<ExtArgs>
+    schemes?: boolean | RoomType$schemesArgs<ExtArgs>
     _count?: boolean | RoomTypeCountOutputTypeDefaultArgs<ExtArgs>
   }, ExtArgs["result"]["roomType"]>
 
@@ -3994,8 +3994,8 @@ export namespace Prisma {
 
   export type RoomTypeOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"name" | "createdAt" | "updatedAt", ExtArgs["result"]["roomType"]>
   export type RoomTypeInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    schemes?: boolean | RoomType$schemesArgs<ExtArgs>
     images?: boolean | RoomType$imagesArgs<ExtArgs>
+    schemes?: boolean | RoomType$schemesArgs<ExtArgs>
     _count?: boolean | RoomTypeCountOutputTypeDefaultArgs<ExtArgs>
   }
   export type RoomTypeIncludeCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {}
@@ -4004,8 +4004,8 @@ export namespace Prisma {
   export type $RoomTypePayload<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     name: "RoomType"
     objects: {
-      schemes: Prisma.$SchemePayload<ExtArgs>[]
       images: Prisma.$ImagePayload<ExtArgs>[]
+      schemes: Prisma.$SchemePayload<ExtArgs>[]
     }
     scalars: $Extensions.GetPayloadResult<{
       name: string
@@ -4405,8 +4405,8 @@ export namespace Prisma {
    */
   export interface Prisma__RoomTypeClient<T, Null = never, ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> extends Prisma.PrismaPromise<T> {
     readonly [Symbol.toStringTag]: "PrismaPromise"
-    schemes<T extends RoomType$schemesArgs<ExtArgs> = {}>(args?: Subset<T, RoomType$schemesArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$SchemePayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
     images<T extends RoomType$imagesArgs<ExtArgs> = {}>(args?: Subset<T, RoomType$imagesArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$ImagePayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+    schemes<T extends RoomType$schemesArgs<ExtArgs> = {}>(args?: Subset<T, RoomType$schemesArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$SchemePayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
     /**
      * Attaches callbacks for the resolution and/or rejection of the Promise.
      * @param onfulfilled The callback to execute when the Promise is resolved.
@@ -4827,30 +4827,6 @@ export namespace Prisma {
   }
 
   /**
-   * RoomType.schemes
-   */
-  export type RoomType$schemesArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * Select specific fields to fetch from the Scheme
-     */
-    select?: SchemeSelect<ExtArgs> | null
-    /**
-     * Omit specific fields from the Scheme
-     */
-    omit?: SchemeOmit<ExtArgs> | null
-    /**
-     * Choose, which related nodes to fetch as well
-     */
-    include?: SchemeInclude<ExtArgs> | null
-    where?: SchemeWhereInput
-    orderBy?: SchemeOrderByWithRelationInput | SchemeOrderByWithRelationInput[]
-    cursor?: SchemeWhereUniqueInput
-    take?: number
-    skip?: number
-    distinct?: SchemeScalarFieldEnum | SchemeScalarFieldEnum[]
-  }
-
-  /**
    * RoomType.images
    */
   export type RoomType$imagesArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
@@ -4872,6 +4848,30 @@ export namespace Prisma {
     take?: number
     skip?: number
     distinct?: ImageScalarFieldEnum | ImageScalarFieldEnum[]
+  }
+
+  /**
+   * RoomType.schemes
+   */
+  export type RoomType$schemesArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Scheme
+     */
+    select?: SchemeSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Scheme
+     */
+    omit?: SchemeOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: SchemeInclude<ExtArgs> | null
+    where?: SchemeWhereInput
+    orderBy?: SchemeOrderByWithRelationInput | SchemeOrderByWithRelationInput[]
+    cursor?: SchemeWhereUniqueInput
+    take?: number
+    skip?: number
+    distinct?: SchemeScalarFieldEnum | SchemeScalarFieldEnum[]
   }
 
   /**
@@ -4899,11 +4899,22 @@ export namespace Prisma {
 
   export type AggregateUser = {
     _count: UserCountAggregateOutputType | null
+    _avg: UserAvgAggregateOutputType | null
+    _sum: UserSumAggregateOutputType | null
     _min: UserMinAggregateOutputType | null
     _max: UserMaxAggregateOutputType | null
   }
 
+  export type UserAvgAggregateOutputType = {
+    id: number | null
+  }
+
+  export type UserSumAggregateOutputType = {
+    id: number | null
+  }
+
   export type UserMinAggregateOutputType = {
+    id: number | null
     email: string | null
     name: string | null
     password: string | null
@@ -4915,6 +4926,7 @@ export namespace Prisma {
   }
 
   export type UserMaxAggregateOutputType = {
+    id: number | null
     email: string | null
     name: string | null
     password: string | null
@@ -4926,6 +4938,7 @@ export namespace Prisma {
   }
 
   export type UserCountAggregateOutputType = {
+    id: number
     email: number
     name: number
     password: number
@@ -4938,7 +4951,16 @@ export namespace Prisma {
   }
 
 
+  export type UserAvgAggregateInputType = {
+    id?: true
+  }
+
+  export type UserSumAggregateInputType = {
+    id?: true
+  }
+
   export type UserMinAggregateInputType = {
+    id?: true
     email?: true
     name?: true
     password?: true
@@ -4950,6 +4972,7 @@ export namespace Prisma {
   }
 
   export type UserMaxAggregateInputType = {
+    id?: true
     email?: true
     name?: true
     password?: true
@@ -4961,6 +4984,7 @@ export namespace Prisma {
   }
 
   export type UserCountAggregateInputType = {
+    id?: true
     email?: true
     name?: true
     password?: true
@@ -5010,6 +5034,18 @@ export namespace Prisma {
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
      * 
+     * Select which fields to average
+    **/
+    _avg?: UserAvgAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to sum
+    **/
+    _sum?: UserSumAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
      * Select which fields to find the minimum value
     **/
     _min?: UserMinAggregateInputType
@@ -5040,11 +5076,14 @@ export namespace Prisma {
     take?: number
     skip?: number
     _count?: UserCountAggregateInputType | true
+    _avg?: UserAvgAggregateInputType
+    _sum?: UserSumAggregateInputType
     _min?: UserMinAggregateInputType
     _max?: UserMaxAggregateInputType
   }
 
   export type UserGroupByOutputType = {
+    id: number
     email: string
     name: string | null
     password: string | null
@@ -5054,6 +5093,8 @@ export namespace Prisma {
     createdAt: Date
     updatedAt: Date
     _count: UserCountAggregateOutputType | null
+    _avg: UserAvgAggregateOutputType | null
+    _sum: UserSumAggregateOutputType | null
     _min: UserMinAggregateOutputType | null
     _max: UserMaxAggregateOutputType | null
   }
@@ -5073,6 +5114,7 @@ export namespace Prisma {
 
 
   export type UserSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
     email?: boolean
     name?: boolean
     password?: boolean
@@ -5086,6 +5128,7 @@ export namespace Prisma {
   }, ExtArgs["result"]["user"]>
 
   export type UserSelectCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
     email?: boolean
     name?: boolean
     password?: boolean
@@ -5097,6 +5140,7 @@ export namespace Prisma {
   }, ExtArgs["result"]["user"]>
 
   export type UserSelectUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
     email?: boolean
     name?: boolean
     password?: boolean
@@ -5108,6 +5152,7 @@ export namespace Prisma {
   }, ExtArgs["result"]["user"]>
 
   export type UserSelectScalar = {
+    id?: boolean
     email?: boolean
     name?: boolean
     password?: boolean
@@ -5118,7 +5163,7 @@ export namespace Prisma {
     updatedAt?: boolean
   }
 
-  export type UserOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"email" | "name" | "password" | "isActive" | "newsletterSub" | "isAdmin" | "createdAt" | "updatedAt", ExtArgs["result"]["user"]>
+  export type UserOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "email" | "name" | "password" | "isActive" | "newsletterSub" | "isAdmin" | "createdAt" | "updatedAt", ExtArgs["result"]["user"]>
   export type UserInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     orders?: boolean | User$ordersArgs<ExtArgs>
     _count?: boolean | UserCountOutputTypeDefaultArgs<ExtArgs>
@@ -5132,6 +5177,7 @@ export namespace Prisma {
       orders: Prisma.$OrderPayload<ExtArgs>[]
     }
     scalars: $Extensions.GetPayloadResult<{
+      id: number
       email: string
       name: string | null
       password: string | null
@@ -5223,8 +5269,8 @@ export namespace Prisma {
      * // Get first 10 Users
      * const users = await prisma.user.findMany({ take: 10 })
      * 
-     * // Only select the `email`
-     * const userWithEmailOnly = await prisma.user.findMany({ select: { email: true } })
+     * // Only select the `id`
+     * const userWithIdOnly = await prisma.user.findMany({ select: { id: true } })
      * 
      */
     findMany<T extends UserFindManyArgs>(args?: SelectSubset<T, UserFindManyArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$UserPayload<ExtArgs>, T, "findMany", GlobalOmitOptions>>
@@ -5268,9 +5314,9 @@ export namespace Prisma {
      *   ]
      * })
      * 
-     * // Create many Users and only return the `email`
-     * const userWithEmailOnly = await prisma.user.createManyAndReturn({
-     *   select: { email: true },
+     * // Create many Users and only return the `id`
+     * const userWithIdOnly = await prisma.user.createManyAndReturn({
+     *   select: { id: true },
      *   data: [
      *     // ... provide data here
      *   ]
@@ -5359,9 +5405,9 @@ export namespace Prisma {
      *   ]
      * })
      * 
-     * // Update zero or more Users and only return the `email`
-     * const userWithEmailOnly = await prisma.user.updateManyAndReturn({
-     *   select: { email: true },
+     * // Update zero or more Users and only return the `id`
+     * const userWithIdOnly = await prisma.user.updateManyAndReturn({
+     *   select: { id: true },
      *   where: {
      *     // ... provide filter here
      *   },
@@ -5564,6 +5610,7 @@ export namespace Prisma {
    * Fields of the User model
    */
   interface UserFieldRefs {
+    readonly id: FieldRef<"User", 'Int'>
     readonly email: FieldRef<"User", 'String'>
     readonly name: FieldRef<"User", 'String'>
     readonly password: FieldRef<"User", 'String'>
@@ -6017,17 +6064,19 @@ export namespace Prisma {
   export type OrderAvgAggregateOutputType = {
     id: number | null
     totalPrice: number | null
+    userId: number | null
   }
 
   export type OrderSumAggregateOutputType = {
     id: number | null
     totalPrice: number | null
+    userId: number | null
   }
 
   export type OrderMinAggregateOutputType = {
     id: number | null
     totalPrice: number | null
-    userEmail: string | null
+    userId: number | null
     withConsultation: boolean | null
     createdAt: Date | null
     updatedAt: Date | null
@@ -6036,7 +6085,7 @@ export namespace Prisma {
   export type OrderMaxAggregateOutputType = {
     id: number | null
     totalPrice: number | null
-    userEmail: string | null
+    userId: number | null
     withConsultation: boolean | null
     createdAt: Date | null
     updatedAt: Date | null
@@ -6045,7 +6094,7 @@ export namespace Prisma {
   export type OrderCountAggregateOutputType = {
     id: number
     totalPrice: number
-    userEmail: number
+    userId: number
     withConsultation: number
     createdAt: number
     updatedAt: number
@@ -6056,17 +6105,19 @@ export namespace Prisma {
   export type OrderAvgAggregateInputType = {
     id?: true
     totalPrice?: true
+    userId?: true
   }
 
   export type OrderSumAggregateInputType = {
     id?: true
     totalPrice?: true
+    userId?: true
   }
 
   export type OrderMinAggregateInputType = {
     id?: true
     totalPrice?: true
-    userEmail?: true
+    userId?: true
     withConsultation?: true
     createdAt?: true
     updatedAt?: true
@@ -6075,7 +6126,7 @@ export namespace Prisma {
   export type OrderMaxAggregateInputType = {
     id?: true
     totalPrice?: true
-    userEmail?: true
+    userId?: true
     withConsultation?: true
     createdAt?: true
     updatedAt?: true
@@ -6084,7 +6135,7 @@ export namespace Prisma {
   export type OrderCountAggregateInputType = {
     id?: true
     totalPrice?: true
-    userEmail?: true
+    userId?: true
     withConsultation?: true
     createdAt?: true
     updatedAt?: true
@@ -6180,7 +6231,7 @@ export namespace Prisma {
   export type OrderGroupByOutputType = {
     id: number
     totalPrice: number
-    userEmail: string
+    userId: number
     withConsultation: boolean
     createdAt: Date
     updatedAt: Date
@@ -6208,7 +6259,7 @@ export namespace Prisma {
   export type OrderSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
     id?: boolean
     totalPrice?: boolean
-    userEmail?: boolean
+    userId?: boolean
     withConsultation?: boolean
     createdAt?: boolean
     updatedAt?: boolean
@@ -6220,7 +6271,7 @@ export namespace Prisma {
   export type OrderSelectCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
     id?: boolean
     totalPrice?: boolean
-    userEmail?: boolean
+    userId?: boolean
     withConsultation?: boolean
     createdAt?: boolean
     updatedAt?: boolean
@@ -6230,7 +6281,7 @@ export namespace Prisma {
   export type OrderSelectUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
     id?: boolean
     totalPrice?: boolean
-    userEmail?: boolean
+    userId?: boolean
     withConsultation?: boolean
     createdAt?: boolean
     updatedAt?: boolean
@@ -6240,13 +6291,13 @@ export namespace Prisma {
   export type OrderSelectScalar = {
     id?: boolean
     totalPrice?: boolean
-    userEmail?: boolean
+    userId?: boolean
     withConsultation?: boolean
     createdAt?: boolean
     updatedAt?: boolean
   }
 
-  export type OrderOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "totalPrice" | "userEmail" | "withConsultation" | "createdAt" | "updatedAt", ExtArgs["result"]["order"]>
+  export type OrderOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "totalPrice" | "userId" | "withConsultation" | "createdAt" | "updatedAt", ExtArgs["result"]["order"]>
   export type OrderInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     schemes?: boolean | Order$schemesArgs<ExtArgs>
     user?: boolean | Order$userArgs<ExtArgs>
@@ -6268,7 +6319,7 @@ export namespace Prisma {
     scalars: $Extensions.GetPayloadResult<{
       id: number
       totalPrice: number
-      userEmail: string
+      userId: number
       withConsultation: boolean
       createdAt: Date
       updatedAt: Date
@@ -6699,7 +6750,7 @@ export namespace Prisma {
   interface OrderFieldRefs {
     readonly id: FieldRef<"Order", 'Int'>
     readonly totalPrice: FieldRef<"Order", 'Int'>
-    readonly userEmail: FieldRef<"Order", 'String'>
+    readonly userId: FieldRef<"Order", 'Int'>
     readonly withConsultation: FieldRef<"Order", 'Boolean'>
     readonly createdAt: FieldRef<"Order", 'DateTime'>
     readonly updatedAt: FieldRef<"Order", 'DateTime'>
@@ -7354,8 +7405,8 @@ export namespace Prisma {
     orderId?: boolean
     createdAt?: boolean
     updatedAt?: boolean
-    scheme?: boolean | SchemeDefaultArgs<ExtArgs>
     order?: boolean | OrderDefaultArgs<ExtArgs>
+    scheme?: boolean | SchemeDefaultArgs<ExtArgs>
   }, ExtArgs["result"]["ordersOnSchemes"]>
 
   export type OrdersOnSchemesSelectCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
@@ -7363,8 +7414,8 @@ export namespace Prisma {
     orderId?: boolean
     createdAt?: boolean
     updatedAt?: boolean
-    scheme?: boolean | SchemeDefaultArgs<ExtArgs>
     order?: boolean | OrderDefaultArgs<ExtArgs>
+    scheme?: boolean | SchemeDefaultArgs<ExtArgs>
   }, ExtArgs["result"]["ordersOnSchemes"]>
 
   export type OrdersOnSchemesSelectUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
@@ -7372,8 +7423,8 @@ export namespace Prisma {
     orderId?: boolean
     createdAt?: boolean
     updatedAt?: boolean
-    scheme?: boolean | SchemeDefaultArgs<ExtArgs>
     order?: boolean | OrderDefaultArgs<ExtArgs>
+    scheme?: boolean | SchemeDefaultArgs<ExtArgs>
   }, ExtArgs["result"]["ordersOnSchemes"]>
 
   export type OrdersOnSchemesSelectScalar = {
@@ -7385,23 +7436,23 @@ export namespace Prisma {
 
   export type OrdersOnSchemesOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"schemeId" | "orderId" | "createdAt" | "updatedAt", ExtArgs["result"]["ordersOnSchemes"]>
   export type OrdersOnSchemesInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    scheme?: boolean | SchemeDefaultArgs<ExtArgs>
     order?: boolean | OrderDefaultArgs<ExtArgs>
+    scheme?: boolean | SchemeDefaultArgs<ExtArgs>
   }
   export type OrdersOnSchemesIncludeCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    scheme?: boolean | SchemeDefaultArgs<ExtArgs>
     order?: boolean | OrderDefaultArgs<ExtArgs>
+    scheme?: boolean | SchemeDefaultArgs<ExtArgs>
   }
   export type OrdersOnSchemesIncludeUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    scheme?: boolean | SchemeDefaultArgs<ExtArgs>
     order?: boolean | OrderDefaultArgs<ExtArgs>
+    scheme?: boolean | SchemeDefaultArgs<ExtArgs>
   }
 
   export type $OrdersOnSchemesPayload<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     name: "OrdersOnSchemes"
     objects: {
-      scheme: Prisma.$SchemePayload<ExtArgs>
       order: Prisma.$OrderPayload<ExtArgs>
+      scheme: Prisma.$SchemePayload<ExtArgs>
     }
     scalars: $Extensions.GetPayloadResult<{
       schemeId: number
@@ -7802,8 +7853,8 @@ export namespace Prisma {
    */
   export interface Prisma__OrdersOnSchemesClient<T, Null = never, ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> extends Prisma.PrismaPromise<T> {
     readonly [Symbol.toStringTag]: "PrismaPromise"
-    scheme<T extends SchemeDefaultArgs<ExtArgs> = {}>(args?: Subset<T, SchemeDefaultArgs<ExtArgs>>): Prisma__SchemeClient<$Result.GetResult<Prisma.$SchemePayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
     order<T extends OrderDefaultArgs<ExtArgs> = {}>(args?: Subset<T, OrderDefaultArgs<ExtArgs>>): Prisma__OrderClient<$Result.GetResult<Prisma.$OrderPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
+    scheme<T extends SchemeDefaultArgs<ExtArgs> = {}>(args?: Subset<T, SchemeDefaultArgs<ExtArgs>>): Prisma__SchemeClient<$Result.GetResult<Prisma.$SchemePayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
     /**
      * Attaches callbacks for the resolution and/or rejection of the Promise.
      * @param onfulfilled The callback to execute when the Promise is resolved.
@@ -8302,6 +8353,7 @@ export namespace Prisma {
 
 
   export const UserScalarFieldEnum: {
+    id: 'id',
     email: 'email',
     name: 'name',
     password: 'password',
@@ -8318,7 +8370,7 @@ export namespace Prisma {
   export const OrderScalarFieldEnum: {
     id: 'id',
     totalPrice: 'totalPrice',
-    userEmail: 'userEmail',
+    userId: 'userId',
     withConsultation: 'withConsultation',
     createdAt: 'createdAt',
     updatedAt: 'updatedAt'
@@ -8445,8 +8497,8 @@ export namespace Prisma {
     createdAt?: DateTimeFilter<"Scheme"> | Date | string
     updatedAt?: DateTimeFilter<"Scheme"> | Date | string
     images?: ImageListRelationFilter
-    roomType?: XOR<RoomTypeNullableScalarRelationFilter, RoomTypeWhereInput> | null
     orders?: OrdersOnSchemesListRelationFilter
+    roomType?: XOR<RoomTypeNullableScalarRelationFilter, RoomTypeWhereInput> | null
   }
 
   export type SchemeOrderByWithRelationInput = {
@@ -8459,8 +8511,8 @@ export namespace Prisma {
     createdAt?: SortOrder
     updatedAt?: SortOrder
     images?: ImageOrderByRelationAggregateInput
-    roomType?: RoomTypeOrderByWithRelationInput
     orders?: OrdersOnSchemesOrderByRelationAggregateInput
+    roomType?: RoomTypeOrderByWithRelationInput
   }
 
   export type SchemeWhereUniqueInput = Prisma.AtLeast<{
@@ -8476,8 +8528,8 @@ export namespace Prisma {
     createdAt?: DateTimeFilter<"Scheme"> | Date | string
     updatedAt?: DateTimeFilter<"Scheme"> | Date | string
     images?: ImageListRelationFilter
-    roomType?: XOR<RoomTypeNullableScalarRelationFilter, RoomTypeWhereInput> | null
     orders?: OrdersOnSchemesListRelationFilter
+    roomType?: XOR<RoomTypeNullableScalarRelationFilter, RoomTypeWhereInput> | null
   }, "id">
 
   export type SchemeOrderByWithAggregationInput = {
@@ -8521,8 +8573,8 @@ export namespace Prisma {
     roomTypeName?: StringNullableFilter<"Image"> | string | null
     createdAt?: DateTimeFilter<"Image"> | Date | string
     updatedAt?: DateTimeFilter<"Image"> | Date | string
-    scheme?: XOR<SchemeScalarRelationFilter, SchemeWhereInput>
     roomType?: XOR<RoomTypeNullableScalarRelationFilter, RoomTypeWhereInput> | null
+    scheme?: XOR<SchemeScalarRelationFilter, SchemeWhereInput>
   }
 
   export type ImageOrderByWithRelationInput = {
@@ -8533,8 +8585,8 @@ export namespace Prisma {
     roomTypeName?: SortOrderInput | SortOrder
     createdAt?: SortOrder
     updatedAt?: SortOrder
-    scheme?: SchemeOrderByWithRelationInput
     roomType?: RoomTypeOrderByWithRelationInput
+    scheme?: SchemeOrderByWithRelationInput
   }
 
   export type ImageWhereUniqueInput = Prisma.AtLeast<{
@@ -8548,8 +8600,8 @@ export namespace Prisma {
     roomTypeName?: StringNullableFilter<"Image"> | string | null
     createdAt?: DateTimeFilter<"Image"> | Date | string
     updatedAt?: DateTimeFilter<"Image"> | Date | string
-    scheme?: XOR<SchemeScalarRelationFilter, SchemeWhereInput>
     roomType?: XOR<RoomTypeNullableScalarRelationFilter, RoomTypeWhereInput> | null
+    scheme?: XOR<SchemeScalarRelationFilter, SchemeWhereInput>
   }, "id">
 
   export type ImageOrderByWithAggregationInput = {
@@ -8587,16 +8639,16 @@ export namespace Prisma {
     name?: StringFilter<"RoomType"> | string
     createdAt?: DateTimeFilter<"RoomType"> | Date | string
     updatedAt?: DateTimeFilter<"RoomType"> | Date | string
-    schemes?: SchemeListRelationFilter
     images?: ImageListRelationFilter
+    schemes?: SchemeListRelationFilter
   }
 
   export type RoomTypeOrderByWithRelationInput = {
     name?: SortOrder
     createdAt?: SortOrder
     updatedAt?: SortOrder
-    schemes?: SchemeOrderByRelationAggregateInput
     images?: ImageOrderByRelationAggregateInput
+    schemes?: SchemeOrderByRelationAggregateInput
   }
 
   export type RoomTypeWhereUniqueInput = Prisma.AtLeast<{
@@ -8606,8 +8658,8 @@ export namespace Prisma {
     NOT?: RoomTypeWhereInput | RoomTypeWhereInput[]
     createdAt?: DateTimeFilter<"RoomType"> | Date | string
     updatedAt?: DateTimeFilter<"RoomType"> | Date | string
-    schemes?: SchemeListRelationFilter
     images?: ImageListRelationFilter
+    schemes?: SchemeListRelationFilter
   }, "name">
 
   export type RoomTypeOrderByWithAggregationInput = {
@@ -8632,6 +8684,7 @@ export namespace Prisma {
     AND?: UserWhereInput | UserWhereInput[]
     OR?: UserWhereInput[]
     NOT?: UserWhereInput | UserWhereInput[]
+    id?: IntFilter<"User"> | number
     email?: StringFilter<"User"> | string
     name?: StringNullableFilter<"User"> | string | null
     password?: StringNullableFilter<"User"> | string | null
@@ -8644,6 +8697,7 @@ export namespace Prisma {
   }
 
   export type UserOrderByWithRelationInput = {
+    id?: SortOrder
     email?: SortOrder
     name?: SortOrderInput | SortOrder
     password?: SortOrderInput | SortOrder
@@ -8656,6 +8710,7 @@ export namespace Prisma {
   }
 
   export type UserWhereUniqueInput = Prisma.AtLeast<{
+    id?: number
     email?: string
     AND?: UserWhereInput | UserWhereInput[]
     OR?: UserWhereInput[]
@@ -8668,9 +8723,10 @@ export namespace Prisma {
     createdAt?: DateTimeFilter<"User"> | Date | string
     updatedAt?: DateTimeFilter<"User"> | Date | string
     orders?: OrderListRelationFilter
-  }, "email">
+  }, "id" | "email">
 
   export type UserOrderByWithAggregationInput = {
+    id?: SortOrder
     email?: SortOrder
     name?: SortOrderInput | SortOrder
     password?: SortOrderInput | SortOrder
@@ -8680,14 +8736,17 @@ export namespace Prisma {
     createdAt?: SortOrder
     updatedAt?: SortOrder
     _count?: UserCountOrderByAggregateInput
+    _avg?: UserAvgOrderByAggregateInput
     _max?: UserMaxOrderByAggregateInput
     _min?: UserMinOrderByAggregateInput
+    _sum?: UserSumOrderByAggregateInput
   }
 
   export type UserScalarWhereWithAggregatesInput = {
     AND?: UserScalarWhereWithAggregatesInput | UserScalarWhereWithAggregatesInput[]
     OR?: UserScalarWhereWithAggregatesInput[]
     NOT?: UserScalarWhereWithAggregatesInput | UserScalarWhereWithAggregatesInput[]
+    id?: IntWithAggregatesFilter<"User"> | number
     email?: StringWithAggregatesFilter<"User"> | string
     name?: StringNullableWithAggregatesFilter<"User"> | string | null
     password?: StringNullableWithAggregatesFilter<"User"> | string | null
@@ -8704,7 +8763,7 @@ export namespace Prisma {
     NOT?: OrderWhereInput | OrderWhereInput[]
     id?: IntFilter<"Order"> | number
     totalPrice?: IntFilter<"Order"> | number
-    userEmail?: StringFilter<"Order"> | string
+    userId?: IntFilter<"Order"> | number
     withConsultation?: BoolFilter<"Order"> | boolean
     createdAt?: DateTimeFilter<"Order"> | Date | string
     updatedAt?: DateTimeFilter<"Order"> | Date | string
@@ -8715,7 +8774,7 @@ export namespace Prisma {
   export type OrderOrderByWithRelationInput = {
     id?: SortOrder
     totalPrice?: SortOrder
-    userEmail?: SortOrder
+    userId?: SortOrder
     withConsultation?: SortOrder
     createdAt?: SortOrder
     updatedAt?: SortOrder
@@ -8729,7 +8788,7 @@ export namespace Prisma {
     OR?: OrderWhereInput[]
     NOT?: OrderWhereInput | OrderWhereInput[]
     totalPrice?: IntFilter<"Order"> | number
-    userEmail?: StringFilter<"Order"> | string
+    userId?: IntFilter<"Order"> | number
     withConsultation?: BoolFilter<"Order"> | boolean
     createdAt?: DateTimeFilter<"Order"> | Date | string
     updatedAt?: DateTimeFilter<"Order"> | Date | string
@@ -8740,7 +8799,7 @@ export namespace Prisma {
   export type OrderOrderByWithAggregationInput = {
     id?: SortOrder
     totalPrice?: SortOrder
-    userEmail?: SortOrder
+    userId?: SortOrder
     withConsultation?: SortOrder
     createdAt?: SortOrder
     updatedAt?: SortOrder
@@ -8757,7 +8816,7 @@ export namespace Prisma {
     NOT?: OrderScalarWhereWithAggregatesInput | OrderScalarWhereWithAggregatesInput[]
     id?: IntWithAggregatesFilter<"Order"> | number
     totalPrice?: IntWithAggregatesFilter<"Order"> | number
-    userEmail?: StringWithAggregatesFilter<"Order"> | string
+    userId?: IntWithAggregatesFilter<"Order"> | number
     withConsultation?: BoolWithAggregatesFilter<"Order"> | boolean
     createdAt?: DateTimeWithAggregatesFilter<"Order"> | Date | string
     updatedAt?: DateTimeWithAggregatesFilter<"Order"> | Date | string
@@ -8771,8 +8830,8 @@ export namespace Prisma {
     orderId?: IntFilter<"OrdersOnSchemes"> | number
     createdAt?: DateTimeFilter<"OrdersOnSchemes"> | Date | string
     updatedAt?: DateTimeFilter<"OrdersOnSchemes"> | Date | string
-    scheme?: XOR<SchemeScalarRelationFilter, SchemeWhereInput>
     order?: XOR<OrderScalarRelationFilter, OrderWhereInput>
+    scheme?: XOR<SchemeScalarRelationFilter, SchemeWhereInput>
   }
 
   export type OrdersOnSchemesOrderByWithRelationInput = {
@@ -8780,8 +8839,8 @@ export namespace Prisma {
     orderId?: SortOrder
     createdAt?: SortOrder
     updatedAt?: SortOrder
-    scheme?: SchemeOrderByWithRelationInput
     order?: OrderOrderByWithRelationInput
+    scheme?: SchemeOrderByWithRelationInput
   }
 
   export type OrdersOnSchemesWhereUniqueInput = Prisma.AtLeast<{
@@ -8793,8 +8852,8 @@ export namespace Prisma {
     orderId?: IntFilter<"OrdersOnSchemes"> | number
     createdAt?: DateTimeFilter<"OrdersOnSchemes"> | Date | string
     updatedAt?: DateTimeFilter<"OrdersOnSchemes"> | Date | string
-    scheme?: XOR<SchemeScalarRelationFilter, SchemeWhereInput>
     order?: XOR<OrderScalarRelationFilter, OrderWhereInput>
+    scheme?: XOR<SchemeScalarRelationFilter, SchemeWhereInput>
   }, "schemeId_orderId">
 
   export type OrdersOnSchemesOrderByWithAggregationInput = {
@@ -8827,8 +8886,8 @@ export namespace Prisma {
     createdAt?: Date | string
     updatedAt?: Date | string
     images?: ImageCreateNestedManyWithoutSchemeInput
-    roomType?: RoomTypeCreateNestedOneWithoutSchemesInput
     orders?: OrdersOnSchemesCreateNestedManyWithoutSchemeInput
+    roomType?: RoomTypeCreateNestedOneWithoutSchemesInput
   }
 
   export type SchemeUncheckedCreateInput = {
@@ -8852,8 +8911,8 @@ export namespace Prisma {
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     images?: ImageUpdateManyWithoutSchemeNestedInput
-    roomType?: RoomTypeUpdateOneWithoutSchemesNestedInput
     orders?: OrdersOnSchemesUpdateManyWithoutSchemeNestedInput
+    roomType?: RoomTypeUpdateOneWithoutSchemesNestedInput
   }
 
   export type SchemeUncheckedUpdateInput = {
@@ -8905,8 +8964,8 @@ export namespace Prisma {
     schemeIndex: number
     createdAt?: Date | string
     updatedAt?: Date | string
-    scheme: SchemeCreateNestedOneWithoutImagesInput
     roomType?: RoomTypeCreateNestedOneWithoutImagesInput
+    scheme: SchemeCreateNestedOneWithoutImagesInput
   }
 
   export type ImageUncheckedCreateInput = {
@@ -8924,8 +8983,8 @@ export namespace Prisma {
     schemeIndex?: IntFieldUpdateOperationsInput | number
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    scheme?: SchemeUpdateOneRequiredWithoutImagesNestedInput
     roomType?: RoomTypeUpdateOneWithoutImagesNestedInput
+    scheme?: SchemeUpdateOneRequiredWithoutImagesNestedInput
   }
 
   export type ImageUncheckedUpdateInput = {
@@ -8969,32 +9028,32 @@ export namespace Prisma {
     name: string
     createdAt?: Date | string
     updatedAt?: Date | string
-    schemes?: SchemeCreateNestedManyWithoutRoomTypeInput
     images?: ImageCreateNestedManyWithoutRoomTypeInput
+    schemes?: SchemeCreateNestedManyWithoutRoomTypeInput
   }
 
   export type RoomTypeUncheckedCreateInput = {
     name: string
     createdAt?: Date | string
     updatedAt?: Date | string
-    schemes?: SchemeUncheckedCreateNestedManyWithoutRoomTypeInput
     images?: ImageUncheckedCreateNestedManyWithoutRoomTypeInput
+    schemes?: SchemeUncheckedCreateNestedManyWithoutRoomTypeInput
   }
 
   export type RoomTypeUpdateInput = {
     name?: StringFieldUpdateOperationsInput | string
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    schemes?: SchemeUpdateManyWithoutRoomTypeNestedInput
     images?: ImageUpdateManyWithoutRoomTypeNestedInput
+    schemes?: SchemeUpdateManyWithoutRoomTypeNestedInput
   }
 
   export type RoomTypeUncheckedUpdateInput = {
     name?: StringFieldUpdateOperationsInput | string
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    schemes?: SchemeUncheckedUpdateManyWithoutRoomTypeNestedInput
     images?: ImageUncheckedUpdateManyWithoutRoomTypeNestedInput
+    schemes?: SchemeUncheckedUpdateManyWithoutRoomTypeNestedInput
   }
 
   export type RoomTypeCreateManyInput = {
@@ -9028,6 +9087,7 @@ export namespace Prisma {
   }
 
   export type UserUncheckedCreateInput = {
+    id?: number
     email: string
     name?: string | null
     password?: string | null
@@ -9052,6 +9112,7 @@ export namespace Prisma {
   }
 
   export type UserUncheckedUpdateInput = {
+    id?: IntFieldUpdateOperationsInput | number
     email?: StringFieldUpdateOperationsInput | string
     name?: NullableStringFieldUpdateOperationsInput | string | null
     password?: NullableStringFieldUpdateOperationsInput | string | null
@@ -9064,6 +9125,7 @@ export namespace Prisma {
   }
 
   export type UserCreateManyInput = {
+    id?: number
     email: string
     name?: string | null
     password?: string | null
@@ -9086,6 +9148,7 @@ export namespace Prisma {
   }
 
   export type UserUncheckedUpdateManyInput = {
+    id?: IntFieldUpdateOperationsInput | number
     email?: StringFieldUpdateOperationsInput | string
     name?: NullableStringFieldUpdateOperationsInput | string | null
     password?: NullableStringFieldUpdateOperationsInput | string | null
@@ -9108,7 +9171,7 @@ export namespace Prisma {
   export type OrderUncheckedCreateInput = {
     id?: number
     totalPrice: number
-    userEmail: string
+    userId: number
     withConsultation?: boolean
     createdAt?: Date | string
     updatedAt?: Date | string
@@ -9127,7 +9190,7 @@ export namespace Prisma {
   export type OrderUncheckedUpdateInput = {
     id?: IntFieldUpdateOperationsInput | number
     totalPrice?: IntFieldUpdateOperationsInput | number
-    userEmail?: StringFieldUpdateOperationsInput | string
+    userId?: IntFieldUpdateOperationsInput | number
     withConsultation?: BoolFieldUpdateOperationsInput | boolean
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
@@ -9137,7 +9200,7 @@ export namespace Prisma {
   export type OrderCreateManyInput = {
     id?: number
     totalPrice: number
-    userEmail: string
+    userId: number
     withConsultation?: boolean
     createdAt?: Date | string
     updatedAt?: Date | string
@@ -9153,7 +9216,7 @@ export namespace Prisma {
   export type OrderUncheckedUpdateManyInput = {
     id?: IntFieldUpdateOperationsInput | number
     totalPrice?: IntFieldUpdateOperationsInput | number
-    userEmail?: StringFieldUpdateOperationsInput | string
+    userId?: IntFieldUpdateOperationsInput | number
     withConsultation?: BoolFieldUpdateOperationsInput | boolean
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
@@ -9162,8 +9225,8 @@ export namespace Prisma {
   export type OrdersOnSchemesCreateInput = {
     createdAt?: Date | string
     updatedAt?: Date | string
-    scheme: SchemeCreateNestedOneWithoutOrdersInput
     order: OrderCreateNestedOneWithoutSchemesInput
+    scheme: SchemeCreateNestedOneWithoutOrdersInput
   }
 
   export type OrdersOnSchemesUncheckedCreateInput = {
@@ -9176,8 +9239,8 @@ export namespace Prisma {
   export type OrdersOnSchemesUpdateInput = {
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    scheme?: SchemeUpdateOneRequiredWithoutOrdersNestedInput
     order?: OrderUpdateOneRequiredWithoutSchemesNestedInput
+    scheme?: SchemeUpdateOneRequiredWithoutOrdersNestedInput
   }
 
   export type OrdersOnSchemesUncheckedUpdateInput = {
@@ -9269,15 +9332,15 @@ export namespace Prisma {
     none?: ImageWhereInput
   }
 
-  export type RoomTypeNullableScalarRelationFilter = {
-    is?: RoomTypeWhereInput | null
-    isNot?: RoomTypeWhereInput | null
-  }
-
   export type OrdersOnSchemesListRelationFilter = {
     every?: OrdersOnSchemesWhereInput
     some?: OrdersOnSchemesWhereInput
     none?: OrdersOnSchemesWhereInput
+  }
+
+  export type RoomTypeNullableScalarRelationFilter = {
+    is?: RoomTypeWhereInput | null
+    isNot?: RoomTypeWhereInput | null
   }
 
   export type SortOrderInput = {
@@ -9496,6 +9559,7 @@ export namespace Prisma {
   }
 
   export type UserCountOrderByAggregateInput = {
+    id?: SortOrder
     email?: SortOrder
     name?: SortOrder
     password?: SortOrder
@@ -9506,7 +9570,12 @@ export namespace Prisma {
     updatedAt?: SortOrder
   }
 
+  export type UserAvgOrderByAggregateInput = {
+    id?: SortOrder
+  }
+
   export type UserMaxOrderByAggregateInput = {
+    id?: SortOrder
     email?: SortOrder
     name?: SortOrder
     password?: SortOrder
@@ -9518,6 +9587,7 @@ export namespace Prisma {
   }
 
   export type UserMinOrderByAggregateInput = {
+    id?: SortOrder
     email?: SortOrder
     name?: SortOrder
     password?: SortOrder
@@ -9528,6 +9598,10 @@ export namespace Prisma {
     updatedAt?: SortOrder
   }
 
+  export type UserSumOrderByAggregateInput = {
+    id?: SortOrder
+  }
+
   export type UserNullableScalarRelationFilter = {
     is?: UserWhereInput | null
     isNot?: UserWhereInput | null
@@ -9536,7 +9610,7 @@ export namespace Prisma {
   export type OrderCountOrderByAggregateInput = {
     id?: SortOrder
     totalPrice?: SortOrder
-    userEmail?: SortOrder
+    userId?: SortOrder
     withConsultation?: SortOrder
     createdAt?: SortOrder
     updatedAt?: SortOrder
@@ -9545,12 +9619,13 @@ export namespace Prisma {
   export type OrderAvgOrderByAggregateInput = {
     id?: SortOrder
     totalPrice?: SortOrder
+    userId?: SortOrder
   }
 
   export type OrderMaxOrderByAggregateInput = {
     id?: SortOrder
     totalPrice?: SortOrder
-    userEmail?: SortOrder
+    userId?: SortOrder
     withConsultation?: SortOrder
     createdAt?: SortOrder
     updatedAt?: SortOrder
@@ -9559,7 +9634,7 @@ export namespace Prisma {
   export type OrderMinOrderByAggregateInput = {
     id?: SortOrder
     totalPrice?: SortOrder
-    userEmail?: SortOrder
+    userId?: SortOrder
     withConsultation?: SortOrder
     createdAt?: SortOrder
     updatedAt?: SortOrder
@@ -9568,6 +9643,7 @@ export namespace Prisma {
   export type OrderSumOrderByAggregateInput = {
     id?: SortOrder
     totalPrice?: SortOrder
+    userId?: SortOrder
   }
 
   export type OrderScalarRelationFilter = {
@@ -9618,17 +9694,17 @@ export namespace Prisma {
     connect?: ImageWhereUniqueInput | ImageWhereUniqueInput[]
   }
 
-  export type RoomTypeCreateNestedOneWithoutSchemesInput = {
-    create?: XOR<RoomTypeCreateWithoutSchemesInput, RoomTypeUncheckedCreateWithoutSchemesInput>
-    connectOrCreate?: RoomTypeCreateOrConnectWithoutSchemesInput
-    connect?: RoomTypeWhereUniqueInput
-  }
-
   export type OrdersOnSchemesCreateNestedManyWithoutSchemeInput = {
     create?: XOR<OrdersOnSchemesCreateWithoutSchemeInput, OrdersOnSchemesUncheckedCreateWithoutSchemeInput> | OrdersOnSchemesCreateWithoutSchemeInput[] | OrdersOnSchemesUncheckedCreateWithoutSchemeInput[]
     connectOrCreate?: OrdersOnSchemesCreateOrConnectWithoutSchemeInput | OrdersOnSchemesCreateOrConnectWithoutSchemeInput[]
     createMany?: OrdersOnSchemesCreateManySchemeInputEnvelope
     connect?: OrdersOnSchemesWhereUniqueInput | OrdersOnSchemesWhereUniqueInput[]
+  }
+
+  export type RoomTypeCreateNestedOneWithoutSchemesInput = {
+    create?: XOR<RoomTypeCreateWithoutSchemesInput, RoomTypeUncheckedCreateWithoutSchemesInput>
+    connectOrCreate?: RoomTypeCreateOrConnectWithoutSchemesInput
+    connect?: RoomTypeWhereUniqueInput
   }
 
   export type ImageUncheckedCreateNestedManyWithoutSchemeInput = {
@@ -9679,16 +9755,6 @@ export namespace Prisma {
     deleteMany?: ImageScalarWhereInput | ImageScalarWhereInput[]
   }
 
-  export type RoomTypeUpdateOneWithoutSchemesNestedInput = {
-    create?: XOR<RoomTypeCreateWithoutSchemesInput, RoomTypeUncheckedCreateWithoutSchemesInput>
-    connectOrCreate?: RoomTypeCreateOrConnectWithoutSchemesInput
-    upsert?: RoomTypeUpsertWithoutSchemesInput
-    disconnect?: RoomTypeWhereInput | boolean
-    delete?: RoomTypeWhereInput | boolean
-    connect?: RoomTypeWhereUniqueInput
-    update?: XOR<XOR<RoomTypeUpdateToOneWithWhereWithoutSchemesInput, RoomTypeUpdateWithoutSchemesInput>, RoomTypeUncheckedUpdateWithoutSchemesInput>
-  }
-
   export type OrdersOnSchemesUpdateManyWithoutSchemeNestedInput = {
     create?: XOR<OrdersOnSchemesCreateWithoutSchemeInput, OrdersOnSchemesUncheckedCreateWithoutSchemeInput> | OrdersOnSchemesCreateWithoutSchemeInput[] | OrdersOnSchemesUncheckedCreateWithoutSchemeInput[]
     connectOrCreate?: OrdersOnSchemesCreateOrConnectWithoutSchemeInput | OrdersOnSchemesCreateOrConnectWithoutSchemeInput[]
@@ -9701,6 +9767,16 @@ export namespace Prisma {
     update?: OrdersOnSchemesUpdateWithWhereUniqueWithoutSchemeInput | OrdersOnSchemesUpdateWithWhereUniqueWithoutSchemeInput[]
     updateMany?: OrdersOnSchemesUpdateManyWithWhereWithoutSchemeInput | OrdersOnSchemesUpdateManyWithWhereWithoutSchemeInput[]
     deleteMany?: OrdersOnSchemesScalarWhereInput | OrdersOnSchemesScalarWhereInput[]
+  }
+
+  export type RoomTypeUpdateOneWithoutSchemesNestedInput = {
+    create?: XOR<RoomTypeCreateWithoutSchemesInput, RoomTypeUncheckedCreateWithoutSchemesInput>
+    connectOrCreate?: RoomTypeCreateOrConnectWithoutSchemesInput
+    upsert?: RoomTypeUpsertWithoutSchemesInput
+    disconnect?: RoomTypeWhereInput | boolean
+    delete?: RoomTypeWhereInput | boolean
+    connect?: RoomTypeWhereUniqueInput
+    update?: XOR<XOR<RoomTypeUpdateToOneWithWhereWithoutSchemesInput, RoomTypeUpdateWithoutSchemesInput>, RoomTypeUncheckedUpdateWithoutSchemesInput>
   }
 
   export type NullableStringFieldUpdateOperationsInput = {
@@ -9735,24 +9811,16 @@ export namespace Prisma {
     deleteMany?: OrdersOnSchemesScalarWhereInput | OrdersOnSchemesScalarWhereInput[]
   }
 
-  export type SchemeCreateNestedOneWithoutImagesInput = {
-    create?: XOR<SchemeCreateWithoutImagesInput, SchemeUncheckedCreateWithoutImagesInput>
-    connectOrCreate?: SchemeCreateOrConnectWithoutImagesInput
-    connect?: SchemeWhereUniqueInput
-  }
-
   export type RoomTypeCreateNestedOneWithoutImagesInput = {
     create?: XOR<RoomTypeCreateWithoutImagesInput, RoomTypeUncheckedCreateWithoutImagesInput>
     connectOrCreate?: RoomTypeCreateOrConnectWithoutImagesInput
     connect?: RoomTypeWhereUniqueInput
   }
 
-  export type SchemeUpdateOneRequiredWithoutImagesNestedInput = {
+  export type SchemeCreateNestedOneWithoutImagesInput = {
     create?: XOR<SchemeCreateWithoutImagesInput, SchemeUncheckedCreateWithoutImagesInput>
     connectOrCreate?: SchemeCreateOrConnectWithoutImagesInput
-    upsert?: SchemeUpsertWithoutImagesInput
     connect?: SchemeWhereUniqueInput
-    update?: XOR<XOR<SchemeUpdateToOneWithWhereWithoutImagesInput, SchemeUpdateWithoutImagesInput>, SchemeUncheckedUpdateWithoutImagesInput>
   }
 
   export type RoomTypeUpdateOneWithoutImagesNestedInput = {
@@ -9765,11 +9833,12 @@ export namespace Prisma {
     update?: XOR<XOR<RoomTypeUpdateToOneWithWhereWithoutImagesInput, RoomTypeUpdateWithoutImagesInput>, RoomTypeUncheckedUpdateWithoutImagesInput>
   }
 
-  export type SchemeCreateNestedManyWithoutRoomTypeInput = {
-    create?: XOR<SchemeCreateWithoutRoomTypeInput, SchemeUncheckedCreateWithoutRoomTypeInput> | SchemeCreateWithoutRoomTypeInput[] | SchemeUncheckedCreateWithoutRoomTypeInput[]
-    connectOrCreate?: SchemeCreateOrConnectWithoutRoomTypeInput | SchemeCreateOrConnectWithoutRoomTypeInput[]
-    createMany?: SchemeCreateManyRoomTypeInputEnvelope
-    connect?: SchemeWhereUniqueInput | SchemeWhereUniqueInput[]
+  export type SchemeUpdateOneRequiredWithoutImagesNestedInput = {
+    create?: XOR<SchemeCreateWithoutImagesInput, SchemeUncheckedCreateWithoutImagesInput>
+    connectOrCreate?: SchemeCreateOrConnectWithoutImagesInput
+    upsert?: SchemeUpsertWithoutImagesInput
+    connect?: SchemeWhereUniqueInput
+    update?: XOR<XOR<SchemeUpdateToOneWithWhereWithoutImagesInput, SchemeUpdateWithoutImagesInput>, SchemeUncheckedUpdateWithoutImagesInput>
   }
 
   export type ImageCreateNestedManyWithoutRoomTypeInput = {
@@ -9779,7 +9848,7 @@ export namespace Prisma {
     connect?: ImageWhereUniqueInput | ImageWhereUniqueInput[]
   }
 
-  export type SchemeUncheckedCreateNestedManyWithoutRoomTypeInput = {
+  export type SchemeCreateNestedManyWithoutRoomTypeInput = {
     create?: XOR<SchemeCreateWithoutRoomTypeInput, SchemeUncheckedCreateWithoutRoomTypeInput> | SchemeCreateWithoutRoomTypeInput[] | SchemeUncheckedCreateWithoutRoomTypeInput[]
     connectOrCreate?: SchemeCreateOrConnectWithoutRoomTypeInput | SchemeCreateOrConnectWithoutRoomTypeInput[]
     createMany?: SchemeCreateManyRoomTypeInputEnvelope
@@ -9793,18 +9862,11 @@ export namespace Prisma {
     connect?: ImageWhereUniqueInput | ImageWhereUniqueInput[]
   }
 
-  export type SchemeUpdateManyWithoutRoomTypeNestedInput = {
+  export type SchemeUncheckedCreateNestedManyWithoutRoomTypeInput = {
     create?: XOR<SchemeCreateWithoutRoomTypeInput, SchemeUncheckedCreateWithoutRoomTypeInput> | SchemeCreateWithoutRoomTypeInput[] | SchemeUncheckedCreateWithoutRoomTypeInput[]
     connectOrCreate?: SchemeCreateOrConnectWithoutRoomTypeInput | SchemeCreateOrConnectWithoutRoomTypeInput[]
-    upsert?: SchemeUpsertWithWhereUniqueWithoutRoomTypeInput | SchemeUpsertWithWhereUniqueWithoutRoomTypeInput[]
     createMany?: SchemeCreateManyRoomTypeInputEnvelope
-    set?: SchemeWhereUniqueInput | SchemeWhereUniqueInput[]
-    disconnect?: SchemeWhereUniqueInput | SchemeWhereUniqueInput[]
-    delete?: SchemeWhereUniqueInput | SchemeWhereUniqueInput[]
     connect?: SchemeWhereUniqueInput | SchemeWhereUniqueInput[]
-    update?: SchemeUpdateWithWhereUniqueWithoutRoomTypeInput | SchemeUpdateWithWhereUniqueWithoutRoomTypeInput[]
-    updateMany?: SchemeUpdateManyWithWhereWithoutRoomTypeInput | SchemeUpdateManyWithWhereWithoutRoomTypeInput[]
-    deleteMany?: SchemeScalarWhereInput | SchemeScalarWhereInput[]
   }
 
   export type ImageUpdateManyWithoutRoomTypeNestedInput = {
@@ -9821,7 +9883,7 @@ export namespace Prisma {
     deleteMany?: ImageScalarWhereInput | ImageScalarWhereInput[]
   }
 
-  export type SchemeUncheckedUpdateManyWithoutRoomTypeNestedInput = {
+  export type SchemeUpdateManyWithoutRoomTypeNestedInput = {
     create?: XOR<SchemeCreateWithoutRoomTypeInput, SchemeUncheckedCreateWithoutRoomTypeInput> | SchemeCreateWithoutRoomTypeInput[] | SchemeUncheckedCreateWithoutRoomTypeInput[]
     connectOrCreate?: SchemeCreateOrConnectWithoutRoomTypeInput | SchemeCreateOrConnectWithoutRoomTypeInput[]
     upsert?: SchemeUpsertWithWhereUniqueWithoutRoomTypeInput | SchemeUpsertWithWhereUniqueWithoutRoomTypeInput[]
@@ -9847,6 +9909,20 @@ export namespace Prisma {
     update?: ImageUpdateWithWhereUniqueWithoutRoomTypeInput | ImageUpdateWithWhereUniqueWithoutRoomTypeInput[]
     updateMany?: ImageUpdateManyWithWhereWithoutRoomTypeInput | ImageUpdateManyWithWhereWithoutRoomTypeInput[]
     deleteMany?: ImageScalarWhereInput | ImageScalarWhereInput[]
+  }
+
+  export type SchemeUncheckedUpdateManyWithoutRoomTypeNestedInput = {
+    create?: XOR<SchemeCreateWithoutRoomTypeInput, SchemeUncheckedCreateWithoutRoomTypeInput> | SchemeCreateWithoutRoomTypeInput[] | SchemeUncheckedCreateWithoutRoomTypeInput[]
+    connectOrCreate?: SchemeCreateOrConnectWithoutRoomTypeInput | SchemeCreateOrConnectWithoutRoomTypeInput[]
+    upsert?: SchemeUpsertWithWhereUniqueWithoutRoomTypeInput | SchemeUpsertWithWhereUniqueWithoutRoomTypeInput[]
+    createMany?: SchemeCreateManyRoomTypeInputEnvelope
+    set?: SchemeWhereUniqueInput | SchemeWhereUniqueInput[]
+    disconnect?: SchemeWhereUniqueInput | SchemeWhereUniqueInput[]
+    delete?: SchemeWhereUniqueInput | SchemeWhereUniqueInput[]
+    connect?: SchemeWhereUniqueInput | SchemeWhereUniqueInput[]
+    update?: SchemeUpdateWithWhereUniqueWithoutRoomTypeInput | SchemeUpdateWithWhereUniqueWithoutRoomTypeInput[]
+    updateMany?: SchemeUpdateManyWithWhereWithoutRoomTypeInput | SchemeUpdateManyWithWhereWithoutRoomTypeInput[]
+    deleteMany?: SchemeScalarWhereInput | SchemeScalarWhereInput[]
   }
 
   export type OrderCreateNestedManyWithoutUserInput = {
@@ -9949,24 +10025,16 @@ export namespace Prisma {
     deleteMany?: OrdersOnSchemesScalarWhereInput | OrdersOnSchemesScalarWhereInput[]
   }
 
-  export type SchemeCreateNestedOneWithoutOrdersInput = {
-    create?: XOR<SchemeCreateWithoutOrdersInput, SchemeUncheckedCreateWithoutOrdersInput>
-    connectOrCreate?: SchemeCreateOrConnectWithoutOrdersInput
-    connect?: SchemeWhereUniqueInput
-  }
-
   export type OrderCreateNestedOneWithoutSchemesInput = {
     create?: XOR<OrderCreateWithoutSchemesInput, OrderUncheckedCreateWithoutSchemesInput>
     connectOrCreate?: OrderCreateOrConnectWithoutSchemesInput
     connect?: OrderWhereUniqueInput
   }
 
-  export type SchemeUpdateOneRequiredWithoutOrdersNestedInput = {
+  export type SchemeCreateNestedOneWithoutOrdersInput = {
     create?: XOR<SchemeCreateWithoutOrdersInput, SchemeUncheckedCreateWithoutOrdersInput>
     connectOrCreate?: SchemeCreateOrConnectWithoutOrdersInput
-    upsert?: SchemeUpsertWithoutOrdersInput
     connect?: SchemeWhereUniqueInput
-    update?: XOR<XOR<SchemeUpdateToOneWithWhereWithoutOrdersInput, SchemeUpdateWithoutOrdersInput>, SchemeUncheckedUpdateWithoutOrdersInput>
   }
 
   export type OrderUpdateOneRequiredWithoutSchemesNestedInput = {
@@ -9975,6 +10043,14 @@ export namespace Prisma {
     upsert?: OrderUpsertWithoutSchemesInput
     connect?: OrderWhereUniqueInput
     update?: XOR<XOR<OrderUpdateToOneWithWhereWithoutSchemesInput, OrderUpdateWithoutSchemesInput>, OrderUncheckedUpdateWithoutSchemesInput>
+  }
+
+  export type SchemeUpdateOneRequiredWithoutOrdersNestedInput = {
+    create?: XOR<SchemeCreateWithoutOrdersInput, SchemeUncheckedCreateWithoutOrdersInput>
+    connectOrCreate?: SchemeCreateOrConnectWithoutOrdersInput
+    upsert?: SchemeUpsertWithoutOrdersInput
+    connect?: SchemeWhereUniqueInput
+    update?: XOR<XOR<SchemeUpdateToOneWithWhereWithoutOrdersInput, SchemeUpdateWithoutOrdersInput>, SchemeUncheckedUpdateWithoutOrdersInput>
   }
 
   export type NestedIntFilter<$PrismaModel = never> = {
@@ -10153,25 +10229,6 @@ export namespace Prisma {
     skipDuplicates?: boolean
   }
 
-  export type RoomTypeCreateWithoutSchemesInput = {
-    name: string
-    createdAt?: Date | string
-    updatedAt?: Date | string
-    images?: ImageCreateNestedManyWithoutRoomTypeInput
-  }
-
-  export type RoomTypeUncheckedCreateWithoutSchemesInput = {
-    name: string
-    createdAt?: Date | string
-    updatedAt?: Date | string
-    images?: ImageUncheckedCreateNestedManyWithoutRoomTypeInput
-  }
-
-  export type RoomTypeCreateOrConnectWithoutSchemesInput = {
-    where: RoomTypeWhereUniqueInput
-    create: XOR<RoomTypeCreateWithoutSchemesInput, RoomTypeUncheckedCreateWithoutSchemesInput>
-  }
-
   export type OrdersOnSchemesCreateWithoutSchemeInput = {
     createdAt?: Date | string
     updatedAt?: Date | string
@@ -10192,6 +10249,25 @@ export namespace Prisma {
   export type OrdersOnSchemesCreateManySchemeInputEnvelope = {
     data: OrdersOnSchemesCreateManySchemeInput | OrdersOnSchemesCreateManySchemeInput[]
     skipDuplicates?: boolean
+  }
+
+  export type RoomTypeCreateWithoutSchemesInput = {
+    name: string
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    images?: ImageCreateNestedManyWithoutRoomTypeInput
+  }
+
+  export type RoomTypeUncheckedCreateWithoutSchemesInput = {
+    name: string
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    images?: ImageUncheckedCreateNestedManyWithoutRoomTypeInput
+  }
+
+  export type RoomTypeCreateOrConnectWithoutSchemesInput = {
+    where: RoomTypeWhereUniqueInput
+    create: XOR<RoomTypeCreateWithoutSchemesInput, RoomTypeUncheckedCreateWithoutSchemesInput>
   }
 
   export type ImageUpsertWithWhereUniqueWithoutSchemeInput = {
@@ -10223,31 +10299,6 @@ export namespace Prisma {
     updatedAt?: DateTimeFilter<"Image"> | Date | string
   }
 
-  export type RoomTypeUpsertWithoutSchemesInput = {
-    update: XOR<RoomTypeUpdateWithoutSchemesInput, RoomTypeUncheckedUpdateWithoutSchemesInput>
-    create: XOR<RoomTypeCreateWithoutSchemesInput, RoomTypeUncheckedCreateWithoutSchemesInput>
-    where?: RoomTypeWhereInput
-  }
-
-  export type RoomTypeUpdateToOneWithWhereWithoutSchemesInput = {
-    where?: RoomTypeWhereInput
-    data: XOR<RoomTypeUpdateWithoutSchemesInput, RoomTypeUncheckedUpdateWithoutSchemesInput>
-  }
-
-  export type RoomTypeUpdateWithoutSchemesInput = {
-    name?: StringFieldUpdateOperationsInput | string
-    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    images?: ImageUpdateManyWithoutRoomTypeNestedInput
-  }
-
-  export type RoomTypeUncheckedUpdateWithoutSchemesInput = {
-    name?: StringFieldUpdateOperationsInput | string
-    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    images?: ImageUncheckedUpdateManyWithoutRoomTypeNestedInput
-  }
-
   export type OrdersOnSchemesUpsertWithWhereUniqueWithoutSchemeInput = {
     where: OrdersOnSchemesWhereUniqueInput
     update: XOR<OrdersOnSchemesUpdateWithoutSchemeInput, OrdersOnSchemesUncheckedUpdateWithoutSchemeInput>
@@ -10274,32 +10325,29 @@ export namespace Prisma {
     updatedAt?: DateTimeFilter<"OrdersOnSchemes"> | Date | string
   }
 
-  export type SchemeCreateWithoutImagesInput = {
-    name: string
-    description: string
-    price: number
-    isAvailable?: boolean
-    createdAt?: Date | string
-    updatedAt?: Date | string
-    roomType?: RoomTypeCreateNestedOneWithoutSchemesInput
-    orders?: OrdersOnSchemesCreateNestedManyWithoutSchemeInput
+  export type RoomTypeUpsertWithoutSchemesInput = {
+    update: XOR<RoomTypeUpdateWithoutSchemesInput, RoomTypeUncheckedUpdateWithoutSchemesInput>
+    create: XOR<RoomTypeCreateWithoutSchemesInput, RoomTypeUncheckedCreateWithoutSchemesInput>
+    where?: RoomTypeWhereInput
   }
 
-  export type SchemeUncheckedCreateWithoutImagesInput = {
-    id?: number
-    name: string
-    description: string
-    price: number
-    isAvailable?: boolean
-    roomTypeName?: string | null
-    createdAt?: Date | string
-    updatedAt?: Date | string
-    orders?: OrdersOnSchemesUncheckedCreateNestedManyWithoutSchemeInput
+  export type RoomTypeUpdateToOneWithWhereWithoutSchemesInput = {
+    where?: RoomTypeWhereInput
+    data: XOR<RoomTypeUpdateWithoutSchemesInput, RoomTypeUncheckedUpdateWithoutSchemesInput>
   }
 
-  export type SchemeCreateOrConnectWithoutImagesInput = {
-    where: SchemeWhereUniqueInput
-    create: XOR<SchemeCreateWithoutImagesInput, SchemeUncheckedCreateWithoutImagesInput>
+  export type RoomTypeUpdateWithoutSchemesInput = {
+    name?: StringFieldUpdateOperationsInput | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    images?: ImageUpdateManyWithoutRoomTypeNestedInput
+  }
+
+  export type RoomTypeUncheckedUpdateWithoutSchemesInput = {
+    name?: StringFieldUpdateOperationsInput | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    images?: ImageUncheckedUpdateManyWithoutRoomTypeNestedInput
   }
 
   export type RoomTypeCreateWithoutImagesInput = {
@@ -10321,38 +10369,32 @@ export namespace Prisma {
     create: XOR<RoomTypeCreateWithoutImagesInput, RoomTypeUncheckedCreateWithoutImagesInput>
   }
 
-  export type SchemeUpsertWithoutImagesInput = {
-    update: XOR<SchemeUpdateWithoutImagesInput, SchemeUncheckedUpdateWithoutImagesInput>
+  export type SchemeCreateWithoutImagesInput = {
+    name: string
+    description: string
+    price: number
+    isAvailable?: boolean
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    orders?: OrdersOnSchemesCreateNestedManyWithoutSchemeInput
+    roomType?: RoomTypeCreateNestedOneWithoutSchemesInput
+  }
+
+  export type SchemeUncheckedCreateWithoutImagesInput = {
+    id?: number
+    name: string
+    description: string
+    price: number
+    isAvailable?: boolean
+    roomTypeName?: string | null
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    orders?: OrdersOnSchemesUncheckedCreateNestedManyWithoutSchemeInput
+  }
+
+  export type SchemeCreateOrConnectWithoutImagesInput = {
+    where: SchemeWhereUniqueInput
     create: XOR<SchemeCreateWithoutImagesInput, SchemeUncheckedCreateWithoutImagesInput>
-    where?: SchemeWhereInput
-  }
-
-  export type SchemeUpdateToOneWithWhereWithoutImagesInput = {
-    where?: SchemeWhereInput
-    data: XOR<SchemeUpdateWithoutImagesInput, SchemeUncheckedUpdateWithoutImagesInput>
-  }
-
-  export type SchemeUpdateWithoutImagesInput = {
-    name?: StringFieldUpdateOperationsInput | string
-    description?: StringFieldUpdateOperationsInput | string
-    price?: IntFieldUpdateOperationsInput | number
-    isAvailable?: BoolFieldUpdateOperationsInput | boolean
-    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    roomType?: RoomTypeUpdateOneWithoutSchemesNestedInput
-    orders?: OrdersOnSchemesUpdateManyWithoutSchemeNestedInput
-  }
-
-  export type SchemeUncheckedUpdateWithoutImagesInput = {
-    id?: IntFieldUpdateOperationsInput | number
-    name?: StringFieldUpdateOperationsInput | string
-    description?: StringFieldUpdateOperationsInput | string
-    price?: IntFieldUpdateOperationsInput | number
-    isAvailable?: BoolFieldUpdateOperationsInput | boolean
-    roomTypeName?: NullableStringFieldUpdateOperationsInput | string | null
-    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    orders?: OrdersOnSchemesUncheckedUpdateManyWithoutSchemeNestedInput
   }
 
   export type RoomTypeUpsertWithoutImagesInput = {
@@ -10378,6 +10420,67 @@ export namespace Prisma {
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     schemes?: SchemeUncheckedUpdateManyWithoutRoomTypeNestedInput
+  }
+
+  export type SchemeUpsertWithoutImagesInput = {
+    update: XOR<SchemeUpdateWithoutImagesInput, SchemeUncheckedUpdateWithoutImagesInput>
+    create: XOR<SchemeCreateWithoutImagesInput, SchemeUncheckedCreateWithoutImagesInput>
+    where?: SchemeWhereInput
+  }
+
+  export type SchemeUpdateToOneWithWhereWithoutImagesInput = {
+    where?: SchemeWhereInput
+    data: XOR<SchemeUpdateWithoutImagesInput, SchemeUncheckedUpdateWithoutImagesInput>
+  }
+
+  export type SchemeUpdateWithoutImagesInput = {
+    name?: StringFieldUpdateOperationsInput | string
+    description?: StringFieldUpdateOperationsInput | string
+    price?: IntFieldUpdateOperationsInput | number
+    isAvailable?: BoolFieldUpdateOperationsInput | boolean
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    orders?: OrdersOnSchemesUpdateManyWithoutSchemeNestedInput
+    roomType?: RoomTypeUpdateOneWithoutSchemesNestedInput
+  }
+
+  export type SchemeUncheckedUpdateWithoutImagesInput = {
+    id?: IntFieldUpdateOperationsInput | number
+    name?: StringFieldUpdateOperationsInput | string
+    description?: StringFieldUpdateOperationsInput | string
+    price?: IntFieldUpdateOperationsInput | number
+    isAvailable?: BoolFieldUpdateOperationsInput | boolean
+    roomTypeName?: NullableStringFieldUpdateOperationsInput | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    orders?: OrdersOnSchemesUncheckedUpdateManyWithoutSchemeNestedInput
+  }
+
+  export type ImageCreateWithoutRoomTypeInput = {
+    url: string
+    schemeIndex: number
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    scheme: SchemeCreateNestedOneWithoutImagesInput
+  }
+
+  export type ImageUncheckedCreateWithoutRoomTypeInput = {
+    id?: number
+    url: string
+    schemeId: number
+    schemeIndex: number
+    createdAt?: Date | string
+    updatedAt?: Date | string
+  }
+
+  export type ImageCreateOrConnectWithoutRoomTypeInput = {
+    where: ImageWhereUniqueInput
+    create: XOR<ImageCreateWithoutRoomTypeInput, ImageUncheckedCreateWithoutRoomTypeInput>
+  }
+
+  export type ImageCreateManyRoomTypeInputEnvelope = {
+    data: ImageCreateManyRoomTypeInput | ImageCreateManyRoomTypeInput[]
+    skipDuplicates?: boolean
   }
 
   export type SchemeCreateWithoutRoomTypeInput = {
@@ -10413,31 +10516,20 @@ export namespace Prisma {
     skipDuplicates?: boolean
   }
 
-  export type ImageCreateWithoutRoomTypeInput = {
-    url: string
-    schemeIndex: number
-    createdAt?: Date | string
-    updatedAt?: Date | string
-    scheme: SchemeCreateNestedOneWithoutImagesInput
-  }
-
-  export type ImageUncheckedCreateWithoutRoomTypeInput = {
-    id?: number
-    url: string
-    schemeId: number
-    schemeIndex: number
-    createdAt?: Date | string
-    updatedAt?: Date | string
-  }
-
-  export type ImageCreateOrConnectWithoutRoomTypeInput = {
+  export type ImageUpsertWithWhereUniqueWithoutRoomTypeInput = {
     where: ImageWhereUniqueInput
+    update: XOR<ImageUpdateWithoutRoomTypeInput, ImageUncheckedUpdateWithoutRoomTypeInput>
     create: XOR<ImageCreateWithoutRoomTypeInput, ImageUncheckedCreateWithoutRoomTypeInput>
   }
 
-  export type ImageCreateManyRoomTypeInputEnvelope = {
-    data: ImageCreateManyRoomTypeInput | ImageCreateManyRoomTypeInput[]
-    skipDuplicates?: boolean
+  export type ImageUpdateWithWhereUniqueWithoutRoomTypeInput = {
+    where: ImageWhereUniqueInput
+    data: XOR<ImageUpdateWithoutRoomTypeInput, ImageUncheckedUpdateWithoutRoomTypeInput>
+  }
+
+  export type ImageUpdateManyWithWhereWithoutRoomTypeInput = {
+    where: ImageScalarWhereInput
+    data: XOR<ImageUpdateManyMutationInput, ImageUncheckedUpdateManyWithoutRoomTypeInput>
   }
 
   export type SchemeUpsertWithWhereUniqueWithoutRoomTypeInput = {
@@ -10468,22 +10560,6 @@ export namespace Prisma {
     roomTypeName?: StringNullableFilter<"Scheme"> | string | null
     createdAt?: DateTimeFilter<"Scheme"> | Date | string
     updatedAt?: DateTimeFilter<"Scheme"> | Date | string
-  }
-
-  export type ImageUpsertWithWhereUniqueWithoutRoomTypeInput = {
-    where: ImageWhereUniqueInput
-    update: XOR<ImageUpdateWithoutRoomTypeInput, ImageUncheckedUpdateWithoutRoomTypeInput>
-    create: XOR<ImageCreateWithoutRoomTypeInput, ImageUncheckedCreateWithoutRoomTypeInput>
-  }
-
-  export type ImageUpdateWithWhereUniqueWithoutRoomTypeInput = {
-    where: ImageWhereUniqueInput
-    data: XOR<ImageUpdateWithoutRoomTypeInput, ImageUncheckedUpdateWithoutRoomTypeInput>
-  }
-
-  export type ImageUpdateManyWithWhereWithoutRoomTypeInput = {
-    where: ImageScalarWhereInput
-    data: XOR<ImageUpdateManyMutationInput, ImageUncheckedUpdateManyWithoutRoomTypeInput>
   }
 
   export type OrderCreateWithoutUserInput = {
@@ -10535,7 +10611,7 @@ export namespace Prisma {
     NOT?: OrderScalarWhereInput | OrderScalarWhereInput[]
     id?: IntFilter<"Order"> | number
     totalPrice?: IntFilter<"Order"> | number
-    userEmail?: StringFilter<"Order"> | string
+    userId?: IntFilter<"Order"> | number
     withConsultation?: BoolFilter<"Order"> | boolean
     createdAt?: DateTimeFilter<"Order"> | Date | string
     updatedAt?: DateTimeFilter<"Order"> | Date | string
@@ -10575,6 +10651,7 @@ export namespace Prisma {
   }
 
   export type UserUncheckedCreateWithoutOrdersInput = {
+    id?: number
     email: string
     name?: string | null
     password?: string | null
@@ -10629,6 +10706,7 @@ export namespace Prisma {
   }
 
   export type UserUncheckedUpdateWithoutOrdersInput = {
+    id?: IntFieldUpdateOperationsInput | number
     email?: StringFieldUpdateOperationsInput | string
     name?: NullableStringFieldUpdateOperationsInput | string | null
     password?: NullableStringFieldUpdateOperationsInput | string | null
@@ -10637,6 +10715,28 @@ export namespace Prisma {
     isAdmin?: BoolFieldUpdateOperationsInput | boolean
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type OrderCreateWithoutSchemesInput = {
+    totalPrice: number
+    withConsultation?: boolean
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    user?: UserCreateNestedOneWithoutOrdersInput
+  }
+
+  export type OrderUncheckedCreateWithoutSchemesInput = {
+    id?: number
+    totalPrice: number
+    userId: number
+    withConsultation?: boolean
+    createdAt?: Date | string
+    updatedAt?: Date | string
+  }
+
+  export type OrderCreateOrConnectWithoutSchemesInput = {
+    where: OrderWhereUniqueInput
+    create: XOR<OrderCreateWithoutSchemesInput, OrderUncheckedCreateWithoutSchemesInput>
   }
 
   export type SchemeCreateWithoutOrdersInput = {
@@ -10667,26 +10767,32 @@ export namespace Prisma {
     create: XOR<SchemeCreateWithoutOrdersInput, SchemeUncheckedCreateWithoutOrdersInput>
   }
 
-  export type OrderCreateWithoutSchemesInput = {
-    totalPrice: number
-    withConsultation?: boolean
-    createdAt?: Date | string
-    updatedAt?: Date | string
-    user?: UserCreateNestedOneWithoutOrdersInput
-  }
-
-  export type OrderUncheckedCreateWithoutSchemesInput = {
-    id?: number
-    totalPrice: number
-    userEmail: string
-    withConsultation?: boolean
-    createdAt?: Date | string
-    updatedAt?: Date | string
-  }
-
-  export type OrderCreateOrConnectWithoutSchemesInput = {
-    where: OrderWhereUniqueInput
+  export type OrderUpsertWithoutSchemesInput = {
+    update: XOR<OrderUpdateWithoutSchemesInput, OrderUncheckedUpdateWithoutSchemesInput>
     create: XOR<OrderCreateWithoutSchemesInput, OrderUncheckedCreateWithoutSchemesInput>
+    where?: OrderWhereInput
+  }
+
+  export type OrderUpdateToOneWithWhereWithoutSchemesInput = {
+    where?: OrderWhereInput
+    data: XOR<OrderUpdateWithoutSchemesInput, OrderUncheckedUpdateWithoutSchemesInput>
+  }
+
+  export type OrderUpdateWithoutSchemesInput = {
+    totalPrice?: IntFieldUpdateOperationsInput | number
+    withConsultation?: BoolFieldUpdateOperationsInput | boolean
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    user?: UserUpdateOneWithoutOrdersNestedInput
+  }
+
+  export type OrderUncheckedUpdateWithoutSchemesInput = {
+    id?: IntFieldUpdateOperationsInput | number
+    totalPrice?: IntFieldUpdateOperationsInput | number
+    userId?: IntFieldUpdateOperationsInput | number
+    withConsultation?: BoolFieldUpdateOperationsInput | boolean
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
 
   export type SchemeUpsertWithoutOrdersInput = {
@@ -10721,34 +10827,6 @@ export namespace Prisma {
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     images?: ImageUncheckedUpdateManyWithoutSchemeNestedInput
-  }
-
-  export type OrderUpsertWithoutSchemesInput = {
-    update: XOR<OrderUpdateWithoutSchemesInput, OrderUncheckedUpdateWithoutSchemesInput>
-    create: XOR<OrderCreateWithoutSchemesInput, OrderUncheckedCreateWithoutSchemesInput>
-    where?: OrderWhereInput
-  }
-
-  export type OrderUpdateToOneWithWhereWithoutSchemesInput = {
-    where?: OrderWhereInput
-    data: XOR<OrderUpdateWithoutSchemesInput, OrderUncheckedUpdateWithoutSchemesInput>
-  }
-
-  export type OrderUpdateWithoutSchemesInput = {
-    totalPrice?: IntFieldUpdateOperationsInput | number
-    withConsultation?: BoolFieldUpdateOperationsInput | boolean
-    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    user?: UserUpdateOneWithoutOrdersNestedInput
-  }
-
-  export type OrderUncheckedUpdateWithoutSchemesInput = {
-    id?: IntFieldUpdateOperationsInput | number
-    totalPrice?: IntFieldUpdateOperationsInput | number
-    userEmail?: StringFieldUpdateOperationsInput | string
-    withConsultation?: BoolFieldUpdateOperationsInput | boolean
-    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
 
   export type ImageCreateManySchemeInput = {
@@ -10810,6 +10888,15 @@ export namespace Prisma {
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
 
+  export type ImageCreateManyRoomTypeInput = {
+    id?: number
+    url: string
+    schemeId: number
+    schemeIndex: number
+    createdAt?: Date | string
+    updatedAt?: Date | string
+  }
+
   export type SchemeCreateManyRoomTypeInput = {
     id?: number
     name: string
@@ -10820,13 +10907,30 @@ export namespace Prisma {
     updatedAt?: Date | string
   }
 
-  export type ImageCreateManyRoomTypeInput = {
-    id?: number
-    url: string
-    schemeId: number
-    schemeIndex: number
-    createdAt?: Date | string
-    updatedAt?: Date | string
+  export type ImageUpdateWithoutRoomTypeInput = {
+    url?: StringFieldUpdateOperationsInput | string
+    schemeIndex?: IntFieldUpdateOperationsInput | number
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    scheme?: SchemeUpdateOneRequiredWithoutImagesNestedInput
+  }
+
+  export type ImageUncheckedUpdateWithoutRoomTypeInput = {
+    id?: IntFieldUpdateOperationsInput | number
+    url?: StringFieldUpdateOperationsInput | string
+    schemeId?: IntFieldUpdateOperationsInput | number
+    schemeIndex?: IntFieldUpdateOperationsInput | number
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type ImageUncheckedUpdateManyWithoutRoomTypeInput = {
+    id?: IntFieldUpdateOperationsInput | number
+    url?: StringFieldUpdateOperationsInput | string
+    schemeId?: IntFieldUpdateOperationsInput | number
+    schemeIndex?: IntFieldUpdateOperationsInput | number
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
 
   export type SchemeUpdateWithoutRoomTypeInput = {
@@ -10858,32 +10962,6 @@ export namespace Prisma {
     description?: StringFieldUpdateOperationsInput | string
     price?: IntFieldUpdateOperationsInput | number
     isAvailable?: BoolFieldUpdateOperationsInput | boolean
-    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
-  }
-
-  export type ImageUpdateWithoutRoomTypeInput = {
-    url?: StringFieldUpdateOperationsInput | string
-    schemeIndex?: IntFieldUpdateOperationsInput | number
-    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    scheme?: SchemeUpdateOneRequiredWithoutImagesNestedInput
-  }
-
-  export type ImageUncheckedUpdateWithoutRoomTypeInput = {
-    id?: IntFieldUpdateOperationsInput | number
-    url?: StringFieldUpdateOperationsInput | string
-    schemeId?: IntFieldUpdateOperationsInput | number
-    schemeIndex?: IntFieldUpdateOperationsInput | number
-    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
-  }
-
-  export type ImageUncheckedUpdateManyWithoutRoomTypeInput = {
-    id?: IntFieldUpdateOperationsInput | number
-    url?: StringFieldUpdateOperationsInput | string
-    schemeId?: IntFieldUpdateOperationsInput | number
-    schemeIndex?: IntFieldUpdateOperationsInput | number
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
