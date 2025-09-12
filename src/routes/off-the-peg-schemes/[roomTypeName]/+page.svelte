@@ -4,10 +4,9 @@
 	import Button from '$lib/components/buttons/Button.svelte';
 	import ClipImage from '$lib/components/ClipImage.svelte';
 	import { slugify } from '$lib/utils/slugify';
+	import CardWrapper from '$lib/components/ui/cards/CardWrapper.svelte';
 
 	let { data }: { data: PageData } = $props();
-
-	console.log(data);
 
 	let isPageReady: boolean = $state(false);
 
@@ -19,21 +18,17 @@
 <main class="RoomTypeName">
 	<ul class="RoomTypeName__list">
 		{#each data.schemes as scheme}
-			<li class="RoomTypeName__item">
-				<div class="RoomTypeName__imageWrapper">
-					<ClipImage isComponentReady={isPageReady} src={scheme.images[0].url} description="" />
-				</div>
-
-				<h3>Our {scheme.name} schemes</h3>
-
-				<p>{scheme.description}</p>
-
-				<!-- Slugify not working for living room - need to fix -->
-				<a href="/off-the-peg-schemes/{slugify(scheme.roomTypeName!)}/{scheme.id}"
-					><Button data-content="Visit">Visit</Button><span class="visually-hidden"
-						>Link to {scheme.name} page</span
-					></a
+			<li>
+				<CardWrapper
+					href="/off-the-peg-schemes/{slugify(scheme.roomTypeName!)}/{scheme.id}"
+					hiddenText="Link to {scheme.name} page"
 				>
+					<div class="RoomTypeName__imageWrapper">
+						<ClipImage isComponentReady={isPageReady} src={scheme.images[0].url} description="" />
+					</div>
+					<h3>Our {scheme.name} schemes</h3>
+					<p>{scheme.description}</p>
+				</CardWrapper>
 			</li>
 		{/each}
 	</ul>
@@ -55,29 +50,6 @@
 
 			@include breakpoints.tablet {
 				grid-template-columns: repeat(2, 1fr);
-			}
-		}
-
-		&__item {
-			display: flex;
-			flex-direction: column;
-			gap: 1.5rem;
-			overflow: hidden;
-			position: relative;
-
-			&:hover h3 {
-				text-decoration: underline;
-			}
-
-			a::after {
-				content: '';
-				inset: 0;
-				position: absolute;
-			}
-
-			:global(button) {
-				position: relative;
-				z-index: 2;
 			}
 		}
 

@@ -4,3 +4,8 @@ export interface OverlayProps {
 	isOpen: boolean;
 	overlayContent: Component | null;
 }
+
+export interface LikedItemProps {
+	isLiked: boolean;
+	likedSchemes: string[];
+}

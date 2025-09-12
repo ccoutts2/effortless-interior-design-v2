@@ -2,8 +2,10 @@
 	import Button from '$lib/components/buttons/Button.svelte';
 	import ClipImage from '$lib/components/ClipImage.svelte';
 	import ShoppingBasket from '$lib/components/ShoppingBasket.svelte';
+	import CardWrapper from '$lib/components/ui/cards/CardWrapper.svelte';
 	import type { OverlayProps } from '$lib/types';
 	import { slugify } from '$lib/utils/slugify';
+	import { Heart } from '@lucide/svelte';
 	import type { PageData } from './$types';
 
 	import { getContext, onMount } from 'svelte';
@@ -17,10 +19,6 @@
 	let { data }: SchemeProps = $props();
 
 	let isPageReady: boolean = $state(false);
-
-	onMount(() => {
-		isPageReady = true;
-	});
 
 	const scheme = $derived(data.scheme);
 
@@ -42,13 +40,65 @@
 	const filteredAlProducts = $derived(
 		allAvailableSchemes.filter((schemeId) => schemeId.id !== scheme.id)
 	);
+
+	let isLiked: boolean = $state(false);
+	let fill: string = $state('');
+
+	const getLikedSchemes = () => {
+		const savedItems = localStorage.getItem('likedSchemes');
+		return savedItems ? JSON.parse(savedItems) : [];
+	};
+
+	const isSchemeLiked = () => {
+		let likedSchemes = getLikedSchemes();
+
+		const schemeIndex = likedSchemes.indexOf(scheme.id);
+
+		if (schemeIndex === -1) {
+			likedSchemes.push(scheme.id);
+			isLiked = true;
+		} else {
+			likedSchemes.splice(schemeIndex, 1);
+			isLiked = false;
+		}
+
+		localStorage.setItem('likedSchemes', JSON.stringify(likedSchemes));
+	};
+
+	onMount(() => {
+		isPageReady = true;
+		const likedSchemes = getLikedSchemes();
+		isLiked = likedSchemes.includes(scheme.id);
+	});
+
+	$effect(() => {
+		if (isLiked) {
+			fill = '#5d3a40';
+		} else {
+			fill = '';
+		}
+
+		const likedSchemes = getLikedSchemes();
+		if (likedSchemes.includes(scheme.id)) {
+			fill = '#5d3a40';
+		} else {
+			fill = '';
+		}
+	});
 </script>
 
 <main class="Scheme">
 	<section class="Scheme__product Product">
 		<article class="Product__information">
 			<div>
-				<span>{scheme.roomTypeName}</span>
+				<div class="flex justify-between">
+					<p>{scheme.roomTypeName}</p>
+					<spam
+						><button onclick={isSchemeLiked}><Heart style="fill:{fill}" strokeWidth="1" /></button
+						></spam
+					>
+				</div>
+
 				<h1>{scheme.name}</h1>
 				<div class="Product__price">
 					<span class="Product__oldPrice">£{scheme.price}</span><span
@@ -70,17 +120,16 @@
 		<ul class="flex gap-8">
 			{#each filteredProducts as product}
 				<li>
-					<article class="RelatedScheme">
+					<CardWrapper
+						href="/off-the-peg-schemes/{slugify(product.roomTypeName!)}/{product.id}"
+						hiddenText="View {product.name}'s page"
+					>
 						<h4>{product.name}</h4>
 						<span>£{product.price}</span>
 						<div>
 							<img src={product.images[0].url} alt="{product.name} image" />
 						</div>
-						<!-- Slugify not working for living room - need to fix -->
-						<a href="/off-the-peg-schemes/{slugify(product.roomTypeName!)}/{product.id}"
-							><span class="visually-hidden">View {product.name}'s page</span></a
-						>
-					</article>
+					</CardWrapper>
 				</li>
 			{/each}
 		</ul>
@@ -90,7 +139,10 @@
 		<ul class="flex gap-8">
 			{#each filteredAlProducts as product}
 				<li>
-					<article class="RelatedScheme">
+					<CardWrapper
+						href="/off-the-peg-schemes/{slugify(product.roomTypeName!)}/{product.id}"
+						hiddenText="View {product.name}'s page"
+					>
 						<div>
 							<h4>{product.name}</h4>
 							<span class="block">£{product.price}</span>
@@ -100,10 +152,7 @@
 						<div>
 							<img src={product.images[0].url} alt="{product.name} image" />
 						</div>
-						<a href="/off-the-peg-schemes/{slugify(product.roomTypeName!)}/{product.id}"
-							><span class="visually-hidden">View {product.name}'s page</span></a
-						>
-					</article>
+					</CardWrapper>
 				</li>
 			{/each}
 		</ul>
@@ -143,18 +192,6 @@
 
 		&__oldPrice {
 			text-decoration: line-through;
-		}
-	}
-
-	.RelatedScheme {
-		display: flex;
-		flex-direction: column-reverse;
-		position: relative;
-
-		a::after {
-			content: '';
-			inset: 0;
-			position: absolute;
 		}
 	}
 </style>

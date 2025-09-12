@@ -1,6 +1,6 @@
 <script lang="ts">
-	import { ShoppingCart, User } from '@lucide/svelte';
-	import { getContext, type Snippet } from 'svelte';
+	import { Heart, ShoppingCart, User } from '@lucide/svelte';
+	import { getContext, onMount, type Snippet } from 'svelte';
 	import NavLink from '../navigation/NavLink.svelte';
 	import Button from '../buttons/Button.svelte';
 
@@ -16,6 +16,7 @@
 	import ShoppingBasket from '../ShoppingBasket.svelte';
 
 	const overlay = getContext('overlay-ctx') as OverlayProps;
+	const isLked = getContext('liked-state');
 
 	function openMobileOverlay() {
 		overlay.isOpen = true;
@@ -41,6 +42,9 @@
 		</a>
 	</div>
 	<div class="NavBar__icon">
+		<button>
+			<Heart />
+		</button>
 		{#if !dataIsAdmin}
 			<button onclick={openShoppingOverlay}>
 				<ShoppingCart />

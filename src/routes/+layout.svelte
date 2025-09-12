@@ -8,7 +8,6 @@
 	import Header from '$lib/components/layout/Header.svelte';
 	import NavLink from '$lib/components/navigation/NavLink.svelte';
 	import Overlay from '$lib/components/ui/Overlay.svelte';
-	import SubMenu from '$lib/components/navigation/SubMenu.svelte';
 
 	let { children }: { children: Snippet } = $props();
 
