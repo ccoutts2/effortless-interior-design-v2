@@ -6,23 +6,24 @@
 		fieldName,
 		value = $bindable(),
 		errors,
+		autocomplete,
 		required = false,
 		constraints = undefined
 	}: FormFieldProps = $props();
 </script>
 
-<div class="EmailField" data-has-error={errors ? 'true' : undefined}>
-	<label class="EmailField__label" data-has-error={errors ? 'true' : undefined} for={fieldName}
+<div class="TextField" data-has-error={errors ? 'true' : undefined}>
+	<label class="TextField__label" data-has-error={errors ? 'true' : undefined} for={fieldName}
 		>{label}</label
 	>
 	<input
-		class="EmailField__input"
+		class="TextField__input"
 		name={fieldName}
 		id={fieldName}
 		bind:value
-		type="email"
+		type="text"
 		{required}
-		autocomplete="email"
+		{autocomplete}
 		aria-invalid={errors ? 'true' : undefined}
 		aria-describedby={errors ? `${fieldName}-error-message` : undefined}
 		{...constraints}
@@ -33,7 +34,7 @@
 </div>
 
 <style lang="scss">
-	.EmailField {
+	.TextField {
 		display: flex;
 		flex-direction: column;
 		width: 100%;

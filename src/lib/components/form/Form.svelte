@@ -3,7 +3,7 @@
 	import Button from '../buttons/Button.svelte';
 
 	interface FormProps {
-		action: string;
+		action?: string;
 		children: Snippet;
 		enhance: any;
 	}

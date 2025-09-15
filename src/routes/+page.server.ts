@@ -1,12 +1,13 @@
-import type { Actions } from '@sveltejs/kit';
 import type { PageServerLoad } from './$types';
-import { message, setError, superValidate } from 'sveltekit-superforms';
+import type { Actions } from '@sveltejs/kit';
 import { zod } from 'sveltekit-superforms/adapters';
+import { message, superValidate, setError } from 'sveltekit-superforms';
 import z from 'zod';
 import prisma from '$lib/server/prisma';
 
 const schema = z.object({
-	email: z.string().email()
+	email: z.string().email(),
+	name: z.string().min(1, 'Please enter a valid name').optional()
 });
 
 export const load: PageServerLoad = async () => {
@@ -43,7 +44,7 @@ export const actions = {
 			await prisma.user.upsert({
 				where: { email: form.data.email },
 				update: { newsletterSub: true },
-				create: { email: form.data.email, newsletterSub: true }
+				create: { email: form.data.email, name: form.data.name, newsletterSub: true }
 			});
 		} catch (error) {
 			console.log(error);

@@ -45,6 +45,7 @@
 
 <style lang="scss">
 	.TestimonialWrapper {
+		margin-block: 25vh 50vh;
 		overflow: hidden;
 		position: relative;
 

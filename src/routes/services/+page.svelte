@@ -9,7 +9,7 @@
 	const { form, enhance, message, errors } = superForm(data.form);
 </script>
 
-<Form action="?/newsLetterRegister" {enhance}>
+<Form {enhance}>
 	{#if $message}
 		<span class="Error text-lg">{$message.text}</span>
 	{/if}
@@ -21,6 +21,7 @@
 			value={$form.email}
 			errors={$errors.email}
 			autocomplete="email"
+			required
 		/>
 	</fieldset>
 </Form>
