@@ -76,3 +76,10 @@ model OrdersOnSchemes {
 
   @@id([schemeId, orderId])
 }
+
+model Session {
+  id             String   @id
+  secretHash     Bytes
+  lastVerifiedAt DateTime
+  createdAt      DateTime
+}

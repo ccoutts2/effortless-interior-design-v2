@@ -7,6 +7,7 @@
 		"seed": "tsx prisma/seed.ts"
 	},
 	"scripts": {
+		"postinstall": "prisma generate",
 		"db:generate": "npx prisma generate",
 		"db:migrate": "npx prisma migrate dev",
 		"db:seed": "npx prisma db seed",
@@ -35,7 +36,7 @@
 		"prettier": "^3.4.2",
 		"prettier-plugin-svelte": "^3.3.3",
 		"prettier-plugin-tailwindcss": "^0.6.11",
-		"prisma": "^6.16.0",
+		"prisma": "^6.16.1",
 		"svelte": "^5.0.0",
 		"svelte-check": "^4.0.0",
 		"sveltekit-superforms": "^2.27.1",
@@ -50,7 +51,7 @@
 	},
 	"dependencies": {
 		"@lucide/svelte": "^0.543.0",
-		"@prisma/client": "^6.16.0",
+		"@prisma/client": "^6.16.1",
 		"gsap": "^3.13.0",
 		"sass": "^1.92.1"
 	}

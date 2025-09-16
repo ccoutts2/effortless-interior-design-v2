@@ -1,6 +1,7 @@
 generator client {
-  provider = "prisma-client-js"
-  output   = "../src/generated/client"
+  provider = "prisma-client"
+  output   = "../src/generated/prisma"
+  
 }
 
 datasource db {
@@ -75,4 +76,11 @@ model OrdersOnSchemes {
   scheme    Scheme   @relation(fields: [schemeId], references: [id])
 
   @@id([schemeId, orderId])
+}
+
+model Session {
+  id              String   @id
+  secretHash      Bytes
+  lastVerifiedAt  DateTime
+  createdAt       DateTime 
 }

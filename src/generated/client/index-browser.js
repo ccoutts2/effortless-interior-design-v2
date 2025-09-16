@@ -20,11 +20,11 @@ exports.Prisma = Prisma
 exports.$Enums = {}
 
 /**
- * Prisma Client JS version: 6.16.0
+ * Prisma Client JS version: 6.16.1
  * Query Engine version: 1c57fdcd7e44b29b9313256c76699e91c3ac3c43
  */
 Prisma.prismaVersion = {
-  client: "6.16.0",
+  client: "6.16.1",
   engine: "1c57fdcd7e44b29b9313256c76699e91c3ac3c43"
 }
 
@@ -175,6 +175,13 @@ exports.Prisma.OrdersOnSchemesScalarFieldEnum = {
   updatedAt: 'updatedAt'
 };
 
+exports.Prisma.SessionScalarFieldEnum = {
+  id: 'id',
+  secretHash: 'secretHash',
+  lastVerifiedAt: 'lastVerifiedAt',
+  createdAt: 'createdAt'
+};
+
 exports.Prisma.SortOrder = {
   asc: 'asc',
   desc: 'desc'
@@ -197,7 +204,8 @@ exports.Prisma.ModelName = {
   RoomType: 'RoomType',
   User: 'User',
   Order: 'Order',
-  OrdersOnSchemes: 'OrdersOnSchemes'
+  OrdersOnSchemes: 'OrdersOnSchemes',
+  Session: 'Session'
 };
 
 /**
