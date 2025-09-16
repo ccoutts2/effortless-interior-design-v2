@@ -17,7 +17,7 @@ export async function createSession(): Promise<SessionWithToken> {
 	await prisma.session.create({
 		data: {
 			id,
-			secretHash,
+			secretHash: Buffer.from(secretHash),
 			lastVerifiedAt: now,
 			createdAt: now
 		}

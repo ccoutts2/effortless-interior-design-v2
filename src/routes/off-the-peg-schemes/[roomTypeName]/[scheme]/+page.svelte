@@ -1,10 +1,12 @@
 <script lang="ts">
 	import Button from '$lib/components/buttons/Button.svelte';
 	import ClipImage from '$lib/components/ClipImage.svelte';
+	import Form from '$lib/components/form/Form.svelte';
 	import ShoppingBasket from '$lib/components/ShoppingBasket.svelte';
 	import type { OverlayProps } from '$lib/types';
 	import { slugify } from '$lib/utils/slugify';
 	import type { PageData } from './$types';
+	import { enhance } from '$app/forms';
 
 	import { getContext, onMount } from 'svelte';
 
@@ -15,6 +17,8 @@
 	const overlay = getContext('overlay-ctx') as OverlayProps;
 
 	let { data }: SchemeProps = $props();
+
+	console.log(data.schemesInBasket);
 
 	let isPageReady: boolean = $state(false);
 
@@ -57,13 +61,24 @@
 				</div>
 				<p>{scheme.description}</p>
 			</div>
-			<div>
-				<Button data-content="Add to basket" onclick={openShoppingBasket}>Add to basket</Button>
-			</div>
+			<Form {enhance}>
+				<input type="hidden" name="schemeId" value={scheme.id} />
+				<Button type="submit" data-content="Add to basket" onclick={openShoppingBasket}
+					>Add to basket</Button
+				>
+			</Form>
 		</article>
 		<div class="overflow-hidden">
 			<ClipImage isComponentReady={isPageReady} src={scheme.images[0].url} description="" />
 		</div>
+	</section>
+	<section class="my-[25vh]">
+		{#if data.schemesInBasket}
+			<ul></ul>
+			{#each data.schemesInBasket as basketItem}
+				<li>{basketItem.scheme.name}</li>
+			{/each}
+		{/if}
 	</section>
 	<section>
 		<h2>Related {scheme.roomTypeName} Schemes</h2>

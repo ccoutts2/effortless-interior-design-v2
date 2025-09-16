@@ -1,7 +1,6 @@
 generator client {
   provider = "prisma-client"
   output   = "../src/generated/prisma"
-  
 }
 
 datasource db {
@@ -20,6 +19,7 @@ model Scheme {
   updatedAt    DateTime          @updatedAt
   images       Image[]
   orders       OrdersOnSchemes[]
+  baskets      SchemesInBasket[]
   roomType     RoomType?         @relation(fields: [roomTypeName], references: [name], onDelete: Cascade)
 }
 
@@ -78,9 +78,30 @@ model OrdersOnSchemes {
   @@id([schemeId, orderId])
 }
 
+model Basket {
+  id        Int               @id @default(autoincrement())
+  sessionId String?           @unique
+  session   Session?          @relation(fields: [sessionId], references: [id])
+  createdAt DateTime          @default(now())
+  updatedAt DateTime          @updatedAt
+  schemes   SchemesInBasket[]
+}
+
+model SchemesInBasket {
+  schemeId  Int
+  basketId  Int
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+  scheme    Scheme   @relation(fields: [schemeId], references: [id])
+  basket    Basket   @relation(fields: [basketId], references: [id])
+
+  @@id([schemeId, basketId])
+}
+
 model Session {
-  id              String   @id
-  secretHash      Bytes
-  lastVerifiedAt  DateTime
-  createdAt       DateTime 
+  id             String   @id
+  secretHash     Bytes
+  lastVerifiedAt DateTime
+  createdAt      DateTime
+  basket         Basket?
 }

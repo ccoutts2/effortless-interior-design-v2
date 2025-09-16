@@ -173,6 +173,7 @@ export type SessionWhereInput = {
   secretHash?: Prisma.BytesFilter<"Session"> | Uint8Array
   lastVerifiedAt?: Prisma.DateTimeFilter<"Session"> | Date | string
   createdAt?: Prisma.DateTimeFilter<"Session"> | Date | string
+  basket?: Prisma.XOR<Prisma.BasketNullableScalarRelationFilter, Prisma.BasketWhereInput> | null
 }
 
 export type SessionOrderByWithRelationInput = {
@@ -180,6 +181,7 @@ export type SessionOrderByWithRelationInput = {
   secretHash?: Prisma.SortOrder
   lastVerifiedAt?: Prisma.SortOrder
   createdAt?: Prisma.SortOrder
+  basket?: Prisma.BasketOrderByWithRelationInput
 }
 
 export type SessionWhereUniqueInput = Prisma.AtLeast<{
@@ -190,6 +192,7 @@ export type SessionWhereUniqueInput = Prisma.AtLeast<{
   secretHash?: Prisma.BytesFilter<"Session"> | Uint8Array
   lastVerifiedAt?: Prisma.DateTimeFilter<"Session"> | Date | string
   createdAt?: Prisma.DateTimeFilter<"Session"> | Date | string
+  basket?: Prisma.XOR<Prisma.BasketNullableScalarRelationFilter, Prisma.BasketWhereInput> | null
 }, "id">
 
 export type SessionOrderByWithAggregationInput = {
@@ -217,6 +220,7 @@ export type SessionCreateInput = {
   secretHash: Uint8Array
   lastVerifiedAt: Date | string
   createdAt: Date | string
+  basket?: Prisma.BasketCreateNestedOneWithoutSessionInput
 }
 
 export type SessionUncheckedCreateInput = {
@@ -224,6 +228,7 @@ export type SessionUncheckedCreateInput = {
   secretHash: Uint8Array
   lastVerifiedAt: Date | string
   createdAt: Date | string
+  basket?: Prisma.BasketUncheckedCreateNestedOneWithoutSessionInput
 }
 
 export type SessionUpdateInput = {
@@ -231,6 +236,7 @@ export type SessionUpdateInput = {
   secretHash?: Prisma.BytesFieldUpdateOperationsInput | Uint8Array
   lastVerifiedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  basket?: Prisma.BasketUpdateOneWithoutSessionNestedInput
 }
 
 export type SessionUncheckedUpdateInput = {
@@ -238,6 +244,7 @@ export type SessionUncheckedUpdateInput = {
   secretHash?: Prisma.BytesFieldUpdateOperationsInput | Uint8Array
   lastVerifiedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  basket?: Prisma.BasketUncheckedUpdateOneWithoutSessionNestedInput
 }
 
 export type SessionCreateManyInput = {
@@ -261,6 +268,11 @@ export type SessionUncheckedUpdateManyInput = {
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
 }
 
+export type SessionNullableScalarRelationFilter = {
+  is?: Prisma.SessionWhereInput | null
+  isNot?: Prisma.SessionWhereInput | null
+}
+
 export type SessionCountOrderByAggregateInput = {
   id?: Prisma.SortOrder
   secretHash?: Prisma.SortOrder
@@ -282,8 +294,68 @@ export type SessionMinOrderByAggregateInput = {
   createdAt?: Prisma.SortOrder
 }
 
+export type SessionCreateNestedOneWithoutBasketInput = {
+  create?: Prisma.XOR<Prisma.SessionCreateWithoutBasketInput, Prisma.SessionUncheckedCreateWithoutBasketInput>
+  connectOrCreate?: Prisma.SessionCreateOrConnectWithoutBasketInput
+  connect?: Prisma.SessionWhereUniqueInput
+}
+
+export type SessionUpdateOneWithoutBasketNestedInput = {
+  create?: Prisma.XOR<Prisma.SessionCreateWithoutBasketInput, Prisma.SessionUncheckedCreateWithoutBasketInput>
+  connectOrCreate?: Prisma.SessionCreateOrConnectWithoutBasketInput
+  upsert?: Prisma.SessionUpsertWithoutBasketInput
+  disconnect?: Prisma.SessionWhereInput | boolean
+  delete?: Prisma.SessionWhereInput | boolean
+  connect?: Prisma.SessionWhereUniqueInput
+  update?: Prisma.XOR<Prisma.XOR<Prisma.SessionUpdateToOneWithWhereWithoutBasketInput, Prisma.SessionUpdateWithoutBasketInput>, Prisma.SessionUncheckedUpdateWithoutBasketInput>
+}
+
 export type BytesFieldUpdateOperationsInput = {
   set?: Uint8Array
+}
+
+export type SessionCreateWithoutBasketInput = {
+  id: string
+  secretHash: Uint8Array
+  lastVerifiedAt: Date | string
+  createdAt: Date | string
+}
+
+export type SessionUncheckedCreateWithoutBasketInput = {
+  id: string
+  secretHash: Uint8Array
+  lastVerifiedAt: Date | string
+  createdAt: Date | string
+}
+
+export type SessionCreateOrConnectWithoutBasketInput = {
+  where: Prisma.SessionWhereUniqueInput
+  create: Prisma.XOR<Prisma.SessionCreateWithoutBasketInput, Prisma.SessionUncheckedCreateWithoutBasketInput>
+}
+
+export type SessionUpsertWithoutBasketInput = {
+  update: Prisma.XOR<Prisma.SessionUpdateWithoutBasketInput, Prisma.SessionUncheckedUpdateWithoutBasketInput>
+  create: Prisma.XOR<Prisma.SessionCreateWithoutBasketInput, Prisma.SessionUncheckedCreateWithoutBasketInput>
+  where?: Prisma.SessionWhereInput
+}
+
+export type SessionUpdateToOneWithWhereWithoutBasketInput = {
+  where?: Prisma.SessionWhereInput
+  data: Prisma.XOR<Prisma.SessionUpdateWithoutBasketInput, Prisma.SessionUncheckedUpdateWithoutBasketInput>
+}
+
+export type SessionUpdateWithoutBasketInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  secretHash?: Prisma.BytesFieldUpdateOperationsInput | Uint8Array
+  lastVerifiedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+}
+
+export type SessionUncheckedUpdateWithoutBasketInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  secretHash?: Prisma.BytesFieldUpdateOperationsInput | Uint8Array
+  lastVerifiedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
 }
 
 
@@ -293,6 +365,7 @@ export type SessionSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs 
   secretHash?: boolean
   lastVerifiedAt?: boolean
   createdAt?: boolean
+  basket?: boolean | Prisma.Session$basketArgs<ExtArgs>
 }, ExtArgs["result"]["session"]>
 
 export type SessionSelectCreateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetSelect<{
@@ -317,10 +390,17 @@ export type SessionSelectScalar = {
 }
 
 export type SessionOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "secretHash" | "lastVerifiedAt" | "createdAt", ExtArgs["result"]["session"]>
+export type SessionInclude<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  basket?: boolean | Prisma.Session$basketArgs<ExtArgs>
+}
+export type SessionIncludeCreateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {}
+export type SessionIncludeUpdateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {}
 
 export type $SessionPayload<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   name: "Session"
-  objects: {}
+  objects: {
+    basket: Prisma.$BasketPayload<ExtArgs> | null
+  }
   scalars: runtime.Types.Extensions.GetPayloadResult<{
     id: string
     secretHash: Uint8Array
@@ -720,6 +800,7 @@ readonly fields: SessionFieldRefs;
  */
 export interface Prisma__SessionClient<T, Null = never, ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs, GlobalOmitOptions = {}> extends Prisma.PrismaPromise<T> {
   readonly [Symbol.toStringTag]: "PrismaPromise"
+  basket<T extends Prisma.Session$basketArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Session$basketArgs<ExtArgs>>): Prisma.Prisma__BasketClient<runtime.Types.Result.GetResult<Prisma.$BasketPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
   /**
    * Attaches callbacks for the resolution and/or rejection of the Promise.
    * @param onfulfilled The callback to execute when the Promise is resolved.
@@ -770,6 +851,10 @@ export type SessionFindUniqueArgs<ExtArgs extends runtime.Types.Extensions.Inter
    */
   omit?: Prisma.SessionOmit<ExtArgs> | null
   /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.SessionInclude<ExtArgs> | null
+  /**
    * Filter, which Session to fetch.
    */
   where: Prisma.SessionWhereUniqueInput
@@ -788,6 +873,10 @@ export type SessionFindUniqueOrThrowArgs<ExtArgs extends runtime.Types.Extension
    */
   omit?: Prisma.SessionOmit<ExtArgs> | null
   /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.SessionInclude<ExtArgs> | null
+  /**
    * Filter, which Session to fetch.
    */
   where: Prisma.SessionWhereUniqueInput
@@ -805,6 +894,10 @@ export type SessionFindFirstArgs<ExtArgs extends runtime.Types.Extensions.Intern
    * Omit specific fields from the Session
    */
   omit?: Prisma.SessionOmit<ExtArgs> | null
+  /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.SessionInclude<ExtArgs> | null
   /**
    * Filter, which Session to fetch.
    */
@@ -854,6 +947,10 @@ export type SessionFindFirstOrThrowArgs<ExtArgs extends runtime.Types.Extensions
    */
   omit?: Prisma.SessionOmit<ExtArgs> | null
   /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.SessionInclude<ExtArgs> | null
+  /**
    * Filter, which Session to fetch.
    */
   where?: Prisma.SessionWhereInput
@@ -902,6 +999,10 @@ export type SessionFindManyArgs<ExtArgs extends runtime.Types.Extensions.Interna
    */
   omit?: Prisma.SessionOmit<ExtArgs> | null
   /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.SessionInclude<ExtArgs> | null
+  /**
    * Filter, which Sessions to fetch.
    */
   where?: Prisma.SessionWhereInput
@@ -944,6 +1045,10 @@ export type SessionCreateArgs<ExtArgs extends runtime.Types.Extensions.InternalA
    * Omit specific fields from the Session
    */
   omit?: Prisma.SessionOmit<ExtArgs> | null
+  /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.SessionInclude<ExtArgs> | null
   /**
    * The data needed to create a Session.
    */
@@ -992,6 +1097,10 @@ export type SessionUpdateArgs<ExtArgs extends runtime.Types.Extensions.InternalA
    * Omit specific fields from the Session
    */
   omit?: Prisma.SessionOmit<ExtArgs> | null
+  /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.SessionInclude<ExtArgs> | null
   /**
    * The data needed to update a Session.
    */
@@ -1059,6 +1168,10 @@ export type SessionUpsertArgs<ExtArgs extends runtime.Types.Extensions.InternalA
    */
   omit?: Prisma.SessionOmit<ExtArgs> | null
   /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.SessionInclude<ExtArgs> | null
+  /**
    * The filter to search for the Session to update in case it exists.
    */
   where: Prisma.SessionWhereUniqueInput
@@ -1085,6 +1198,10 @@ export type SessionDeleteArgs<ExtArgs extends runtime.Types.Extensions.InternalA
    */
   omit?: Prisma.SessionOmit<ExtArgs> | null
   /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.SessionInclude<ExtArgs> | null
+  /**
    * Filter which Session to delete.
    */
   where: Prisma.SessionWhereUniqueInput
@@ -1105,6 +1222,25 @@ export type SessionDeleteManyArgs<ExtArgs extends runtime.Types.Extensions.Inter
 }
 
 /**
+ * Session.basket
+ */
+export type Session$basketArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  /**
+   * Select specific fields to fetch from the Basket
+   */
+  select?: Prisma.BasketSelect<ExtArgs> | null
+  /**
+   * Omit specific fields from the Basket
+   */
+  omit?: Prisma.BasketOmit<ExtArgs> | null
+  /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.BasketInclude<ExtArgs> | null
+  where?: Prisma.BasketWhereInput
+}
+
+/**
  * Session without action
  */
 export type SessionDefaultArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
@@ -1116,4 +1252,8 @@ export type SessionDefaultArgs<ExtArgs extends runtime.Types.Extensions.Internal
    * Omit specific fields from the Session
    */
   omit?: Prisma.SessionOmit<ExtArgs> | null
+  /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.SessionInclude<ExtArgs> | null
 }

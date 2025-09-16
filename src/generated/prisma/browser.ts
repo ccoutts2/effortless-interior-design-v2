@@ -47,6 +47,16 @@ export type Order = Prisma.OrderModel
  */
 export type OrdersOnSchemes = Prisma.OrdersOnSchemesModel
 /**
+ * Model Basket
+ * 
+ */
+export type Basket = Prisma.BasketModel
+/**
+ * Model SchemesInBasket
+ * 
+ */
+export type SchemesInBasket = Prisma.SchemesInBasketModel
+/**
  * Model Session
  * 
  */

@@ -245,6 +245,7 @@ export type SchemeWhereInput = {
   updatedAt?: Prisma.DateTimeFilter<"Scheme"> | Date | string
   images?: Prisma.ImageListRelationFilter
   orders?: Prisma.OrdersOnSchemesListRelationFilter
+  baskets?: Prisma.SchemesInBasketListRelationFilter
   roomType?: Prisma.XOR<Prisma.RoomTypeNullableScalarRelationFilter, Prisma.RoomTypeWhereInput> | null
 }
 
@@ -259,6 +260,7 @@ export type SchemeOrderByWithRelationInput = {
   updatedAt?: Prisma.SortOrder
   images?: Prisma.ImageOrderByRelationAggregateInput
   orders?: Prisma.OrdersOnSchemesOrderByRelationAggregateInput
+  baskets?: Prisma.SchemesInBasketOrderByRelationAggregateInput
   roomType?: Prisma.RoomTypeOrderByWithRelationInput
 }
 
@@ -276,6 +278,7 @@ export type SchemeWhereUniqueInput = Prisma.AtLeast<{
   updatedAt?: Prisma.DateTimeFilter<"Scheme"> | Date | string
   images?: Prisma.ImageListRelationFilter
   orders?: Prisma.OrdersOnSchemesListRelationFilter
+  baskets?: Prisma.SchemesInBasketListRelationFilter
   roomType?: Prisma.XOR<Prisma.RoomTypeNullableScalarRelationFilter, Prisma.RoomTypeWhereInput> | null
 }, "id">
 
@@ -318,6 +321,7 @@ export type SchemeCreateInput = {
   updatedAt?: Date | string
   images?: Prisma.ImageCreateNestedManyWithoutSchemeInput
   orders?: Prisma.OrdersOnSchemesCreateNestedManyWithoutSchemeInput
+  baskets?: Prisma.SchemesInBasketCreateNestedManyWithoutSchemeInput
   roomType?: Prisma.RoomTypeCreateNestedOneWithoutSchemesInput
 }
 
@@ -332,6 +336,7 @@ export type SchemeUncheckedCreateInput = {
   updatedAt?: Date | string
   images?: Prisma.ImageUncheckedCreateNestedManyWithoutSchemeInput
   orders?: Prisma.OrdersOnSchemesUncheckedCreateNestedManyWithoutSchemeInput
+  baskets?: Prisma.SchemesInBasketUncheckedCreateNestedManyWithoutSchemeInput
 }
 
 export type SchemeUpdateInput = {
@@ -343,6 +348,7 @@ export type SchemeUpdateInput = {
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   images?: Prisma.ImageUpdateManyWithoutSchemeNestedInput
   orders?: Prisma.OrdersOnSchemesUpdateManyWithoutSchemeNestedInput
+  baskets?: Prisma.SchemesInBasketUpdateManyWithoutSchemeNestedInput
   roomType?: Prisma.RoomTypeUpdateOneWithoutSchemesNestedInput
 }
 
@@ -357,6 +363,7 @@ export type SchemeUncheckedUpdateInput = {
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   images?: Prisma.ImageUncheckedUpdateManyWithoutSchemeNestedInput
   orders?: Prisma.OrdersOnSchemesUncheckedUpdateManyWithoutSchemeNestedInput
+  baskets?: Prisma.SchemesInBasketUncheckedUpdateManyWithoutSchemeNestedInput
 }
 
 export type SchemeCreateManyInput = {
@@ -542,6 +549,20 @@ export type SchemeUpdateOneRequiredWithoutOrdersNestedInput = {
   update?: Prisma.XOR<Prisma.XOR<Prisma.SchemeUpdateToOneWithWhereWithoutOrdersInput, Prisma.SchemeUpdateWithoutOrdersInput>, Prisma.SchemeUncheckedUpdateWithoutOrdersInput>
 }
 
+export type SchemeCreateNestedOneWithoutBasketsInput = {
+  create?: Prisma.XOR<Prisma.SchemeCreateWithoutBasketsInput, Prisma.SchemeUncheckedCreateWithoutBasketsInput>
+  connectOrCreate?: Prisma.SchemeCreateOrConnectWithoutBasketsInput
+  connect?: Prisma.SchemeWhereUniqueInput
+}
+
+export type SchemeUpdateOneRequiredWithoutBasketsNestedInput = {
+  create?: Prisma.XOR<Prisma.SchemeCreateWithoutBasketsInput, Prisma.SchemeUncheckedCreateWithoutBasketsInput>
+  connectOrCreate?: Prisma.SchemeCreateOrConnectWithoutBasketsInput
+  upsert?: Prisma.SchemeUpsertWithoutBasketsInput
+  connect?: Prisma.SchemeWhereUniqueInput
+  update?: Prisma.XOR<Prisma.XOR<Prisma.SchemeUpdateToOneWithWhereWithoutBasketsInput, Prisma.SchemeUpdateWithoutBasketsInput>, Prisma.SchemeUncheckedUpdateWithoutBasketsInput>
+}
+
 export type SchemeCreateWithoutImagesInput = {
   name: string
   description: string
@@ -550,6 +571,7 @@ export type SchemeCreateWithoutImagesInput = {
   createdAt?: Date | string
   updatedAt?: Date | string
   orders?: Prisma.OrdersOnSchemesCreateNestedManyWithoutSchemeInput
+  baskets?: Prisma.SchemesInBasketCreateNestedManyWithoutSchemeInput
   roomType?: Prisma.RoomTypeCreateNestedOneWithoutSchemesInput
 }
 
@@ -563,6 +585,7 @@ export type SchemeUncheckedCreateWithoutImagesInput = {
   createdAt?: Date | string
   updatedAt?: Date | string
   orders?: Prisma.OrdersOnSchemesUncheckedCreateNestedManyWithoutSchemeInput
+  baskets?: Prisma.SchemesInBasketUncheckedCreateNestedManyWithoutSchemeInput
 }
 
 export type SchemeCreateOrConnectWithoutImagesInput = {
@@ -589,6 +612,7 @@ export type SchemeUpdateWithoutImagesInput = {
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   orders?: Prisma.OrdersOnSchemesUpdateManyWithoutSchemeNestedInput
+  baskets?: Prisma.SchemesInBasketUpdateManyWithoutSchemeNestedInput
   roomType?: Prisma.RoomTypeUpdateOneWithoutSchemesNestedInput
 }
 
@@ -602,6 +626,7 @@ export type SchemeUncheckedUpdateWithoutImagesInput = {
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   orders?: Prisma.OrdersOnSchemesUncheckedUpdateManyWithoutSchemeNestedInput
+  baskets?: Prisma.SchemesInBasketUncheckedUpdateManyWithoutSchemeNestedInput
 }
 
 export type SchemeCreateWithoutRoomTypeInput = {
@@ -613,6 +638,7 @@ export type SchemeCreateWithoutRoomTypeInput = {
   updatedAt?: Date | string
   images?: Prisma.ImageCreateNestedManyWithoutSchemeInput
   orders?: Prisma.OrdersOnSchemesCreateNestedManyWithoutSchemeInput
+  baskets?: Prisma.SchemesInBasketCreateNestedManyWithoutSchemeInput
 }
 
 export type SchemeUncheckedCreateWithoutRoomTypeInput = {
@@ -625,6 +651,7 @@ export type SchemeUncheckedCreateWithoutRoomTypeInput = {
   updatedAt?: Date | string
   images?: Prisma.ImageUncheckedCreateNestedManyWithoutSchemeInput
   orders?: Prisma.OrdersOnSchemesUncheckedCreateNestedManyWithoutSchemeInput
+  baskets?: Prisma.SchemesInBasketUncheckedCreateNestedManyWithoutSchemeInput
 }
 
 export type SchemeCreateOrConnectWithoutRoomTypeInput = {
@@ -675,6 +702,7 @@ export type SchemeCreateWithoutOrdersInput = {
   createdAt?: Date | string
   updatedAt?: Date | string
   images?: Prisma.ImageCreateNestedManyWithoutSchemeInput
+  baskets?: Prisma.SchemesInBasketCreateNestedManyWithoutSchemeInput
   roomType?: Prisma.RoomTypeCreateNestedOneWithoutSchemesInput
 }
 
@@ -688,6 +716,7 @@ export type SchemeUncheckedCreateWithoutOrdersInput = {
   createdAt?: Date | string
   updatedAt?: Date | string
   images?: Prisma.ImageUncheckedCreateNestedManyWithoutSchemeInput
+  baskets?: Prisma.SchemesInBasketUncheckedCreateNestedManyWithoutSchemeInput
 }
 
 export type SchemeCreateOrConnectWithoutOrdersInput = {
@@ -714,6 +743,7 @@ export type SchemeUpdateWithoutOrdersInput = {
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   images?: Prisma.ImageUpdateManyWithoutSchemeNestedInput
+  baskets?: Prisma.SchemesInBasketUpdateManyWithoutSchemeNestedInput
   roomType?: Prisma.RoomTypeUpdateOneWithoutSchemesNestedInput
 }
 
@@ -727,6 +757,73 @@ export type SchemeUncheckedUpdateWithoutOrdersInput = {
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   images?: Prisma.ImageUncheckedUpdateManyWithoutSchemeNestedInput
+  baskets?: Prisma.SchemesInBasketUncheckedUpdateManyWithoutSchemeNestedInput
+}
+
+export type SchemeCreateWithoutBasketsInput = {
+  name: string
+  description: string
+  price: number
+  isAvailable?: boolean
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  images?: Prisma.ImageCreateNestedManyWithoutSchemeInput
+  orders?: Prisma.OrdersOnSchemesCreateNestedManyWithoutSchemeInput
+  roomType?: Prisma.RoomTypeCreateNestedOneWithoutSchemesInput
+}
+
+export type SchemeUncheckedCreateWithoutBasketsInput = {
+  id?: number
+  name: string
+  description: string
+  price: number
+  isAvailable?: boolean
+  roomTypeName?: string | null
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  images?: Prisma.ImageUncheckedCreateNestedManyWithoutSchemeInput
+  orders?: Prisma.OrdersOnSchemesUncheckedCreateNestedManyWithoutSchemeInput
+}
+
+export type SchemeCreateOrConnectWithoutBasketsInput = {
+  where: Prisma.SchemeWhereUniqueInput
+  create: Prisma.XOR<Prisma.SchemeCreateWithoutBasketsInput, Prisma.SchemeUncheckedCreateWithoutBasketsInput>
+}
+
+export type SchemeUpsertWithoutBasketsInput = {
+  update: Prisma.XOR<Prisma.SchemeUpdateWithoutBasketsInput, Prisma.SchemeUncheckedUpdateWithoutBasketsInput>
+  create: Prisma.XOR<Prisma.SchemeCreateWithoutBasketsInput, Prisma.SchemeUncheckedCreateWithoutBasketsInput>
+  where?: Prisma.SchemeWhereInput
+}
+
+export type SchemeUpdateToOneWithWhereWithoutBasketsInput = {
+  where?: Prisma.SchemeWhereInput
+  data: Prisma.XOR<Prisma.SchemeUpdateWithoutBasketsInput, Prisma.SchemeUncheckedUpdateWithoutBasketsInput>
+}
+
+export type SchemeUpdateWithoutBasketsInput = {
+  name?: Prisma.StringFieldUpdateOperationsInput | string
+  description?: Prisma.StringFieldUpdateOperationsInput | string
+  price?: Prisma.IntFieldUpdateOperationsInput | number
+  isAvailable?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  images?: Prisma.ImageUpdateManyWithoutSchemeNestedInput
+  orders?: Prisma.OrdersOnSchemesUpdateManyWithoutSchemeNestedInput
+  roomType?: Prisma.RoomTypeUpdateOneWithoutSchemesNestedInput
+}
+
+export type SchemeUncheckedUpdateWithoutBasketsInput = {
+  id?: Prisma.IntFieldUpdateOperationsInput | number
+  name?: Prisma.StringFieldUpdateOperationsInput | string
+  description?: Prisma.StringFieldUpdateOperationsInput | string
+  price?: Prisma.IntFieldUpdateOperationsInput | number
+  isAvailable?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  roomTypeName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  images?: Prisma.ImageUncheckedUpdateManyWithoutSchemeNestedInput
+  orders?: Prisma.OrdersOnSchemesUncheckedUpdateManyWithoutSchemeNestedInput
 }
 
 export type SchemeCreateManyRoomTypeInput = {
@@ -748,6 +845,7 @@ export type SchemeUpdateWithoutRoomTypeInput = {
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   images?: Prisma.ImageUpdateManyWithoutSchemeNestedInput
   orders?: Prisma.OrdersOnSchemesUpdateManyWithoutSchemeNestedInput
+  baskets?: Prisma.SchemesInBasketUpdateManyWithoutSchemeNestedInput
 }
 
 export type SchemeUncheckedUpdateWithoutRoomTypeInput = {
@@ -760,6 +858,7 @@ export type SchemeUncheckedUpdateWithoutRoomTypeInput = {
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   images?: Prisma.ImageUncheckedUpdateManyWithoutSchemeNestedInput
   orders?: Prisma.OrdersOnSchemesUncheckedUpdateManyWithoutSchemeNestedInput
+  baskets?: Prisma.SchemesInBasketUncheckedUpdateManyWithoutSchemeNestedInput
 }
 
 export type SchemeUncheckedUpdateManyWithoutRoomTypeInput = {
@@ -780,11 +879,13 @@ export type SchemeUncheckedUpdateManyWithoutRoomTypeInput = {
 export type SchemeCountOutputType = {
   images: number
   orders: number
+  baskets: number
 }
 
 export type SchemeCountOutputTypeSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   images?: boolean | SchemeCountOutputTypeCountImagesArgs
   orders?: boolean | SchemeCountOutputTypeCountOrdersArgs
+  baskets?: boolean | SchemeCountOutputTypeCountBasketsArgs
 }
 
 /**
@@ -811,6 +912,13 @@ export type SchemeCountOutputTypeCountOrdersArgs<ExtArgs extends runtime.Types.E
   where?: Prisma.OrdersOnSchemesWhereInput
 }
 
+/**
+ * SchemeCountOutputType without action
+ */
+export type SchemeCountOutputTypeCountBasketsArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  where?: Prisma.SchemesInBasketWhereInput
+}
+
 
 export type SchemeSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetSelect<{
   id?: boolean
@@ -823,6 +931,7 @@ export type SchemeSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs =
   updatedAt?: boolean
   images?: boolean | Prisma.Scheme$imagesArgs<ExtArgs>
   orders?: boolean | Prisma.Scheme$ordersArgs<ExtArgs>
+  baskets?: boolean | Prisma.Scheme$basketsArgs<ExtArgs>
   roomType?: boolean | Prisma.Scheme$roomTypeArgs<ExtArgs>
   _count?: boolean | Prisma.SchemeCountOutputTypeDefaultArgs<ExtArgs>
 }, ExtArgs["result"]["scheme"]>
@@ -866,6 +975,7 @@ export type SchemeOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = r
 export type SchemeInclude<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   images?: boolean | Prisma.Scheme$imagesArgs<ExtArgs>
   orders?: boolean | Prisma.Scheme$ordersArgs<ExtArgs>
+  baskets?: boolean | Prisma.Scheme$basketsArgs<ExtArgs>
   roomType?: boolean | Prisma.Scheme$roomTypeArgs<ExtArgs>
   _count?: boolean | Prisma.SchemeCountOutputTypeDefaultArgs<ExtArgs>
 }
@@ -881,6 +991,7 @@ export type $SchemePayload<ExtArgs extends runtime.Types.Extensions.InternalArgs
   objects: {
     images: Prisma.$ImagePayload<ExtArgs>[]
     orders: Prisma.$OrdersOnSchemesPayload<ExtArgs>[]
+    baskets: Prisma.$SchemesInBasketPayload<ExtArgs>[]
     roomType: Prisma.$RoomTypePayload<ExtArgs> | null
   }
   scalars: runtime.Types.Extensions.GetPayloadResult<{
@@ -1288,6 +1399,7 @@ export interface Prisma__SchemeClient<T, Null = never, ExtArgs extends runtime.T
   readonly [Symbol.toStringTag]: "PrismaPromise"
   images<T extends Prisma.Scheme$imagesArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Scheme$imagesArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$ImagePayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   orders<T extends Prisma.Scheme$ordersArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Scheme$ordersArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$OrdersOnSchemesPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+  baskets<T extends Prisma.Scheme$basketsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Scheme$basketsArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$SchemesInBasketPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   roomType<T extends Prisma.Scheme$roomTypeArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Scheme$roomTypeArgs<ExtArgs>>): Prisma.Prisma__RoomTypeClient<runtime.Types.Result.GetResult<Prisma.$RoomTypePayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
   /**
    * Attaches callbacks for the resolution and/or rejection of the Promise.
@@ -1767,6 +1879,30 @@ export type Scheme$ordersArgs<ExtArgs extends runtime.Types.Extensions.InternalA
   take?: number
   skip?: number
   distinct?: Prisma.OrdersOnSchemesScalarFieldEnum | Prisma.OrdersOnSchemesScalarFieldEnum[]
+}
+
+/**
+ * Scheme.baskets
+ */
+export type Scheme$basketsArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  /**
+   * Select specific fields to fetch from the SchemesInBasket
+   */
+  select?: Prisma.SchemesInBasketSelect<ExtArgs> | null
+  /**
+   * Omit specific fields from the SchemesInBasket
+   */
+  omit?: Prisma.SchemesInBasketOmit<ExtArgs> | null
+  /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.SchemesInBasketInclude<ExtArgs> | null
+  where?: Prisma.SchemesInBasketWhereInput
+  orderBy?: Prisma.SchemesInBasketOrderByWithRelationInput | Prisma.SchemesInBasketOrderByWithRelationInput[]
+  cursor?: Prisma.SchemesInBasketWhereUniqueInput
+  take?: number
+  skip?: number
+  distinct?: Prisma.SchemesInBasketScalarFieldEnum | Prisma.SchemesInBasketScalarFieldEnum[]
 }
 
 /**

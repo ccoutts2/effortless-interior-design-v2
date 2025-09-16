@@ -27,8 +27,6 @@ const authHandle: Handle = async ({ event, resolve }) => {
 		setSessionTokenCookie(event, newSession.token, expiresAt);
 	}
 
-	console.log(event.locals);
-
 	event.locals.session = session;
 
 	return resolve(event);

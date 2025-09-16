@@ -25,6 +25,8 @@ export const ModelName = {
   User: 'User',
   Order: 'Order',
   OrdersOnSchemes: 'OrdersOnSchemes',
+  Basket: 'Basket',
+  SchemesInBasket: 'SchemesInBasket',
   Session: 'Session'
 } as const
 
@@ -114,6 +116,26 @@ export const OrdersOnSchemesScalarFieldEnum = {
 } as const
 
 export type OrdersOnSchemesScalarFieldEnum = (typeof OrdersOnSchemesScalarFieldEnum)[keyof typeof OrdersOnSchemesScalarFieldEnum]
+
+
+export const BasketScalarFieldEnum = {
+  id: 'id',
+  sessionId: 'sessionId',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt'
+} as const
+
+export type BasketScalarFieldEnum = (typeof BasketScalarFieldEnum)[keyof typeof BasketScalarFieldEnum]
+
+
+export const SchemesInBasketScalarFieldEnum = {
+  schemeId: 'schemeId',
+  basketId: 'basketId',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt'
+} as const
+
+export type SchemesInBasketScalarFieldEnum = (typeof SchemesInBasketScalarFieldEnum)[keyof typeof SchemesInBasketScalarFieldEnum]
 
 
 export const SessionScalarFieldEnum = {
