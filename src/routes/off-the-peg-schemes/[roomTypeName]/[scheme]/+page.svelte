@@ -76,7 +76,12 @@
 		{#if data.schemesInBasket}
 			<ul></ul>
 			{#each data.schemesInBasket as basketItem}
-				<li>{basketItem.scheme.name}</li>
+				<li>
+					<article>
+						<h3>{basketItem.scheme.name}</h3>
+						<div><img src={basketItem.scheme.images[0].url} alt="" /></div>
+					</article>
+				</li>
 			{/each}
 		{/if}
 	</section>
