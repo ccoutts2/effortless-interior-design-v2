@@ -8,13 +8,14 @@
 	import Header from '$lib/components/layout/Header.svelte';
 	import NavLink from '$lib/components/navigation/NavLink.svelte';
 	import Overlay from '$lib/components/ui/Overlay.svelte';
-	import SubMenu from '$lib/components/navigation/SubMenu.svelte';
+	import type { PageData } from './$types';
 
-	let { children }: { children: Snippet } = $props();
+	let { children, data }: { children: Snippet; data: PageData } = $props();
 
 	const overlayState = $state<OverlayProps>({
 		isOpen: false,
-		overlayContent: null
+		overlayContent: null,
+		data: data.schemesInBasket ?? null
 	});
 
 	setContext('overlay-ctx', overlayState);

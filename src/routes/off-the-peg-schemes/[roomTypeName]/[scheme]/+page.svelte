@@ -1,14 +1,15 @@
 <script lang="ts">
+	import { getContext, onMount } from 'svelte';
+	import { enhance } from '$app/forms';
+	import { invalidateAll } from '$app/navigation';
+	import { slugify } from '$lib/utils/slugify';
+	import type { OverlayProps } from '$lib/types';
+	import type { PageData } from './$types';
+
 	import Button from '$lib/components/buttons/Button.svelte';
 	import ClipImage from '$lib/components/ClipImage.svelte';
 	import Form from '$lib/components/form/Form.svelte';
 	import ShoppingBasket from '$lib/components/ShoppingBasket.svelte';
-	import type { OverlayProps } from '$lib/types';
-	import { slugify } from '$lib/utils/slugify';
-	import type { PageData } from './$types';
-	import { enhance } from '$app/forms';
-
-	import { getContext, onMount } from 'svelte';
 
 	interface SchemeProps {
 		data: PageData;
@@ -17,8 +18,6 @@
 	const overlay = getContext('overlay-ctx') as OverlayProps;
 
 	let { data }: SchemeProps = $props();
-
-	console.log(data.schemesInBasket);
 
 	let isPageReady: boolean = $state(false);
 
@@ -32,20 +31,20 @@
 
 	const allAvailableSchemes = $derived(data.allSchemes);
 
-	const openShoppingBasket = () => {
-		overlay.isOpen = true;
-		overlay.overlayContent = ShoppingBasket;
-	};
-
-	const discountedPrice = (price: number, discount: number) => {
-		return price * (1 - discount);
-	};
-
 	const filteredProducts = $derived(allSchemes.filter((schemeId) => schemeId.id !== scheme.id));
 
 	const filteredAlProducts = $derived(
 		allAvailableSchemes.filter((schemeId) => schemeId.id !== scheme.id)
 	);
+
+	const discountedPrice = (price: number, discount: number) => {
+		return price * (1 - discount);
+	};
+
+	const openShoppingBasket = () => {
+		overlay.isOpen = true;
+		overlay.overlayContent = ShoppingBasket;
+	};
 </script>
 
 <main class="Scheme">
@@ -61,29 +60,13 @@
 				</div>
 				<p>{scheme.description}</p>
 			</div>
-			<Form {enhance}>
+			<Form {enhance} buttonLabel="Add to basket" onClick={openShoppingBasket}>
 				<input type="hidden" name="schemeId" value={scheme.id} />
-				<Button type="submit" data-content="Add to basket" onclick={openShoppingBasket}
-					>Add to basket</Button
-				>
 			</Form>
 		</article>
 		<div class="overflow-hidden">
 			<ClipImage isComponentReady={isPageReady} src={scheme.images[0].url} description="" />
 		</div>
-	</section>
-	<section class="my-[25vh]">
-		{#if data.schemesInBasket}
-			<ul></ul>
-			{#each data.schemesInBasket as basketItem}
-				<li>
-					<article>
-						<h3>{basketItem.scheme.name}</h3>
-						<div><img src={basketItem.scheme.images[0].url} alt="" /></div>
-					</article>
-				</li>
-			{/each}
-		{/if}
 	</section>
 	<section>
 		<h2>Related {scheme.roomTypeName} Schemes</h2>
@@ -107,7 +90,7 @@
 	</section>
 	<section>
 		<h2>More Schemes</h2>
-		<ul class="flex gap-8">
+		<ul class="flex flex-wrap gap-8">
 			{#each filteredAlProducts as product}
 				<li>
 					<article class="RelatedScheme">

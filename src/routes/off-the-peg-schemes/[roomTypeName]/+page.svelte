@@ -7,8 +7,6 @@
 
 	let { data }: { data: PageData } = $props();
 
-	console.log(data);
-
 	let isPageReady: boolean = $state(false);
 
 	onMount(() => {

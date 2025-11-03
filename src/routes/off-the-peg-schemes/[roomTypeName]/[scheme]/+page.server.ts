@@ -55,48 +55,16 @@ const fetchAllSchemes = async () => {
 	return allSchemes;
 };
 
-const fetchSchemesInBasket = async (sessionId: string) => {
-	const basket = await prisma.basket.findUnique({
-		where: { sessionId: sessionId }
-	});
-
-	if (!basket) {
-		return null;
-	}
-
-	const schemes = await prisma.schemesInBasket.findMany({
-		where: { basketId: basket.id },
-		include: {
-			scheme: {
-				include: {
-					images: true,
-					roomType: true
-				}
-			}
-		}
-	});
-
-	return schemes;
-};
-
-export const load: PageServerLoad = async ({ params, cookies }: SchemeProps) => {
+export const load: PageServerLoad = async ({ params }: SchemeProps) => {
 	const scheme = await fetchScheme(Number(params.scheme));
 	const schemes = await fetchSchemes(params.roomTypeName);
 
 	const allSchemes = await fetchAllSchemes();
 
-	const sessionCookie = cookies.get('session');
-
-	let schemesInBasket = null;
-	if (sessionCookie) {
-		schemesInBasket = await fetchSchemesInBasket(sessionCookie);
-	}
-
 	return {
 		scheme,
 		schemes,
-		allSchemes,
-		schemesInBasket
+		allSchemes
 	};
 };
 
@@ -131,8 +99,14 @@ export const actions = {
 				}
 			});
 
-			await prisma.schemesInBasket.create({
-				data: {
+			const schemeInBasketId = {
+				schemeId: Number(schemeId),
+				basketId: basket.id
+			};
+			await prisma.schemesInBasket.upsert({
+				where: { schemeId_basketId: schemeInBasketId },
+				update: {},
+				create: {
 					basketId: basket.id,
 					schemeId: Number(schemeId)
 				}

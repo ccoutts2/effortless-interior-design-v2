@@ -4,7 +4,7 @@
 	import Button from '../buttons/Button.svelte';
 	import MobileMenu from '../navigation/MobileMenu.svelte';
 
-	const overlay = getContext('overlay-ctx') as OverlayProps;
+	const overlay = getContext<OverlayProps>('overlay-ctx');
 </script>
 
 <div class="Overlay {overlay.isOpen ? 'reveal' : ''}">

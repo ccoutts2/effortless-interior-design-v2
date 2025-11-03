@@ -60,7 +60,7 @@ export async function validateSessionToken(token: string): Promise<Session | nul
 		await prisma.session.update({
 			where: { id: session.id },
 			data: {
-				lastVerifiedAt: Math.floor(now.getTime() / 1000)
+				lastVerifiedAt: now
 			}
 		});
 	}
@@ -79,7 +79,7 @@ async function getSession(sessionId: string): Promise<Session | null> {
 		return null;
 	}
 
-	if (now.getTime() - session.lastVerifiedAt.getTime() >= inactivityTimeoutSeconds) {
+	if (now.getTime() - session.lastVerifiedAt.getTime() >= inactivityTimeoutSeconds * 1000) {
 		await deleteSession(session.id);
 		return null;
 	}

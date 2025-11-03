@@ -185,7 +185,7 @@
 	<aside class="Home__newsletterSub">
 		<SectionHeader headerTag="h2" header="Sign up to our newsletter" />
 		<p>For insights & behind the scenes updates, sign up for our newsletter</p>
-		<Form {enhance}>
+		<Form {enhance} buttonLabel="Sign up">
 			{#if $message}
 				<span class="Error text-lg">{$message.text}</span>
 			{/if}

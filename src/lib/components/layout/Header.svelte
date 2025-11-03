@@ -15,7 +15,7 @@
 	import type { OverlayProps } from '$lib/types';
 	import ShoppingBasket from '../ShoppingBasket.svelte';
 
-	const overlay = getContext('overlay-ctx') as OverlayProps;
+	const overlay = getContext<OverlayProps>('overlay-ctx');
 
 	function openMobileOverlay() {
 		overlay.isOpen = true;
@@ -49,6 +49,9 @@
 			<NavLink href="/">
 				<User />
 			</NavLink>
+		{/if}
+		{#if overlay.data && overlay.data.length > 0}
+			<span>{overlay.data.length}</span>
 		{/if}
 	</div>
 </header>
@@ -99,6 +102,13 @@
 			display: flex;
 			flex: 1;
 			justify-content: flex-end;
+			position: relative;
+
+			span {
+				position: absolute;
+				right: -0.5rem;
+				top: -1rem;
+			}
 		}
 	}
 </style>
