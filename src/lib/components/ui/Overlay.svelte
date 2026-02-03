@@ -18,20 +18,26 @@
 </div>
 
 <style lang="scss">
+	@use '$lib/styles/partials/breakpoints';
+
 	.Overlay {
 		align-items: center;
 		background-color: #f3eee8;
-		clip-path: polygon(0% 0%, 100% 0%, 100% 0%, 0% 0%);
+		clip-path: polygon(100% 0, 100% 0, 100% 100%, 100% 100%);
 		display: flex;
 		height: auto;
 		justify-content: center;
-		left: 0;
-		padding-bottom: 10vh;
+		right: 0;
+		padding: 1rem;
 		position: fixed;
 		top: 0;
 		transition: clip-path 1s;
 		width: 100%;
 		z-index: 1000;
+
+		@include breakpoints.desktop {
+			width: 25%;
+		}
 
 		&.reveal {
 			clip-path: polygon(0% 0%, 100% 0%, 100% 100%, 0% 100%);

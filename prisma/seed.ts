@@ -1,25 +1,27 @@
-import { PrismaClient, Scheme } from '@prisma/client';
+import { PrismaClient } from '../src/generated/prisma/client';
+
 import { roomType, images, schemes } from './generators';
 import { roomTypeNames } from './generators/roomType';
 import { resetDatabase } from './generators/resetDatabase';
 
 export const prisma = new PrismaClient();
 
-let schemeArray: Scheme[] = [];
+let schemeArray = [] as any;
 
 async function createRoomTypes() {
 	console.log('Creating room types');
 
 	const roomTypes = roomType();
-	await Promise.all(
-		roomTypes.map((roomType) => {
-			return prisma.roomType.create({
-				data: {
-					...roomType
-				}
-			});
-		})
-	);
+	for (const item of roomTypes) {
+		await prisma.roomType.upsert({
+			where: { name: item.name },
+			update: { slug: item.slug },
+			create: {
+				name: item.name,
+				slug: item.slug
+			}
+		});
+	}
 
 	console.log('Finished creating rooms');
 }

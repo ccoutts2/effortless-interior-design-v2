@@ -1,15 +1,13 @@
 <script lang="ts">
-	import { getContext, onMount } from 'svelte';
 	import { enhance } from '$app/forms';
-	import { invalidateAll } from '$app/navigation';
-	import { slugify } from '$lib/utils/slugify';
-	import type { OverlayProps } from '$lib/types';
-	import type { PageData } from './$types';
-
-	import Button from '$lib/components/buttons/Button.svelte';
+	import { getContext, onMount } from 'svelte';
 	import ClipImage from '$lib/components/ClipImage.svelte';
 	import Form from '$lib/components/form/Form.svelte';
 	import ShoppingBasket from '$lib/components/ShoppingBasket.svelte';
+	import type { OverlayProps } from '$lib/types';
+	import type { PageData } from './$types';
+	import { slugify } from '$lib/utils/slugify';
+	import { invalidateAll } from '$app/navigation';
 
 	interface SchemeProps {
 		data: PageData;
@@ -25,26 +23,21 @@
 		isPageReady = true;
 	});
 
+	// Retreive specific product
 	const scheme = $derived(data.scheme);
 
-	const allSchemes = $derived(data.schemes);
+	// Retrieve all products related to scheme;
+	const allRelatedSchemes = $derived(data.relatedSchemes);
 
+	// Retreive all available schemes
 	const allAvailableSchemes = $derived(data.allSchemes);
 
-	const filteredProducts = $derived(allSchemes.filter((schemeId) => schemeId.id !== scheme.id));
-
-	const filteredAlProducts = $derived(
-		allAvailableSchemes.filter((schemeId) => schemeId.id !== scheme.id)
-	);
-
+	// TODO: This is a temporary measure - need to figure out how to incoporate into database
 	const discountedPrice = (price: number, discount: number) => {
 		return price * (1 - discount);
 	};
 
-	const openShoppingBasket = () => {
-		overlay.isOpen = true;
-		overlay.overlayContent = ShoppingBasket;
-	};
+	let addingToBasket: boolean = $derived(false);
 </script>
 
 <main class="Scheme">
@@ -60,7 +53,22 @@
 				</div>
 				<p>{scheme.description}</p>
 			</div>
-			<Form {enhance} buttonLabel="Add to basket" onClick={openShoppingBasket}>
+			<Form
+				enhance={() => {
+					addingToBasket = true;
+					overlay.isOpen = true;
+					overlay.overlayContent = ShoppingBasket;
+					// @ts-ignore
+					return async ({ result, update }) => {
+						if (result.type === 'success') {
+							await update();
+						}
+
+						addingToBasket = false;
+					};
+				}}
+				buttonLabel={addingToBasket ? 'Adding' : 'Add to basket'}
+			>
 				<input type="hidden" name="schemeId" value={scheme.id} />
 			</Form>
 		</article>
@@ -71,7 +79,7 @@
 	<section>
 		<h2>Related {scheme.roomTypeName} Schemes</h2>
 		<ul class="flex gap-8">
-			{#each filteredProducts as product}
+			{#each allRelatedSchemes as product}
 				<li>
 					<article class="RelatedScheme">
 						<h4>{product.name}</h4>
@@ -79,9 +87,10 @@
 						<div>
 							<img src={product.images[0].url} alt="{product.name} image" />
 						</div>
-						<!-- Slugify not working for living room - need to fix -->
-						<a href="/off-the-peg-schemes/{slugify(product.roomTypeName!)}/{product.id}"
-							><span class="visually-hidden">View {product.name}'s page</span></a
+
+						<a href="/off-the-peg-schemes/{product.roomType?.slug}/{product.id}"
+							><span class="visually-hidden">View the {product.roomType?.name} product page.</span
+							></a
 						>
 					</article>
 				</li>
@@ -91,7 +100,7 @@
 	<section>
 		<h2>More Schemes</h2>
 		<ul class="flex flex-wrap gap-8">
-			{#each filteredAlProducts as product}
+			{#each allAvailableSchemes as product}
 				<li>
 					<article class="RelatedScheme">
 						<div>

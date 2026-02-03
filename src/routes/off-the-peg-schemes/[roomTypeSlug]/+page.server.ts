@@ -3,30 +3,33 @@ import type { PageServerLoad } from './$types';
 
 interface RoomSchemeProps {
 	params: {
-		roomTypeName: string;
+		roomTypeSlug: string;
 	};
 }
 
-const fetchSchemes = async (roomTypeName: string) => {
+const fetchSchemes = async (roomTypeSlug: string) => {
 	const schemes = await prisma.scheme.findMany({
 		where: {
-			roomTypeName: {
-				equals: roomTypeName,
-				mode: 'insensitive'
+			roomType: {
+				slug: {
+					equals: roomTypeSlug,
+					mode: 'insensitive'
+				}
 			},
 			isAvailable: true
 		},
 		include: {
 			images: {
 				orderBy: { schemeIndex: 'asc' }
-			}
+			},
+			roomType: true
 		}
 	});
 	return schemes;
 };
 
 export const load: PageServerLoad = async ({ params }: RoomSchemeProps) => {
-	const schemes = await fetchSchemes(params.roomTypeName);
+	const schemes = await fetchSchemes(params.roomTypeSlug);
 
 	return {
 		schemes

@@ -52,6 +52,7 @@ export const SchemeScalarFieldEnum = {
   price: 'price',
   isAvailable: 'isAvailable',
   roomTypeName: 'roomTypeName',
+  roomTypeNameSlug: 'roomTypeNameSlug',
   createdAt: 'createdAt',
   updatedAt: 'updatedAt'
 } as const
@@ -74,6 +75,7 @@ export type ImageScalarFieldEnum = (typeof ImageScalarFieldEnum)[keyof typeof Im
 
 export const RoomTypeScalarFieldEnum = {
   name: 'name',
+  slug: 'slug',
   createdAt: 'createdAt',
   updatedAt: 'updatedAt'
 } as const

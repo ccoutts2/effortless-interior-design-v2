@@ -4,6 +4,7 @@
 	import { type Snippet } from 'svelte';
 	import { setContext } from 'svelte';
 	import type { OverlayProps } from '$lib/types';
+	import { onNavigate } from '$app/navigation';
 
 	import Header from '$lib/components/layout/Header.svelte';
 	import NavLink from '$lib/components/navigation/NavLink.svelte';
@@ -29,6 +30,17 @@
 	function onMouseLeave() {
 		isActive = false;
 	}
+
+	onNavigate((navigation) => {
+		if (!document.startViewTransition) return;
+
+		return new Promise((resolve) => {
+			document.startViewTransition(async () => {
+				resolve();
+				await navigation.complete;
+			});
+		});
+	});
 </script>
 
 <svelte:head>
@@ -48,3 +60,38 @@
 {@render children?.()}
 
 <Overlay />
+
+<style lang="scss">
+	:global(a) {
+		opacity: 1;
+		text-decoration: none;
+		transition: opacity 0.3s ease-in-out;
+	}
+
+	:global(nav:has(a:hover) a:not(:hover)) {
+		opacity: 0.25;
+	}
+
+	@keyframes old-slide-up {
+		to {
+			opacity: 0;
+			transform: translateY(-50%);
+		}
+	}
+
+	@keyframes new-slide-up {
+		from {
+			opacity: 0;
+			transform: translateY(50%);
+		}
+	}
+
+	:root::view-transition-old(page-header) {
+		animation: 800ms cubic-bezier(0.63, 0.09, 0.11, 1.04) both old-slide-up;
+	}
+
+	:root::view-transition-new(page-header) {
+		animation: 800ms cubic-bezier(0.63, 0.09, 0.11, 1.04) both new-slide-up;
+		animation-delay: 500ms;
+	}
+</style>

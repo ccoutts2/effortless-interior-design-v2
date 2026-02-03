@@ -9,18 +9,19 @@ datasource db {
 }
 
 model Scheme {
-  id           Int               @id @default(autoincrement())
-  name         String
-  description  String
-  price        Int
-  isAvailable  Boolean           @default(false)
-  roomTypeName String?
-  createdAt    DateTime          @default(now())
-  updatedAt    DateTime          @updatedAt
-  images       Image[]
-  orders       OrdersOnSchemes[]
-  baskets      SchemesInBasket[]
-  roomType     RoomType?         @relation(fields: [roomTypeName], references: [name], onDelete: Cascade)
+  id               Int               @id @default(autoincrement())
+  name             String
+  description      String
+  price            Int
+  isAvailable      Boolean           @default(false)
+  roomTypeName     String?
+  roomTypeNameSlug String?
+  createdAt        DateTime          @default(now())
+  updatedAt        DateTime          @updatedAt
+  images           Image[]
+  orders           OrdersOnSchemes[]
+  baskets          SchemesInBasket[]
+  roomType         RoomType?         @relation(fields: [roomTypeName], references: [name], onDelete: Cascade)
 }
 
 model Image {
@@ -37,6 +38,7 @@ model Image {
 
 model RoomType {
   name      String   @id
+  slug      String   @unique
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
   images    Image[]

@@ -3,7 +3,7 @@
 	import type { PageData } from './$types';
 	import Button from '$lib/components/buttons/Button.svelte';
 	import ClipImage from '$lib/components/ClipImage.svelte';
-	import { slugify } from '$lib/utils/slugify';
+	import PageHeader from '$lib/components/PageHeader.svelte';
 
 	let { data }: { data: PageData } = $props();
 
@@ -14,28 +14,34 @@
 	});
 </script>
 
-<main class="RoomTypeName">
-	<ul class="RoomTypeName__list">
-		{#each data.schemes as scheme}
-			<li class="RoomTypeName__item">
-				<div class="RoomTypeName__imageWrapper">
-					<ClipImage isComponentReady={isPageReady} src={scheme.images[0].url} description="" />
-				</div>
+{#if data && data.schemes.length > 0}
+	<main class="RoomTypeName">
+		<PageHeader title={data.schemes[0].roomTypeName as string}>
+			<p class="my-8 italic">
+				Elegant {data.schemes[0].roomTypeName?.toLowerCase()} schemes for your liking
+			</p>
+		</PageHeader>
+		<ul class="RoomTypeName__list">
+			{#each data.schemes as scheme}
+				<li class="RoomTypeName__item">
+					<div class="RoomTypeName__imageWrapper">
+						<ClipImage isComponentReady={isPageReady} src={scheme.images[0].url} description="" />
+					</div>
 
-				<h3>Our {scheme.name} schemes</h3>
+					<h3>Our {scheme.name} schemes</h3>
 
-				<p>{scheme.description}</p>
+					<p>{scheme.description}</p>
 
-				<!-- Slugify not working for living room - need to fix -->
-				<a href="/off-the-peg-schemes/{slugify(scheme.roomTypeName!)}/{scheme.id}"
-					><Button data-content="Visit">Visit</Button><span class="visually-hidden"
-						>Link to {scheme.name} page</span
-					></a
-				>
-			</li>
-		{/each}
-	</ul>
-</main>
+					<a href="/off-the-peg-schemes/{scheme.roomType?.slug}/{scheme.id}"
+						><Button data-content="Visit">Visit</Button><span class="visually-hidden"
+							>Link to {scheme.name} page</span
+						></a
+					>
+				</li>
+			{/each}
+		</ul>
+	</main>
+{/if}
 
 <style lang="scss">
 	@use '../../../lib/styles/partials/breakpoints';

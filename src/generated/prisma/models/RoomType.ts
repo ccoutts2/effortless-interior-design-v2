@@ -25,18 +25,21 @@ export type AggregateRoomType = {
 
 export type RoomTypeMinAggregateOutputType = {
   name: string | null
+  slug: string | null
   createdAt: Date | null
   updatedAt: Date | null
 }
 
 export type RoomTypeMaxAggregateOutputType = {
   name: string | null
+  slug: string | null
   createdAt: Date | null
   updatedAt: Date | null
 }
 
 export type RoomTypeCountAggregateOutputType = {
   name: number
+  slug: number
   createdAt: number
   updatedAt: number
   _all: number
@@ -45,18 +48,21 @@ export type RoomTypeCountAggregateOutputType = {
 
 export type RoomTypeMinAggregateInputType = {
   name?: true
+  slug?: true
   createdAt?: true
   updatedAt?: true
 }
 
 export type RoomTypeMaxAggregateInputType = {
   name?: true
+  slug?: true
   createdAt?: true
   updatedAt?: true
 }
 
 export type RoomTypeCountAggregateInputType = {
   name?: true
+  slug?: true
   createdAt?: true
   updatedAt?: true
   _all?: true
@@ -136,6 +142,7 @@ export type RoomTypeGroupByArgs<ExtArgs extends runtime.Types.Extensions.Interna
 
 export type RoomTypeGroupByOutputType = {
   name: string
+  slug: string
   createdAt: Date
   updatedAt: Date
   _count: RoomTypeCountAggregateOutputType | null
@@ -163,6 +170,7 @@ export type RoomTypeWhereInput = {
   OR?: Prisma.RoomTypeWhereInput[]
   NOT?: Prisma.RoomTypeWhereInput | Prisma.RoomTypeWhereInput[]
   name?: Prisma.StringFilter<"RoomType"> | string
+  slug?: Prisma.StringFilter<"RoomType"> | string
   createdAt?: Prisma.DateTimeFilter<"RoomType"> | Date | string
   updatedAt?: Prisma.DateTimeFilter<"RoomType"> | Date | string
   images?: Prisma.ImageListRelationFilter
@@ -171,6 +179,7 @@ export type RoomTypeWhereInput = {
 
 export type RoomTypeOrderByWithRelationInput = {
   name?: Prisma.SortOrder
+  slug?: Prisma.SortOrder
   createdAt?: Prisma.SortOrder
   updatedAt?: Prisma.SortOrder
   images?: Prisma.ImageOrderByRelationAggregateInput
@@ -179,6 +188,7 @@ export type RoomTypeOrderByWithRelationInput = {
 
 export type RoomTypeWhereUniqueInput = Prisma.AtLeast<{
   name?: string
+  slug?: string
   AND?: Prisma.RoomTypeWhereInput | Prisma.RoomTypeWhereInput[]
   OR?: Prisma.RoomTypeWhereInput[]
   NOT?: Prisma.RoomTypeWhereInput | Prisma.RoomTypeWhereInput[]
@@ -186,10 +196,11 @@ export type RoomTypeWhereUniqueInput = Prisma.AtLeast<{
   updatedAt?: Prisma.DateTimeFilter<"RoomType"> | Date | string
   images?: Prisma.ImageListRelationFilter
   schemes?: Prisma.SchemeListRelationFilter
-}, "name">
+}, "name" | "slug">
 
 export type RoomTypeOrderByWithAggregationInput = {
   name?: Prisma.SortOrder
+  slug?: Prisma.SortOrder
   createdAt?: Prisma.SortOrder
   updatedAt?: Prisma.SortOrder
   _count?: Prisma.RoomTypeCountOrderByAggregateInput
@@ -202,12 +213,14 @@ export type RoomTypeScalarWhereWithAggregatesInput = {
   OR?: Prisma.RoomTypeScalarWhereWithAggregatesInput[]
   NOT?: Prisma.RoomTypeScalarWhereWithAggregatesInput | Prisma.RoomTypeScalarWhereWithAggregatesInput[]
   name?: Prisma.StringWithAggregatesFilter<"RoomType"> | string
+  slug?: Prisma.StringWithAggregatesFilter<"RoomType"> | string
   createdAt?: Prisma.DateTimeWithAggregatesFilter<"RoomType"> | Date | string
   updatedAt?: Prisma.DateTimeWithAggregatesFilter<"RoomType"> | Date | string
 }
 
 export type RoomTypeCreateInput = {
   name: string
+  slug: string
   createdAt?: Date | string
   updatedAt?: Date | string
   images?: Prisma.ImageCreateNestedManyWithoutRoomTypeInput
@@ -216,6 +229,7 @@ export type RoomTypeCreateInput = {
 
 export type RoomTypeUncheckedCreateInput = {
   name: string
+  slug: string
   createdAt?: Date | string
   updatedAt?: Date | string
   images?: Prisma.ImageUncheckedCreateNestedManyWithoutRoomTypeInput
@@ -224,6 +238,7 @@ export type RoomTypeUncheckedCreateInput = {
 
 export type RoomTypeUpdateInput = {
   name?: Prisma.StringFieldUpdateOperationsInput | string
+  slug?: Prisma.StringFieldUpdateOperationsInput | string
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   images?: Prisma.ImageUpdateManyWithoutRoomTypeNestedInput
@@ -232,6 +247,7 @@ export type RoomTypeUpdateInput = {
 
 export type RoomTypeUncheckedUpdateInput = {
   name?: Prisma.StringFieldUpdateOperationsInput | string
+  slug?: Prisma.StringFieldUpdateOperationsInput | string
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   images?: Prisma.ImageUncheckedUpdateManyWithoutRoomTypeNestedInput
@@ -240,18 +256,21 @@ export type RoomTypeUncheckedUpdateInput = {
 
 export type RoomTypeCreateManyInput = {
   name: string
+  slug: string
   createdAt?: Date | string
   updatedAt?: Date | string
 }
 
 export type RoomTypeUpdateManyMutationInput = {
   name?: Prisma.StringFieldUpdateOperationsInput | string
+  slug?: Prisma.StringFieldUpdateOperationsInput | string
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
 }
 
 export type RoomTypeUncheckedUpdateManyInput = {
   name?: Prisma.StringFieldUpdateOperationsInput | string
+  slug?: Prisma.StringFieldUpdateOperationsInput | string
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
 }
@@ -263,18 +282,21 @@ export type RoomTypeNullableScalarRelationFilter = {
 
 export type RoomTypeCountOrderByAggregateInput = {
   name?: Prisma.SortOrder
+  slug?: Prisma.SortOrder
   createdAt?: Prisma.SortOrder
   updatedAt?: Prisma.SortOrder
 }
 
 export type RoomTypeMaxOrderByAggregateInput = {
   name?: Prisma.SortOrder
+  slug?: Prisma.SortOrder
   createdAt?: Prisma.SortOrder
   updatedAt?: Prisma.SortOrder
 }
 
 export type RoomTypeMinOrderByAggregateInput = {
   name?: Prisma.SortOrder
+  slug?: Prisma.SortOrder
   createdAt?: Prisma.SortOrder
   updatedAt?: Prisma.SortOrder
 }
@@ -313,6 +335,7 @@ export type RoomTypeUpdateOneWithoutImagesNestedInput = {
 
 export type RoomTypeCreateWithoutSchemesInput = {
   name: string
+  slug: string
   createdAt?: Date | string
   updatedAt?: Date | string
   images?: Prisma.ImageCreateNestedManyWithoutRoomTypeInput
@@ -320,6 +343,7 @@ export type RoomTypeCreateWithoutSchemesInput = {
 
 export type RoomTypeUncheckedCreateWithoutSchemesInput = {
   name: string
+  slug: string
   createdAt?: Date | string
   updatedAt?: Date | string
   images?: Prisma.ImageUncheckedCreateNestedManyWithoutRoomTypeInput
@@ -343,6 +367,7 @@ export type RoomTypeUpdateToOneWithWhereWithoutSchemesInput = {
 
 export type RoomTypeUpdateWithoutSchemesInput = {
   name?: Prisma.StringFieldUpdateOperationsInput | string
+  slug?: Prisma.StringFieldUpdateOperationsInput | string
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   images?: Prisma.ImageUpdateManyWithoutRoomTypeNestedInput
@@ -350,6 +375,7 @@ export type RoomTypeUpdateWithoutSchemesInput = {
 
 export type RoomTypeUncheckedUpdateWithoutSchemesInput = {
   name?: Prisma.StringFieldUpdateOperationsInput | string
+  slug?: Prisma.StringFieldUpdateOperationsInput | string
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   images?: Prisma.ImageUncheckedUpdateManyWithoutRoomTypeNestedInput
@@ -357,6 +383,7 @@ export type RoomTypeUncheckedUpdateWithoutSchemesInput = {
 
 export type RoomTypeCreateWithoutImagesInput = {
   name: string
+  slug: string
   createdAt?: Date | string
   updatedAt?: Date | string
   schemes?: Prisma.SchemeCreateNestedManyWithoutRoomTypeInput
@@ -364,6 +391,7 @@ export type RoomTypeCreateWithoutImagesInput = {
 
 export type RoomTypeUncheckedCreateWithoutImagesInput = {
   name: string
+  slug: string
   createdAt?: Date | string
   updatedAt?: Date | string
   schemes?: Prisma.SchemeUncheckedCreateNestedManyWithoutRoomTypeInput
@@ -387,6 +415,7 @@ export type RoomTypeUpdateToOneWithWhereWithoutImagesInput = {
 
 export type RoomTypeUpdateWithoutImagesInput = {
   name?: Prisma.StringFieldUpdateOperationsInput | string
+  slug?: Prisma.StringFieldUpdateOperationsInput | string
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   schemes?: Prisma.SchemeUpdateManyWithoutRoomTypeNestedInput
@@ -394,6 +423,7 @@ export type RoomTypeUpdateWithoutImagesInput = {
 
 export type RoomTypeUncheckedUpdateWithoutImagesInput = {
   name?: Prisma.StringFieldUpdateOperationsInput | string
+  slug?: Prisma.StringFieldUpdateOperationsInput | string
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   schemes?: Prisma.SchemeUncheckedUpdateManyWithoutRoomTypeNestedInput
@@ -441,6 +471,7 @@ export type RoomTypeCountOutputTypeCountSchemesArgs<ExtArgs extends runtime.Type
 
 export type RoomTypeSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetSelect<{
   name?: boolean
+  slug?: boolean
   createdAt?: boolean
   updatedAt?: boolean
   images?: boolean | Prisma.RoomType$imagesArgs<ExtArgs>
@@ -450,23 +481,26 @@ export type RoomTypeSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs
 
 export type RoomTypeSelectCreateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetSelect<{
   name?: boolean
+  slug?: boolean
   createdAt?: boolean
   updatedAt?: boolean
 }, ExtArgs["result"]["roomType"]>
 
 export type RoomTypeSelectUpdateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetSelect<{
   name?: boolean
+  slug?: boolean
   createdAt?: boolean
   updatedAt?: boolean
 }, ExtArgs["result"]["roomType"]>
 
 export type RoomTypeSelectScalar = {
   name?: boolean
+  slug?: boolean
   createdAt?: boolean
   updatedAt?: boolean
 }
 
-export type RoomTypeOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"name" | "createdAt" | "updatedAt", ExtArgs["result"]["roomType"]>
+export type RoomTypeOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"name" | "slug" | "createdAt" | "updatedAt", ExtArgs["result"]["roomType"]>
 export type RoomTypeInclude<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   images?: boolean | Prisma.RoomType$imagesArgs<ExtArgs>
   schemes?: boolean | Prisma.RoomType$schemesArgs<ExtArgs>
@@ -483,6 +517,7 @@ export type $RoomTypePayload<ExtArgs extends runtime.Types.Extensions.InternalAr
   }
   scalars: runtime.Types.Extensions.GetPayloadResult<{
     name: string
+    slug: string
     createdAt: Date
     updatedAt: Date
   }, ExtArgs["result"]["roomType"]>
@@ -911,6 +946,7 @@ export interface Prisma__RoomTypeClient<T, Null = never, ExtArgs extends runtime
  */
 export interface RoomTypeFieldRefs {
   readonly name: Prisma.FieldRef<"RoomType", 'String'>
+  readonly slug: Prisma.FieldRef<"RoomType", 'String'>
   readonly createdAt: Prisma.FieldRef<"RoomType", 'DateTime'>
   readonly updatedAt: Prisma.FieldRef<"RoomType", 'DateTime'>
 }

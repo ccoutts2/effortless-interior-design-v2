@@ -1,5 +1,5 @@
-@layer reset, globals;
 @import 'tailwindcss';
+@layer reset, globals;
 
 @import './fonts.scss' layer(globals);
 

@@ -45,13 +45,13 @@
 			<button onclick={openShoppingOverlay}>
 				<ShoppingCart />
 			</button>
+			{#if overlay.data && overlay.data.length > 0}
+				<span aria-label="{overlay.data.length} items in basket">{overlay.data.length}</span>
+			{/if}
 		{:else}
 			<NavLink href="/">
 				<User />
 			</NavLink>
-		{/if}
-		{#if overlay.data && overlay.data.length > 0}
-			<span>{overlay.data.length}</span>
 		{/if}
 	</div>
 </header>

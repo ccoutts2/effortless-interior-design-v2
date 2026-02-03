@@ -12,6 +12,7 @@
 	import EmailField from '$lib/components/form/inputs/EmailField.svelte';
 	import { superForm } from 'sveltekit-superforms';
 	import TextField from '$lib/components/form/inputs/TextField.svelte';
+	import SlideIn from '$lib/components/SlideIn.svelte';
 
 	interface CustomerTestimonial {
 		text: string;
@@ -41,23 +42,48 @@
 	let scrollContainer: HTMLElement;
 	let tl: GSAPTimeline;
 
+	let cont: HTMLElement;
+	let panels: HTMLElement[];
+
+	const testimonialsCount: number = $state(customerTestimonial.length);
+	const width = testimonialsCount * 50;
+
 	onMount(() => {
 		gsap.registerPlugin(ScrollTrigger);
 
-		gsap.set(scrollContainer, {
-			clipPath: 'polygon(15% 10%, 85% 10%, 85% 90%, 15% 90%)'
-		});
+		// gsap.set(scrollContainer, {
+		// 	clipPath: 'polygon(15% 10%, 85% 10%, 85% 90%, 15% 90%)'
+		// });
 
-		if (!scrollContainer) return;
+		// if (!scrollContainer) return;
 
-		tl = gsap.timeline().to(scrollContainer, {
-			clipPath: 'polygon(0% 0%, 100% 0%, 100% 100%, 0% 100%)',
+		// tl = gsap.timeline().to(scrollContainer, {
+		// 	clipPath: 'polygon(0% 0%, 100% 0%, 100% 100%, 0% 100%)',
+		// 	ease: 'none',
+		// 	scrollTrigger: {
+		// 		trigger: scrollContainer,
+		// 		start: 'top bottom',
+		// 		end: 'bottom bottom',
+		// 		scrub: true
+		// 	}
+		// });
+
+		// doesnt work for tablet or mobile and laptop
+
+		panels = gsap.utils.toArray('#panels-container .panel');
+
+		tl = gsap.timeline();
+
+		tl.to(panels, {
+			x: () => -1 * (cont.scrollWidth - innerWidth),
 			ease: 'none',
 			scrollTrigger: {
-				trigger: scrollContainer,
-				start: 'top bottom',
-				end: 'bottom bottom',
-				scrub: true
+				trigger: cont,
+				pin: true,
+				markers: true,
+				start: 'center center',
+				scrub: 1,
+				end: () => '+=' + (cont.scrollWidth - innerWidth)
 			}
 		});
 	});
@@ -76,7 +102,7 @@
 		<img class="h-full w-full object-cover" src="/assets/images/hero.webp" alt="placeholder" />
 	</div>
 
-	<section>
+	<SlideIn>
 		<SectionHeader headerTag="h1" header="Who is Holly Lomax?" />
 		<div class="Home__bio">
 			<TextWithCta ctaText="Learn More" href="/about">
@@ -111,13 +137,14 @@
 					alt="A woman is leaning against a white shelving unit filled with books, a lamp and a plant. She is smiling past the camera, wearing a blue shirt and patterned vest shirt."
 					width={600}
 					height={800}
+					loading="lazy"
 				/>
 			</div>
 		</div>
-	</section>
+	</SlideIn>
 
-	<section>
-		<SectionHeader headerTag="h2" header="Interior Design Services" />
+	<SlideIn>
+		<SectionHeader headerTag="h2" textCenter={true} header="Interior Design Services" />
 
 		<TextWithCta ctaText="Learn More" href="/services" centred={true}>
 			<p>
@@ -126,15 +153,26 @@
 				different clients all over the world - all with the same considered, expert approach.
 			</p>
 		</TextWithCta>
-	</section>
+	</SlideIn>
 
-	<TestimonialWrapper>
+	<!-- <TestimonialWrapper>
 		{#each customerTestimonial as testimonial}
 			<li><Testimonial text={testimonial.text} /></li>
 		{/each}
-	</TestimonialWrapper>
+	</TestimonialWrapper> -->
 
-	<section>
+	<!-- be able to navigate between testimonials -->
+	<section id="panels">
+		<ul id="panels-container" style="width: {width}%" bind:this={cont}>
+			{#each customerTestimonial as testimonial, i}
+				<li id="panel-{i + 1}" class="panel red">
+					<Testimonial text={testimonial.text} />
+				</li>
+			{/each}
+		</ul>
+	</section>
+
+	<SlideIn>
 		<SectionHeader headerTag="h2" header="What is an off-the-peg design scheme?" />
 
 		<div class="relative h-[100vh] w-full overflow-hidden">
@@ -148,6 +186,7 @@
 				alt="An render of an off the peg design scheme."
 				width={2400}
 				height={1800}
+				loading="lazy"
 				class="absolute h-full w-full object-cover"
 			/>
 		</div>
@@ -180,10 +219,10 @@
 				</p>
 			</TextWithCta>
 		</div>
-	</section>
+	</SlideIn>
 
 	<aside class="Home__newsletterSub">
-		<SectionHeader headerTag="h2" header="Sign up to our newsletter" />
+		<SectionHeader headerTag="h2" textCenter={true} header="Sign up to our newsletter" />
 		<p>For insights & behind the scenes updates, sign up for our newsletter</p>
 		<Form {enhance} buttonLabel="Sign up">
 			{#if $message}
@@ -216,6 +255,32 @@
 <style lang="scss">
 	@use '../lib/styles/partials/breakpoints';
 
+	#panels #panels-container {
+		height: 50vh;
+		display: -webkit-box;
+		display: -ms-flexbox;
+		display: flex;
+		align-items: center;
+		justify-content: center;
+		-ms-flex-wrap: nowrap;
+		flex-wrap: nowrap;
+		padding: 0;
+		overflow: hidden;
+		background-color: #ddd;
+	}
+	#panels #panels-container .panel {
+		position: relative;
+		min-width: 20vw;
+		height: 50vh;
+		overflow: hidden;
+		display: -webkit-box;
+		display: -ms-flexbox;
+		display: flex;
+		color: #333;
+		text-align: left;
+		border-right: 1px solid #f00;
+	}
+
 	.Home {
 		display: flex;
 		flex-direction: column;
@@ -238,9 +303,9 @@
 		}
 
 		&__bioImageContainer {
-			max-width: 37.5rem;
+			max-width: 30rem;
 			width: 100%;
-			max-height: 50rem;
+			max-height: 40rem;
 			flex: 1;
 		}
 

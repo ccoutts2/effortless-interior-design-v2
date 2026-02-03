@@ -5,7 +5,7 @@ import type { PageServerLoad } from './$types';
 interface SchemeProps {
 	cookies: any;
 	params: {
-		roomTypeName: string;
+		roomTypeSlug: string;
 		scheme: string;
 	};
 }
@@ -22,24 +22,6 @@ const fetchScheme = async (id: number) => {
 	return scheme;
 };
 
-const fetchSchemes = async (roomTypeName: string) => {
-	const schemes = await prisma.scheme.findMany({
-		where: {
-			roomTypeName: {
-				equals: roomTypeName,
-				mode: 'insensitive'
-			},
-			isAvailable: true
-		},
-		include: {
-			images: {
-				orderBy: { schemeIndex: 'asc' }
-			}
-		}
-	});
-	return schemes;
-};
-
 const fetchAllSchemes = async () => {
 	const allSchemes = await prisma.scheme.findMany({
 		where: {
@@ -48,7 +30,8 @@ const fetchAllSchemes = async () => {
 		include: {
 			images: {
 				orderBy: { schemeIndex: 'asc' }
-			}
+			},
+			roomType: true
 		}
 	});
 
@@ -57,21 +40,26 @@ const fetchAllSchemes = async () => {
 
 export const load: PageServerLoad = async ({ params }: SchemeProps) => {
 	const scheme = await fetchScheme(Number(params.scheme));
-	const schemes = await fetchSchemes(params.roomTypeName);
-
 	const allSchemes = await fetchAllSchemes();
 
 	return {
 		scheme,
-		schemes,
-		allSchemes
+		relatedSchemes: allSchemes.filter(
+			(s) => s.roomTypeName === scheme.roomTypeName && s.id !== scheme.id
+		),
+		allSchemes: allSchemes.filter((s) => s.id !== scheme.id)
 	};
 };
 
 export const actions = {
 	default: async ({ request, cookies }) => {
+		await new Promise((fulfil) => setTimeout(fulfil, 1000));
 		const form = await request.formData();
 		const schemeId = form.get('schemeId');
+
+		if (!schemeId || isNaN(Number(schemeId))) {
+			return { status: 400, body: { message: 'Invalid schemeId' } };
+		}
 
 		const sessionCookie = cookies.get('session');
 
@@ -118,6 +106,10 @@ export const actions = {
 			};
 		} catch (error) {
 			console.log(error);
+			return {
+				status: 500,
+				body: { message: 'Failed to add item to basket.' }
+			};
 		}
 	}
 } satisfies Actions;

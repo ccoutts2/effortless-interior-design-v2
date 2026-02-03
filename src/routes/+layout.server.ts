@@ -1,11 +1,7 @@
 import prisma from '$lib/server/prisma';
-import type { LayoutServerData } from './$types';
+import type { LayoutServerLoad } from './$types';
 
-interface LayoutProps {
-	cookies: any;
-}
-
-export const load: LayoutServerData = async ({ cookies }: LayoutProps) => {
+export const load: LayoutServerLoad = async ({ cookies }: { cookies: any }) => {
 	const sessionCookie = cookies.get('session');
 
 	let schemesInBasket = null;
