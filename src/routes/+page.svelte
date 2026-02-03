@@ -162,7 +162,7 @@
 	</TestimonialWrapper> -->
 
 	<!-- be able to navigate between testimonials -->
-	<section id="panels">
+	<!-- <section id="panels">
 		<ul id="panels-container" style="width: {width}%" bind:this={cont}>
 			{#each customerTestimonial as testimonial, i}
 				<li id="panel-{i + 1}" class="panel red">
@@ -170,7 +170,7 @@
 				</li>
 			{/each}
 		</ul>
-	</section>
+	</section> -->
 
 	<SlideIn>
 		<SectionHeader headerTag="h2" header="What is an off-the-peg design scheme?" />
@@ -266,7 +266,6 @@
 		flex-wrap: nowrap;
 		padding: 0;
 		overflow: hidden;
-		background-color: #ddd;
 	}
 	#panels #panels-container .panel {
 		position: relative;
@@ -278,7 +277,6 @@
 		display: flex;
 		color: #333;
 		text-align: left;
-		border-right: 1px solid #f00;
 	}
 
 	.Home {

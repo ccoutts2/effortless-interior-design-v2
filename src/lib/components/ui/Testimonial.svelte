@@ -16,14 +16,8 @@
 
 <style lang="scss">
 	.Testimonial {
-		background-color: #ffffff;
-		background-position: center center;
-		border-color: #f5f5f5;
-		border-radius: 0.75rem;
-		border-style: solid;
-		border-width: 1px;
-		min-width: 20rem;
-		padding: 2rem;
+		margin-block: 20vh;
+		padding-inline: 2rem;
 
 		blockquote {
 			color: #333;
