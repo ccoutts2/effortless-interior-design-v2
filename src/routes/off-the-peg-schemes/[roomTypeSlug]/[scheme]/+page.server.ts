@@ -1,6 +1,7 @@
 import prisma from '$lib/server/prisma';
 import { redirect, type Actions } from '@sveltejs/kit';
 import type { PageServerLoad } from './$types';
+import { StripeService } from '$lib/services/stripe.service';
 
 interface SchemeProps {
 	cookies: any;
@@ -52,7 +53,7 @@ export const load: PageServerLoad = async ({ params }: SchemeProps) => {
 };
 
 export const actions = {
-	default: async ({ request, cookies }) => {
+	addToBasket: async ({ request, cookies }) => {
 		const form = await request.formData();
 		const schemeId = form.get('schemeId');
 
@@ -110,5 +111,20 @@ export const actions = {
 				body: { message: 'Failed to add item to basket.' }
 			};
 		}
+	},
+	purchaseProduct: async ({ request, cookies }) => {
+		const form = await request.formData();
+		const priceId = form.get('price_id') as string;
+		const session = await StripeService.stripePayment(priceId);
+
+		if (session?.client_secret) {
+			cookies.set('client-secret', session.client_secret, {
+				path: '/',
+				httpOnly: true,
+				secure: true
+			});
+			redirect(302, '/shopping/checkout');
+		}
+		redirect(302, '/shopping/error');
 	}
 } satisfies Actions;

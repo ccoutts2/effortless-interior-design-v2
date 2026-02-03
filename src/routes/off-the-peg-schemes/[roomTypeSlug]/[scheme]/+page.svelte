@@ -51,6 +51,7 @@
 				<p>{scheme.description}</p>
 			</div>
 			<AddBasketForm
+				action="?/addToBasket"
 				enhance={() => {
 					addingToBasket = true;
 					overlay.overlayContent = ShoppingBasket;
@@ -68,6 +69,10 @@
 			>
 				<input type="hidden" name="schemeId" value={scheme.id} />
 			</AddBasketForm>
+			<form action="?/purchaseProduct" method="POST">
+				<input type="hidden" name="price_id" value="price_1SwiwzFDhgGDMpbYx4W10WVz" />
+				<button type="submit">Purchase</button>
+			</form>
 		</article>
 		<div class="overflow-hidden">
 			{#if scheme.images.length > 0}
