@@ -53,7 +53,6 @@ export const load: PageServerLoad = async ({ params }: SchemeProps) => {
 
 export const actions = {
 	default: async ({ request, cookies }) => {
-		await new Promise((fulfil) => setTimeout(fulfil, 1000));
 		const form = await request.formData();
 		const schemeId = form.get('schemeId');
 

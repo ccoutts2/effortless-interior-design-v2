@@ -65,11 +65,11 @@
 	</SlideIn>
 	<SlideIn>
 		<SectionHeader header="Let's Get Started" headerTag="h2" />
+		<p></p>
 		<p>
 			If you would like to explore working together, please use the button below - or send an email
-			to <a href="mailto:info@effortlessinteriordesign.com">info@effortlessinteriordesign.com</a>-
-			to request a copy of my portfolio, set up an introductory call, or simply to tell me about
-			your project.
+			to <a href="mailto:info@effortlessinteriordesign.com">info@effortlessinteriordesign.com</a> - to
+			request a copy of my portfolio, set up an introductory call, or simply to tell me about your project.
 		</p>
 	</SlideIn>
 </main>

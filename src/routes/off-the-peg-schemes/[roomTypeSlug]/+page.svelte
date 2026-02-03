@@ -25,7 +25,9 @@
 			{#each data.schemes as scheme}
 				<li class="RoomTypeName__item">
 					<div class="RoomTypeName__imageWrapper">
-						<ClipImage isComponentReady={isPageReady} src={scheme.images[0].url} description="" />
+						{#if scheme.images.length > 0}
+							<ClipImage isComponentReady={isPageReady} src={scheme.images[0].url} description="" />
+						{/if}
 					</div>
 
 					<h3>Our {scheme.name} schemes</h3>
@@ -54,7 +56,7 @@
 		&__list {
 			display: grid;
 			gap: 1rem;
-			grid-template-columns: 1;
+			grid-template-columns: 1fr;
 			height: 100%;
 
 			@include breakpoints.tablet {

@@ -1,13 +1,10 @@
 <script lang="ts">
-	import { enhance } from '$app/forms';
 	import { getContext, onMount } from 'svelte';
 	import ClipImage from '$lib/components/ClipImage.svelte';
-	import Form from '$lib/components/form/Form.svelte';
 	import ShoppingBasket from '$lib/components/ShoppingBasket.svelte';
 	import type { OverlayProps } from '$lib/types';
 	import type { PageData } from './$types';
-	import { slugify } from '$lib/utils/slugify';
-	import { invalidateAll } from '$app/navigation';
+	import AddBasketForm from '$lib/components/form/AddBasketForm.svelte';
 
 	interface SchemeProps {
 		data: PageData;
@@ -37,7 +34,7 @@
 		return price * (1 - discount);
 	};
 
-	let addingToBasket: boolean = $derived(false);
+	let addingToBasket: boolean = $state(false);
 </script>
 
 <main class="Scheme">
@@ -53,11 +50,11 @@
 				</div>
 				<p>{scheme.description}</p>
 			</div>
-			<Form
+			<AddBasketForm
 				enhance={() => {
 					addingToBasket = true;
-					overlay.isOpen = true;
 					overlay.overlayContent = ShoppingBasket;
+					overlay.isOpen = true;
 					// @ts-ignore
 					return async ({ result, update }) => {
 						if (result.type === 'success') {
@@ -70,10 +67,12 @@
 				buttonLabel={addingToBasket ? 'Adding' : 'Add to basket'}
 			>
 				<input type="hidden" name="schemeId" value={scheme.id} />
-			</Form>
+			</AddBasketForm>
 		</article>
 		<div class="overflow-hidden">
-			<ClipImage isComponentReady={isPageReady} src={scheme.images[0].url} description="" />
+			{#if scheme.images.length > 0}
+				<ClipImage isComponentReady={isPageReady} src={scheme.images[0].url} description="" />
+			{/if}
 		</div>
 	</section>
 	<section>
@@ -112,7 +111,7 @@
 						<div>
 							<img src={product.images[0].url} alt="{product.name} image" />
 						</div>
-						<a href="/off-the-peg-schemes/{slugify(product.roomTypeName!)}/{product.id}"
+						<a href="/off-the-peg-schemes/{product.roomType?.slug}/{product.id}"
 							><span class="visually-hidden">View {product.name}'s page</span></a
 						>
 					</article>

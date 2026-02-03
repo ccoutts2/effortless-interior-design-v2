@@ -11,7 +11,9 @@
 			<li>
 				<article>
 					<h3>{item.scheme.name}</h3>
-					<div><img src={item.scheme.images[0].url} alt="" /></div>
+					{#if item.scheme.images?.length > 0}
+						<div><img src={item.scheme.images[0].url} alt="" /></div>
+					{/if}
 				</article>
 			</li>
 		{/each}
