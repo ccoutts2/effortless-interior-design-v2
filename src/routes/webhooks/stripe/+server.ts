@@ -30,7 +30,8 @@ export const POST: RequestHandler = async ({ request }) => {
 			default:
 				console.log(`Unhandled event type ${event.type}.`);
 		}
-	return json({ received: true });
+	} catch (error) {
+		const message = error instanceof Error ? error.message : 'unknown';
 		return new Response(`Webhook Error: ${message}`, { status: 400 });
 	}
 
