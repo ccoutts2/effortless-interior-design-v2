@@ -12,8 +12,8 @@
 		Your payment was successful and an email will be sent to {data.customerEmail} for:
 	</p>
 	<ul>
-		{#each items?.data as item}
-			<li>{item.description}</li>
+		{#each items?.data ?? [] as item}
+			<li>{item.description ?? 'Item'}</li>
 		{/each}
 	</ul>
 	<a href="/">Go back home</a>

@@ -6,7 +6,7 @@ export const load: PageServerLoad = async ({ url }) => {
 	const sessionId = url.searchParams.get('session_id');
 
 	if (sessionId === null) {
-		redirect(302, '/shopping/error');
+		throw redirect(302, '/shopping/error');
 	}
 
 	try {
@@ -19,5 +19,6 @@ export const load: PageServerLoad = async ({ url }) => {
 		};
 	} catch (error) {
 		console.log(error);
+		throw redirect(302, '/shopping/error');
 	}
 };
