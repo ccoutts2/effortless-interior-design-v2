@@ -3,7 +3,7 @@
 	import type { PageProps } from './$types';
 	import { loadStripe } from '@stripe/stripe-js';
 	import { PUBLIC_STRIPE_KEY } from '$env/static/public';
-	import { goto } from '$app/navigation';
+	import { redirect } from '@sveltejs/kit';
 
 	let { data }: PageProps = $props();
 
@@ -22,12 +22,12 @@
 			}
 		}
 
-		goto('/shopping/error');
+		throw redirect(302, '/shopping/error');
 	});
 </script>
 
-<div class="flex min-h-screen items-center justify-center py-12">
-	<div class="bg-secondary bg-opacity-40 rounded-lg p-8 shadow-xl">
+<div class="flex w-full items-center justify-center py-12">
+	<div class="w-full rounded-lg p-8 shadow-xl">
 		<div id="checkout"></div>
 	</div>
 </div>

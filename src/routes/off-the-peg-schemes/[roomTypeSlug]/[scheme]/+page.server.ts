@@ -121,10 +121,11 @@ export const actions = {
 			cookies.set('client-secret', session.client_secret, {
 				path: '/',
 				httpOnly: true,
-				secure: true
+				secure: true,
+				sameSite: 'strict'
 			});
-			redirect(302, '/shopping/checkout');
+			throw redirect(302, '/shopping/checkout');
 		}
-		redirect(302, '/shopping/error');
+		throw redirect(302, '/shopping/error');
 	}
 } satisfies Actions;

@@ -71,7 +71,7 @@
 			</AddBasketForm>
 			<form action="?/purchaseProduct" method="POST">
 				<input type="hidden" name="price_id" value="price_1SwiwzFDhgGDMpbYx4W10WVz" />
-				<button type="submit">Purchase</button>
+				<button type="submit" role="link">Checkout Now</button>
 			</form>
 		</article>
 		<div class="overflow-hidden">
