@@ -1,9 +1,5 @@
-// $lib/services/stripe.service.ts
-import Stripe from 'stripe';
 import { PUBLIC_DOMAIN } from '$env/static/public';
-import { SECRET_STRIPE_KEY } from '$env/static/private';
-
-const stripe = new Stripe(SECRET_STRIPE_KEY);
+import { stripe } from '$lib/server/stripe/stripe';
 
 export const StripeService = {
 	async stripePayment(priceId: string) {
