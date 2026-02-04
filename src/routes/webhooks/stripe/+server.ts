@@ -7,31 +7,30 @@ export const POST: RequestHandler = async ({ request }) => {
 	const body = await request.text();
 
 	if (!signature) {
-		return new Response('unautorized', { status: 401 });
+		return new Response('unauthorized', { status: 401 });
 	}
 	try {
 		const event = stripe.webhooks.constructEvent(body, signature, SECRET_STRIPE_WEBHOOK);
 		console.log('TYPE', event.type);
 		switch (event.type) {
 			case 'payment_intent.succeeded': {
-				const paymentIntent = event.data.object;
-				console.log(`PaymentIntent for ${paymentIntent.amount} was successful!`);
-				// Then define and call a method to handle the successful payment intent.
-				// handlePaymentIntentSucceeded(paymentIntent);
+				console.log(event.type);
+				console.log(event.data.object);
 				break;
 			}
+			case 'product.created': {
+				console.log(event.type);
+				console.log(event.data.object);
+			}
 			case 'payment_method.attached': {
-				const paymentMethod = event.data.object;
-				// Then define and call a method to handle the successful attachment of a PaymentMethod.
-				// handlePaymentMethodAttached(paymentMethod);
+				console.log(event.type);
+				console.log(event.data.object);
 				break;
 			}
 			default:
-				// Unexpected event type
 				console.log(`Unhandled event type ${event.type}.`);
 		}
-	} catch (error) {
-		const message = error instanceof Error ? error.message : 'unknown';
+	return json({ received: true });
 		return new Response(`Webhook Error: ${message}`, { status: 400 });
 	}
 

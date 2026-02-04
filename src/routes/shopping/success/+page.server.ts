@@ -18,7 +18,7 @@ export const load: PageServerLoad = async ({ url }) => {
 			status: session.status
 		};
 	} catch (error) {
-		console.log(error);
+		console.error(error);
 		throw redirect(302, '/shopping/error');
 	}
 };
