@@ -5,6 +5,7 @@
 	import type { OverlayProps } from '$lib/types';
 	import type { PageData } from './$types';
 	import AddBasketForm from '$lib/components/form/AddBasketForm.svelte';
+	import { invalidateAll } from '$app/navigation';
 
 	interface SchemeProps {
 		data: PageData;
@@ -44,8 +45,8 @@
 				<span>{scheme.roomTypeName}</span>
 				<h1>{scheme.name}</h1>
 				<div class="Product__price">
-					<span class="Product__oldPrice">£{scheme.price}</span><span
-						><strong>£{discountedPrice(Number(scheme.price), 0.3)}</strong></span
+					<span class="Product__oldPrice">£{scheme.stripePriceId}</span><span
+						><strong>£{discountedPrice(Number(scheme.stripePriceId), 0.3)}</strong></span
 					>
 				</div>
 				<p>{scheme.description}</p>
@@ -57,11 +58,9 @@
 					overlay.overlayContent = ShoppingBasket;
 					overlay.isOpen = true;
 					// @ts-ignore
-					return async ({ result, update }) => {
-						if (result.type === 'success') {
-							await update();
-						}
-
+					return async ({ update }) => {
+						await update();
+						await invalidateAll();
 						addingToBasket = false;
 					};
 				}}
@@ -87,7 +86,7 @@
 				<li>
 					<article class="RelatedScheme">
 						<h4>{product.name}</h4>
-						<span>£{product.price}</span>
+						<span>£{product.stripePriceId}</span>
 						<div>
 							<img src={product.images[0].url} alt="{product.name} image" />
 						</div>
@@ -109,7 +108,7 @@
 					<article class="RelatedScheme">
 						<div>
 							<h4>{product.name}</h4>
-							<span class="block">£{product.price}</span>
+							<span class="block">£{product.stripePriceId}</span>
 							<span class="text-sm">{product.roomTypeName}</span>
 						</div>
 

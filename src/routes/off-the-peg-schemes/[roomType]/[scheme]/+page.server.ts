@@ -6,7 +6,7 @@ import { StripeService } from '$lib/services/stripe.service';
 interface SchemeProps {
 	cookies: any;
 	params: {
-		roomTypeSlug: string;
+		roomType: string;
 		scheme: string;
 	};
 }
@@ -17,7 +17,8 @@ const fetchScheme = async (id: number) => {
 		include: {
 			images: {
 				orderBy: { schemeIndex: 'asc' }
-			}
+			},
+			roomType: true
 		}
 	});
 	return scheme;
@@ -26,7 +27,7 @@ const fetchScheme = async (id: number) => {
 const fetchAllSchemes = async () => {
 	const allSchemes = await prisma.scheme.findMany({
 		where: {
-			isAvailable: true
+			active: true
 		},
 		include: {
 			images: {

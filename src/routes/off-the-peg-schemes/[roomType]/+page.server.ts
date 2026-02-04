@@ -3,7 +3,7 @@ import type { PageServerLoad } from './$types';
 
 interface RoomSchemeProps {
 	params: {
-		roomTypeSlug: string;
+		roomType: string;
 	};
 }
 
@@ -16,7 +16,7 @@ const fetchSchemes = async (roomTypeSlug: string) => {
 					mode: 'insensitive'
 				}
 			},
-			isAvailable: true
+			active: true
 		},
 		include: {
 			images: {
@@ -29,7 +29,7 @@ const fetchSchemes = async (roomTypeSlug: string) => {
 };
 
 export const load: PageServerLoad = async ({ params }: RoomSchemeProps) => {
-	const schemes = await fetchSchemes(params.roomTypeSlug);
+	const schemes = await fetchSchemes(params.roomType);
 
 	return {
 		schemes

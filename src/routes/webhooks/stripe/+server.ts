@@ -13,15 +13,37 @@ export const POST: RequestHandler = async ({ request }) => {
 		const event = stripe.webhooks.constructEvent(body, signature, SECRET_STRIPE_WEBHOOK);
 		console.log('TYPE', event.type);
 		switch (event.type) {
+			// Product Events
+			case 'product.created':
+			case 'product.updated': {
+				console.log(event.type);
+				console.log(event.data.object);
+			}
+			case 'product.deleted': {
+				console.log(event.type);
+				console.log(event.data.object);
+			}
+			// Price Events
+			case 'price.created':
+			case 'price.updated': {
+				console.log(event.type);
+				console.log(event.data.object);
+			}
+			case 'price.deleted': {
+				console.log(event.type);
+				console.log(event.data.object);
+			}
 			case 'payment_intent.succeeded': {
 				console.log(event.type);
 				console.log(event.data.object);
 				break;
 			}
-			case 'product.created': {
+			case 'payment_intent.succeeded': {
 				console.log(event.type);
 				console.log(event.data.object);
+				break;
 			}
+
 			case 'payment_method.attached': {
 				console.log(event.type);
 				console.log(event.data.object);

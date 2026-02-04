@@ -12,10 +12,11 @@ model Scheme {
   id               Int               @id @default(autoincrement())
   name             String
   description      String
-  price            Int
-  isAvailable      Boolean           @default(false)
+  stripePriceId    String?
+  active           Boolean           @default(false)
   roomTypeName     String?
-  roomTypeNameSlug String?
+  features         String[]
+  metadata         Json?
   createdAt        DateTime          @default(now())
   updatedAt        DateTime          @updatedAt
   images           Image[]

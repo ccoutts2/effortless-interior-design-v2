@@ -27,22 +27,19 @@ export type AggregateScheme = {
 
 export type SchemeAvgAggregateOutputType = {
   id: number | null
-  price: number | null
 }
 
 export type SchemeSumAggregateOutputType = {
   id: number | null
-  price: number | null
 }
 
 export type SchemeMinAggregateOutputType = {
   id: number | null
   name: string | null
   description: string | null
-  price: number | null
-  isAvailable: boolean | null
+  stripePriceId: string | null
+  active: boolean | null
   roomTypeName: string | null
-  roomTypeNameSlug: string | null
   createdAt: Date | null
   updatedAt: Date | null
 }
@@ -51,10 +48,9 @@ export type SchemeMaxAggregateOutputType = {
   id: number | null
   name: string | null
   description: string | null
-  price: number | null
-  isAvailable: boolean | null
+  stripePriceId: string | null
+  active: boolean | null
   roomTypeName: string | null
-  roomTypeNameSlug: string | null
   createdAt: Date | null
   updatedAt: Date | null
 }
@@ -63,10 +59,11 @@ export type SchemeCountAggregateOutputType = {
   id: number
   name: number
   description: number
-  price: number
-  isAvailable: number
+  stripePriceId: number
+  active: number
   roomTypeName: number
-  roomTypeNameSlug: number
+  features: number
+  metadata: number
   createdAt: number
   updatedAt: number
   _all: number
@@ -75,22 +72,19 @@ export type SchemeCountAggregateOutputType = {
 
 export type SchemeAvgAggregateInputType = {
   id?: true
-  price?: true
 }
 
 export type SchemeSumAggregateInputType = {
   id?: true
-  price?: true
 }
 
 export type SchemeMinAggregateInputType = {
   id?: true
   name?: true
   description?: true
-  price?: true
-  isAvailable?: true
+  stripePriceId?: true
+  active?: true
   roomTypeName?: true
-  roomTypeNameSlug?: true
   createdAt?: true
   updatedAt?: true
 }
@@ -99,10 +93,9 @@ export type SchemeMaxAggregateInputType = {
   id?: true
   name?: true
   description?: true
-  price?: true
-  isAvailable?: true
+  stripePriceId?: true
+  active?: true
   roomTypeName?: true
-  roomTypeNameSlug?: true
   createdAt?: true
   updatedAt?: true
 }
@@ -111,10 +104,11 @@ export type SchemeCountAggregateInputType = {
   id?: true
   name?: true
   description?: true
-  price?: true
-  isAvailable?: true
+  stripePriceId?: true
+  active?: true
   roomTypeName?: true
-  roomTypeNameSlug?: true
+  features?: true
+  metadata?: true
   createdAt?: true
   updatedAt?: true
   _all?: true
@@ -210,10 +204,11 @@ export type SchemeGroupByOutputType = {
   id: number
   name: string
   description: string
-  price: number
-  isAvailable: boolean
+  stripePriceId: string | null
+  active: boolean
   roomTypeName: string | null
-  roomTypeNameSlug: string | null
+  features: string[]
+  metadata: runtime.JsonValue | null
   createdAt: Date
   updatedAt: Date
   _count: SchemeCountAggregateOutputType | null
@@ -245,10 +240,11 @@ export type SchemeWhereInput = {
   id?: Prisma.IntFilter<"Scheme"> | number
   name?: Prisma.StringFilter<"Scheme"> | string
   description?: Prisma.StringFilter<"Scheme"> | string
-  price?: Prisma.IntFilter<"Scheme"> | number
-  isAvailable?: Prisma.BoolFilter<"Scheme"> | boolean
+  stripePriceId?: Prisma.StringNullableFilter<"Scheme"> | string | null
+  active?: Prisma.BoolFilter<"Scheme"> | boolean
   roomTypeName?: Prisma.StringNullableFilter<"Scheme"> | string | null
-  roomTypeNameSlug?: Prisma.StringNullableFilter<"Scheme"> | string | null
+  features?: Prisma.StringNullableListFilter<"Scheme">
+  metadata?: Prisma.JsonNullableFilter<"Scheme">
   createdAt?: Prisma.DateTimeFilter<"Scheme"> | Date | string
   updatedAt?: Prisma.DateTimeFilter<"Scheme"> | Date | string
   images?: Prisma.ImageListRelationFilter
@@ -261,10 +257,11 @@ export type SchemeOrderByWithRelationInput = {
   id?: Prisma.SortOrder
   name?: Prisma.SortOrder
   description?: Prisma.SortOrder
-  price?: Prisma.SortOrder
-  isAvailable?: Prisma.SortOrder
+  stripePriceId?: Prisma.SortOrderInput | Prisma.SortOrder
+  active?: Prisma.SortOrder
   roomTypeName?: Prisma.SortOrderInput | Prisma.SortOrder
-  roomTypeNameSlug?: Prisma.SortOrderInput | Prisma.SortOrder
+  features?: Prisma.SortOrder
+  metadata?: Prisma.SortOrderInput | Prisma.SortOrder
   createdAt?: Prisma.SortOrder
   updatedAt?: Prisma.SortOrder
   images?: Prisma.ImageOrderByRelationAggregateInput
@@ -280,10 +277,11 @@ export type SchemeWhereUniqueInput = Prisma.AtLeast<{
   NOT?: Prisma.SchemeWhereInput | Prisma.SchemeWhereInput[]
   name?: Prisma.StringFilter<"Scheme"> | string
   description?: Prisma.StringFilter<"Scheme"> | string
-  price?: Prisma.IntFilter<"Scheme"> | number
-  isAvailable?: Prisma.BoolFilter<"Scheme"> | boolean
+  stripePriceId?: Prisma.StringNullableFilter<"Scheme"> | string | null
+  active?: Prisma.BoolFilter<"Scheme"> | boolean
   roomTypeName?: Prisma.StringNullableFilter<"Scheme"> | string | null
-  roomTypeNameSlug?: Prisma.StringNullableFilter<"Scheme"> | string | null
+  features?: Prisma.StringNullableListFilter<"Scheme">
+  metadata?: Prisma.JsonNullableFilter<"Scheme">
   createdAt?: Prisma.DateTimeFilter<"Scheme"> | Date | string
   updatedAt?: Prisma.DateTimeFilter<"Scheme"> | Date | string
   images?: Prisma.ImageListRelationFilter
@@ -296,10 +294,11 @@ export type SchemeOrderByWithAggregationInput = {
   id?: Prisma.SortOrder
   name?: Prisma.SortOrder
   description?: Prisma.SortOrder
-  price?: Prisma.SortOrder
-  isAvailable?: Prisma.SortOrder
+  stripePriceId?: Prisma.SortOrderInput | Prisma.SortOrder
+  active?: Prisma.SortOrder
   roomTypeName?: Prisma.SortOrderInput | Prisma.SortOrder
-  roomTypeNameSlug?: Prisma.SortOrderInput | Prisma.SortOrder
+  features?: Prisma.SortOrder
+  metadata?: Prisma.SortOrderInput | Prisma.SortOrder
   createdAt?: Prisma.SortOrder
   updatedAt?: Prisma.SortOrder
   _count?: Prisma.SchemeCountOrderByAggregateInput
@@ -316,10 +315,11 @@ export type SchemeScalarWhereWithAggregatesInput = {
   id?: Prisma.IntWithAggregatesFilter<"Scheme"> | number
   name?: Prisma.StringWithAggregatesFilter<"Scheme"> | string
   description?: Prisma.StringWithAggregatesFilter<"Scheme"> | string
-  price?: Prisma.IntWithAggregatesFilter<"Scheme"> | number
-  isAvailable?: Prisma.BoolWithAggregatesFilter<"Scheme"> | boolean
+  stripePriceId?: Prisma.StringNullableWithAggregatesFilter<"Scheme"> | string | null
+  active?: Prisma.BoolWithAggregatesFilter<"Scheme"> | boolean
   roomTypeName?: Prisma.StringNullableWithAggregatesFilter<"Scheme"> | string | null
-  roomTypeNameSlug?: Prisma.StringNullableWithAggregatesFilter<"Scheme"> | string | null
+  features?: Prisma.StringNullableListFilter<"Scheme">
+  metadata?: Prisma.JsonNullableWithAggregatesFilter<"Scheme">
   createdAt?: Prisma.DateTimeWithAggregatesFilter<"Scheme"> | Date | string
   updatedAt?: Prisma.DateTimeWithAggregatesFilter<"Scheme"> | Date | string
 }
@@ -327,9 +327,10 @@ export type SchemeScalarWhereWithAggregatesInput = {
 export type SchemeCreateInput = {
   name: string
   description: string
-  price: number
-  isAvailable?: boolean
-  roomTypeNameSlug?: string | null
+  stripePriceId?: string | null
+  active?: boolean
+  features?: Prisma.SchemeCreatefeaturesInput | string[]
+  metadata?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
   createdAt?: Date | string
   updatedAt?: Date | string
   images?: Prisma.ImageCreateNestedManyWithoutSchemeInput
@@ -342,10 +343,11 @@ export type SchemeUncheckedCreateInput = {
   id?: number
   name: string
   description: string
-  price: number
-  isAvailable?: boolean
+  stripePriceId?: string | null
+  active?: boolean
   roomTypeName?: string | null
-  roomTypeNameSlug?: string | null
+  features?: Prisma.SchemeCreatefeaturesInput | string[]
+  metadata?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
   createdAt?: Date | string
   updatedAt?: Date | string
   images?: Prisma.ImageUncheckedCreateNestedManyWithoutSchemeInput
@@ -356,9 +358,10 @@ export type SchemeUncheckedCreateInput = {
 export type SchemeUpdateInput = {
   name?: Prisma.StringFieldUpdateOperationsInput | string
   description?: Prisma.StringFieldUpdateOperationsInput | string
-  price?: Prisma.IntFieldUpdateOperationsInput | number
-  isAvailable?: Prisma.BoolFieldUpdateOperationsInput | boolean
-  roomTypeNameSlug?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  stripePriceId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  active?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  features?: Prisma.SchemeUpdatefeaturesInput | string[]
+  metadata?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   images?: Prisma.ImageUpdateManyWithoutSchemeNestedInput
@@ -371,10 +374,11 @@ export type SchemeUncheckedUpdateInput = {
   id?: Prisma.IntFieldUpdateOperationsInput | number
   name?: Prisma.StringFieldUpdateOperationsInput | string
   description?: Prisma.StringFieldUpdateOperationsInput | string
-  price?: Prisma.IntFieldUpdateOperationsInput | number
-  isAvailable?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  stripePriceId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  active?: Prisma.BoolFieldUpdateOperationsInput | boolean
   roomTypeName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  roomTypeNameSlug?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  features?: Prisma.SchemeUpdatefeaturesInput | string[]
+  metadata?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   images?: Prisma.ImageUncheckedUpdateManyWithoutSchemeNestedInput
@@ -386,10 +390,11 @@ export type SchemeCreateManyInput = {
   id?: number
   name: string
   description: string
-  price: number
-  isAvailable?: boolean
+  stripePriceId?: string | null
+  active?: boolean
   roomTypeName?: string | null
-  roomTypeNameSlug?: string | null
+  features?: Prisma.SchemeCreatefeaturesInput | string[]
+  metadata?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
   createdAt?: Date | string
   updatedAt?: Date | string
 }
@@ -397,9 +402,10 @@ export type SchemeCreateManyInput = {
 export type SchemeUpdateManyMutationInput = {
   name?: Prisma.StringFieldUpdateOperationsInput | string
   description?: Prisma.StringFieldUpdateOperationsInput | string
-  price?: Prisma.IntFieldUpdateOperationsInput | number
-  isAvailable?: Prisma.BoolFieldUpdateOperationsInput | boolean
-  roomTypeNameSlug?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  stripePriceId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  active?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  features?: Prisma.SchemeUpdatefeaturesInput | string[]
+  metadata?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
 }
@@ -408,39 +414,47 @@ export type SchemeUncheckedUpdateManyInput = {
   id?: Prisma.IntFieldUpdateOperationsInput | number
   name?: Prisma.StringFieldUpdateOperationsInput | string
   description?: Prisma.StringFieldUpdateOperationsInput | string
-  price?: Prisma.IntFieldUpdateOperationsInput | number
-  isAvailable?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  stripePriceId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  active?: Prisma.BoolFieldUpdateOperationsInput | boolean
   roomTypeName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  roomTypeNameSlug?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  features?: Prisma.SchemeUpdatefeaturesInput | string[]
+  metadata?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+}
+
+export type StringNullableListFilter<$PrismaModel = never> = {
+  equals?: string[] | Prisma.ListStringFieldRefInput<$PrismaModel> | null
+  has?: string | Prisma.StringFieldRefInput<$PrismaModel> | null
+  hasEvery?: string[] | Prisma.ListStringFieldRefInput<$PrismaModel>
+  hasSome?: string[] | Prisma.ListStringFieldRefInput<$PrismaModel>
+  isEmpty?: boolean
 }
 
 export type SchemeCountOrderByAggregateInput = {
   id?: Prisma.SortOrder
   name?: Prisma.SortOrder
   description?: Prisma.SortOrder
-  price?: Prisma.SortOrder
-  isAvailable?: Prisma.SortOrder
+  stripePriceId?: Prisma.SortOrder
+  active?: Prisma.SortOrder
   roomTypeName?: Prisma.SortOrder
-  roomTypeNameSlug?: Prisma.SortOrder
+  features?: Prisma.SortOrder
+  metadata?: Prisma.SortOrder
   createdAt?: Prisma.SortOrder
   updatedAt?: Prisma.SortOrder
 }
 
 export type SchemeAvgOrderByAggregateInput = {
   id?: Prisma.SortOrder
-  price?: Prisma.SortOrder
 }
 
 export type SchemeMaxOrderByAggregateInput = {
   id?: Prisma.SortOrder
   name?: Prisma.SortOrder
   description?: Prisma.SortOrder
-  price?: Prisma.SortOrder
-  isAvailable?: Prisma.SortOrder
+  stripePriceId?: Prisma.SortOrder
+  active?: Prisma.SortOrder
   roomTypeName?: Prisma.SortOrder
-  roomTypeNameSlug?: Prisma.SortOrder
   createdAt?: Prisma.SortOrder
   updatedAt?: Prisma.SortOrder
 }
@@ -449,17 +463,15 @@ export type SchemeMinOrderByAggregateInput = {
   id?: Prisma.SortOrder
   name?: Prisma.SortOrder
   description?: Prisma.SortOrder
-  price?: Prisma.SortOrder
-  isAvailable?: Prisma.SortOrder
+  stripePriceId?: Prisma.SortOrder
+  active?: Prisma.SortOrder
   roomTypeName?: Prisma.SortOrder
-  roomTypeNameSlug?: Prisma.SortOrder
   createdAt?: Prisma.SortOrder
   updatedAt?: Prisma.SortOrder
 }
 
 export type SchemeSumOrderByAggregateInput = {
   id?: Prisma.SortOrder
-  price?: Prisma.SortOrder
 }
 
 export type SchemeScalarRelationFilter = {
@@ -477,8 +489,29 @@ export type SchemeOrderByRelationAggregateInput = {
   _count?: Prisma.SortOrder
 }
 
+export type SchemeCreatefeaturesInput = {
+  set: string[]
+}
+
 export type StringFieldUpdateOperationsInput = {
   set?: string
+}
+
+export type NullableStringFieldUpdateOperationsInput = {
+  set?: string | null
+}
+
+export type BoolFieldUpdateOperationsInput = {
+  set?: boolean
+}
+
+export type SchemeUpdatefeaturesInput = {
+  set?: string[]
+  push?: string | string[]
+}
+
+export type DateTimeFieldUpdateOperationsInput = {
+  set?: Date | string
 }
 
 export type IntFieldUpdateOperationsInput = {
@@ -487,18 +520,6 @@ export type IntFieldUpdateOperationsInput = {
   decrement?: number
   multiply?: number
   divide?: number
-}
-
-export type BoolFieldUpdateOperationsInput = {
-  set?: boolean
-}
-
-export type NullableStringFieldUpdateOperationsInput = {
-  set?: string | null
-}
-
-export type DateTimeFieldUpdateOperationsInput = {
-  set?: Date | string
 }
 
 export type SchemeCreateNestedOneWithoutImagesInput = {
@@ -588,9 +609,10 @@ export type SchemeUpdateOneRequiredWithoutBasketsNestedInput = {
 export type SchemeCreateWithoutImagesInput = {
   name: string
   description: string
-  price: number
-  isAvailable?: boolean
-  roomTypeNameSlug?: string | null
+  stripePriceId?: string | null
+  active?: boolean
+  features?: Prisma.SchemeCreatefeaturesInput | string[]
+  metadata?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
   createdAt?: Date | string
   updatedAt?: Date | string
   orders?: Prisma.OrdersOnSchemesCreateNestedManyWithoutSchemeInput
@@ -602,10 +624,11 @@ export type SchemeUncheckedCreateWithoutImagesInput = {
   id?: number
   name: string
   description: string
-  price: number
-  isAvailable?: boolean
+  stripePriceId?: string | null
+  active?: boolean
   roomTypeName?: string | null
-  roomTypeNameSlug?: string | null
+  features?: Prisma.SchemeCreatefeaturesInput | string[]
+  metadata?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
   createdAt?: Date | string
   updatedAt?: Date | string
   orders?: Prisma.OrdersOnSchemesUncheckedCreateNestedManyWithoutSchemeInput
@@ -631,9 +654,10 @@ export type SchemeUpdateToOneWithWhereWithoutImagesInput = {
 export type SchemeUpdateWithoutImagesInput = {
   name?: Prisma.StringFieldUpdateOperationsInput | string
   description?: Prisma.StringFieldUpdateOperationsInput | string
-  price?: Prisma.IntFieldUpdateOperationsInput | number
-  isAvailable?: Prisma.BoolFieldUpdateOperationsInput | boolean
-  roomTypeNameSlug?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  stripePriceId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  active?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  features?: Prisma.SchemeUpdatefeaturesInput | string[]
+  metadata?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   orders?: Prisma.OrdersOnSchemesUpdateManyWithoutSchemeNestedInput
@@ -645,10 +669,11 @@ export type SchemeUncheckedUpdateWithoutImagesInput = {
   id?: Prisma.IntFieldUpdateOperationsInput | number
   name?: Prisma.StringFieldUpdateOperationsInput | string
   description?: Prisma.StringFieldUpdateOperationsInput | string
-  price?: Prisma.IntFieldUpdateOperationsInput | number
-  isAvailable?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  stripePriceId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  active?: Prisma.BoolFieldUpdateOperationsInput | boolean
   roomTypeName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  roomTypeNameSlug?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  features?: Prisma.SchemeUpdatefeaturesInput | string[]
+  metadata?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   orders?: Prisma.OrdersOnSchemesUncheckedUpdateManyWithoutSchemeNestedInput
@@ -658,9 +683,10 @@ export type SchemeUncheckedUpdateWithoutImagesInput = {
 export type SchemeCreateWithoutRoomTypeInput = {
   name: string
   description: string
-  price: number
-  isAvailable?: boolean
-  roomTypeNameSlug?: string | null
+  stripePriceId?: string | null
+  active?: boolean
+  features?: Prisma.SchemeCreatefeaturesInput | string[]
+  metadata?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
   createdAt?: Date | string
   updatedAt?: Date | string
   images?: Prisma.ImageCreateNestedManyWithoutSchemeInput
@@ -672,9 +698,10 @@ export type SchemeUncheckedCreateWithoutRoomTypeInput = {
   id?: number
   name: string
   description: string
-  price: number
-  isAvailable?: boolean
-  roomTypeNameSlug?: string | null
+  stripePriceId?: string | null
+  active?: boolean
+  features?: Prisma.SchemeCreatefeaturesInput | string[]
+  metadata?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
   createdAt?: Date | string
   updatedAt?: Date | string
   images?: Prisma.ImageUncheckedCreateNestedManyWithoutSchemeInput
@@ -715,10 +742,11 @@ export type SchemeScalarWhereInput = {
   id?: Prisma.IntFilter<"Scheme"> | number
   name?: Prisma.StringFilter<"Scheme"> | string
   description?: Prisma.StringFilter<"Scheme"> | string
-  price?: Prisma.IntFilter<"Scheme"> | number
-  isAvailable?: Prisma.BoolFilter<"Scheme"> | boolean
+  stripePriceId?: Prisma.StringNullableFilter<"Scheme"> | string | null
+  active?: Prisma.BoolFilter<"Scheme"> | boolean
   roomTypeName?: Prisma.StringNullableFilter<"Scheme"> | string | null
-  roomTypeNameSlug?: Prisma.StringNullableFilter<"Scheme"> | string | null
+  features?: Prisma.StringNullableListFilter<"Scheme">
+  metadata?: Prisma.JsonNullableFilter<"Scheme">
   createdAt?: Prisma.DateTimeFilter<"Scheme"> | Date | string
   updatedAt?: Prisma.DateTimeFilter<"Scheme"> | Date | string
 }
@@ -726,9 +754,10 @@ export type SchemeScalarWhereInput = {
 export type SchemeCreateWithoutOrdersInput = {
   name: string
   description: string
-  price: number
-  isAvailable?: boolean
-  roomTypeNameSlug?: string | null
+  stripePriceId?: string | null
+  active?: boolean
+  features?: Prisma.SchemeCreatefeaturesInput | string[]
+  metadata?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
   createdAt?: Date | string
   updatedAt?: Date | string
   images?: Prisma.ImageCreateNestedManyWithoutSchemeInput
@@ -740,10 +769,11 @@ export type SchemeUncheckedCreateWithoutOrdersInput = {
   id?: number
   name: string
   description: string
-  price: number
-  isAvailable?: boolean
+  stripePriceId?: string | null
+  active?: boolean
   roomTypeName?: string | null
-  roomTypeNameSlug?: string | null
+  features?: Prisma.SchemeCreatefeaturesInput | string[]
+  metadata?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
   createdAt?: Date | string
   updatedAt?: Date | string
   images?: Prisma.ImageUncheckedCreateNestedManyWithoutSchemeInput
@@ -769,9 +799,10 @@ export type SchemeUpdateToOneWithWhereWithoutOrdersInput = {
 export type SchemeUpdateWithoutOrdersInput = {
   name?: Prisma.StringFieldUpdateOperationsInput | string
   description?: Prisma.StringFieldUpdateOperationsInput | string
-  price?: Prisma.IntFieldUpdateOperationsInput | number
-  isAvailable?: Prisma.BoolFieldUpdateOperationsInput | boolean
-  roomTypeNameSlug?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  stripePriceId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  active?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  features?: Prisma.SchemeUpdatefeaturesInput | string[]
+  metadata?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   images?: Prisma.ImageUpdateManyWithoutSchemeNestedInput
@@ -783,10 +814,11 @@ export type SchemeUncheckedUpdateWithoutOrdersInput = {
   id?: Prisma.IntFieldUpdateOperationsInput | number
   name?: Prisma.StringFieldUpdateOperationsInput | string
   description?: Prisma.StringFieldUpdateOperationsInput | string
-  price?: Prisma.IntFieldUpdateOperationsInput | number
-  isAvailable?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  stripePriceId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  active?: Prisma.BoolFieldUpdateOperationsInput | boolean
   roomTypeName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  roomTypeNameSlug?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  features?: Prisma.SchemeUpdatefeaturesInput | string[]
+  metadata?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   images?: Prisma.ImageUncheckedUpdateManyWithoutSchemeNestedInput
@@ -796,9 +828,10 @@ export type SchemeUncheckedUpdateWithoutOrdersInput = {
 export type SchemeCreateWithoutBasketsInput = {
   name: string
   description: string
-  price: number
-  isAvailable?: boolean
-  roomTypeNameSlug?: string | null
+  stripePriceId?: string | null
+  active?: boolean
+  features?: Prisma.SchemeCreatefeaturesInput | string[]
+  metadata?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
   createdAt?: Date | string
   updatedAt?: Date | string
   images?: Prisma.ImageCreateNestedManyWithoutSchemeInput
@@ -810,10 +843,11 @@ export type SchemeUncheckedCreateWithoutBasketsInput = {
   id?: number
   name: string
   description: string
-  price: number
-  isAvailable?: boolean
+  stripePriceId?: string | null
+  active?: boolean
   roomTypeName?: string | null
-  roomTypeNameSlug?: string | null
+  features?: Prisma.SchemeCreatefeaturesInput | string[]
+  metadata?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
   createdAt?: Date | string
   updatedAt?: Date | string
   images?: Prisma.ImageUncheckedCreateNestedManyWithoutSchemeInput
@@ -839,9 +873,10 @@ export type SchemeUpdateToOneWithWhereWithoutBasketsInput = {
 export type SchemeUpdateWithoutBasketsInput = {
   name?: Prisma.StringFieldUpdateOperationsInput | string
   description?: Prisma.StringFieldUpdateOperationsInput | string
-  price?: Prisma.IntFieldUpdateOperationsInput | number
-  isAvailable?: Prisma.BoolFieldUpdateOperationsInput | boolean
-  roomTypeNameSlug?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  stripePriceId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  active?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  features?: Prisma.SchemeUpdatefeaturesInput | string[]
+  metadata?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   images?: Prisma.ImageUpdateManyWithoutSchemeNestedInput
@@ -853,10 +888,11 @@ export type SchemeUncheckedUpdateWithoutBasketsInput = {
   id?: Prisma.IntFieldUpdateOperationsInput | number
   name?: Prisma.StringFieldUpdateOperationsInput | string
   description?: Prisma.StringFieldUpdateOperationsInput | string
-  price?: Prisma.IntFieldUpdateOperationsInput | number
-  isAvailable?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  stripePriceId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  active?: Prisma.BoolFieldUpdateOperationsInput | boolean
   roomTypeName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  roomTypeNameSlug?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  features?: Prisma.SchemeUpdatefeaturesInput | string[]
+  metadata?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   images?: Prisma.ImageUncheckedUpdateManyWithoutSchemeNestedInput
@@ -867,9 +903,10 @@ export type SchemeCreateManyRoomTypeInput = {
   id?: number
   name: string
   description: string
-  price: number
-  isAvailable?: boolean
-  roomTypeNameSlug?: string | null
+  stripePriceId?: string | null
+  active?: boolean
+  features?: Prisma.SchemeCreatefeaturesInput | string[]
+  metadata?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
   createdAt?: Date | string
   updatedAt?: Date | string
 }
@@ -877,9 +914,10 @@ export type SchemeCreateManyRoomTypeInput = {
 export type SchemeUpdateWithoutRoomTypeInput = {
   name?: Prisma.StringFieldUpdateOperationsInput | string
   description?: Prisma.StringFieldUpdateOperationsInput | string
-  price?: Prisma.IntFieldUpdateOperationsInput | number
-  isAvailable?: Prisma.BoolFieldUpdateOperationsInput | boolean
-  roomTypeNameSlug?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  stripePriceId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  active?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  features?: Prisma.SchemeUpdatefeaturesInput | string[]
+  metadata?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   images?: Prisma.ImageUpdateManyWithoutSchemeNestedInput
@@ -891,9 +929,10 @@ export type SchemeUncheckedUpdateWithoutRoomTypeInput = {
   id?: Prisma.IntFieldUpdateOperationsInput | number
   name?: Prisma.StringFieldUpdateOperationsInput | string
   description?: Prisma.StringFieldUpdateOperationsInput | string
-  price?: Prisma.IntFieldUpdateOperationsInput | number
-  isAvailable?: Prisma.BoolFieldUpdateOperationsInput | boolean
-  roomTypeNameSlug?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  stripePriceId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  active?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  features?: Prisma.SchemeUpdatefeaturesInput | string[]
+  metadata?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   images?: Prisma.ImageUncheckedUpdateManyWithoutSchemeNestedInput
@@ -905,9 +944,10 @@ export type SchemeUncheckedUpdateManyWithoutRoomTypeInput = {
   id?: Prisma.IntFieldUpdateOperationsInput | number
   name?: Prisma.StringFieldUpdateOperationsInput | string
   description?: Prisma.StringFieldUpdateOperationsInput | string
-  price?: Prisma.IntFieldUpdateOperationsInput | number
-  isAvailable?: Prisma.BoolFieldUpdateOperationsInput | boolean
-  roomTypeNameSlug?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  stripePriceId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  active?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  features?: Prisma.SchemeUpdatefeaturesInput | string[]
+  metadata?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
 }
@@ -965,10 +1005,11 @@ export type SchemeSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs =
   id?: boolean
   name?: boolean
   description?: boolean
-  price?: boolean
-  isAvailable?: boolean
+  stripePriceId?: boolean
+  active?: boolean
   roomTypeName?: boolean
-  roomTypeNameSlug?: boolean
+  features?: boolean
+  metadata?: boolean
   createdAt?: boolean
   updatedAt?: boolean
   images?: boolean | Prisma.Scheme$imagesArgs<ExtArgs>
@@ -982,10 +1023,11 @@ export type SchemeSelectCreateManyAndReturn<ExtArgs extends runtime.Types.Extens
   id?: boolean
   name?: boolean
   description?: boolean
-  price?: boolean
-  isAvailable?: boolean
+  stripePriceId?: boolean
+  active?: boolean
   roomTypeName?: boolean
-  roomTypeNameSlug?: boolean
+  features?: boolean
+  metadata?: boolean
   createdAt?: boolean
   updatedAt?: boolean
   roomType?: boolean | Prisma.Scheme$roomTypeArgs<ExtArgs>
@@ -995,10 +1037,11 @@ export type SchemeSelectUpdateManyAndReturn<ExtArgs extends runtime.Types.Extens
   id?: boolean
   name?: boolean
   description?: boolean
-  price?: boolean
-  isAvailable?: boolean
+  stripePriceId?: boolean
+  active?: boolean
   roomTypeName?: boolean
-  roomTypeNameSlug?: boolean
+  features?: boolean
+  metadata?: boolean
   createdAt?: boolean
   updatedAt?: boolean
   roomType?: boolean | Prisma.Scheme$roomTypeArgs<ExtArgs>
@@ -1008,15 +1051,16 @@ export type SchemeSelectScalar = {
   id?: boolean
   name?: boolean
   description?: boolean
-  price?: boolean
-  isAvailable?: boolean
+  stripePriceId?: boolean
+  active?: boolean
   roomTypeName?: boolean
-  roomTypeNameSlug?: boolean
+  features?: boolean
+  metadata?: boolean
   createdAt?: boolean
   updatedAt?: boolean
 }
 
-export type SchemeOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "name" | "description" | "price" | "isAvailable" | "roomTypeName" | "roomTypeNameSlug" | "createdAt" | "updatedAt", ExtArgs["result"]["scheme"]>
+export type SchemeOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "name" | "description" | "stripePriceId" | "active" | "roomTypeName" | "features" | "metadata" | "createdAt" | "updatedAt", ExtArgs["result"]["scheme"]>
 export type SchemeInclude<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   images?: boolean | Prisma.Scheme$imagesArgs<ExtArgs>
   orders?: boolean | Prisma.Scheme$ordersArgs<ExtArgs>
@@ -1043,10 +1087,11 @@ export type $SchemePayload<ExtArgs extends runtime.Types.Extensions.InternalArgs
     id: number
     name: string
     description: string
-    price: number
-    isAvailable: boolean
+    stripePriceId: string | null
+    active: boolean
     roomTypeName: string | null
-    roomTypeNameSlug: string | null
+    features: string[]
+    metadata: runtime.JsonValue | null
     createdAt: Date
     updatedAt: Date
   }, ExtArgs["result"]["scheme"]>
@@ -1479,10 +1524,11 @@ export interface SchemeFieldRefs {
   readonly id: Prisma.FieldRef<"Scheme", 'Int'>
   readonly name: Prisma.FieldRef<"Scheme", 'String'>
   readonly description: Prisma.FieldRef<"Scheme", 'String'>
-  readonly price: Prisma.FieldRef<"Scheme", 'Int'>
-  readonly isAvailable: Prisma.FieldRef<"Scheme", 'Boolean'>
+  readonly stripePriceId: Prisma.FieldRef<"Scheme", 'String'>
+  readonly active: Prisma.FieldRef<"Scheme", 'Boolean'>
   readonly roomTypeName: Prisma.FieldRef<"Scheme", 'String'>
-  readonly roomTypeNameSlug: Prisma.FieldRef<"Scheme", 'String'>
+  readonly features: Prisma.FieldRef<"Scheme", 'String[]'>
+  readonly metadata: Prisma.FieldRef<"Scheme", 'Json'>
   readonly createdAt: Prisma.FieldRef<"Scheme", 'DateTime'>
   readonly updatedAt: Prisma.FieldRef<"Scheme", 'DateTime'>
 }
