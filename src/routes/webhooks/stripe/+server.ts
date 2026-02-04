@@ -18,22 +18,21 @@ export const POST: RequestHandler = async ({ request }) => {
 			case 'product.updated': {
 				console.log(event.type);
 				console.log(event.data.object);
+				break;
 			}
 			case 'product.deleted': {
 				console.log(event.type);
 				console.log(event.data.object);
+				break;
 			}
 			// Price Events
 			case 'price.created':
 			case 'price.updated': {
 				console.log(event.type);
 				console.log(event.data.object);
+				break;
 			}
 			case 'price.deleted': {
-				console.log(event.type);
-				console.log(event.data.object);
-			}
-			case 'payment_intent.succeeded': {
 				console.log(event.type);
 				console.log(event.data.object);
 				break;

@@ -56,12 +56,13 @@
 				enhance={() => {
 					addingToBasket = true;
 					overlay.overlayContent = ShoppingBasket;
-					overlay.isOpen = true;
+
 					// @ts-ignore
 					return async ({ update }) => {
 						await update();
 						await invalidateAll();
 						addingToBasket = false;
+						overlay.isOpen = true;
 					};
 				}}
 				buttonLabel={addingToBasket ? 'Adding' : 'Add to basket'}

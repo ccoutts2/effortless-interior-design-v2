@@ -6,7 +6,7 @@
 </script>
 
 {#if context?.data}
-	<ul class="flex flex-col">
+	<ul class="flex flex-col-reverse">
 		{#each context.data as item}
 			<li>
 				<article>

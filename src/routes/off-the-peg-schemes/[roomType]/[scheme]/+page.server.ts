@@ -16,7 +16,7 @@ const fetchScheme = async (id: number) => {
 		where: { id },
 		include: {
 			images: {
-				orderBy: { schemeIndex: 'asc' }
+				orderBy: { schemeIndex: 'desc' }
 			},
 			roomType: true
 		}
@@ -101,9 +101,24 @@ export const actions = {
 				}
 			});
 
+			const schemesInBasket = await prisma.schemesInBasket.findMany({
+				where: { basketId: basket.id },
+				orderBy: {
+					createdAt: 'asc'
+				},
+				include: {
+					scheme: {
+						include: {
+							images: true,
+							roomType: true
+						}
+					}
+				}
+			});
+
 			return {
 				status: 200,
-				body: { message: 'Item added to basket successfully.' }
+				body: { message: 'Item added to basket successfully.', schemesInBasket }
 			};
 		} catch (error) {
 			console.log(error);

@@ -21,6 +21,14 @@
 
 	setContext('overlay-ctx', overlayState);
 
+	// Keep overlay context in sync with layout data so components (e.g. ShoppingBasket)
+	// that read `context.data` update when `load` re-runs (for example after
+	// `invalidateAll()` from an enhanced form). Previously this was a one-time
+	// snapshot which required a full page refresh to reflect changes.
+	$effect(() => {
+		overlayState.data = data.schemesInBasket ?? null;
+	});
+
 	let isActive: boolean = $state(false);
 
 	function onMouseEnter() {
