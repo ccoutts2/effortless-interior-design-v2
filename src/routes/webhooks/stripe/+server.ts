@@ -1,6 +1,7 @@
 import { SECRET_STRIPE_WEBHOOK } from '$env/static/private';
 import { stripe } from '$lib/server/stripe/stripe';
 import { json, type RequestHandler } from '@sveltejs/kit';
+import { upsertProduct } from './handlers';
 
 export const POST: RequestHandler = async ({ request }) => {
 	const signature = request.headers.get('stripe-signature');
@@ -16,8 +17,7 @@ export const POST: RequestHandler = async ({ request }) => {
 			// Product Events
 			case 'product.created':
 			case 'product.updated': {
-				console.log(event.type);
-				console.log(event.data.object);
+				await upsertProduct(event.data.object);
 				break;
 			}
 			case 'product.deleted': {

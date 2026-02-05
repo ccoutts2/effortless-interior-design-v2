@@ -7,6 +7,7 @@ const mapStripeProductToDbProduct = ({
 	name,
 	active,
 	description,
+	images,
 	marketing_features: features,
 	metadata,
 	created,
@@ -16,14 +17,19 @@ const mapStripeProductToDbProduct = ({
 	name,
 	active,
 	description,
+	images,
 	features: features.map(({ name }) => name || '').filter((name) => !!name) as string[],
 	metadata,
-	created: new Date(created),
-	updated: new Date(updated)
+	roomTypeName: metadata.roomType || null,
+	created: new Date(created * 1000),
+	updated: new Date(updated * 1000)
 });
 
 export const upsertProduct = async (product: Stripe.Product) => {
 	const dbProduct = mapStripeProductToDbProduct(product);
+	const roomTypeConnection = dbProduct.roomTypeName
+		? { connect: { name: dbProduct.roomTypeName } }
+		: undefined;
 
 	try {
 		await prisma.scheme.upsert({
@@ -33,7 +39,9 @@ export const upsertProduct = async (product: Stripe.Product) => {
 				active: dbProduct.active,
 				description: dbProduct.description,
 				features: dbProduct.features,
+				images: dbProduct.images,
 				metadata: dbProduct.metadata as any,
+				roomType: roomTypeConnection,
 				updatedAt: dbProduct.updated
 			},
 			create: {
@@ -43,6 +51,7 @@ export const upsertProduct = async (product: Stripe.Product) => {
 				description: dbProduct.description,
 				features: dbProduct.features,
 				metadata: dbProduct.metadata as any,
+				roomType: roomTypeConnection,
 				createdAt: dbProduct.created,
 				updatedAt: dbProduct.updated
 			}
@@ -52,6 +61,6 @@ export const upsertProduct = async (product: Stripe.Product) => {
 	}
 };
 
-const mapStripePriceToDbPrice = ({ id }: Stripe.Product) => {};
+const mapStripePriceToDbPrice = ({ id }: Stripe.Price) => {};
 
 export const upsertPrice = async (price: Stripe.Price) => {};

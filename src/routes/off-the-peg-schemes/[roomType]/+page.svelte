@@ -4,8 +4,9 @@
 	import Button from '$lib/components/buttons/Button.svelte';
 	import ClipImage from '$lib/components/ClipImage.svelte';
 	import PageHeader from '$lib/components/PageHeader.svelte';
+	import type { Product } from '$lib/types';
 
-	let { data }: { data: PageData } = $props();
+	let { data }: { data: { schemes: Product[] } } = $props();
 
 	let isPageReady: boolean = $state(false);
 
@@ -25,8 +26,13 @@
 			{#each data.schemes as scheme}
 				<li class="RoomTypeName__item">
 					<div class="RoomTypeName__imageWrapper">
-						{#if scheme.images.length > 0}
-							<ClipImage isComponentReady={isPageReady} src={scheme.images[0].url} description="" />
+						{#if scheme.images}
+							<ClipImage
+								isComponentReady={isPageReady}
+								src={scheme.images[0]}
+								description={scheme.metadata?.altDescription ??
+									`This is the layout for ${scheme.roomTypeName}`}
+							/>
 						{/if}
 					</div>
 
@@ -34,10 +40,8 @@
 
 					<p>{scheme.description}</p>
 
-					<a href="/off-the-peg-schemes/{scheme.roomType?.slug}/{scheme.id}"
-						><Button data-content="Visit">Visit</Button><span class="visually-hidden"
-							>Link to {scheme.name} page</span
-						></a
+					<a href="/off-the-peg-schemes/{scheme.roomType?.slug}/{scheme.id}" class="btn"
+						>Visit<span class="visually-hidden">the {scheme.name} page</span></a
 					>
 				</li>
 			{/each}

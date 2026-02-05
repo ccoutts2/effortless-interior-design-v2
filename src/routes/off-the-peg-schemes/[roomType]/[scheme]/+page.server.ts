@@ -2,6 +2,7 @@ import prisma from '$lib/server/prisma';
 import { redirect, type Actions } from '@sveltejs/kit';
 import type { PageServerLoad } from './$types';
 import { StripeService } from '$lib/services/stripe.service';
+import type { Product } from '$lib/types';
 
 interface SchemeProps {
 	cookies: any;

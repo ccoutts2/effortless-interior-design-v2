@@ -2,7 +2,7 @@
 	import { getContext, onMount } from 'svelte';
 	import ClipImage from '$lib/components/ClipImage.svelte';
 	import ShoppingBasket from '$lib/components/ShoppingBasket.svelte';
-	import type { OverlayProps } from '$lib/types';
+	import type { OverlayProps, Product } from '$lib/types';
 	import type { PageData } from './$types';
 	import AddBasketForm from '$lib/components/form/AddBasketForm.svelte';
 	import { invalidateAll } from '$app/navigation';
@@ -89,7 +89,7 @@
 						<h4>{product.name}</h4>
 						<span>£100</span>
 						<div>
-							<img src={product.images[0]} alt="{product.name} image" />
+							<img src={product.images[0]} alt={`${product.name} design scheme.`} />
 						</div>
 
 						<a href="/off-the-peg-schemes/{product.roomType?.slug}/{product.id}"

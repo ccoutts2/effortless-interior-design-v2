@@ -11,8 +11,8 @@
 			<li>
 				<article>
 					<h3>{item.scheme.name}</h3>
-					{#if item.scheme.images?.length > 0}
-						<div><img src={item.scheme.images[0].url} alt="" /></div>
+					{#if item.scheme.images[0]}
+						<div><img src={item.scheme.images[0]} alt="" /></div>
 					{/if}
 				</article>
 			</li>

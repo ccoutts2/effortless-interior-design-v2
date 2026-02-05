@@ -63,4 +63,18 @@
 		cursor: pointer;
 		outline: inherit;
 	}
+
+	.btn {
+		align-items: center;
+		display: flex;
+		background-color: #f6f1eb;
+		border: 1px solid #403a34;
+		color: #403a34;
+		flex: 1;
+		justify-content: center;
+		max-width: fit-content;
+		min-width: 5rem;
+		padding: 0.5rem;
+		text-transform: uppercase;
+	}
 }
