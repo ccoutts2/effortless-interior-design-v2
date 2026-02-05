@@ -5,7 +5,6 @@ export async function resetDatabase() {
 
 	await prisma.roomType.deleteMany({});
 	await prisma.scheme.deleteMany({});
-	await prisma.image.deleteMany({});
 
 	console.log('Database is reset');
 }

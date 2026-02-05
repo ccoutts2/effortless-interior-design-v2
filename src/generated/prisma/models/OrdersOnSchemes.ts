@@ -26,24 +26,22 @@ export type AggregateOrdersOnSchemes = {
 }
 
 export type OrdersOnSchemesAvgAggregateOutputType = {
-  schemeId: number | null
   orderId: number | null
 }
 
 export type OrdersOnSchemesSumAggregateOutputType = {
-  schemeId: number | null
   orderId: number | null
 }
 
 export type OrdersOnSchemesMinAggregateOutputType = {
-  schemeId: number | null
+  schemeId: string | null
   orderId: number | null
   createdAt: Date | null
   updatedAt: Date | null
 }
 
 export type OrdersOnSchemesMaxAggregateOutputType = {
-  schemeId: number | null
+  schemeId: string | null
   orderId: number | null
   createdAt: Date | null
   updatedAt: Date | null
@@ -59,12 +57,10 @@ export type OrdersOnSchemesCountAggregateOutputType = {
 
 
 export type OrdersOnSchemesAvgAggregateInputType = {
-  schemeId?: true
   orderId?: true
 }
 
 export type OrdersOnSchemesSumAggregateInputType = {
-  schemeId?: true
   orderId?: true
 }
 
@@ -177,7 +173,7 @@ export type OrdersOnSchemesGroupByArgs<ExtArgs extends runtime.Types.Extensions.
 }
 
 export type OrdersOnSchemesGroupByOutputType = {
-  schemeId: number
+  schemeId: string
   orderId: number
   createdAt: Date
   updatedAt: Date
@@ -207,7 +203,7 @@ export type OrdersOnSchemesWhereInput = {
   AND?: Prisma.OrdersOnSchemesWhereInput | Prisma.OrdersOnSchemesWhereInput[]
   OR?: Prisma.OrdersOnSchemesWhereInput[]
   NOT?: Prisma.OrdersOnSchemesWhereInput | Prisma.OrdersOnSchemesWhereInput[]
-  schemeId?: Prisma.IntFilter<"OrdersOnSchemes"> | number
+  schemeId?: Prisma.StringFilter<"OrdersOnSchemes"> | string
   orderId?: Prisma.IntFilter<"OrdersOnSchemes"> | number
   createdAt?: Prisma.DateTimeFilter<"OrdersOnSchemes"> | Date | string
   updatedAt?: Prisma.DateTimeFilter<"OrdersOnSchemes"> | Date | string
@@ -229,7 +225,7 @@ export type OrdersOnSchemesWhereUniqueInput = Prisma.AtLeast<{
   AND?: Prisma.OrdersOnSchemesWhereInput | Prisma.OrdersOnSchemesWhereInput[]
   OR?: Prisma.OrdersOnSchemesWhereInput[]
   NOT?: Prisma.OrdersOnSchemesWhereInput | Prisma.OrdersOnSchemesWhereInput[]
-  schemeId?: Prisma.IntFilter<"OrdersOnSchemes"> | number
+  schemeId?: Prisma.StringFilter<"OrdersOnSchemes"> | string
   orderId?: Prisma.IntFilter<"OrdersOnSchemes"> | number
   createdAt?: Prisma.DateTimeFilter<"OrdersOnSchemes"> | Date | string
   updatedAt?: Prisma.DateTimeFilter<"OrdersOnSchemes"> | Date | string
@@ -253,7 +249,7 @@ export type OrdersOnSchemesScalarWhereWithAggregatesInput = {
   AND?: Prisma.OrdersOnSchemesScalarWhereWithAggregatesInput | Prisma.OrdersOnSchemesScalarWhereWithAggregatesInput[]
   OR?: Prisma.OrdersOnSchemesScalarWhereWithAggregatesInput[]
   NOT?: Prisma.OrdersOnSchemesScalarWhereWithAggregatesInput | Prisma.OrdersOnSchemesScalarWhereWithAggregatesInput[]
-  schemeId?: Prisma.IntWithAggregatesFilter<"OrdersOnSchemes"> | number
+  schemeId?: Prisma.StringWithAggregatesFilter<"OrdersOnSchemes"> | string
   orderId?: Prisma.IntWithAggregatesFilter<"OrdersOnSchemes"> | number
   createdAt?: Prisma.DateTimeWithAggregatesFilter<"OrdersOnSchemes"> | Date | string
   updatedAt?: Prisma.DateTimeWithAggregatesFilter<"OrdersOnSchemes"> | Date | string
@@ -267,7 +263,7 @@ export type OrdersOnSchemesCreateInput = {
 }
 
 export type OrdersOnSchemesUncheckedCreateInput = {
-  schemeId: number
+  schemeId: string
   orderId: number
   createdAt?: Date | string
   updatedAt?: Date | string
@@ -281,14 +277,14 @@ export type OrdersOnSchemesUpdateInput = {
 }
 
 export type OrdersOnSchemesUncheckedUpdateInput = {
-  schemeId?: Prisma.IntFieldUpdateOperationsInput | number
+  schemeId?: Prisma.StringFieldUpdateOperationsInput | string
   orderId?: Prisma.IntFieldUpdateOperationsInput | number
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
 }
 
 export type OrdersOnSchemesCreateManyInput = {
-  schemeId: number
+  schemeId: string
   orderId: number
   createdAt?: Date | string
   updatedAt?: Date | string
@@ -300,7 +296,7 @@ export type OrdersOnSchemesUpdateManyMutationInput = {
 }
 
 export type OrdersOnSchemesUncheckedUpdateManyInput = {
-  schemeId?: Prisma.IntFieldUpdateOperationsInput | number
+  schemeId?: Prisma.StringFieldUpdateOperationsInput | string
   orderId?: Prisma.IntFieldUpdateOperationsInput | number
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -317,7 +313,7 @@ export type OrdersOnSchemesOrderByRelationAggregateInput = {
 }
 
 export type OrdersOnSchemesSchemeIdOrderIdCompoundUniqueInput = {
-  schemeId: number
+  schemeId: string
   orderId: number
 }
 
@@ -329,7 +325,6 @@ export type OrdersOnSchemesCountOrderByAggregateInput = {
 }
 
 export type OrdersOnSchemesAvgOrderByAggregateInput = {
-  schemeId?: Prisma.SortOrder
   orderId?: Prisma.SortOrder
 }
 
@@ -348,7 +343,6 @@ export type OrdersOnSchemesMinOrderByAggregateInput = {
 }
 
 export type OrdersOnSchemesSumOrderByAggregateInput = {
-  schemeId?: Prisma.SortOrder
   orderId?: Prisma.SortOrder
 }
 
@@ -478,7 +472,7 @@ export type OrdersOnSchemesScalarWhereInput = {
   AND?: Prisma.OrdersOnSchemesScalarWhereInput | Prisma.OrdersOnSchemesScalarWhereInput[]
   OR?: Prisma.OrdersOnSchemesScalarWhereInput[]
   NOT?: Prisma.OrdersOnSchemesScalarWhereInput | Prisma.OrdersOnSchemesScalarWhereInput[]
-  schemeId?: Prisma.IntFilter<"OrdersOnSchemes"> | number
+  schemeId?: Prisma.StringFilter<"OrdersOnSchemes"> | string
   orderId?: Prisma.IntFilter<"OrdersOnSchemes"> | number
   createdAt?: Prisma.DateTimeFilter<"OrdersOnSchemes"> | Date | string
   updatedAt?: Prisma.DateTimeFilter<"OrdersOnSchemes"> | Date | string
@@ -491,7 +485,7 @@ export type OrdersOnSchemesCreateWithoutOrderInput = {
 }
 
 export type OrdersOnSchemesUncheckedCreateWithoutOrderInput = {
-  schemeId: number
+  schemeId: string
   createdAt?: Date | string
   updatedAt?: Date | string
 }
@@ -547,7 +541,7 @@ export type OrdersOnSchemesUncheckedUpdateManyWithoutSchemeInput = {
 }
 
 export type OrdersOnSchemesCreateManyOrderInput = {
-  schemeId: number
+  schemeId: string
   createdAt?: Date | string
   updatedAt?: Date | string
 }
@@ -559,13 +553,13 @@ export type OrdersOnSchemesUpdateWithoutOrderInput = {
 }
 
 export type OrdersOnSchemesUncheckedUpdateWithoutOrderInput = {
-  schemeId?: Prisma.IntFieldUpdateOperationsInput | number
+  schemeId?: Prisma.StringFieldUpdateOperationsInput | string
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
 }
 
 export type OrdersOnSchemesUncheckedUpdateManyWithoutOrderInput = {
-  schemeId?: Prisma.IntFieldUpdateOperationsInput | number
+  schemeId?: Prisma.StringFieldUpdateOperationsInput | string
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
 }
@@ -627,7 +621,7 @@ export type $OrdersOnSchemesPayload<ExtArgs extends runtime.Types.Extensions.Int
     scheme: Prisma.$SchemePayload<ExtArgs>
   }
   scalars: runtime.Types.Extensions.GetPayloadResult<{
-    schemeId: number
+    schemeId: string
     orderId: number
     createdAt: Date
     updatedAt: Date
@@ -1056,7 +1050,7 @@ export interface Prisma__OrdersOnSchemesClient<T, Null = never, ExtArgs extends 
  * Fields of the OrdersOnSchemes model
  */
 export interface OrdersOnSchemesFieldRefs {
-  readonly schemeId: Prisma.FieldRef<"OrdersOnSchemes", 'Int'>
+  readonly schemeId: Prisma.FieldRef<"OrdersOnSchemes", 'String'>
   readonly orderId: Prisma.FieldRef<"OrdersOnSchemes", 'Int'>
   readonly createdAt: Prisma.FieldRef<"OrdersOnSchemes", 'DateTime'>
   readonly updatedAt: Prisma.FieldRef<"OrdersOnSchemes", 'DateTime'>

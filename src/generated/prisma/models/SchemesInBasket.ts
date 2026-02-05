@@ -26,24 +26,22 @@ export type AggregateSchemesInBasket = {
 }
 
 export type SchemesInBasketAvgAggregateOutputType = {
-  schemeId: number | null
   basketId: number | null
 }
 
 export type SchemesInBasketSumAggregateOutputType = {
-  schemeId: number | null
   basketId: number | null
 }
 
 export type SchemesInBasketMinAggregateOutputType = {
-  schemeId: number | null
+  schemeId: string | null
   basketId: number | null
   createdAt: Date | null
   updatedAt: Date | null
 }
 
 export type SchemesInBasketMaxAggregateOutputType = {
-  schemeId: number | null
+  schemeId: string | null
   basketId: number | null
   createdAt: Date | null
   updatedAt: Date | null
@@ -59,12 +57,10 @@ export type SchemesInBasketCountAggregateOutputType = {
 
 
 export type SchemesInBasketAvgAggregateInputType = {
-  schemeId?: true
   basketId?: true
 }
 
 export type SchemesInBasketSumAggregateInputType = {
-  schemeId?: true
   basketId?: true
 }
 
@@ -177,7 +173,7 @@ export type SchemesInBasketGroupByArgs<ExtArgs extends runtime.Types.Extensions.
 }
 
 export type SchemesInBasketGroupByOutputType = {
-  schemeId: number
+  schemeId: string
   basketId: number
   createdAt: Date
   updatedAt: Date
@@ -207,7 +203,7 @@ export type SchemesInBasketWhereInput = {
   AND?: Prisma.SchemesInBasketWhereInput | Prisma.SchemesInBasketWhereInput[]
   OR?: Prisma.SchemesInBasketWhereInput[]
   NOT?: Prisma.SchemesInBasketWhereInput | Prisma.SchemesInBasketWhereInput[]
-  schemeId?: Prisma.IntFilter<"SchemesInBasket"> | number
+  schemeId?: Prisma.StringFilter<"SchemesInBasket"> | string
   basketId?: Prisma.IntFilter<"SchemesInBasket"> | number
   createdAt?: Prisma.DateTimeFilter<"SchemesInBasket"> | Date | string
   updatedAt?: Prisma.DateTimeFilter<"SchemesInBasket"> | Date | string
@@ -229,7 +225,7 @@ export type SchemesInBasketWhereUniqueInput = Prisma.AtLeast<{
   AND?: Prisma.SchemesInBasketWhereInput | Prisma.SchemesInBasketWhereInput[]
   OR?: Prisma.SchemesInBasketWhereInput[]
   NOT?: Prisma.SchemesInBasketWhereInput | Prisma.SchemesInBasketWhereInput[]
-  schemeId?: Prisma.IntFilter<"SchemesInBasket"> | number
+  schemeId?: Prisma.StringFilter<"SchemesInBasket"> | string
   basketId?: Prisma.IntFilter<"SchemesInBasket"> | number
   createdAt?: Prisma.DateTimeFilter<"SchemesInBasket"> | Date | string
   updatedAt?: Prisma.DateTimeFilter<"SchemesInBasket"> | Date | string
@@ -253,7 +249,7 @@ export type SchemesInBasketScalarWhereWithAggregatesInput = {
   AND?: Prisma.SchemesInBasketScalarWhereWithAggregatesInput | Prisma.SchemesInBasketScalarWhereWithAggregatesInput[]
   OR?: Prisma.SchemesInBasketScalarWhereWithAggregatesInput[]
   NOT?: Prisma.SchemesInBasketScalarWhereWithAggregatesInput | Prisma.SchemesInBasketScalarWhereWithAggregatesInput[]
-  schemeId?: Prisma.IntWithAggregatesFilter<"SchemesInBasket"> | number
+  schemeId?: Prisma.StringWithAggregatesFilter<"SchemesInBasket"> | string
   basketId?: Prisma.IntWithAggregatesFilter<"SchemesInBasket"> | number
   createdAt?: Prisma.DateTimeWithAggregatesFilter<"SchemesInBasket"> | Date | string
   updatedAt?: Prisma.DateTimeWithAggregatesFilter<"SchemesInBasket"> | Date | string
@@ -267,7 +263,7 @@ export type SchemesInBasketCreateInput = {
 }
 
 export type SchemesInBasketUncheckedCreateInput = {
-  schemeId: number
+  schemeId: string
   basketId: number
   createdAt?: Date | string
   updatedAt?: Date | string
@@ -281,14 +277,14 @@ export type SchemesInBasketUpdateInput = {
 }
 
 export type SchemesInBasketUncheckedUpdateInput = {
-  schemeId?: Prisma.IntFieldUpdateOperationsInput | number
+  schemeId?: Prisma.StringFieldUpdateOperationsInput | string
   basketId?: Prisma.IntFieldUpdateOperationsInput | number
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
 }
 
 export type SchemesInBasketCreateManyInput = {
-  schemeId: number
+  schemeId: string
   basketId: number
   createdAt?: Date | string
   updatedAt?: Date | string
@@ -300,7 +296,7 @@ export type SchemesInBasketUpdateManyMutationInput = {
 }
 
 export type SchemesInBasketUncheckedUpdateManyInput = {
-  schemeId?: Prisma.IntFieldUpdateOperationsInput | number
+  schemeId?: Prisma.StringFieldUpdateOperationsInput | string
   basketId?: Prisma.IntFieldUpdateOperationsInput | number
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -317,7 +313,7 @@ export type SchemesInBasketOrderByRelationAggregateInput = {
 }
 
 export type SchemesInBasketSchemeIdBasketIdCompoundUniqueInput = {
-  schemeId: number
+  schemeId: string
   basketId: number
 }
 
@@ -329,7 +325,6 @@ export type SchemesInBasketCountOrderByAggregateInput = {
 }
 
 export type SchemesInBasketAvgOrderByAggregateInput = {
-  schemeId?: Prisma.SortOrder
   basketId?: Prisma.SortOrder
 }
 
@@ -348,7 +343,6 @@ export type SchemesInBasketMinOrderByAggregateInput = {
 }
 
 export type SchemesInBasketSumOrderByAggregateInput = {
-  schemeId?: Prisma.SortOrder
   basketId?: Prisma.SortOrder
 }
 
@@ -478,7 +472,7 @@ export type SchemesInBasketScalarWhereInput = {
   AND?: Prisma.SchemesInBasketScalarWhereInput | Prisma.SchemesInBasketScalarWhereInput[]
   OR?: Prisma.SchemesInBasketScalarWhereInput[]
   NOT?: Prisma.SchemesInBasketScalarWhereInput | Prisma.SchemesInBasketScalarWhereInput[]
-  schemeId?: Prisma.IntFilter<"SchemesInBasket"> | number
+  schemeId?: Prisma.StringFilter<"SchemesInBasket"> | string
   basketId?: Prisma.IntFilter<"SchemesInBasket"> | number
   createdAt?: Prisma.DateTimeFilter<"SchemesInBasket"> | Date | string
   updatedAt?: Prisma.DateTimeFilter<"SchemesInBasket"> | Date | string
@@ -491,7 +485,7 @@ export type SchemesInBasketCreateWithoutBasketInput = {
 }
 
 export type SchemesInBasketUncheckedCreateWithoutBasketInput = {
-  schemeId: number
+  schemeId: string
   createdAt?: Date | string
   updatedAt?: Date | string
 }
@@ -547,7 +541,7 @@ export type SchemesInBasketUncheckedUpdateManyWithoutSchemeInput = {
 }
 
 export type SchemesInBasketCreateManyBasketInput = {
-  schemeId: number
+  schemeId: string
   createdAt?: Date | string
   updatedAt?: Date | string
 }
@@ -559,13 +553,13 @@ export type SchemesInBasketUpdateWithoutBasketInput = {
 }
 
 export type SchemesInBasketUncheckedUpdateWithoutBasketInput = {
-  schemeId?: Prisma.IntFieldUpdateOperationsInput | number
+  schemeId?: Prisma.StringFieldUpdateOperationsInput | string
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
 }
 
 export type SchemesInBasketUncheckedUpdateManyWithoutBasketInput = {
-  schemeId?: Prisma.IntFieldUpdateOperationsInput | number
+  schemeId?: Prisma.StringFieldUpdateOperationsInput | string
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
 }
@@ -627,7 +621,7 @@ export type $SchemesInBasketPayload<ExtArgs extends runtime.Types.Extensions.Int
     basket: Prisma.$BasketPayload<ExtArgs>
   }
   scalars: runtime.Types.Extensions.GetPayloadResult<{
-    schemeId: number
+    schemeId: string
     basketId: number
     createdAt: Date
     updatedAt: Date
@@ -1056,7 +1050,7 @@ export interface Prisma__SchemesInBasketClient<T, Null = never, ExtArgs extends 
  * Fields of the SchemesInBasket model
  */
 export interface SchemesInBasketFieldRefs {
-  readonly schemeId: Prisma.FieldRef<"SchemesInBasket", 'Int'>
+  readonly schemeId: Prisma.FieldRef<"SchemesInBasket", 'String'>
   readonly basketId: Prisma.FieldRef<"SchemesInBasket", 'Int'>
   readonly createdAt: Prisma.FieldRef<"SchemesInBasket", 'DateTime'>
   readonly updatedAt: Prisma.FieldRef<"SchemesInBasket", 'DateTime'>

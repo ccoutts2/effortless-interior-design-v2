@@ -390,7 +390,6 @@ type FieldRefInputType<Model, FieldType> = Model extends never ? never : FieldRe
 
 export const ModelName = {
   Scheme: 'Scheme',
-  Image: 'Image',
   RoomType: 'RoomType',
   User: 'User',
   Order: 'Order',
@@ -413,7 +412,7 @@ export type TypeMap<ExtArgs extends runtime.Types.Extensions.InternalArgs = runt
     omit: GlobalOmitOptions
   }
   meta: {
-    modelProps: "scheme" | "image" | "roomType" | "user" | "order" | "ordersOnSchemes" | "basket" | "schemesInBasket" | "session"
+    modelProps: "scheme" | "roomType" | "user" | "order" | "ordersOnSchemes" | "basket" | "schemesInBasket" | "session"
     txIsolationLevel: TransactionIsolationLevel
   }
   model: {
@@ -488,80 +487,6 @@ export type TypeMap<ExtArgs extends runtime.Types.Extensions.InternalArgs = runt
         count: {
           args: Prisma.SchemeCountArgs<ExtArgs>
           result: runtime.Types.Utils.Optional<Prisma.SchemeCountAggregateOutputType> | number
-        }
-      }
-    }
-    Image: {
-      payload: Prisma.$ImagePayload<ExtArgs>
-      fields: Prisma.ImageFieldRefs
-      operations: {
-        findUnique: {
-          args: Prisma.ImageFindUniqueArgs<ExtArgs>
-          result: runtime.Types.Utils.PayloadToResult<Prisma.$ImagePayload> | null
-        }
-        findUniqueOrThrow: {
-          args: Prisma.ImageFindUniqueOrThrowArgs<ExtArgs>
-          result: runtime.Types.Utils.PayloadToResult<Prisma.$ImagePayload>
-        }
-        findFirst: {
-          args: Prisma.ImageFindFirstArgs<ExtArgs>
-          result: runtime.Types.Utils.PayloadToResult<Prisma.$ImagePayload> | null
-        }
-        findFirstOrThrow: {
-          args: Prisma.ImageFindFirstOrThrowArgs<ExtArgs>
-          result: runtime.Types.Utils.PayloadToResult<Prisma.$ImagePayload>
-        }
-        findMany: {
-          args: Prisma.ImageFindManyArgs<ExtArgs>
-          result: runtime.Types.Utils.PayloadToResult<Prisma.$ImagePayload>[]
-        }
-        create: {
-          args: Prisma.ImageCreateArgs<ExtArgs>
-          result: runtime.Types.Utils.PayloadToResult<Prisma.$ImagePayload>
-        }
-        createMany: {
-          args: Prisma.ImageCreateManyArgs<ExtArgs>
-          result: BatchPayload
-        }
-        createManyAndReturn: {
-          args: Prisma.ImageCreateManyAndReturnArgs<ExtArgs>
-          result: runtime.Types.Utils.PayloadToResult<Prisma.$ImagePayload>[]
-        }
-        delete: {
-          args: Prisma.ImageDeleteArgs<ExtArgs>
-          result: runtime.Types.Utils.PayloadToResult<Prisma.$ImagePayload>
-        }
-        update: {
-          args: Prisma.ImageUpdateArgs<ExtArgs>
-          result: runtime.Types.Utils.PayloadToResult<Prisma.$ImagePayload>
-        }
-        deleteMany: {
-          args: Prisma.ImageDeleteManyArgs<ExtArgs>
-          result: BatchPayload
-        }
-        updateMany: {
-          args: Prisma.ImageUpdateManyArgs<ExtArgs>
-          result: BatchPayload
-        }
-        updateManyAndReturn: {
-          args: Prisma.ImageUpdateManyAndReturnArgs<ExtArgs>
-          result: runtime.Types.Utils.PayloadToResult<Prisma.$ImagePayload>[]
-        }
-        upsert: {
-          args: Prisma.ImageUpsertArgs<ExtArgs>
-          result: runtime.Types.Utils.PayloadToResult<Prisma.$ImagePayload>
-        }
-        aggregate: {
-          args: Prisma.ImageAggregateArgs<ExtArgs>
-          result: runtime.Types.Utils.Optional<Prisma.AggregateImage>
-        }
-        groupBy: {
-          args: Prisma.ImageGroupByArgs<ExtArgs>
-          result: runtime.Types.Utils.Optional<Prisma.ImageGroupByOutputType>[]
-        }
-        count: {
-          args: Prisma.ImageCountArgs<ExtArgs>
-          result: runtime.Types.Utils.Optional<Prisma.ImageCountAggregateOutputType> | number
         }
       }
     }
@@ -1126,29 +1051,16 @@ export const SchemeScalarFieldEnum = {
   id: 'id',
   name: 'name',
   description: 'description',
-  stripePriceId: 'stripePriceId',
   active: 'active',
-  roomTypeName: 'roomTypeName',
   features: 'features',
+  images: 'images',
   metadata: 'metadata',
   createdAt: 'createdAt',
-  updatedAt: 'updatedAt'
+  updatedAt: 'updatedAt',
+  roomTypeName: 'roomTypeName'
 } as const
 
 export type SchemeScalarFieldEnum = (typeof SchemeScalarFieldEnum)[keyof typeof SchemeScalarFieldEnum]
-
-
-export const ImageScalarFieldEnum = {
-  id: 'id',
-  url: 'url',
-  schemeId: 'schemeId',
-  schemeIndex: 'schemeIndex',
-  roomTypeName: 'roomTypeName',
-  createdAt: 'createdAt',
-  updatedAt: 'updatedAt'
-} as const
-
-export type ImageScalarFieldEnum = (typeof ImageScalarFieldEnum)[keyof typeof ImageScalarFieldEnum]
 
 
 export const RoomTypeScalarFieldEnum = {
@@ -1276,20 +1188,6 @@ export type NullsOrder = (typeof NullsOrder)[keyof typeof NullsOrder]
 
 
 /**
- * Reference to a field of type 'Int'
- */
-export type IntFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'Int'>
-    
-
-
-/**
- * Reference to a field of type 'Int[]'
- */
-export type ListIntFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'Int[]'>
-    
-
-
-/**
  * Reference to a field of type 'String'
  */
 export type StringFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'String'>
@@ -1335,6 +1233,20 @@ export type DateTimeFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel
  * Reference to a field of type 'DateTime[]'
  */
 export type ListDateTimeFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'DateTime[]'>
+    
+
+
+/**
+ * Reference to a field of type 'Int'
+ */
+export type IntFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'Int'>
+    
+
+
+/**
+ * Reference to a field of type 'Int[]'
+ */
+export type ListIntFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'Int[]'>
     
 
 
@@ -1453,7 +1365,6 @@ export interface PrismaClientOptions {
 }
 export type GlobalOmitConfig = {
   scheme?: Prisma.SchemeOmit
-  image?: Prisma.ImageOmit
   roomType?: Prisma.RoomTypeOmit
   user?: Prisma.UserOmit
   order?: Prisma.OrderOmit

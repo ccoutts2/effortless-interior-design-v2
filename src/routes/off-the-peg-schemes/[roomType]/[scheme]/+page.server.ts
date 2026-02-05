@@ -11,13 +11,10 @@ interface SchemeProps {
 	};
 }
 
-const fetchScheme = async (id: number) => {
+const fetchScheme = async (id: string) => {
 	const scheme = await prisma.scheme.findUniqueOrThrow({
 		where: { id },
 		include: {
-			images: {
-				orderBy: { schemeIndex: 'desc' }
-			},
 			roomType: true
 		}
 	});
@@ -30,9 +27,6 @@ const fetchAllSchemes = async () => {
 			active: true
 		},
 		include: {
-			images: {
-				orderBy: { schemeIndex: 'asc' }
-			},
 			roomType: true
 		}
 	});
@@ -41,7 +35,7 @@ const fetchAllSchemes = async () => {
 };
 
 export const load: PageServerLoad = async ({ params }: SchemeProps) => {
-	const scheme = await fetchScheme(Number(params.scheme));
+	const scheme = await fetchScheme(params.scheme);
 	const allSchemes = await fetchAllSchemes();
 
 	return {
@@ -56,9 +50,9 @@ export const load: PageServerLoad = async ({ params }: SchemeProps) => {
 export const actions = {
 	addToBasket: async ({ request, cookies }) => {
 		const form = await request.formData();
-		const schemeId = form.get('schemeId');
+		const schemeId = form.get('schemeId') as string;
 
-		if (!schemeId || isNaN(Number(schemeId))) {
+		if (!schemeId) {
 			return { status: 400, body: { message: 'Invalid schemeId' } };
 		}
 
@@ -89,7 +83,7 @@ export const actions = {
 			});
 
 			const schemeInBasketId = {
-				schemeId: Number(schemeId),
+				schemeId: schemeId,
 				basketId: basket.id
 			};
 			await prisma.schemesInBasket.upsert({
@@ -97,7 +91,7 @@ export const actions = {
 				update: {},
 				create: {
 					basketId: basket.id,
-					schemeId: Number(schemeId)
+					schemeId: schemeId
 				}
 			});
 
@@ -109,7 +103,6 @@ export const actions = {
 				include: {
 					scheme: {
 						include: {
-							images: true,
 							roomType: true
 						}
 					}

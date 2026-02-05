@@ -9,32 +9,22 @@ datasource db {
 }
 
 model Scheme {
-  id               Int               @id @default(autoincrement())
+  id               String            @id
   name             String
-  description      String
-  stripePriceId    String?
+  description      String?
   active           Boolean           @default(false)
-  roomTypeName     String?
   features         String[]
+  images           String[]
   metadata         Json?
+
   createdAt        DateTime          @default(now())
   updatedAt        DateTime          @updatedAt
-  images           Image[]
+
+  roomTypeName     String?
+  roomType         RoomType?         @relation(fields: [roomTypeName], references: [name], onDelete: Cascade)
+
   orders           OrdersOnSchemes[]
   baskets          SchemesInBasket[]
-  roomType         RoomType?         @relation(fields: [roomTypeName], references: [name], onDelete: Cascade)
-}
-
-model Image {
-  id           Int       @id @default(autoincrement())
-  url          String
-  schemeId     Int
-  schemeIndex  Int
-  roomTypeName String?
-  createdAt    DateTime  @default(now())
-  updatedAt    DateTime  @updatedAt
-  roomType     RoomType? @relation(fields: [roomTypeName], references: [name], onDelete: Cascade)
-  scheme       Scheme    @relation(fields: [schemeId], references: [id], onDelete: Cascade)
 }
 
 model RoomType {
@@ -42,7 +32,6 @@ model RoomType {
   slug      String   @unique
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
-  images    Image[]
   schemes   Scheme[]
 }
 
@@ -71,7 +60,7 @@ model Order {
 }
 
 model OrdersOnSchemes {
-  schemeId  Int
+  schemeId  String
   orderId   Int
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
@@ -91,7 +80,7 @@ model Basket {
 }
 
 model SchemesInBasket {
-  schemeId  Int
+  schemeId  String
   basketId  Int
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt

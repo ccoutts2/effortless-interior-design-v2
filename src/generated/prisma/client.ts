@@ -49,11 +49,6 @@ path.join(process.cwd(), "src/generated/prisma/libquery_engine-darwin-arm64.dyli
  */
 export type Scheme = Prisma.SchemeModel
 /**
- * Model Image
- * 
- */
-export type Image = Prisma.ImageModel
-/**
  * Model RoomType
  * 
  */

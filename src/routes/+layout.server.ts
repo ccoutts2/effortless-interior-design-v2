@@ -28,7 +28,6 @@ const fetchSchemesInBasket = async (sessionId: string) => {
 		include: {
 			scheme: {
 				include: {
-					images: true,
 					roomType: true
 				}
 			}

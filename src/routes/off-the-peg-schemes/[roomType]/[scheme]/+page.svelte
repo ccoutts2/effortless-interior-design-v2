@@ -45,9 +45,9 @@
 				<span>{scheme.roomTypeName}</span>
 				<h1>{scheme.name}</h1>
 				<div class="Product__price">
-					<span class="Product__oldPrice">£{scheme.stripePriceId}</span><span
-						><strong>£{discountedPrice(Number(scheme.stripePriceId), 0.3)}</strong></span
-					>
+					<span class="Product__oldPrice">£100</span>
+					<!-- TODO: show discount price -->
+					<span><strong>£70</strong></span>
 				</div>
 				<p>{scheme.description}</p>
 			</div>
@@ -76,7 +76,7 @@
 		</article>
 		<div class="overflow-hidden">
 			{#if scheme.images.length > 0}
-				<ClipImage isComponentReady={isPageReady} src={scheme.images[0].url} description="" />
+				<ClipImage isComponentReady={isPageReady} src={scheme.images[0]} description="" />
 			{/if}
 		</div>
 	</section>
@@ -87,9 +87,9 @@
 				<li>
 					<article class="RelatedScheme">
 						<h4>{product.name}</h4>
-						<span>£{product.stripePriceId}</span>
+						<span>£100</span>
 						<div>
-							<img src={product.images[0].url} alt="{product.name} image" />
+							<img src={product.images[0]} alt="{product.name} image" />
 						</div>
 
 						<a href="/off-the-peg-schemes/{product.roomType?.slug}/{product.id}"
@@ -109,12 +109,13 @@
 					<article class="RelatedScheme">
 						<div>
 							<h4>{product.name}</h4>
-							<span class="block">£{product.stripePriceId}</span>
+							<!-- TOTO: PRICE FOR SCHEME -->
+							<span class="block">£100</span>
 							<span class="text-sm">{product.roomTypeName}</span>
 						</div>
 
 						<div>
-							<img src={product.images[0].url} alt="{product.name} image" />
+							<img src={product.images[0]} alt="{product.name} image" />
 						</div>
 						<a href="/off-the-peg-schemes/{product.roomType?.slug}/{product.id}"
 							><span class="visually-hidden">View {product.name}'s page</span></a

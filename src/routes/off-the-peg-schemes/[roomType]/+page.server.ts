@@ -19,9 +19,6 @@ const fetchSchemes = async (roomTypeSlug: string) => {
 			active: true
 		},
 		include: {
-			images: {
-				orderBy: { schemeIndex: 'asc' }
-			},
 			roomType: true
 		}
 	});

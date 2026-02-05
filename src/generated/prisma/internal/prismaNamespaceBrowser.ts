@@ -20,7 +20,6 @@ export type * from './prismaNamespace'
 export const Decimal = runtime.Decimal
 export const ModelName = {
   Scheme: 'Scheme',
-  Image: 'Image',
   RoomType: 'RoomType',
   User: 'User',
   Order: 'Order',
@@ -49,29 +48,16 @@ export const SchemeScalarFieldEnum = {
   id: 'id',
   name: 'name',
   description: 'description',
-  stripePriceId: 'stripePriceId',
   active: 'active',
-  roomTypeName: 'roomTypeName',
   features: 'features',
+  images: 'images',
   metadata: 'metadata',
   createdAt: 'createdAt',
-  updatedAt: 'updatedAt'
+  updatedAt: 'updatedAt',
+  roomTypeName: 'roomTypeName'
 } as const
 
 export type SchemeScalarFieldEnum = (typeof SchemeScalarFieldEnum)[keyof typeof SchemeScalarFieldEnum]
-
-
-export const ImageScalarFieldEnum = {
-  id: 'id',
-  url: 'url',
-  schemeId: 'schemeId',
-  schemeIndex: 'schemeIndex',
-  roomTypeName: 'roomTypeName',
-  createdAt: 'createdAt',
-  updatedAt: 'updatedAt'
-} as const
-
-export type ImageScalarFieldEnum = (typeof ImageScalarFieldEnum)[keyof typeof ImageScalarFieldEnum]
 
 
 export const RoomTypeScalarFieldEnum = {

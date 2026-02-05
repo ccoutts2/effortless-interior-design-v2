@@ -22,11 +22,6 @@ export * from './enums';
  */
 export type Scheme = Prisma.SchemeModel
 /**
- * Model Image
- * 
- */
-export type Image = Prisma.ImageModel
-/**
  * Model RoomType
  * 
  */

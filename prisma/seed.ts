@@ -1,6 +1,6 @@
 import { PrismaClient } from '../src/generated/prisma/client';
 
-import { roomType, images, schemes } from './generators';
+import { roomType, schemes } from './generators';
 import { roomTypeNames } from './generators/roomType';
 import { resetDatabase } from './generators/resetDatabase';
 
@@ -38,24 +38,12 @@ async function createSchemes() {
 	console.log('Finished creating schemes');
 }
 
-async function createImages() {
-	console.log('Creating images');
-	for (const scheme of schemeArray) {
-		const imageGenerator = images(scheme);
-		await prisma.image.create({
-			data: imageGenerator
-		});
-	}
-	console.log('Finished creating images');
-}
-
 const main = async () => {
 	console.log('\nCurrent environment is: ');
 	await resetDatabase();
 
 	await createRoomTypes();
 	await createSchemes();
-	await createImages();
 };
 
 main()
