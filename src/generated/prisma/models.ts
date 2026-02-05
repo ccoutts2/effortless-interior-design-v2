@@ -8,6 +8,7 @@
  * 🟢 You can import this file directly.
  */
 export type * from './models/Scheme'
+export type * from './models/SchemePrice'
 export type * from './models/RoomType'
 export type * from './models/User'
 export type * from './models/Order'

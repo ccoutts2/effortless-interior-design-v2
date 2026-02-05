@@ -22,6 +22,11 @@ export * from './enums';
  */
 export type Scheme = Prisma.SchemeModel
 /**
+ * Model SchemePrice
+ * 
+ */
+export type SchemePrice = Prisma.SchemePriceModel
+/**
  * Model RoomType
  * 
  */

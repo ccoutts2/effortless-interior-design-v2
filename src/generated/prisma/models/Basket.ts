@@ -35,23 +35,23 @@ export type BasketSumAggregateOutputType = {
 
 export type BasketMinAggregateOutputType = {
   id: number | null
-  sessionId: string | null
   createdAt: Date | null
   updatedAt: Date | null
+  sessionId: string | null
 }
 
 export type BasketMaxAggregateOutputType = {
   id: number | null
-  sessionId: string | null
   createdAt: Date | null
   updatedAt: Date | null
+  sessionId: string | null
 }
 
 export type BasketCountAggregateOutputType = {
   id: number
-  sessionId: number
   createdAt: number
   updatedAt: number
+  sessionId: number
   _all: number
 }
 
@@ -66,23 +66,23 @@ export type BasketSumAggregateInputType = {
 
 export type BasketMinAggregateInputType = {
   id?: true
-  sessionId?: true
   createdAt?: true
   updatedAt?: true
+  sessionId?: true
 }
 
 export type BasketMaxAggregateInputType = {
   id?: true
-  sessionId?: true
   createdAt?: true
   updatedAt?: true
+  sessionId?: true
 }
 
 export type BasketCountAggregateInputType = {
   id?: true
-  sessionId?: true
   createdAt?: true
   updatedAt?: true
+  sessionId?: true
   _all?: true
 }
 
@@ -174,9 +174,9 @@ export type BasketGroupByArgs<ExtArgs extends runtime.Types.Extensions.InternalA
 
 export type BasketGroupByOutputType = {
   id: number
-  sessionId: string | null
   createdAt: Date
   updatedAt: Date
+  sessionId: string | null
   _count: BasketCountAggregateOutputType | null
   _avg: BasketAvgAggregateOutputType | null
   _sum: BasketSumAggregateOutputType | null
@@ -204,18 +204,18 @@ export type BasketWhereInput = {
   OR?: Prisma.BasketWhereInput[]
   NOT?: Prisma.BasketWhereInput | Prisma.BasketWhereInput[]
   id?: Prisma.IntFilter<"Basket"> | number
-  sessionId?: Prisma.StringNullableFilter<"Basket"> | string | null
   createdAt?: Prisma.DateTimeFilter<"Basket"> | Date | string
   updatedAt?: Prisma.DateTimeFilter<"Basket"> | Date | string
+  sessionId?: Prisma.StringNullableFilter<"Basket"> | string | null
   session?: Prisma.XOR<Prisma.SessionNullableScalarRelationFilter, Prisma.SessionWhereInput> | null
   schemes?: Prisma.SchemesInBasketListRelationFilter
 }
 
 export type BasketOrderByWithRelationInput = {
   id?: Prisma.SortOrder
-  sessionId?: Prisma.SortOrderInput | Prisma.SortOrder
   createdAt?: Prisma.SortOrder
   updatedAt?: Prisma.SortOrder
+  sessionId?: Prisma.SortOrderInput | Prisma.SortOrder
   session?: Prisma.SessionOrderByWithRelationInput
   schemes?: Prisma.SchemesInBasketOrderByRelationAggregateInput
 }
@@ -234,9 +234,9 @@ export type BasketWhereUniqueInput = Prisma.AtLeast<{
 
 export type BasketOrderByWithAggregationInput = {
   id?: Prisma.SortOrder
-  sessionId?: Prisma.SortOrderInput | Prisma.SortOrder
   createdAt?: Prisma.SortOrder
   updatedAt?: Prisma.SortOrder
+  sessionId?: Prisma.SortOrderInput | Prisma.SortOrder
   _count?: Prisma.BasketCountOrderByAggregateInput
   _avg?: Prisma.BasketAvgOrderByAggregateInput
   _max?: Prisma.BasketMaxOrderByAggregateInput
@@ -249,9 +249,9 @@ export type BasketScalarWhereWithAggregatesInput = {
   OR?: Prisma.BasketScalarWhereWithAggregatesInput[]
   NOT?: Prisma.BasketScalarWhereWithAggregatesInput | Prisma.BasketScalarWhereWithAggregatesInput[]
   id?: Prisma.IntWithAggregatesFilter<"Basket"> | number
-  sessionId?: Prisma.StringNullableWithAggregatesFilter<"Basket"> | string | null
   createdAt?: Prisma.DateTimeWithAggregatesFilter<"Basket"> | Date | string
   updatedAt?: Prisma.DateTimeWithAggregatesFilter<"Basket"> | Date | string
+  sessionId?: Prisma.StringNullableWithAggregatesFilter<"Basket"> | string | null
 }
 
 export type BasketCreateInput = {
@@ -263,9 +263,9 @@ export type BasketCreateInput = {
 
 export type BasketUncheckedCreateInput = {
   id?: number
-  sessionId?: string | null
   createdAt?: Date | string
   updatedAt?: Date | string
+  sessionId?: string | null
   schemes?: Prisma.SchemesInBasketUncheckedCreateNestedManyWithoutBasketInput
 }
 
@@ -278,17 +278,17 @@ export type BasketUpdateInput = {
 
 export type BasketUncheckedUpdateInput = {
   id?: Prisma.IntFieldUpdateOperationsInput | number
-  sessionId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  sessionId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   schemes?: Prisma.SchemesInBasketUncheckedUpdateManyWithoutBasketNestedInput
 }
 
 export type BasketCreateManyInput = {
   id?: number
-  sessionId?: string | null
   createdAt?: Date | string
   updatedAt?: Date | string
+  sessionId?: string | null
 }
 
 export type BasketUpdateManyMutationInput = {
@@ -298,16 +298,16 @@ export type BasketUpdateManyMutationInput = {
 
 export type BasketUncheckedUpdateManyInput = {
   id?: Prisma.IntFieldUpdateOperationsInput | number
-  sessionId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  sessionId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
 }
 
 export type BasketCountOrderByAggregateInput = {
   id?: Prisma.SortOrder
-  sessionId?: Prisma.SortOrder
   createdAt?: Prisma.SortOrder
   updatedAt?: Prisma.SortOrder
+  sessionId?: Prisma.SortOrder
 }
 
 export type BasketAvgOrderByAggregateInput = {
@@ -316,16 +316,16 @@ export type BasketAvgOrderByAggregateInput = {
 
 export type BasketMaxOrderByAggregateInput = {
   id?: Prisma.SortOrder
-  sessionId?: Prisma.SortOrder
   createdAt?: Prisma.SortOrder
   updatedAt?: Prisma.SortOrder
+  sessionId?: Prisma.SortOrder
 }
 
 export type BasketMinOrderByAggregateInput = {
   id?: Prisma.SortOrder
-  sessionId?: Prisma.SortOrder
   createdAt?: Prisma.SortOrder
   updatedAt?: Prisma.SortOrder
+  sessionId?: Prisma.SortOrder
 }
 
 export type BasketSumOrderByAggregateInput = {
@@ -396,9 +396,9 @@ export type BasketCreateWithoutSchemesInput = {
 
 export type BasketUncheckedCreateWithoutSchemesInput = {
   id?: number
-  sessionId?: string | null
   createdAt?: Date | string
   updatedAt?: Date | string
+  sessionId?: string | null
 }
 
 export type BasketCreateOrConnectWithoutSchemesInput = {
@@ -425,9 +425,9 @@ export type BasketUpdateWithoutSchemesInput = {
 
 export type BasketUncheckedUpdateWithoutSchemesInput = {
   id?: Prisma.IntFieldUpdateOperationsInput | number
-  sessionId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  sessionId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
 }
 
 export type BasketCreateWithoutSessionInput = {
@@ -505,9 +505,9 @@ export type BasketCountOutputTypeCountSchemesArgs<ExtArgs extends runtime.Types.
 
 export type BasketSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetSelect<{
   id?: boolean
-  sessionId?: boolean
   createdAt?: boolean
   updatedAt?: boolean
+  sessionId?: boolean
   session?: boolean | Prisma.Basket$sessionArgs<ExtArgs>
   schemes?: boolean | Prisma.Basket$schemesArgs<ExtArgs>
   _count?: boolean | Prisma.BasketCountOutputTypeDefaultArgs<ExtArgs>
@@ -515,28 +515,28 @@ export type BasketSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs =
 
 export type BasketSelectCreateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetSelect<{
   id?: boolean
-  sessionId?: boolean
   createdAt?: boolean
   updatedAt?: boolean
+  sessionId?: boolean
   session?: boolean | Prisma.Basket$sessionArgs<ExtArgs>
 }, ExtArgs["result"]["basket"]>
 
 export type BasketSelectUpdateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetSelect<{
   id?: boolean
-  sessionId?: boolean
   createdAt?: boolean
   updatedAt?: boolean
+  sessionId?: boolean
   session?: boolean | Prisma.Basket$sessionArgs<ExtArgs>
 }, ExtArgs["result"]["basket"]>
 
 export type BasketSelectScalar = {
   id?: boolean
-  sessionId?: boolean
   createdAt?: boolean
   updatedAt?: boolean
+  sessionId?: boolean
 }
 
-export type BasketOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "sessionId" | "createdAt" | "updatedAt", ExtArgs["result"]["basket"]>
+export type BasketOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "createdAt" | "updatedAt" | "sessionId", ExtArgs["result"]["basket"]>
 export type BasketInclude<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   session?: boolean | Prisma.Basket$sessionArgs<ExtArgs>
   schemes?: boolean | Prisma.Basket$schemesArgs<ExtArgs>
@@ -557,9 +557,9 @@ export type $BasketPayload<ExtArgs extends runtime.Types.Extensions.InternalArgs
   }
   scalars: runtime.Types.Extensions.GetPayloadResult<{
     id: number
-    sessionId: string | null
     createdAt: Date
     updatedAt: Date
+    sessionId: string | null
   }, ExtArgs["result"]["basket"]>
   composites: {}
 }
@@ -986,9 +986,9 @@ export interface Prisma__BasketClient<T, Null = never, ExtArgs extends runtime.T
  */
 export interface BasketFieldRefs {
   readonly id: Prisma.FieldRef<"Basket", 'Int'>
-  readonly sessionId: Prisma.FieldRef<"Basket", 'String'>
   readonly createdAt: Prisma.FieldRef<"Basket", 'DateTime'>
   readonly updatedAt: Prisma.FieldRef<"Basket", 'DateTime'>
+  readonly sessionId: Prisma.FieldRef<"Basket", 'String'>
 }
     
 

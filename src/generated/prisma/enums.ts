@@ -8,7 +8,9 @@
 * 🟢 You can import this file directly.
 */
 
+export const PaymentType = {
+  one_time: 'one_time',
+  recurring: 'recurring'
+} as const
 
-
-// This file is empty because there are no enums in the schema.
-export {}
+export type PaymentType = (typeof PaymentType)[keyof typeof PaymentType]

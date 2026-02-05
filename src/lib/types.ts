@@ -1,4 +1,5 @@
 import type { Component } from 'svelte';
+import type { PaymentType } from '../generated/prisma/enums';
 
 export interface OverlayProps {
 	isOpen: boolean;
@@ -25,7 +26,15 @@ export type Product = {
 	updated: Date;
 };
 
-export type Price = {};
+export type Price = {
+	id: string;
+	schemeId: string;
+	active: boolean;
+	currency: string;
+	unitAmount: number | null;
+	type: PaymentType;
+	created: Date;
+};
 
 export type ProductMetaData = {
 	altDescription?: string;

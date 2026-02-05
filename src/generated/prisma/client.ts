@@ -49,6 +49,11 @@ path.join(process.cwd(), "src/generated/prisma/libquery_engine-darwin-arm64.dyli
  */
 export type Scheme = Prisma.SchemeModel
 /**
+ * Model SchemePrice
+ * 
+ */
+export type SchemePrice = Prisma.SchemePriceModel
+/**
  * Model RoomType
  * 
  */

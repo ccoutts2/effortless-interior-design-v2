@@ -9,83 +9,112 @@ datasource db {
 }
 
 model Scheme {
-  id               String            @id
-  name             String
-  description      String?
-  active           Boolean           @default(false)
-  features         String[]
-  images           String[]
-  metadata         Json?
+  id          String   @id
+  name        String
+  description String?
+  active      Boolean  @default(false)
+  features    String[]
+  images      String[]
+  metadata    Json?
 
-  createdAt        DateTime          @default(now())
-  updatedAt        DateTime          @updatedAt
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
 
-  roomTypeName     String?
-  roomType         RoomType?         @relation(fields: [roomTypeName], references: [name], onDelete: Cascade)
+  roomTypeName String?
+  roomType     RoomType? @relation(fields: [roomTypeName], references: [name], onDelete: Cascade)
 
-  orders           OrdersOnSchemes[]
-  baskets          SchemesInBasket[]
+  orders  OrdersOnSchemes[]
+  baskets SchemesInBasket[]
+  prices  SchemePrice[]
+}
+
+model SchemePrice {
+  id         String       @id
+  active     Boolean      @default(false)
+  currency   String
+  type       PaymentType?
+  unitAmount Int       @default(0)
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  schemeId String
+  scheme   Scheme @relation(fields: [schemeId], references: [id], onDelete: Cascade)
 }
 
 model RoomType {
-  name      String   @id
-  slug      String   @unique
+  name String @id
+  slug String @unique
+
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
-  schemes   Scheme[]
+
+  schemes Scheme[]
 }
 
 model User {
-  id            Int      @id @default(autoincrement())
-  email         String   @unique
+  id            Int     @id @default(autoincrement())
+  email         String  @unique
   name          String?
   password      String?
-  isActive      Boolean  @default(false)
-  newsletterSub Boolean  @default(false)
-  isAdmin       Boolean  @default(false)
-  orders        Order[]
-  createdAt     DateTime @default(now())
-  updatedAt     DateTime @updatedAt
+  isActive      Boolean @default(false)
+  newsletterSub Boolean @default(false)
+  isAdmin       Boolean @default(false)
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  orders Order[]
 }
 
 model Order {
-  id               Int               @id @default(autoincrement())
+  id               Int     @id @default(autoincrement())
   totalPrice       Int
-  schemes          OrdersOnSchemes[]
-  userId           Int
-  user             User?             @relation(fields: [userId], references: [id], onDelete: Cascade)
-  withConsultation Boolean           @default(false)
-  createdAt        DateTime          @default(now())
-  updatedAt        DateTime          @updatedAt
+  withConsultation Boolean @default(false)
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  userId Int
+  user   User? @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  schemes OrdersOnSchemes[]
 }
 
 model OrdersOnSchemes {
-  schemeId  String
-  orderId   Int
+  schemeId String
+  orderId  Int
+
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
-  order     Order    @relation(fields: [orderId], references: [id])
-  scheme    Scheme   @relation(fields: [schemeId], references: [id])
+
+  order  Order  @relation(fields: [orderId], references: [id])
+  scheme Scheme @relation(fields: [schemeId], references: [id])
 
   @@id([schemeId, orderId])
 }
 
 model Basket {
-  id        Int               @id @default(autoincrement())
-  sessionId String?           @unique
-  session   Session?          @relation(fields: [sessionId], references: [id])
-  createdAt DateTime          @default(now())
-  updatedAt DateTime          @updatedAt
-  schemes   SchemesInBasket[]
+  id Int @id @default(autoincrement())
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  sessionId String?  @unique
+  session   Session? @relation(fields: [sessionId], references: [id])
+
+  schemes SchemesInBasket[]
 }
 
 model SchemesInBasket {
-  schemeId  String
-  basketId  Int
+  schemeId String
+  basketId Int
+
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
-  scheme    Scheme   @relation(fields: [schemeId], references: [id])
-  basket    Basket   @relation(fields: [basketId], references: [id])
+
+  scheme Scheme @relation(fields: [schemeId], references: [id])
+  basket Basket @relation(fields: [basketId], references: [id])
 
   @@id([schemeId, basketId])
 }
@@ -94,6 +123,13 @@ model Session {
   id             String   @id
   secretHash     Bytes
   lastVerifiedAt DateTime
-  createdAt      DateTime
-  basket         Basket?
+
+  createdAt DateTime
+
+  basket Basket?
+}
+
+enum PaymentType {
+  one_time
+  recurring
 }

@@ -390,6 +390,7 @@ type FieldRefInputType<Model, FieldType> = Model extends never ? never : FieldRe
 
 export const ModelName = {
   Scheme: 'Scheme',
+  SchemePrice: 'SchemePrice',
   RoomType: 'RoomType',
   User: 'User',
   Order: 'Order',
@@ -412,7 +413,7 @@ export type TypeMap<ExtArgs extends runtime.Types.Extensions.InternalArgs = runt
     omit: GlobalOmitOptions
   }
   meta: {
-    modelProps: "scheme" | "roomType" | "user" | "order" | "ordersOnSchemes" | "basket" | "schemesInBasket" | "session"
+    modelProps: "scheme" | "schemePrice" | "roomType" | "user" | "order" | "ordersOnSchemes" | "basket" | "schemesInBasket" | "session"
     txIsolationLevel: TransactionIsolationLevel
   }
   model: {
@@ -487,6 +488,80 @@ export type TypeMap<ExtArgs extends runtime.Types.Extensions.InternalArgs = runt
         count: {
           args: Prisma.SchemeCountArgs<ExtArgs>
           result: runtime.Types.Utils.Optional<Prisma.SchemeCountAggregateOutputType> | number
+        }
+      }
+    }
+    SchemePrice: {
+      payload: Prisma.$SchemePricePayload<ExtArgs>
+      fields: Prisma.SchemePriceFieldRefs
+      operations: {
+        findUnique: {
+          args: Prisma.SchemePriceFindUniqueArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$SchemePricePayload> | null
+        }
+        findUniqueOrThrow: {
+          args: Prisma.SchemePriceFindUniqueOrThrowArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$SchemePricePayload>
+        }
+        findFirst: {
+          args: Prisma.SchemePriceFindFirstArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$SchemePricePayload> | null
+        }
+        findFirstOrThrow: {
+          args: Prisma.SchemePriceFindFirstOrThrowArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$SchemePricePayload>
+        }
+        findMany: {
+          args: Prisma.SchemePriceFindManyArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$SchemePricePayload>[]
+        }
+        create: {
+          args: Prisma.SchemePriceCreateArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$SchemePricePayload>
+        }
+        createMany: {
+          args: Prisma.SchemePriceCreateManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        createManyAndReturn: {
+          args: Prisma.SchemePriceCreateManyAndReturnArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$SchemePricePayload>[]
+        }
+        delete: {
+          args: Prisma.SchemePriceDeleteArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$SchemePricePayload>
+        }
+        update: {
+          args: Prisma.SchemePriceUpdateArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$SchemePricePayload>
+        }
+        deleteMany: {
+          args: Prisma.SchemePriceDeleteManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        updateMany: {
+          args: Prisma.SchemePriceUpdateManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        updateManyAndReturn: {
+          args: Prisma.SchemePriceUpdateManyAndReturnArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$SchemePricePayload>[]
+        }
+        upsert: {
+          args: Prisma.SchemePriceUpsertArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$SchemePricePayload>
+        }
+        aggregate: {
+          args: Prisma.SchemePriceAggregateArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.AggregateSchemePrice>
+        }
+        groupBy: {
+          args: Prisma.SchemePriceGroupByArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.SchemePriceGroupByOutputType>[]
+        }
+        count: {
+          args: Prisma.SchemePriceCountArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.SchemePriceCountAggregateOutputType> | number
         }
       }
     }
@@ -1063,6 +1138,20 @@ export const SchemeScalarFieldEnum = {
 export type SchemeScalarFieldEnum = (typeof SchemeScalarFieldEnum)[keyof typeof SchemeScalarFieldEnum]
 
 
+export const SchemePriceScalarFieldEnum = {
+  id: 'id',
+  active: 'active',
+  currency: 'currency',
+  type: 'type',
+  unitAmount: 'unitAmount',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt',
+  schemeId: 'schemeId'
+} as const
+
+export type SchemePriceScalarFieldEnum = (typeof SchemePriceScalarFieldEnum)[keyof typeof SchemePriceScalarFieldEnum]
+
+
 export const RoomTypeScalarFieldEnum = {
   name: 'name',
   slug: 'slug',
@@ -1091,10 +1180,10 @@ export type UserScalarFieldEnum = (typeof UserScalarFieldEnum)[keyof typeof User
 export const OrderScalarFieldEnum = {
   id: 'id',
   totalPrice: 'totalPrice',
-  userId: 'userId',
   withConsultation: 'withConsultation',
   createdAt: 'createdAt',
-  updatedAt: 'updatedAt'
+  updatedAt: 'updatedAt',
+  userId: 'userId'
 } as const
 
 export type OrderScalarFieldEnum = (typeof OrderScalarFieldEnum)[keyof typeof OrderScalarFieldEnum]
@@ -1112,9 +1201,9 @@ export type OrdersOnSchemesScalarFieldEnum = (typeof OrdersOnSchemesScalarFieldE
 
 export const BasketScalarFieldEnum = {
   id: 'id',
-  sessionId: 'sessionId',
   createdAt: 'createdAt',
-  updatedAt: 'updatedAt'
+  updatedAt: 'updatedAt',
+  sessionId: 'sessionId'
 } as const
 
 export type BasketScalarFieldEnum = (typeof BasketScalarFieldEnum)[keyof typeof BasketScalarFieldEnum]
@@ -1233,6 +1322,20 @@ export type DateTimeFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel
  * Reference to a field of type 'DateTime[]'
  */
 export type ListDateTimeFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'DateTime[]'>
+    
+
+
+/**
+ * Reference to a field of type 'PaymentType'
+ */
+export type EnumPaymentTypeFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'PaymentType'>
+    
+
+
+/**
+ * Reference to a field of type 'PaymentType[]'
+ */
+export type ListEnumPaymentTypeFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'PaymentType[]'>
     
 
 
@@ -1365,6 +1468,7 @@ export interface PrismaClientOptions {
 }
 export type GlobalOmitConfig = {
   scheme?: Prisma.SchemeOmit
+  schemePrice?: Prisma.SchemePriceOmit
   roomType?: Prisma.RoomTypeOmit
   user?: Prisma.UserOmit
   order?: Prisma.OrderOmit

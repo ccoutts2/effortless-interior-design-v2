@@ -20,6 +20,7 @@ export type * from './prismaNamespace'
 export const Decimal = runtime.Decimal
 export const ModelName = {
   Scheme: 'Scheme',
+  SchemePrice: 'SchemePrice',
   RoomType: 'RoomType',
   User: 'User',
   Order: 'Order',
@@ -60,6 +61,20 @@ export const SchemeScalarFieldEnum = {
 export type SchemeScalarFieldEnum = (typeof SchemeScalarFieldEnum)[keyof typeof SchemeScalarFieldEnum]
 
 
+export const SchemePriceScalarFieldEnum = {
+  id: 'id',
+  active: 'active',
+  currency: 'currency',
+  type: 'type',
+  unitAmount: 'unitAmount',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt',
+  schemeId: 'schemeId'
+} as const
+
+export type SchemePriceScalarFieldEnum = (typeof SchemePriceScalarFieldEnum)[keyof typeof SchemePriceScalarFieldEnum]
+
+
 export const RoomTypeScalarFieldEnum = {
   name: 'name',
   slug: 'slug',
@@ -88,10 +103,10 @@ export type UserScalarFieldEnum = (typeof UserScalarFieldEnum)[keyof typeof User
 export const OrderScalarFieldEnum = {
   id: 'id',
   totalPrice: 'totalPrice',
-  userId: 'userId',
   withConsultation: 'withConsultation',
   createdAt: 'createdAt',
-  updatedAt: 'updatedAt'
+  updatedAt: 'updatedAt',
+  userId: 'userId'
 } as const
 
 export type OrderScalarFieldEnum = (typeof OrderScalarFieldEnum)[keyof typeof OrderScalarFieldEnum]
@@ -109,9 +124,9 @@ export type OrdersOnSchemesScalarFieldEnum = (typeof OrdersOnSchemesScalarFieldE
 
 export const BasketScalarFieldEnum = {
   id: 'id',
-  sessionId: 'sessionId',
   createdAt: 'createdAt',
-  updatedAt: 'updatedAt'
+  updatedAt: 'updatedAt',
+  sessionId: 'sessionId'
 } as const
 
 export type BasketScalarFieldEnum = (typeof BasketScalarFieldEnum)[keyof typeof BasketScalarFieldEnum]
