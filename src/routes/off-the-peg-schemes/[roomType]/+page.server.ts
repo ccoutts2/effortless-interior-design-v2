@@ -18,8 +18,17 @@ const fetchSchemes = async (roomTypeSlug: string) => {
 			},
 			active: true
 		},
-		include: {
-			roomType: true
+		select: {
+			id: true,
+			name: true,
+			description: true,
+			images: true,
+			roomType: {
+				select: {
+					name: true,
+					slug: true
+				}
+			}
 		}
 	});
 	return schemes;

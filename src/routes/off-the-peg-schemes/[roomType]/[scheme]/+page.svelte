@@ -1,11 +1,14 @@
 <script lang="ts">
 	import { getContext, onMount } from 'svelte';
+	import { invalidateAll } from '$app/navigation';
+	import AddBasketForm from '$lib/components/form/AddBasketForm.svelte';
 	import ClipImage from '$lib/components/ClipImage.svelte';
 	import ShoppingBasket from '$lib/components/ShoppingBasket.svelte';
-	import type { OverlayProps, Product } from '$lib/types';
+	import type { OverlayProps } from '$lib/types';
 	import type { PageData } from './$types';
-	import AddBasketForm from '$lib/components/form/AddBasketForm.svelte';
-	import { invalidateAll } from '$app/navigation';
+	import Price from '$lib/components/Price.svelte';
+	import SchemeWrapper from '$lib/components/SchemeWrapper.svelte';
+	import SchemeInfoWrapper from '$lib/components/SchemeInfoWrapper.svelte';
 
 	interface SchemeProps {
 		data: PageData;
@@ -17,10 +20,6 @@
 
 	let isPageReady: boolean = $state(false);
 
-	onMount(() => {
-		isPageReady = true;
-	});
-
 	// Retreive specific product
 	const scheme = $derived(data.scheme);
 
@@ -30,138 +29,142 @@
 	// Retreive all available schemes
 	const allAvailableSchemes = $derived(data.allSchemes);
 
-	// TODO: This is a temporary measure - need to figure out how to incoporate into database
-	const discountedPrice = (price: number, discount: number) => {
-		return price * (1 - discount);
-	};
-
 	let addingToBasket: boolean = $state(false);
+
+	onMount(() => {
+		isPageReady = true;
+	});
 </script>
 
 <main class="Scheme">
-	<section class="Scheme__product Product">
-		<article class="Product__information">
-			<div>
-				<span>{scheme.roomTypeName}</span>
-				<h1>{scheme.name}</h1>
-				<div class="Product__price">
-					<span class="Product__oldPrice">£100</span>
-					<!-- TODO: show discount price -->
-					<span><strong>£70</strong></span>
-				</div>
-				<p>{scheme.description}</p>
+	{#if scheme}
+		<SchemeWrapper>
+			<SchemeInfoWrapper>
+				<article class="Product__information">
+					<div>
+						<span>{scheme.roomTypeName}</span>
+						<h1>{scheme.name}</h1>
+						<div class="Product__price">
+							{#if scheme.prices && scheme.prices.length > 0}
+								<Price price={scheme.prices[0].unitAmount} currency={scheme.prices[0].currency} />
+							{/if}
+
+							<!-- TODO: show discount price -->
+							<span><strong>£70</strong></span>
+						</div>
+						<p>{scheme.description}</p>
+					</div>
+					<AddBasketForm
+						action="?/addToBasket"
+						enhance={() => {
+							addingToBasket = true;
+							overlay.overlayContent = ShoppingBasket;
+
+							// @ts-ignore
+							return async ({ update }) => {
+								await update();
+								await invalidateAll();
+								addingToBasket = false;
+								overlay.isOpen = true;
+							};
+						}}
+						buttonLabel={addingToBasket ? 'Adding' : 'Add to basket'}
+					>
+						<input type="hidden" name="schemeId" value={scheme.id} />
+					</AddBasketForm>
+					{#if scheme.prices && scheme.prices.length > 0}
+						<form action="?/purchaseProduct" method="POST">
+							<input type="hidden" name="price_id" value={scheme.prices[0].id} />
+							<button type="submit" role="link">Checkout Now</button>
+						</form>
+					{/if}
+				</article>
+			</SchemeInfoWrapper>
+			<div class="overflow-hidden">
+				{#if scheme.images.length > 0}
+					<ClipImage isComponentReady={isPageReady} src={scheme.images[0]} description="" />
+				{/if}
 			</div>
-			<AddBasketForm
-				action="?/addToBasket"
-				enhance={() => {
-					addingToBasket = true;
-					overlay.overlayContent = ShoppingBasket;
-
-					// @ts-ignore
-					return async ({ update }) => {
-						await update();
-						await invalidateAll();
-						addingToBasket = false;
-						overlay.isOpen = true;
-					};
-				}}
-				buttonLabel={addingToBasket ? 'Adding' : 'Add to basket'}
-			>
-				<input type="hidden" name="schemeId" value={scheme.id} />
-			</AddBasketForm>
-			<form action="?/purchaseProduct" method="POST">
-				<input type="hidden" name="price_id" value="price_1SwiwzFDhgGDMpbYx4W10WVz" />
-				<button type="submit" role="link">Checkout Now</button>
-			</form>
-		</article>
-		<div class="overflow-hidden">
-			{#if scheme.images.length > 0}
-				<ClipImage isComponentReady={isPageReady} src={scheme.images[0]} description="" />
-			{/if}
-		</div>
-	</section>
-	<section>
-		<h2>Related {scheme.roomTypeName} Schemes</h2>
-		<ul class="flex gap-8">
-			{#each allRelatedSchemes as product}
-				<li>
-					<article class="RelatedScheme">
-						<h4>{product.name}</h4>
-						<span>£100</span>
-						<div>
-							<img src={product.images[0]} alt={`${product.name} design scheme.`} />
-						</div>
-
-						<a href="/off-the-peg-schemes/{product.roomType?.slug}/{product.id}"
-							><span class="visually-hidden">View the {product.roomType?.name} product page.</span
-							></a
-						>
-					</article>
-				</li>
-			{/each}
-		</ul>
-	</section>
-	<section>
-		<h2>More Schemes</h2>
-		<ul class="flex flex-wrap gap-8">
-			{#each allAvailableSchemes as product}
-				<li>
-					<article class="RelatedScheme">
-						<div>
+		</SchemeWrapper>
+		<section>
+			<h2>Related {scheme.roomTypeName} Schemes</h2>
+			<ul class="flex gap-8">
+				{#each allRelatedSchemes as product}
+					<li>
+						<article class="RelatedScheme">
 							<h4>{product.name}</h4>
-							<!-- TOTO: PRICE FOR SCHEME -->
-							<span class="block">£100</span>
-							<span class="text-sm">{product.roomTypeName}</span>
-						</div>
+							<span>£</span>
+							<div>
+								<img src={product.images[0]} alt={`${product.name} design scheme.`} />
+							</div>
 
-						<div>
-							<img src={product.images[0]} alt="{product.name} image" />
-						</div>
-						<a href="/off-the-peg-schemes/{product.roomType?.slug}/{product.id}"
-							><span class="visually-hidden">View {product.name}'s page</span></a
-						>
-					</article>
-				</li>
-			{/each}
-		</ul>
-	</section>
+							<a href="/off-the-peg-schemes/{product.roomType?.slug}/{product.id}"
+								><span class="visually-hidden">View the {product.roomType?.name} product page.</span
+								></a
+							>
+						</article>
+					</li>
+				{/each}
+			</ul>
+		</section>
+		<section>
+			<h2>More Schemes</h2>
+			<ul class="flex flex-wrap gap-8">
+				{#each allAvailableSchemes as product}
+					<li>
+						<article class="RelatedScheme">
+							<div>
+								<h4>{product.name}</h4>
+								{#if product.prices && product.prices.length > 0}
+									<span class="block uppercase"
+										>{product.prices[0].currency} {product.prices[0].unitAmount}</span
+									>
+								{/if}
+								<span class="text-sm">{product.roomTypeName}</span>
+							</div>
+
+							<div>
+								<img src={product.images[0]} alt="{product.name} image" />
+							</div>
+							<a href="/off-the-peg-schemes/{product.roomType?.slug}/{product.id}"
+								><span class="visually-hidden">View {product.name}'s page</span></a
+							>
+						</article>
+					</li>
+				{/each}
+			</ul>
+		</section>
+	{:else}
+		<p>No schemes to see!</p>
+	{/if}
 </main>
 
 <style lang="scss">
-	@use '../../../../lib/styles/partials/breakpoints';
+	@use '$lib/styles/partials/breakpoints';
 
 	.Scheme {
-		display: flex;
-		flex-direction: column;
-
-		&__product {
-			display: flex;
-			flex-direction: column;
-		}
+		margin: 0 auto;
+		width: 100%;
 	}
 
-	.Product {
-		display: flex;
-		justify-content: space-between;
+	// .Product {
+	// 	display: flex;
+	// 	justify-content: space-between;
 
-		@include breakpoints.desktop {
-			flex-direction: row-reverse;
-		}
-		&__information {
-			display: flex;
-			flex-direction: column;
-			gap: 2rem;
-		}
+	// 	@include breakpoints.desktop {
+	// 		flex-direction: row-reverse;
+	// 	}
+	// 	&__information {
+	// 		display: flex;
+	// 		flex-direction: column;
+	// 		gap: 2rem;
+	// 	}
 
-		&__price {
-			display: flex;
-			gap: 1rem;
-		}
-
-		&__oldPrice {
-			text-decoration: line-through;
-		}
-	}
+	// 	&__price {
+	// 		display: flex;
+	// 		gap: 1rem;
+	// 	}
+	// }
 
 	.RelatedScheme {
 		display: flex;

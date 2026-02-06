@@ -1,56 +1,49 @@
 <script lang="ts">
-	import NavLink from '$lib/components/navigation/NavLink.svelte';
+	import RoomCard from '$lib/components/cards/RoomCard.svelte';
 	import PageHeader from '$lib/components/PageHeader.svelte';
+
+	const rooms = [
+		{
+			roomName: 'Bathroom',
+			slug: 'bathroom',
+			imageCover: 'https://picsum.photos/id/1/400/600',
+			imageReveal: 'https://picsum.photos/id/33/400/600'
+		},
+		{
+			roomName: 'Bedroom',
+			slug: 'bedroom',
+			imageCover: 'https://picsum.photos/id/70/400/600',
+			imageReveal: 'https://picsum.photos/id/6/400/600'
+		},
+		{
+			roomName: 'Kitchen',
+			slug: 'kitchen',
+			imageCover: 'https://picsum.photos/id/26/400/600',
+			imageReveal: 'https://picsum.photos/id/34/400/600'
+		},
+		{
+			roomName: 'Living Room',
+			slug: 'living-room',
+			imageCover: 'https://picsum.photos/id/20/400/600',
+			imageReveal: 'https://picsum.photos/id/40/400/600'
+		}
+	];
 </script>
 
 <main class="Schemes">
 	<PageHeader title="Off The Peg Design Schemes" />
 
 	<ul class="Schemes__list">
-		<li>
-			<article class="Schemes__card">
-				<h3>Bathroom</h3>
-				<div class="Schemes__cardImageContainer">
-					<img src="https://placehold.co/400x600" alt="" />
-				</div>
-				<a href="/off-the-peg-schemes/bathroom"
-					><span class="visually-hidden">Click to see Bathroom Room schemes</span></a
-				>
-			</article>
-		</li>
-		<li>
-			<article class="Schemes__card">
-				<h3>Bedroom</h3>
-				<div class="Schemes__cardImageContainer">
-					<img src="https://placehold.co/400x600" alt="" />
-				</div>
-				<a href="/off-the-peg-schemes/bedroom"
-					><span class="visually-hidden">Click to see Bedroom schemes</span></a
-				>
-			</article>
-		</li>
-		<li>
-			<article class="Schemes__card">
-				<h3>Kitchen</h3>
-				<div class="Schemes__cardImageContainer">
-					<img src="https://placehold.co/400x600" alt="" />
-				</div>
-				<a href="/off-the-peg-schemes/kitchen"
-					><span class="visually-hidden">Click to see Kitchen schemes</span></a
-				>
-			</article>
-		</li>
-		<li>
-			<article class="Schemes__card">
-				<h3>Living Room</h3>
-				<div class="Schemes__cardImageContainer">
-					<img src="https://placehold.co/400x600" alt="" />
-				</div>
-				<a href="/off-the-peg-schemes/living-room"
-					><span class="visually-hidden">Click to see Living Room schemes</span></a
-				>
-			</article>
-		</li>
+		{#each rooms as room}
+			<li>
+				<RoomCard
+					roomName={room.roomName}
+					slug={room.slug}
+					imageCover={room.imageCover}
+					imageReveal={room.imageReveal}
+				/>
+			</li>
+		{/each}
 	</ul>
 </main>
 
@@ -61,6 +54,7 @@
 		display: flex;
 		flex-direction: column;
 		margin: 0 auto;
+		padding: 1rem;
 
 		&__list {
 			display: grid;
@@ -70,33 +64,13 @@
 			place-items: center;
 
 			@include breakpoints.tablet {
+				gap: 2rem;
 				grid-template-columns: 1fr 1fr;
 			}
 		}
 
-		&__card {
-			display: flex;
-			flex-direction: column-reverse;
-			max-height: 31.25rem;
-			max-width: 20.8rem;
-			position: relative;
-
-			&:hover h3 {
-				text-decoration: underline;
-			}
-
-			img {
-				aspect-ratio: 3/4;
-				height: 100%;
-				object-fit: cover;
-				width: 100%;
-			}
-
-			a::after {
-				content: '';
-				position: absolute;
-				inset: 0;
-			}
+		li {
+			width: 100%;
 		}
 	}
 </style>

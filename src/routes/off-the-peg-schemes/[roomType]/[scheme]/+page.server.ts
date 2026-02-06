@@ -2,7 +2,6 @@ import prisma from '$lib/server/prisma';
 import { redirect, type Actions } from '@sveltejs/kit';
 import type { PageServerLoad } from './$types';
 import { StripeService } from '$lib/services/stripe.service';
-import type { Product } from '$lib/types';
 
 interface SchemeProps {
 	cookies: any;
@@ -15,8 +14,28 @@ interface SchemeProps {
 const fetchScheme = async (id: string) => {
 	const scheme = await prisma.scheme.findUniqueOrThrow({
 		where: { id },
-		include: {
-			roomType: true
+		select: {
+			id: true,
+			name: true,
+			description: true,
+			features: true,
+			images: true,
+			metadata: true,
+			roomTypeName: true,
+			roomType: {
+				select: {
+					name: true,
+					slug: true
+				}
+			},
+			prices: {
+				where: { active: true },
+				select: {
+					id: true,
+					currency: true,
+					unitAmount: true
+				}
+			}
 		}
 	});
 	return scheme;
@@ -27,8 +46,28 @@ const fetchAllSchemes = async () => {
 		where: {
 			active: true
 		},
-		include: {
-			roomType: true
+		select: {
+			id: true,
+			name: true,
+			description: true,
+			features: true,
+			images: true,
+			metadata: true,
+			roomTypeName: true,
+			roomType: {
+				select: {
+					name: true,
+					slug: true
+				}
+			},
+			prices: {
+				where: { active: true },
+				select: {
+					id: true,
+					currency: true,
+					unitAmount: true
+				}
+			}
 		}
 	});
 

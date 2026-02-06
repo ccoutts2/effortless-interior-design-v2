@@ -52,6 +52,5 @@ export const POST: RequestHandler = async ({ request }) => {
 		return new Response(`Webhook Error: ${message}`, { status: 400 });
 	}
 
-	console.log('we are getting webhooks');
 	return json({ recevied: true });
 };
