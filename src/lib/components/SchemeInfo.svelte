@@ -1,11 +1,11 @@
 <script lang="ts">
-	import { getContext, type Snippet } from 'svelte';
-	import AddBasketForm from './form/AddBasketForm.svelte';
+	import { getContext } from 'svelte';
 	import { invalidateAll } from '$app/navigation';
 	import { ShoppingBasket } from '@lucide/svelte';
-	import type { OverlayProps } from '$lib/types';
-	import Price from './Price.svelte';
+	import AddBasketForm from './form/AddBasketForm.svelte';
 	import Form from './form/Form.svelte';
+	import Price from './Price.svelte';
+	import type { OverlayProps } from '$lib/types';
 
 	interface SchemeInfoProps {
 		id: string;
@@ -67,6 +67,7 @@
 
 		<Form action="?/purchaseProduct" buttonLabel="Checkout Now">
 			<input type="hidden" name="price_id" value={priceId} />
+			<input type="hidden" name="scheme_id" value={id} />
 		</Form>
 	</div>
 </article>

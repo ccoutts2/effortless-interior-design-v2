@@ -1,7 +1,7 @@
 import { SECRET_STRIPE_WEBHOOK } from '$env/static/private';
 import { stripe } from '$lib/server/stripe/stripe';
 import { json, type RequestHandler } from '@sveltejs/kit';
-import { deletePrice, deleteProduct, upsertPrice, upsertProduct } from './handlers';
+import { deletePrice, deleteProduct, upsertCustomer, upsertPrice, upsertProduct } from './handlers';
 
 export const POST: RequestHandler = async ({ request }) => {
 	const signature = request.headers.get('stripe-signature');
@@ -32,6 +32,11 @@ export const POST: RequestHandler = async ({ request }) => {
 			}
 			case 'price.deleted': {
 				deletePrice(event.data.object);
+				break;
+			}
+
+			case 'checkout.session.completed': {
+				upsertCustomer(event.data.object);
 				break;
 			}
 			case 'payment_intent.succeeded': {

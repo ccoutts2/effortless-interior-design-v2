@@ -1,17 +1,15 @@
 <script lang="ts">
+	import { accordionData } from '$lib/constants/accordionData';
 	import { onMount } from 'svelte';
-
-	import type { PageData } from './$types';
-	import SchemeWrapper from '$lib/components/SchemeWrapper.svelte';
-	import SchemeInfoWrapper from '$lib/components/SchemeInfoWrapper.svelte';
+	import Accordion from '$lib/components/ui/accordion/Accordion.svelte';
+	import CheckList from '$lib/components/ui/CheckList.svelte';
+	import GridWrapper from '$lib/components/ui/GridWrapper.svelte';
 	import SchemeCarousel from '$lib/components/SchemeCarousel.svelte';
 	import SchemeInfo from '$lib/components/SchemeInfo.svelte';
-	import Accordion from '$lib/components/ui/accordion/Accordion.svelte';
-	import { accordionData } from '$lib/constants/accordionData';
-	import GridWrapper from '$lib/components/ui/GridWrapper.svelte';
+	import SchemeInfoWrapper from '$lib/components/SchemeInfoWrapper.svelte';
+	import SchemeWrapper from '$lib/components/SchemeWrapper.svelte';
 	import SectionHeader from '$lib/components/SectionHeader.svelte';
-	import { Check } from '@lucide/svelte';
-	import CheckList from '$lib/components/ui/CheckList.svelte';
+	import type { PageData } from './$types';
 
 	interface SchemeProps {
 		data: PageData;

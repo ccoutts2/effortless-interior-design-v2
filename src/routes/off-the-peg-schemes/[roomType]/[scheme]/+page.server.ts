@@ -164,7 +164,8 @@ export const actions = {
 	purchaseProduct: async ({ request, cookies }) => {
 		const form = await request.formData();
 		const priceId = form.get('price_id') as string;
-		const session = await StripeService.stripePayment(priceId);
+		const schemeId = form.get('scheme_id') as string;
+		const session = await StripeService.stripePayment(priceId, schemeId);
 
 		if (session?.client_secret) {
 			cookies.set('client-secret', session.client_secret, {

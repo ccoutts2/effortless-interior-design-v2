@@ -131,3 +131,42 @@ export const deletePrice = async (price: Stripe.Price) => {
 		console.log(error);
 	}
 };
+
+export const upsertCustomer = async (session: Stripe.Checkout.Session) => {
+	const email = session.customer_details?.email;
+	const name = session.customer_details?.name;
+	const schemeId = session.metadata?.schemeId;
+
+	if (!email) {
+		return;
+	}
+
+	try {
+		const user = await prisma.user.upsert({
+			where: { email: email },
+			update: { name: name },
+			create: {
+				email: email,
+				name: name,
+				isActive: false
+			}
+		});
+
+		if (schemeId) {
+			await prisma.order.create({
+				data: {
+					userId: user.id,
+					totalPrice: session.amount_total || 0,
+					withConsultation: false,
+					schemes: {
+						create: {
+							schemeId: schemeId
+						}
+					}
+				}
+			});
+		}
+	} catch (error) {
+		console.log(error);
+	}
+};
