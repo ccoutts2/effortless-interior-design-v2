@@ -39,16 +39,6 @@ export const POST: RequestHandler = async ({ request }) => {
 				upsertCustomer(event.data.object);
 				break;
 			}
-			case 'payment_intent.succeeded': {
-				console.log(event.type);
-				console.log(event.data.object);
-				break;
-			}
-			case 'payment_method.attached': {
-				console.log(event.type);
-				console.log(event.data.object);
-				break;
-			}
 			default:
 				console.log(`Unhandled event type ${event.type}.`);
 		}

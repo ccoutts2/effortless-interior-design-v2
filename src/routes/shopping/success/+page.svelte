@@ -9,7 +9,8 @@
 <main>
 	<h1>Thank you for your purchase!</h1>
 	<p>
-		Your payment was successful and an email will be sent to {data.customerEmail} for:
+		{data.customerName}, your payment was successful and an email will be sent to {data.customerEmail}
+		for:
 	</p>
 	<ul>
 		{#each items?.data ?? [] as item}

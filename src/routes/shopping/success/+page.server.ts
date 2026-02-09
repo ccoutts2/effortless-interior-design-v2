@@ -14,6 +14,7 @@ export const load: PageServerLoad = async ({ url }) => {
 
 		return {
 			customerEmail: session.customer_details?.email,
+			customerName: session.customer_details?.name,
 			items: session.line_items,
 			status: session.status
 		};
