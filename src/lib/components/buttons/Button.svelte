@@ -5,16 +5,19 @@
 
 	interface ButtonProps extends HTMLButtonAttributes {
 		children: Snippet;
+		inverted?: boolean;
 	}
 
-	let { children, ...props }: ButtonProps = $props();
+	let { children, inverted, ...props }: ButtonProps = $props();
 </script>
 
-<button {...props} class="Button">
+<button {...props} class="Button" data-is-inverted={inverted}>
 	{@render children?.()}
 </button>
 
 <style lang="scss">
+	@use '$lib/styles/partials/breakpoints';
+
 	.Button {
 		align-items: center;
 		display: flex;
@@ -23,11 +26,24 @@
 		color: #403a34;
 		flex: 1;
 		justify-content: center;
-		max-width: fit-content;
-		min-width: 5rem;
 		padding: 0.5rem;
 		position: relative;
 		text-transform: uppercase;
+		width: 100%;
+
+		&[type='button'] {
+			max-width: fit-content;
+		}
+
+		&[data-is-inverted='true'] {
+			background-color: #403a34;
+			color: #f6f1eb;
+
+			&::after {
+				background-color: #f3eee8;
+				color: #403a34 !important;
+			}
+		}
 
 		&::after {
 			content: '';

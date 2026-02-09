@@ -35,11 +35,11 @@
 		}
 
 		h1 {
-			font-size: clamp(1.5rem, 3vw, 3rem);
+			font-size: clamp(1.25rem, 3vw, 2.25rem);
 		}
 
 		h2 {
-			font-size: clamp(1.25rem, 3vw, 2.5rem);
+			font-size: clamp(1.125rem, 3vw, 2rem);
 		}
 	}
 </style>

@@ -1,7 +1,5 @@
 <script lang="ts">
 	import { onMount } from 'svelte';
-	import type { PageData } from './$types';
-	import Button from '$lib/components/buttons/Button.svelte';
 	import ClipImage from '$lib/components/ClipImage.svelte';
 	import PageHeader from '$lib/components/PageHeader.svelte';
 	import type { Product } from '$lib/types';
@@ -17,7 +15,7 @@
 
 {#if data && data.schemes.length > 0}
 	<main class="RoomTypeName">
-		<PageHeader title={data.schemes[0].roomTypeName as string}>
+		<PageHeader title={data.schemes[0].roomType?.name ?? 'Schemes'}>
 			<p class="my-8 italic">
 				Elegant {data.schemes[0].roomTypeName?.toLowerCase()} schemes for your liking
 			</p>
@@ -47,6 +45,9 @@
 			{/each}
 		</ul>
 	</main>
+{:else}
+	<h1>There are no schemes!</h1>
+	<a href="/off-the-peg-scehemes"> Please go back. </a>
 {/if}
 
 <style lang="scss">

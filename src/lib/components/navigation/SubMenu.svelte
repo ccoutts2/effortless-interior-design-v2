@@ -34,7 +34,6 @@
 
 		&__item {
 			border-bottom: 1px solid black;
-			font-family: ClashGrotesk-Light;
 			padding: 0.5rem;
 			width: 100%;
 

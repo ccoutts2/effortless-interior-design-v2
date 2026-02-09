@@ -7,7 +7,7 @@
 	interface FormProps extends HTMLFormAttributes {
 		action?: string;
 		children: Snippet;
-		enhance: any;
+		enhance?: any;
 		buttonLabel: string;
 		onClick?: () => void;
 	}
@@ -17,7 +17,9 @@
 
 <form class="Form" method="POST" {action} use:enhance>
 	{@render children?.()}
-	<Button data-content={buttonLabel} type="submit" onclick={onClick}>{buttonLabel}</Button>
+	<Button data-content={buttonLabel} type="submit" onclick={onClick} inverted={true}
+		>{buttonLabel}</Button
+	>
 </form>
 
 <style lang="scss">

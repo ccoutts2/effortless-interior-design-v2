@@ -12,11 +12,15 @@
 	@use '$lib/styles/partials/breakpoints';
 
 	.SchemeInfoWrapper {
-		width: 50%;
-		margin-left: 0.5rem;
-		padding: 1rem 3rem;
+		height: 100%;
+		padding-block: 1rem;
 		position: sticky;
 		top: 1rem;
-		height: 100%;
+		width: 100%;
+
+		@include breakpoints.laptop {
+			padding-inline: 3rem;
+			width: 50%;
+		}
 	}
 </style>

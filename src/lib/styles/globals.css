@@ -1,80 +1,66 @@
 @import 'tailwindcss';
-@layer reset, globals;
 
 @import './fonts.scss' layer(globals);
 
-@layer reset {
-	* {
-		box-sizing: border-box;
-		margin: 0;
-		padding: 0;
-	}
+* {
+	box-sizing: border-box;
+	margin: 0;
+	padding: 0;
 }
 
-@layer globals {
-	.visually-hidden {
-		clip-path: inset(50%);
-		clip: rect(0 0 0 0);
-		height: 1px;
-		overflow: hidden;
-		position: absolute;
-		white-space: nowrap;
-		width: 1px;
-	}
+.visually-hidden {
+	clip-path: inset(50%);
+	clip: rect(0 0 0 0);
+	height: 1px;
+	overflow: hidden;
+	position: absolute;
+	white-space: nowrap;
+	width: 1px;
+}
 
-	html {
-		scroll-behavior: smooth;
-	}
+html {
+	scroll-behavior: smooth;
+}
 
-	body {
-		background-color: #f3eee8;
-		color: #5d3a40;
-		font-family: ClashGrotesk-Regular;
-		font-weight: 400;
-		min-height: 100vh;
-		position: relative;
-		letter-spacing: 1.25px;
-	}
+body {
+	background-color: #f3eee8;
+	color: #5d3a40;
+	font-family: 'Clash Grotesk', sans-serif;
+	font-weight: 400;
+	letter-spacing: 1.2px;
+	min-height: 100vh;
+	position: relative;
+}
 
-	h1,
-	h2 {
-		font-family: Playfair-Regular;
-	}
+h1,
+h2 {
+	font-family: 'Playfair Display', serif;
+}
 
-	p {
-		font-weight: 400;
-	}
+a {
+	color: inherit;
+	text-decoration: underline;
+}
 
-	form > * {
-		font-size: 1rem;
-		font-weight: 400;
-	}
+button {
+	color: inherit;
+	border: none;
+	padding: 0;
+	font: inherit;
+	cursor: pointer;
+	outline: inherit;
+}
 
-	a {
-		color: inherit;
-		text-decoration: underline;
-	}
-
-	button {
-		color: inherit;
-		border: none;
-		padding: 0;
-		font: inherit;
-		cursor: pointer;
-		outline: inherit;
-	}
-
-	.btn {
-		align-items: center;
-		display: flex;
-		background-color: #f6f1eb;
-		border: 1px solid #403a34;
-		color: #403a34;
-		flex: 1;
-		justify-content: center;
-		max-width: fit-content;
-		min-width: 5rem;
-		padding: 0.5rem;
-		text-transform: uppercase;
-	}
+.btn {
+	align-items: center;
+	display: flex;
+	background-color: #f6f1eb;
+	border: 1px solid #403a34;
+	color: #403a34;
+	flex: 1;
+	justify-content: center;
+	max-width: fit-content;
+	min-width: 5rem;
+	padding: 0.5rem;
+	text-transform: uppercase;
 }

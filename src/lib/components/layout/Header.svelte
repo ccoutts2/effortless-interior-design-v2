@@ -30,7 +30,7 @@
 
 <header class="NavBar">
 	<div class="NavBar__button">
-		<Button data-content="Menu" onclick={openMobileOverlay}>Menu</Button>
+		<Button data-content="Menu" onclick={openMobileOverlay} type="button">Menu</Button>
 	</div>
 	<nav class="NavBar__navEl">
 		{@render children?.()}

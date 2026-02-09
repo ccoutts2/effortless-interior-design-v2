@@ -1,29 +1,38 @@
 @font-face {
-	font-family: ClashGrotesk-Light;
-	src:
-		url('/assets/fonts/ClashGrotesk-Light.woff2') format('woff2'),
-		url('/assets/fonts/ClashGrotesk-Light.woff') format('woff');
+	font-family: 'Cardo';
+	src: url('/assets/fonts/Cardo-Regular.c9646.woff2') format('woff2');
+	font-weight: 400;
+	font-style: normal;
 }
 
+/* Regular */
 @font-face {
-	font-family: ClashGrotesk-Regular;
+	font-family: 'Clash Grotesk';
 	src:
 		url('/assets/fonts/ClashGrotesk-Regular.woff2') format('woff2'),
 		url('/assets/fonts/ClashGrotesk-Regular.woff') format('woff');
+	font-weight: 400;
+	font-style: normal;
 }
 
+/* Semibold */
 @font-face {
-	font-family: ClashGrotesk-Semibold;
+	font-family: 'Clash Grotesk';
 	src:
 		url('/assets/fonts/ClashGrotesk-Semibold.woff2') format('woff2'),
 		url('/assets/fonts/ClashGrotesk-Semibold.woff') format('woff');
+	font-weight: 600;
+	font-style: normal;
 }
 
+/* Bold */
 @font-face {
-	font-family: ClashGrotesk-Bold;
+	font-family: 'Clash Grotesk';
 	src:
 		url('/assets/fonts/ClashGrotesk-Bold.woff2') format('woff2'),
 		url('/assets/fonts/ClashGrotesk-Bold.woff') format('woff');
+	font-weight: 700;
+	font-style: normal;
 }
 
 // Hanken Grotesk
@@ -53,19 +62,26 @@
 	src: url('/assets/fonts/Cyrene+Regular+Advanced.otf') format('truetype');
 }
 
-// Playfair
-
+/* Light */
 @font-face {
-	font-family: 'Playfair-Light';
+	font-family: 'Playfair Display';
 	src: url('/assets/fonts/PlayfairDisplay-Light.ttf') format('truetype');
+	font-weight: 300;
+	font-style: normal;
 }
 
+/* Regular */
 @font-face {
-	font-family: 'Playfair-Regular';
+	font-family: 'Playfair Display';
 	src: url('/assets/fonts/PlayfairDisplay-Regular.ttf') format('truetype');
+	font-weight: 400;
+	font-style: normal;
 }
 
+/* Bold */
 @font-face {
-	font-family: 'Playfair-Bold';
+	font-family: 'Playfair Display';
 	src: url('/assets/fonts/PlayfairDisplay-Bold.ttf') format('truetype');
+	font-weight: 700;
+	font-style: normal;
 }
