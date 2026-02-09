@@ -27,18 +27,19 @@ export const POST: RequestHandler = async ({ request }) => {
 			// Price Events
 			case 'price.created':
 			case 'price.updated': {
-				upsertPrice(event.data.object);
+				await upsertPrice(event.data.object);
 				break;
 			}
 			case 'price.deleted': {
-				deletePrice(event.data.object);
+				await deletePrice(event.data.object);
 				break;
 			}
 
 			case 'checkout.session.completed': {
-				upsertCustomer(event.data.object);
+				await upsertCustomer(event.data.object);
 				break;
 			}
+
 			default:
 				console.log(`Unhandled event type ${event.type}.`);
 		}

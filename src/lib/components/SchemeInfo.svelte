@@ -12,7 +12,7 @@
 		name: string;
 		description: string | null;
 		features: string[];
-		price: number;
+		price: number | null;
 		currency: string;
 		priceId: string;
 	}
@@ -40,9 +40,9 @@
 			<dt>File Name:</dt>
 			<dd>{name}</dd>
 			<dt>Type:</dt>
-			<dd>{features[0]}</dd>
+			<dd>{features[0] ?? 'N/A'}</dd>
 			<dt>Size:</dt>
-			<dd>{features[1]}</dd>
+			<dd>{features[1] ?? 'N/A'}</dd>
 		</dl>
 	</div>
 	<div class="SchemeInfo__buttons">

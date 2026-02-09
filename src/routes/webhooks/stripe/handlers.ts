@@ -50,6 +50,7 @@ export const upsertProduct = async (product: Stripe.Product) => {
 				active: dbProduct.active,
 				description: dbProduct.description,
 				features: dbProduct.features,
+				images: dbProduct.images,
 				metadata: dbProduct.metadata as ProductMetaData,
 				roomType: roomTypeConnection,
 				createdAt: dbProduct.created,
@@ -103,7 +104,7 @@ export const upsertPrice = async (price: Stripe.Price) => {
 				active: dbPrice.active,
 				currency: dbPrice.currency,
 				type: dbPrice.type,
-				unitAmount: dbPrice.unitAmount as number
+				unitAmount: dbPrice.unitAmount ?? 0
 			},
 			create: {
 				id: dbPrice.id,

@@ -17,7 +17,7 @@
 	<main class="RoomTypeName">
 		<PageHeader title={data.schemes[0].roomType?.name ?? 'Schemes'}>
 			<p class="my-8 italic">
-				Elegant {data.schemes[0].roomTypeName?.toLowerCase()} schemes for your liking
+				Elegant {data.schemes[0].roomType?.name?.toLowerCase() ?? ''} schemes for your liking
 			</p>
 		</PageHeader>
 		<ul class="RoomTypeName__list">
@@ -47,7 +47,7 @@
 	</main>
 {:else}
 	<h1>There are no schemes!</h1>
-	<a href="/off-the-peg-scehemes"> Please go back. </a>
+	<a href="/off-the-peg-schemes"> Please go back. </a>
 {/if}
 
 <style lang="scss">

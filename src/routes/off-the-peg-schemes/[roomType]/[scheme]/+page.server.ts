@@ -165,6 +165,10 @@ export const actions = {
 		const form = await request.formData();
 		const priceId = form.get('price_id') as string;
 		const schemeId = form.get('scheme_id') as string;
+
+		if (!priceId || !schemeId) {
+			throw redirect(302, '/shopping/error');
+		}
 		const session = await StripeService.stripePayment(priceId, schemeId);
 
 		if (session?.client_secret) {

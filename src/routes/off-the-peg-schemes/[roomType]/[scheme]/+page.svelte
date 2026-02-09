@@ -37,15 +37,19 @@
 	{#if scheme}
 		<SchemeWrapper>
 			<SchemeInfoWrapper>
-				<SchemeInfo
-					id={scheme.id}
-					name={scheme.name}
-					description={scheme.description}
-					features={scheme.features}
-					price={scheme.prices[0].unitAmount}
-					currency={scheme.prices[0].currency}
-					priceId={scheme.prices[0].id}
-				/>
+				{#if scheme.prices && scheme.prices.length > 0}
+					<SchemeInfo
+						id={scheme.id}
+						name={scheme.name}
+						description={scheme.description}
+						features={scheme.features}
+						price={scheme.prices[0].unitAmount}
+						currency={scheme.prices[0].currency}
+						priceId={scheme.prices[0].id}
+					/>
+				{:else}
+					<p>Price information unavailable.</p>
+				{/if}
 				<Accordion {accordionData} />
 			</SchemeInfoWrapper>
 			<SchemeCarousel roomType={scheme.roomType?.name.toLowerCase()} />
@@ -65,7 +69,7 @@
 			</p>
 		</GridWrapper>
 		<section class="Scheme__section">
-			<SectionHeader headerTag="h2" header="What's inluded?" textCenter={true} />
+			<SectionHeader headerTag="h2" header="What's included?" textCenter={true} />
 			<p>This Off-the-Peg Design Scheme takes the form of a PDF file which contains:</p>
 			<ul>
 				<CheckList>Your Design Specification, containing prices and product details</CheckList>

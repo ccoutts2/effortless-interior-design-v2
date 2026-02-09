@@ -1,5 +1,5 @@
 <script lang="ts">
-	let { price, currency }: { price: number; currency: string } = $props();
+	let { price, currency }: { price: number | null; currency: string } = $props();
 
 	const priceFormat = $derived(
 		Intl.NumberFormat('en-GB', {
@@ -10,5 +10,5 @@
 </script>
 
 <span class="Product__oldPrice uppercase">
-	{priceFormat.format(price / 100)}
+	{price ? priceFormat.format(price / 100) : 'N/A'}
 </span>

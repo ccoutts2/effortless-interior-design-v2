@@ -73,7 +73,7 @@
 				<img
 					src="https://meathrznzeujphllwqbq.supabase.co/storage/v1/object/public/Effortless%20Interior%20Design%20Assets/{roomType}/img{i +
 						1}.avif"
-					alt=""
+					alt="{roomType} design scheme - image {i + 1} of 7"
 				/>
 			</figure>
 		{/each}
