@@ -75,15 +75,6 @@
 					<li class="Tabs__item">
 						<a
 							class="Tabs__tab"
-							href="?information=how"
-							data-sveltekit-noscroll
-							data-sveltekit-replacestate
-							class:active={schemeInfoTab === 'how'}>How does it work?</a
-						>
-					</li>
-					<li class="Tabs__item">
-						<a
-							class="Tabs__tab"
 							href="?information=benefits"
 							data-sveltekit-noscroll
 							data-sveltekit-replacestate
@@ -116,21 +107,6 @@
 					</ul>
 					<a href="/">View all information</a>
 				</div>
-			{:else if schemeInfoTab === 'how'}
-				<div>
-					<p>
-						Once you have ordered and received your samples, you can customise your Off-the-Peg
-						Design Scheme by mixing and matching your favourites in your own unique way, or
-						following the combinations shown in the renderings.
-					</p>
-
-					<p>
-						When you have finalised your selection, we recommend that you contact your curtain
-						maker, upholsterer or decorator to ascertain how much of each item you will need to
-						order. Then simply complete your Order Request Form; we'll send you an invoice, and our
-						suppliers will deliver directly to you.
-					</p>
-				</div>
 			{:else if schemeInfoTab === 'important'}
 				<div>
 					<p>
@@ -142,7 +118,7 @@
 					</p>
 					<a href="/">View all information</a>
 				</div>
-			{:else}
+			{:else if schemeInfoTab === 'benefits'}
 				<div>
 					<ul>
 						<CheckList
@@ -371,17 +347,11 @@
 				height: 100%;
 			}
 		}
-	}
-
-	.RelatedScheme {
-		display: flex;
-		flex-direction: column-reverse;
-		position: relative;
 
 		a::after {
 			content: '';
-			inset: 0;
 			position: absolute;
+			inset: 0;
 		}
 	}
 </style>

@@ -3,6 +3,7 @@ import { PrismaClient } from '../src/generated/prisma/client';
 import { roomType, schemes } from './generators';
 import { roomTypeNames } from './generators/roomType';
 import { resetDatabase } from './generators/resetDatabase';
+import { faker } from '@faker-js/faker';
 
 export const prisma = new PrismaClient();
 
@@ -31,7 +32,20 @@ async function createSchemes() {
 
 	for (let i = 0; i < 10; i++) {
 		const schemeData = schemes(roomTypeNames);
-		const newScheme = await prisma.scheme.create({ data: schemeData });
+		const newScheme = await prisma.scheme.create({
+			data: {
+				...schemeData,
+				prices: {
+					create: {
+						id: `price_${Math.random().toString(36)}`,
+						active: true,
+						currency: 'gbp',
+						unitAmount: 75000,
+						type: 'one_time'
+					}
+				}
+			}
+		});
 		schemeArray.push(newScheme);
 	}
 
