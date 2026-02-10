@@ -40,9 +40,9 @@
 			<dt>File Name:</dt>
 			<dd>{name}</dd>
 			<dt>Type:</dt>
-			<dd>{features[0] ?? 'N/A'}</dd>
+			<dd>{features[0]}</dd>
 			<dt>Size:</dt>
-			<dd>{features[1] ?? 'N/A'}</dd>
+			<dd>{features[1]}</dd>
 		</dl>
 	</div>
 	<div class="SchemeInfo__buttons">
@@ -102,10 +102,12 @@
 
 			h3 {
 				font-weight: 400;
+				font-size: 1.125rem;
 			}
 
 			p {
 				padding-top: 0.5rem;
+				font-size: 0.875rem;
 			}
 
 			dl {

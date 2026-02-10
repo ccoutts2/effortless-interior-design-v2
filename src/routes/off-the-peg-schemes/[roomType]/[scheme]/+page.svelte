@@ -10,6 +10,8 @@
 	import SchemeWrapper from '$lib/components/SchemeWrapper.svelte';
 	import SectionHeader from '$lib/components/SectionHeader.svelte';
 	import type { PageData } from './$types';
+	import Price from '$lib/components/Price.svelte';
+	import Button from '$lib/components/buttons/Button.svelte';
 
 	interface SchemeProps {
 		data: PageData;
@@ -18,6 +20,8 @@
 	let { data }: SchemeProps = $props();
 
 	let isPageReady: boolean = $state(false);
+
+	const schemeInfoTab = $derived(data.schemeInfoTab);
 
 	// Retreive specific product
 	const scheme = $derived(data.scheme);
@@ -52,37 +56,108 @@
 				{/if}
 				<Accordion {accordionData} />
 			</SchemeInfoWrapper>
+
 			<SchemeCarousel roomType={scheme.roomType?.name.toLowerCase()} />
 		</SchemeWrapper>
 
-		<GridWrapper as="div">
-			<p class="col-start-1 col-end-13 mt-12! text-lg md:col-start-6 lg:text-3xl">
-				Our Off-the-Peg Design Schemes are expertly curated collections of high-spec fabrics,
-				paints, wallpapers and accessories, designed to help you create a stunning home without the
-				guesswork.
-			</p>
-			<p class="col-start-1 col-end-12 mt-24! text-lg md:col-end-9 lg:text-3xl">
-				We share our trade margins with our customers, meaning that the designer fabrics, trimmings
-				and wallpapers in the schemes are offered at discounts of up to 30%. Many of our suppliers
-				are trade-only, meaning that you cannot buy their products unless you have an interior
-				designer (or an Off-the-Peg Design Scheme!)
-			</p>
-		</GridWrapper>
 		<section class="Scheme__section">
-			<SectionHeader headerTag="h2" header="What's included?" textCenter={true} />
-			<p>This Off-the-Peg Design Scheme takes the form of a PDF file which contains:</p>
-			<ul>
-				<CheckList>Your Design Specification, containing prices and product details</CheckList>
-				<CheckList>High-quality renderings of the design scheme in an example room</CheckList>
-				<CheckList
-					>A detailed step-by-step guide to help you pull your design scheme together Holly's Little
-					Black Book A link to your Order Request Form</CheckList
-				>
-			</ul>
-			<p class="mt-6!">
-				See more <span class="underline"><a href="/">information</a></span> about what's included in
-				your purchase, and other important information.
-			</p>
+			<nav class="Tabs">
+				<ul class="Tabs__list">
+					<li class="Tabs__item">
+						<a
+							class="Tabs__tab"
+							href="?information=included"
+							data-sveltekit-noscroll
+							data-sveltekit-replacestate
+							class:active={schemeInfoTab === 'included'}>What's included?</a
+						>
+					</li>
+					<li class="Tabs__item">
+						<a
+							class="Tabs__tab"
+							href="?information=how"
+							data-sveltekit-noscroll
+							data-sveltekit-replacestate
+							class:active={schemeInfoTab === 'how'}>How does it work?</a
+						>
+					</li>
+					<li class="Tabs__item">
+						<a
+							class="Tabs__tab"
+							href="?information=benefits"
+							data-sveltekit-noscroll
+							data-sveltekit-replacestate
+							class:active={schemeInfoTab === 'benefits'}>What are the benefits?</a
+						>
+					</li>
+					<li class="Tabs__item">
+						<a
+							class="Tabs__tab"
+							href="?information=important"
+							data-sveltekit-noscroll
+							data-sveltekit-replacestate
+							class:active={schemeInfoTab === 'important'}>Important info</a
+						>
+					</li>
+				</ul>
+			</nav>
+			{#if schemeInfoTab === 'included'}
+				<div>
+					<p class="mb-4!">
+						This Off-the-Peg Design Scheme takes the form of a PDF file which contains:
+					</p>
+					<ul>
+						<CheckList>Your Design Specification, containing prices and product details</CheckList>
+						<CheckList>High-quality renderings of the design scheme in an example room</CheckList>
+						<CheckList
+							>A detailed step-by-step guide to help you pull your design scheme together Holly's
+							Little Black Book A link to your Order Request Form</CheckList
+						>
+					</ul>
+					<a href="/">View all information</a>
+				</div>
+			{:else if schemeInfoTab === 'how'}
+				<div>
+					<p>
+						Once you have ordered and received your samples, you can customise your Off-the-Peg
+						Design Scheme by mixing and matching your favourites in your own unique way, or
+						following the combinations shown in the renderings.
+					</p>
+
+					<p>
+						When you have finalised your selection, we recommend that you contact your curtain
+						maker, upholsterer or decorator to ascertain how much of each item you will need to
+						order. Then simply complete your Order Request Form; we'll send you an invoice, and our
+						suppliers will deliver directly to you.
+					</p>
+				</div>
+			{:else if schemeInfoTab === 'important'}
+				<div>
+					<p>
+						While we strive to make our renderings as accurate as possible, please be aware that
+						they are not to be relied upon as precise indicators of the size, scale, or pattern of
+						products. We recommend always ordering samples, reviewing product images on supplier
+						websites (provided in the Design Specification), and checking measurements before making
+						any final
+					</p>
+					<a href="/">View all information</a>
+				</div>
+			{:else}
+				<div>
+					<ul>
+						<CheckList
+							>A stunning, professionally designed home for a fraction of the cost of hiring an
+							interior designer</CheckList
+						>
+						<CheckList>Save precious time, money and frustration</CheckList>
+						<CheckList>Access to trade-only products and trade discounts</CheckList>
+						<CheckList
+							>Express your unique taste thanks to our customisable design schemes</CheckList
+						>
+					</ul>
+					<a href="/">View all information</a>
+				</div>
+			{/if}
 		</section>
 		<div class="PageBreak" aria-label="A divider to break up different page content."></div>
 		<section>
@@ -98,9 +173,18 @@
 						{#each allRelatedSchemes as product}
 							<li class="MoreSchemes__item">
 								<article class="MoreSchemes__product">
-									<div>
+									<div class="MoreSchemes__info">
 										<h4>{product.name}</h4>
-										<span>£</span>
+										{#if product.prices && product.prices.length > 0}
+											<span
+												><Price
+													price={product.prices[0].unitAmount}
+													currency={product.prices[0].currency}
+												/></span
+											>
+										{:else}
+											<span>£750</span>
+										{/if}
 									</div>
 
 									<div class="MoreSchemes__image">
@@ -155,11 +239,58 @@
 <style lang="scss">
 	@use '$lib/styles/partials/breakpoints';
 
+	.Tabs {
+		margin-block: 2rem;
+		width: 100%;
+
+		&__list {
+			display: flex;
+			flex-wrap: wrap;
+			gap: 0.5rem;
+			justify-content: center;
+
+			@include breakpoints.tablet {
+				gap: 1rem;
+				justify-content: flex-start;
+			}
+			@include breakpoints.laptop {
+				gap: 1.5rem;
+			}
+		}
+
+		&__item {
+			padding: 0.25rem;
+			font-size: clamp(1rem, 2vw, 2rem);
+		}
+
+		&__tab {
+			position: relative;
+
+			&.active::after {
+				content: '';
+				background-color: black;
+				bottom: -4px;
+				height: 1px;
+				left: 0;
+				position: absolute;
+				width: 100%;
+
+				@include breakpoints.tablet {
+					view-transition-name: active-page;
+				}
+			}
+		}
+	}
+
 	.PageBreak {
 		width: 100%;
 		height: 2px;
 		background-color: currentColor;
-		margin-block: 4rem;
+		margin-block: 1.5rem;
+
+		@include breakpoints.tablet {
+			margin-block: 3rem;
+		}
 	}
 
 	.Scheme {
@@ -177,6 +308,8 @@
 
 	.MoreSchemes {
 		width: 100%;
+		padding-left: 1rem;
+		padding-top: 2rem;
 		margin: auto;
 
 		&__viewport {
@@ -186,27 +319,27 @@
 		}
 
 		&__list {
-			cursor: grab;
 			display: flex;
-
-			:active {
-				cursor: grabbing;
-			}
+			padding-left: 1rem;
 		}
 
 		&__item {
 			flex: 0 0 60%;
+			margin-right: 1rem;
 			min-width: 0;
 			scroll-snap-align: start;
-			padding-left: 1rem;
 			transform: translate3d(0, 0, 0);
 
 			@include breakpoints.tablet {
-				flex: 0 0 40%;
+				flex: 0 0 45%;
 			}
 
 			@include breakpoints.laptop {
 				flex: 0 0 25%;
+			}
+
+			&:last-of-type {
+				padding-right: 1rem;
 			}
 		}
 
@@ -215,10 +348,19 @@
 			flex-direction: column-reverse;
 		}
 
+		&__info {
+			font-size: 0.875rem;
+			margin-top: 0.5rem;
+
+			h4 {
+				margin-bottom: 0.25rem;
+			}
+		}
+
 		&__image {
 			position: relative;
 			width: 100%;
-			height: clamp(15rem, 25rem, 30rem);
+			aspect-ratio: 3.5 / 5;
 
 			img {
 				position: absolute;

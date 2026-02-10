@@ -20,6 +20,7 @@
 
 		@include breakpoints.laptop {
 			padding-inline: 3rem;
+			padding-top: 0rem;
 			width: 50%;
 		}
 	}

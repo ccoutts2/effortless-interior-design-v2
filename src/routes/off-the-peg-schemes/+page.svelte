@@ -33,6 +33,15 @@
 <main class="Schemes">
 	<PageHeader title="Off The Peg Design Schemes" />
 
+	<p class="mt-4 mb-8! text-center">
+		Our Off-the-Peg Design Schemes are expertly curated collections of high-spec fabrics, paints,
+		wallpapers and accessories, designed to help you create a stunning home without the guesswork.
+		We share our trade margins with our customers, meaning that the designer fabrics, trimmings and
+		wallpapers in the schemes are offered at discounts of up to <span class="font-semibold"
+			>30%</span
+		>. Many of our suppliers are trade-only, meaning that you cannot buy their products unless you
+		have an interior designer (or an Off-the-Peg Design Scheme!)
+	</p>
 	<ul class="Schemes__list">
 		{#each rooms as room}
 			<li>

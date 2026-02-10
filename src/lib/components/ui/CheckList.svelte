@@ -7,7 +7,7 @@
 
 <li class="CheckList">
 	<span class="CheckList__icon"><Check size={14} /></span>
-	<span class="CheckList__text">{@render children()}</span>
+	<span>{@render children()}</span>
 </li>
 
 <style lang="scss">
@@ -16,13 +16,10 @@
 		display: flex;
 		align-items: center;
 		gap: 0.5rem;
+		padding-block: 0.25rem;
 
 		&__icon {
 			padding-left: 1rem;
-		}
-
-		&__text {
-			font-size: 0.875rem;
 		}
 	}
 </style>

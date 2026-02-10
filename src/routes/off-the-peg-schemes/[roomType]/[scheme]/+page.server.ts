@@ -9,6 +9,7 @@ interface SchemeProps {
 		roomType: string;
 		scheme: string;
 	};
+	url: any;
 }
 
 const fetchScheme = async (id: string) => {
@@ -74,16 +75,18 @@ const fetchAllSchemes = async () => {
 	return allSchemes;
 };
 
-export const load: PageServerLoad = async ({ params }: SchemeProps) => {
+export const load: PageServerLoad = async ({ params, url }: SchemeProps) => {
 	const scheme = await fetchScheme(params.scheme);
 	const allSchemes = await fetchAllSchemes();
+	const schemeInfoTab = url.searchParams.get('information') ?? 'included';
 
 	return {
 		scheme,
 		relatedSchemes: allSchemes.filter(
 			(s) => s.roomTypeName === scheme.roomTypeName && s.id !== scheme.id
 		),
-		allSchemes: allSchemes.filter((s) => s.id !== scheme.id)
+		allSchemes: allSchemes.filter((s) => s.id !== scheme.id),
+		schemeInfoTab
 	};
 };
 
