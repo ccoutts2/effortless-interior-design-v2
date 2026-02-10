@@ -1,6 +1,6 @@
 <script lang="ts">
-	import Button from '../buttons/Button.svelte';
-	import PlusMinusButton from '../buttons/PlusMinusButton.svelte';
+	import Button from '../ui/buttons/Button.svelte';
+	import PlusMinusButton from '../ui/buttons/PlusMinusButton.svelte';
 	import NavLink from './NavLink.svelte';
 	import SubMenu from './SubMenu.svelte';
 

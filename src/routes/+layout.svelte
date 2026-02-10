@@ -21,12 +21,36 @@
 
 	setContext('overlay-ctx', overlayState);
 
-	// Keep overlay context in sync with layout data so components (e.g. ShoppingBasket)
-	// that read `context.data` update when `load` re-runs (for example after
-	// `invalidateAll()` from an enhanced form). Previously this was a one-time
-	// snapshot which required a full page refresh to reflect changes.
+	const handleOutsideClick = (e: MouseEvent) => {
+		const target = e.target as HTMLElement;
+
+		if (overlayState.isOpen === true) {
+			if (!target.closest('.Overlay')) {
+				overlayState.isOpen = !overlayState.isOpen;
+			}
+		}
+	};
+
 	$effect(() => {
 		overlayState.data = data.schemesInBasket ?? null;
+		if (overlayState.isOpen === true) {
+			document.body.classList.add('overlay-open');
+			const timeout = setTimeout(() => {
+				document.addEventListener('click', handleOutsideClick);
+			}, 0);
+
+			return () => {
+				clearTimeout(timeout);
+			};
+		} else {
+			document.body.classList.remove('overlay-open');
+		}
+
+		return () => {
+			document.body.classList.remove('overlay-open');
+
+			document.removeEventListener('click', handleOutsideClick);
+		};
 	});
 
 	let isActive: boolean = $state(false);
@@ -65,6 +89,7 @@
 		<li><NavLink isMobileMenu={false} href="/contact">Contact</NavLink></li>
 	</ul>
 </Header>
+
 {@render children?.()}
 
 <Overlay />
@@ -78,6 +103,10 @@
 
 	:global(nav:has(a:hover) a:not(:hover)) {
 		opacity: 0.25;
+	}
+
+	:global(.overlay-open) {
+		overflow: hidden;
 	}
 
 	@keyframes old-slide-up {

@@ -1,7 +1,7 @@
 <script lang="ts">
 	import { enhance as svelteEnhance } from '$app/forms';
 	import type { Snippet } from 'svelte';
-	import Button from '../buttons/Button.svelte';
+	import Button from '../ui/buttons/Button.svelte';
 
 	import type { HTMLFormAttributes } from 'svelte/elements';
 

@@ -2,7 +2,7 @@
 	import { ShoppingCart, User } from '@lucide/svelte';
 	import { getContext, type Snippet } from 'svelte';
 	import NavLink from '../navigation/NavLink.svelte';
-	import Button from '../buttons/Button.svelte';
+	import Button from '../ui/buttons/Button.svelte';
 
 	interface HeaderProps {
 		children: Snippet;
@@ -18,12 +18,12 @@
 	const overlay = getContext<OverlayProps>('overlay-ctx');
 
 	function openMobileOverlay() {
-		overlay.isOpen = true;
+		overlay.isOpen = !overlay.isOpen;
 		overlay.overlayContent = MobileMenu;
 	}
 
 	function openShoppingOverlay() {
-		overlay.isOpen = true;
+		overlay.isOpen = !overlay.isOpen;
 		overlay.overlayContent = ShoppingBasket;
 	}
 </script>

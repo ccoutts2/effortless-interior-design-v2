@@ -137,6 +137,7 @@ export const upsertCustomer = async (session: Stripe.Checkout.Session) => {
 	const email = session.customer_details?.email;
 	const name = session.customer_details?.name;
 	const schemeId = session.metadata?.schemeId;
+	const schemeIdList = schemeId?.split(',');
 
 	if (!email) {
 		return;
@@ -153,6 +154,8 @@ export const upsertCustomer = async (session: Stripe.Checkout.Session) => {
 			}
 		});
 
+		console.log(schemeIdList);
+
 		if (schemeId) {
 			await prisma.order.create({
 				data: {
@@ -160,9 +163,7 @@ export const upsertCustomer = async (session: Stripe.Checkout.Session) => {
 					totalPrice: session.amount_total || 0,
 					withConsultation: false,
 					schemes: {
-						create: {
-							schemeId: schemeId
-						}
+						create: schemeIdList?.map((id) => ({ schemeId: id.trim() }))
 					}
 				}
 			});

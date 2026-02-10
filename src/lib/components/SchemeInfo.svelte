@@ -1,10 +1,10 @@
 <script lang="ts">
 	import { getContext } from 'svelte';
 	import { invalidateAll } from '$app/navigation';
-	import { ShoppingBasket } from '@lucide/svelte';
 	import AddBasketForm from './form/AddBasketForm.svelte';
 	import Form from './form/Form.svelte';
 	import Price from './Price.svelte';
+	import ShoppingBasket from './ShoppingBasket.svelte';
 	import type { OverlayProps } from '$lib/types';
 
 	interface SchemeInfoProps {

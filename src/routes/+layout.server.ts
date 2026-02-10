@@ -25,10 +25,20 @@ const fetchSchemesInBasket = async (sessionId: string) => {
 
 	const schemes = await prisma.schemesInBasket.findMany({
 		where: { basketId: basket.id },
-		include: {
+		select: {
+			schemeId: true,
+			basketId: true,
 			scheme: {
-				include: {
-					roomType: true
+				select: {
+					name: true,
+					images: true,
+					prices: {
+						select: {
+							id: true,
+							unitAmount: true,
+							currency: true
+						}
+					}
 				}
 			}
 		}

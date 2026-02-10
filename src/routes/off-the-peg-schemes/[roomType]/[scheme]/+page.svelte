@@ -11,7 +11,8 @@
 	import SectionHeader from '$lib/components/SectionHeader.svelte';
 	import type { PageData } from './$types';
 	import Price from '$lib/components/Price.svelte';
-	import Button from '$lib/components/buttons/Button.svelte';
+	import Button from '$lib/components/ui/buttons/Button.svelte';
+	import LineBreak from '$lib/components/LineBreak.svelte';
 
 	interface SchemeProps {
 		data: PageData;
@@ -60,6 +61,7 @@
 			<SchemeCarousel roomType={scheme.roomType?.name.toLowerCase()} />
 		</SchemeWrapper>
 
+		<LineBreak />
 		<section class="Scheme__section">
 			<nav class="Tabs">
 				<ul class="Tabs__list">
@@ -258,17 +260,6 @@
 		}
 	}
 
-	.PageBreak {
-		width: 100%;
-		height: 2px;
-		background-color: currentColor;
-		margin-block: 1.5rem;
-
-		@include breakpoints.tablet {
-			margin-block: 3rem;
-		}
-	}
-
 	.Scheme {
 		margin: 0 auto;
 		width: 100%;
@@ -312,10 +303,6 @@
 
 			@include breakpoints.laptop {
 				flex: 0 0 25%;
-			}
-
-			&:last-of-type {
-				padding-right: 1rem;
 			}
 		}
 

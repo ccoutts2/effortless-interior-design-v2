@@ -101,6 +101,7 @@ export const actions = {
 
 		const sessionCookie = cookies.get('session');
 
+		// TODO: redirect to appropriate page
 		if (!sessionCookie) {
 			throw redirect(302, '/');
 		}
@@ -172,7 +173,7 @@ export const actions = {
 		if (!priceId || !schemeId) {
 			throw redirect(302, '/shopping/error');
 		}
-		const session = await StripeService.stripePayment(priceId, schemeId);
+		const session = await StripeService.stripePayment([{ priceId, schemeId }]);
 
 		if (session?.client_secret) {
 			cookies.set('client-secret', session.client_secret, {
