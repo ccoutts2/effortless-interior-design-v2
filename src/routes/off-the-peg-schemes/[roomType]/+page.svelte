@@ -4,7 +4,7 @@
 	import PageHeader from '$lib/components/PageHeader.svelte';
 	import type { Product } from '$lib/types';
 
-	let { data }: { data: { schemes: Product[] } } = $props();
+	let { data }: { data: { products: Product[] } } = $props();
 
 	let isPageReady: boolean = $state(false);
 
@@ -13,15 +13,15 @@
 	});
 </script>
 
-{#if data && data.schemes.length > 0}
+{#if data && data.products.length > 0}
 	<main class="RoomTypeName">
-		<PageHeader title={data.schemes[0].roomType?.name ?? 'Schemes'}>
+		<PageHeader title={data.products[0].roomType?.name ?? 'Schemes'}>
 			<p class="my-8 italic">
-				Elegant {data.schemes[0].roomType?.name?.toLowerCase() ?? ''} schemes for your liking
+				Elegant {data.products[0].roomType?.name?.toLowerCase() ?? ''} schemes for your liking
 			</p>
 		</PageHeader>
 		<ul class="RoomTypeName__list">
-			{#each data.schemes as scheme}
+			{#each data.products as scheme}
 				<li class="RoomTypeName__item">
 					<div class="RoomTypeName__imageWrapper">
 						{#if scheme.images}

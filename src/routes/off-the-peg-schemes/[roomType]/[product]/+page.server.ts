@@ -3,22 +3,23 @@ import { redirect, type Actions } from '@sveltejs/kit';
 import type { PageServerLoad } from './$types';
 import { StripeService } from '$lib/services/stripe.service';
 
-interface SchemeProps {
+interface ProductProps {
 	cookies: any;
 	params: {
 		roomType: string;
-		scheme: string;
+		product: string;
 	};
 	url: any;
 }
 
-const fetchScheme = async (id: string) => {
-	const scheme = await prisma.scheme.findUniqueOrThrow({
+const fetchProduct = async (id: string) => {
+	const product = await prisma.product.findUniqueOrThrow({
 		where: { id },
 		select: {
 			id: true,
 			name: true,
 			description: true,
+			isScheme: true,
 			features: true,
 			images: true,
 			metadata: true,
@@ -39,11 +40,11 @@ const fetchScheme = async (id: string) => {
 			}
 		}
 	});
-	return scheme;
+	return product;
 };
 
-const fetchAllSchemes = async () => {
-	const allSchemes = await prisma.scheme.findMany({
+const fetchAllProducts = async () => {
+	const allProducts = await prisma.product.findMany({
 		where: {
 			active: true
 		},
@@ -51,6 +52,7 @@ const fetchAllSchemes = async () => {
 			id: true,
 			name: true,
 			description: true,
+			isScheme: true,
 			features: true,
 			images: true,
 			metadata: true,
@@ -72,31 +74,31 @@ const fetchAllSchemes = async () => {
 		}
 	});
 
-	return allSchemes;
+	return allProducts;
 };
 
-export const load: PageServerLoad = async ({ params, url }: SchemeProps) => {
-	const scheme = await fetchScheme(params.scheme);
-	const allSchemes = await fetchAllSchemes();
-	const schemeInfoTab = url.searchParams.get('information') ?? 'included';
+export const load: PageServerLoad = async ({ params, url }: ProductProps) => {
+	const product = await fetchProduct(params.product);
+	const allProducts = await fetchAllProducts();
+	const productInfoTab = url.searchParams.get('information') ?? 'included';
 
 	return {
-		scheme,
-		relatedSchemes: allSchemes.filter(
-			(s) => s.roomTypeName === scheme.roomTypeName && s.id !== scheme.id
+		product,
+		relatedProducts: allProducts.filter(
+			(s) => s.roomTypeName === product.roomTypeName && s.id !== product.id
 		),
-		allSchemes: allSchemes.filter((s) => s.id !== scheme.id),
-		schemeInfoTab
+		allProducts: allProducts.filter((s) => s.id !== product.id),
+		productInfoTab
 	};
 };
 
 export const actions = {
 	addToBasket: async ({ request, cookies }) => {
 		const form = await request.formData();
-		const schemeId = form.get('schemeId') as string;
+		const productId = form.get('productId') as string;
 
-		if (!schemeId) {
-			return { status: 400, body: { message: 'Invalid schemeId' } };
+		if (!productId) {
+			return { status: 400, body: { message: 'Invalid productId' } };
 		}
 
 		const sessionCookie = cookies.get('session');
@@ -126,26 +128,26 @@ export const actions = {
 				}
 			});
 
-			const schemeInBasketId = {
-				schemeId: schemeId,
+			const productInBasketId = {
+				productId: productId,
 				basketId: basket.id
 			};
-			await prisma.schemesInBasket.upsert({
-				where: { schemeId_basketId: schemeInBasketId },
+			await prisma.productsInBasket.upsert({
+				where: { productId_basketId: productInBasketId },
 				update: {},
 				create: {
 					basketId: basket.id,
-					schemeId: schemeId
+					productId: productId
 				}
 			});
 
-			const schemesInBasket = await prisma.schemesInBasket.findMany({
+			const productsInBasket = await prisma.productsInBasket.findMany({
 				where: { basketId: basket.id },
 				orderBy: {
 					createdAt: 'asc'
 				},
 				include: {
-					scheme: {
+					product: {
 						include: {
 							roomType: true
 						}
@@ -155,7 +157,7 @@ export const actions = {
 
 			return {
 				status: 200,
-				body: { message: 'Item added to basket successfully.', schemesInBasket }
+				body: { message: 'Item added to basket successfully.', productsInBasket }
 			};
 		} catch (error) {
 			console.log(error);
@@ -168,12 +170,12 @@ export const actions = {
 	purchaseProduct: async ({ request, cookies }) => {
 		const form = await request.formData();
 		const priceId = form.get('price_id') as string;
-		const schemeId = form.get('scheme_id') as string;
+		const productId = form.get('product_id') as string;
 
-		if (!priceId || !schemeId) {
+		if (!priceId || !productId) {
 			throw redirect(302, '/shopping/error');
 		}
-		const session = await StripeService.stripePayment([{ priceId, schemeId }]);
+		const session = await StripeService.stripePayment([{ priceId, productId }]);
 
 		if (session?.client_secret) {
 			cookies.set('client-secret', session.client_secret, {

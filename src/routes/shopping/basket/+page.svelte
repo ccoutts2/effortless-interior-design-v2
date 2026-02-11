@@ -5,5 +5,5 @@
 </script>
 
 <main>
-	<pre>{JSON.stringify(data.schemesInBasket, null, 2)}</pre>
+	<pre>{JSON.stringify(data.productsInBasket, null, 2)}</pre>
 </main>

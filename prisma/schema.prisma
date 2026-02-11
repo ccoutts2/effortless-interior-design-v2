@@ -8,10 +8,11 @@ datasource db {
   url      = env("DATABASE_URL")
 }
 
-model Scheme {
+model Product {
   id          String   @id
   name        String
   description String?
+  isScheme    Boolean  @default(true)
   active      Boolean  @default(false)
   features    String[]
   images      String[]
@@ -23,12 +24,12 @@ model Scheme {
   roomTypeName String?
   roomType     RoomType? @relation(fields: [roomTypeName], references: [name], onDelete: Cascade)
 
-  orders  OrdersOnSchemes[]
-  baskets SchemesInBasket[]
-  prices  SchemePrice[]
+  orders  OrdersOnProducts[]
+  baskets ProductsInBasket[]
+  prices  ProductPrice[]
 }
 
-model SchemePrice {
+model ProductPrice {
   id         String       @id
   active     Boolean      @default(false)
   currency   String
@@ -38,8 +39,8 @@ model SchemePrice {
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
 
-  schemeId String
-  scheme   Scheme @relation(fields: [schemeId], references: [id], onDelete: Cascade)
+  productId String
+  product   Product @relation(fields: [productId], references: [id], onDelete: Cascade)
 }
 
 model RoomType {
@@ -49,7 +50,7 @@ model RoomType {
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
 
-  schemes Scheme[]
+  schemes Product[]
 }
 
 model User {
@@ -78,20 +79,20 @@ model Order {
   userId Int
   user   User? @relation(fields: [userId], references: [id], onDelete: Cascade)
 
-  schemes OrdersOnSchemes[]
+  products OrdersOnProducts[]
 }
 
-model OrdersOnSchemes {
-  schemeId String
+model OrdersOnProducts {
+  productId String
   orderId  Int
 
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
 
   order  Order  @relation(fields: [orderId], references: [id])
-  scheme Scheme @relation(fields: [schemeId], references: [id])
+  product Product @relation(fields: [productId], references: [id])
 
-  @@id([schemeId, orderId])
+  @@id([productId, orderId])
 }
 
 model Basket {
@@ -103,20 +104,20 @@ model Basket {
   sessionId String?  @unique
   session   Session? @relation(fields: [sessionId], references: [id])
 
-  schemes SchemesInBasket[]
+  products ProductsInBasket[]
 }
 
-model SchemesInBasket {
-  schemeId String
+model ProductsInBasket {
+  productId String
   basketId Int
 
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
 
-  scheme Scheme @relation(fields: [schemeId], references: [id])
+  product Product @relation(fields: [productId], references: [id])
   basket Basket @relation(fields: [basketId], references: [id])
 
-  @@id([schemeId, basketId])
+  @@id([productId, basketId])
 }
 
 model Session {

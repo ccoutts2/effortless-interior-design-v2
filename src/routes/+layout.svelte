@@ -16,7 +16,7 @@
 	const overlayState = $state<OverlayProps>({
 		isOpen: false,
 		overlayContent: null,
-		data: data.schemesInBasket ?? null
+		data: data.productsInBasket ?? null
 	});
 
 	setContext('overlay-ctx', overlayState);
@@ -32,7 +32,7 @@
 	};
 
 	$effect(() => {
-		overlayState.data = data.schemesInBasket ?? null;
+		overlayState.data = data.productsInBasket ?? null;
 		if (overlayState.isOpen === true) {
 			document.body.classList.add('overlay-open');
 			const timeout = setTimeout(() => {

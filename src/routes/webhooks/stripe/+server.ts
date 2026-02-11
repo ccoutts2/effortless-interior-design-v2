@@ -35,6 +35,7 @@ export const POST: RequestHandler = async ({ request }) => {
 				break;
 			}
 
+			// Checkout Event
 			case 'checkout.session.completed': {
 				await upsertCustomer(event.data.object);
 				break;

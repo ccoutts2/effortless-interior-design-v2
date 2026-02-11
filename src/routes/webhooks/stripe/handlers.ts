@@ -16,6 +16,7 @@ const mapStripeProductToDbProduct = ({
 	id,
 	name,
 	active,
+	isScheme: metadata.isScheme !== 'false',
 	description,
 	images,
 	features: features.map(({ name }) => name || '').filter((name) => !!name) as string[],
@@ -32,12 +33,13 @@ export const upsertProduct = async (product: Stripe.Product) => {
 		: undefined;
 
 	try {
-		await prisma.scheme.upsert({
+		await prisma.product.upsert({
 			where: { id: dbProduct.id },
 			update: {
 				name: dbProduct.name,
 				active: dbProduct.active,
 				description: dbProduct.description,
+				isScheme: dbProduct.isScheme,
 				features: dbProduct.features,
 				images: dbProduct.images,
 				metadata: dbProduct.metadata as ProductMetaData,
@@ -49,6 +51,7 @@ export const upsertProduct = async (product: Stripe.Product) => {
 				name: dbProduct.name,
 				active: dbProduct.active,
 				description: dbProduct.description,
+				isScheme: dbProduct.isScheme,
 				features: dbProduct.features,
 				images: dbProduct.images,
 				metadata: dbProduct.metadata as ProductMetaData,
@@ -66,7 +69,7 @@ export const deleteProduct = async (product: Stripe.Product) => {
 	const dbProduct = mapStripeProductToDbProduct(product);
 
 	try {
-		await prisma.scheme.delete({
+		await prisma.product.delete({
 			where: { id: dbProduct.id }
 		});
 	} catch (error) {
@@ -84,7 +87,7 @@ const mapStripePriceToDbPrice = ({
 	created
 }: Stripe.Price): Price => ({
 	id,
-	schemeId: typeof product === 'string' ? product : product.id,
+	productId: typeof product === 'string' ? product : product.id,
 	active,
 	currency,
 	type,
@@ -96,11 +99,11 @@ export const upsertPrice = async (price: Stripe.Price) => {
 	const dbPrice = mapStripePriceToDbPrice(price);
 
 	try {
-		await prisma.schemePrice.upsert({
+		await prisma.productPrice.upsert({
 			where: { id: dbPrice.id },
 			update: {
 				id: dbPrice.id,
-				schemeId: dbPrice.schemeId,
+				productId: dbPrice.productId,
 				active: dbPrice.active,
 				currency: dbPrice.currency,
 				type: dbPrice.type,
@@ -108,7 +111,7 @@ export const upsertPrice = async (price: Stripe.Price) => {
 			},
 			create: {
 				id: dbPrice.id,
-				schemeId: dbPrice.schemeId,
+				productId: dbPrice.productId,
 				active: dbPrice.active,
 				currency: dbPrice.currency,
 				type: dbPrice.type,
@@ -125,7 +128,7 @@ export const deletePrice = async (price: Stripe.Price) => {
 	const dbPrice = mapStripePriceToDbPrice(price);
 
 	try {
-		await prisma.schemePrice.delete({
+		await prisma.productPrice.delete({
 			where: { id: dbPrice.id }
 		});
 	} catch (error) {
@@ -136,8 +139,8 @@ export const deletePrice = async (price: Stripe.Price) => {
 export const upsertCustomer = async (session: Stripe.Checkout.Session) => {
 	const email = session.customer_details?.email;
 	const name = session.customer_details?.name;
-	const schemeId = session.metadata?.schemeId;
-	const schemeIdList = schemeId?.split(',');
+	const productId = session.metadata?.productId;
+	const productIdList = productId?.split(',');
 
 	if (!email) {
 		return;
@@ -154,16 +157,14 @@ export const upsertCustomer = async (session: Stripe.Checkout.Session) => {
 			}
 		});
 
-		console.log(schemeIdList);
-
-		if (schemeId) {
+		if (productId) {
 			await prisma.order.create({
 				data: {
 					userId: user.id,
 					totalPrice: session.amount_total || 0,
 					withConsultation: false,
-					schemes: {
-						create: schemeIdList?.map((id) => ({ schemeId: id.trim() }))
+					products: {
+						create: productIdList?.map((id) => ({ productId: id.trim() }))
 					}
 				}
 			});

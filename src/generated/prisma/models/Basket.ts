@@ -208,7 +208,7 @@ export type BasketWhereInput = {
   updatedAt?: Prisma.DateTimeFilter<"Basket"> | Date | string
   sessionId?: Prisma.StringNullableFilter<"Basket"> | string | null
   session?: Prisma.XOR<Prisma.SessionNullableScalarRelationFilter, Prisma.SessionWhereInput> | null
-  schemes?: Prisma.SchemesInBasketListRelationFilter
+  products?: Prisma.ProductsInBasketListRelationFilter
 }
 
 export type BasketOrderByWithRelationInput = {
@@ -217,7 +217,7 @@ export type BasketOrderByWithRelationInput = {
   updatedAt?: Prisma.SortOrder
   sessionId?: Prisma.SortOrderInput | Prisma.SortOrder
   session?: Prisma.SessionOrderByWithRelationInput
-  schemes?: Prisma.SchemesInBasketOrderByRelationAggregateInput
+  products?: Prisma.ProductsInBasketOrderByRelationAggregateInput
 }
 
 export type BasketWhereUniqueInput = Prisma.AtLeast<{
@@ -229,7 +229,7 @@ export type BasketWhereUniqueInput = Prisma.AtLeast<{
   createdAt?: Prisma.DateTimeFilter<"Basket"> | Date | string
   updatedAt?: Prisma.DateTimeFilter<"Basket"> | Date | string
   session?: Prisma.XOR<Prisma.SessionNullableScalarRelationFilter, Prisma.SessionWhereInput> | null
-  schemes?: Prisma.SchemesInBasketListRelationFilter
+  products?: Prisma.ProductsInBasketListRelationFilter
 }, "id" | "sessionId">
 
 export type BasketOrderByWithAggregationInput = {
@@ -258,7 +258,7 @@ export type BasketCreateInput = {
   createdAt?: Date | string
   updatedAt?: Date | string
   session?: Prisma.SessionCreateNestedOneWithoutBasketInput
-  schemes?: Prisma.SchemesInBasketCreateNestedManyWithoutBasketInput
+  products?: Prisma.ProductsInBasketCreateNestedManyWithoutBasketInput
 }
 
 export type BasketUncheckedCreateInput = {
@@ -266,14 +266,14 @@ export type BasketUncheckedCreateInput = {
   createdAt?: Date | string
   updatedAt?: Date | string
   sessionId?: string | null
-  schemes?: Prisma.SchemesInBasketUncheckedCreateNestedManyWithoutBasketInput
+  products?: Prisma.ProductsInBasketUncheckedCreateNestedManyWithoutBasketInput
 }
 
 export type BasketUpdateInput = {
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   session?: Prisma.SessionUpdateOneWithoutBasketNestedInput
-  schemes?: Prisma.SchemesInBasketUpdateManyWithoutBasketNestedInput
+  products?: Prisma.ProductsInBasketUpdateManyWithoutBasketNestedInput
 }
 
 export type BasketUncheckedUpdateInput = {
@@ -281,7 +281,7 @@ export type BasketUncheckedUpdateInput = {
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   sessionId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  schemes?: Prisma.SchemesInBasketUncheckedUpdateManyWithoutBasketNestedInput
+  products?: Prisma.ProductsInBasketUncheckedUpdateManyWithoutBasketNestedInput
 }
 
 export type BasketCreateManyInput = {
@@ -342,18 +342,18 @@ export type BasketNullableScalarRelationFilter = {
   isNot?: Prisma.BasketWhereInput | null
 }
 
-export type BasketCreateNestedOneWithoutSchemesInput = {
-  create?: Prisma.XOR<Prisma.BasketCreateWithoutSchemesInput, Prisma.BasketUncheckedCreateWithoutSchemesInput>
-  connectOrCreate?: Prisma.BasketCreateOrConnectWithoutSchemesInput
+export type BasketCreateNestedOneWithoutProductsInput = {
+  create?: Prisma.XOR<Prisma.BasketCreateWithoutProductsInput, Prisma.BasketUncheckedCreateWithoutProductsInput>
+  connectOrCreate?: Prisma.BasketCreateOrConnectWithoutProductsInput
   connect?: Prisma.BasketWhereUniqueInput
 }
 
-export type BasketUpdateOneRequiredWithoutSchemesNestedInput = {
-  create?: Prisma.XOR<Prisma.BasketCreateWithoutSchemesInput, Prisma.BasketUncheckedCreateWithoutSchemesInput>
-  connectOrCreate?: Prisma.BasketCreateOrConnectWithoutSchemesInput
-  upsert?: Prisma.BasketUpsertWithoutSchemesInput
+export type BasketUpdateOneRequiredWithoutProductsNestedInput = {
+  create?: Prisma.XOR<Prisma.BasketCreateWithoutProductsInput, Prisma.BasketUncheckedCreateWithoutProductsInput>
+  connectOrCreate?: Prisma.BasketCreateOrConnectWithoutProductsInput
+  upsert?: Prisma.BasketUpsertWithoutProductsInput
   connect?: Prisma.BasketWhereUniqueInput
-  update?: Prisma.XOR<Prisma.XOR<Prisma.BasketUpdateToOneWithWhereWithoutSchemesInput, Prisma.BasketUpdateWithoutSchemesInput>, Prisma.BasketUncheckedUpdateWithoutSchemesInput>
+  update?: Prisma.XOR<Prisma.XOR<Prisma.BasketUpdateToOneWithWhereWithoutProductsInput, Prisma.BasketUpdateWithoutProductsInput>, Prisma.BasketUncheckedUpdateWithoutProductsInput>
 }
 
 export type BasketCreateNestedOneWithoutSessionInput = {
@@ -388,42 +388,42 @@ export type BasketUncheckedUpdateOneWithoutSessionNestedInput = {
   update?: Prisma.XOR<Prisma.XOR<Prisma.BasketUpdateToOneWithWhereWithoutSessionInput, Prisma.BasketUpdateWithoutSessionInput>, Prisma.BasketUncheckedUpdateWithoutSessionInput>
 }
 
-export type BasketCreateWithoutSchemesInput = {
+export type BasketCreateWithoutProductsInput = {
   createdAt?: Date | string
   updatedAt?: Date | string
   session?: Prisma.SessionCreateNestedOneWithoutBasketInput
 }
 
-export type BasketUncheckedCreateWithoutSchemesInput = {
+export type BasketUncheckedCreateWithoutProductsInput = {
   id?: number
   createdAt?: Date | string
   updatedAt?: Date | string
   sessionId?: string | null
 }
 
-export type BasketCreateOrConnectWithoutSchemesInput = {
+export type BasketCreateOrConnectWithoutProductsInput = {
   where: Prisma.BasketWhereUniqueInput
-  create: Prisma.XOR<Prisma.BasketCreateWithoutSchemesInput, Prisma.BasketUncheckedCreateWithoutSchemesInput>
+  create: Prisma.XOR<Prisma.BasketCreateWithoutProductsInput, Prisma.BasketUncheckedCreateWithoutProductsInput>
 }
 
-export type BasketUpsertWithoutSchemesInput = {
-  update: Prisma.XOR<Prisma.BasketUpdateWithoutSchemesInput, Prisma.BasketUncheckedUpdateWithoutSchemesInput>
-  create: Prisma.XOR<Prisma.BasketCreateWithoutSchemesInput, Prisma.BasketUncheckedCreateWithoutSchemesInput>
+export type BasketUpsertWithoutProductsInput = {
+  update: Prisma.XOR<Prisma.BasketUpdateWithoutProductsInput, Prisma.BasketUncheckedUpdateWithoutProductsInput>
+  create: Prisma.XOR<Prisma.BasketCreateWithoutProductsInput, Prisma.BasketUncheckedCreateWithoutProductsInput>
   where?: Prisma.BasketWhereInput
 }
 
-export type BasketUpdateToOneWithWhereWithoutSchemesInput = {
+export type BasketUpdateToOneWithWhereWithoutProductsInput = {
   where?: Prisma.BasketWhereInput
-  data: Prisma.XOR<Prisma.BasketUpdateWithoutSchemesInput, Prisma.BasketUncheckedUpdateWithoutSchemesInput>
+  data: Prisma.XOR<Prisma.BasketUpdateWithoutProductsInput, Prisma.BasketUncheckedUpdateWithoutProductsInput>
 }
 
-export type BasketUpdateWithoutSchemesInput = {
+export type BasketUpdateWithoutProductsInput = {
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   session?: Prisma.SessionUpdateOneWithoutBasketNestedInput
 }
 
-export type BasketUncheckedUpdateWithoutSchemesInput = {
+export type BasketUncheckedUpdateWithoutProductsInput = {
   id?: Prisma.IntFieldUpdateOperationsInput | number
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -433,14 +433,14 @@ export type BasketUncheckedUpdateWithoutSchemesInput = {
 export type BasketCreateWithoutSessionInput = {
   createdAt?: Date | string
   updatedAt?: Date | string
-  schemes?: Prisma.SchemesInBasketCreateNestedManyWithoutBasketInput
+  products?: Prisma.ProductsInBasketCreateNestedManyWithoutBasketInput
 }
 
 export type BasketUncheckedCreateWithoutSessionInput = {
   id?: number
   createdAt?: Date | string
   updatedAt?: Date | string
-  schemes?: Prisma.SchemesInBasketUncheckedCreateNestedManyWithoutBasketInput
+  products?: Prisma.ProductsInBasketUncheckedCreateNestedManyWithoutBasketInput
 }
 
 export type BasketCreateOrConnectWithoutSessionInput = {
@@ -462,14 +462,14 @@ export type BasketUpdateToOneWithWhereWithoutSessionInput = {
 export type BasketUpdateWithoutSessionInput = {
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  schemes?: Prisma.SchemesInBasketUpdateManyWithoutBasketNestedInput
+  products?: Prisma.ProductsInBasketUpdateManyWithoutBasketNestedInput
 }
 
 export type BasketUncheckedUpdateWithoutSessionInput = {
   id?: Prisma.IntFieldUpdateOperationsInput | number
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  schemes?: Prisma.SchemesInBasketUncheckedUpdateManyWithoutBasketNestedInput
+  products?: Prisma.ProductsInBasketUncheckedUpdateManyWithoutBasketNestedInput
 }
 
 
@@ -478,11 +478,11 @@ export type BasketUncheckedUpdateWithoutSessionInput = {
  */
 
 export type BasketCountOutputType = {
-  schemes: number
+  products: number
 }
 
 export type BasketCountOutputTypeSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
-  schemes?: boolean | BasketCountOutputTypeCountSchemesArgs
+  products?: boolean | BasketCountOutputTypeCountProductsArgs
 }
 
 /**
@@ -498,8 +498,8 @@ export type BasketCountOutputTypeDefaultArgs<ExtArgs extends runtime.Types.Exten
 /**
  * BasketCountOutputType without action
  */
-export type BasketCountOutputTypeCountSchemesArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
-  where?: Prisma.SchemesInBasketWhereInput
+export type BasketCountOutputTypeCountProductsArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  where?: Prisma.ProductsInBasketWhereInput
 }
 
 
@@ -509,7 +509,7 @@ export type BasketSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs =
   updatedAt?: boolean
   sessionId?: boolean
   session?: boolean | Prisma.Basket$sessionArgs<ExtArgs>
-  schemes?: boolean | Prisma.Basket$schemesArgs<ExtArgs>
+  products?: boolean | Prisma.Basket$productsArgs<ExtArgs>
   _count?: boolean | Prisma.BasketCountOutputTypeDefaultArgs<ExtArgs>
 }, ExtArgs["result"]["basket"]>
 
@@ -539,7 +539,7 @@ export type BasketSelectScalar = {
 export type BasketOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "createdAt" | "updatedAt" | "sessionId", ExtArgs["result"]["basket"]>
 export type BasketInclude<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   session?: boolean | Prisma.Basket$sessionArgs<ExtArgs>
-  schemes?: boolean | Prisma.Basket$schemesArgs<ExtArgs>
+  products?: boolean | Prisma.Basket$productsArgs<ExtArgs>
   _count?: boolean | Prisma.BasketCountOutputTypeDefaultArgs<ExtArgs>
 }
 export type BasketIncludeCreateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
@@ -553,7 +553,7 @@ export type $BasketPayload<ExtArgs extends runtime.Types.Extensions.InternalArgs
   name: "Basket"
   objects: {
     session: Prisma.$SessionPayload<ExtArgs> | null
-    schemes: Prisma.$SchemesInBasketPayload<ExtArgs>[]
+    products: Prisma.$ProductsInBasketPayload<ExtArgs>[]
   }
   scalars: runtime.Types.Extensions.GetPayloadResult<{
     id: number
@@ -955,7 +955,7 @@ readonly fields: BasketFieldRefs;
 export interface Prisma__BasketClient<T, Null = never, ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs, GlobalOmitOptions = {}> extends Prisma.PrismaPromise<T> {
   readonly [Symbol.toStringTag]: "PrismaPromise"
   session<T extends Prisma.Basket$sessionArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Basket$sessionArgs<ExtArgs>>): Prisma.Prisma__SessionClient<runtime.Types.Result.GetResult<Prisma.$SessionPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
-  schemes<T extends Prisma.Basket$schemesArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Basket$schemesArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$SchemesInBasketPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+  products<T extends Prisma.Basket$productsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Basket$productsArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$ProductsInBasketPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   /**
    * Attaches callbacks for the resolution and/or rejection of the Promise.
    * @param onfulfilled The callback to execute when the Promise is resolved.
@@ -1404,27 +1404,27 @@ export type Basket$sessionArgs<ExtArgs extends runtime.Types.Extensions.Internal
 }
 
 /**
- * Basket.schemes
+ * Basket.products
  */
-export type Basket$schemesArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+export type Basket$productsArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   /**
-   * Select specific fields to fetch from the SchemesInBasket
+   * Select specific fields to fetch from the ProductsInBasket
    */
-  select?: Prisma.SchemesInBasketSelect<ExtArgs> | null
+  select?: Prisma.ProductsInBasketSelect<ExtArgs> | null
   /**
-   * Omit specific fields from the SchemesInBasket
+   * Omit specific fields from the ProductsInBasket
    */
-  omit?: Prisma.SchemesInBasketOmit<ExtArgs> | null
+  omit?: Prisma.ProductsInBasketOmit<ExtArgs> | null
   /**
    * Choose, which related nodes to fetch as well
    */
-  include?: Prisma.SchemesInBasketInclude<ExtArgs> | null
-  where?: Prisma.SchemesInBasketWhereInput
-  orderBy?: Prisma.SchemesInBasketOrderByWithRelationInput | Prisma.SchemesInBasketOrderByWithRelationInput[]
-  cursor?: Prisma.SchemesInBasketWhereUniqueInput
+  include?: Prisma.ProductsInBasketInclude<ExtArgs> | null
+  where?: Prisma.ProductsInBasketWhereInput
+  orderBy?: Prisma.ProductsInBasketOrderByWithRelationInput | Prisma.ProductsInBasketOrderByWithRelationInput[]
+  cursor?: Prisma.ProductsInBasketWhereUniqueInput
   take?: number
   skip?: number
-  distinct?: Prisma.SchemesInBasketScalarFieldEnum | Prisma.SchemesInBasketScalarFieldEnum[]
+  distinct?: Prisma.ProductsInBasketScalarFieldEnum | Prisma.ProductsInBasketScalarFieldEnum[]
 }
 
 /**

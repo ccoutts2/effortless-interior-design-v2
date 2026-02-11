@@ -4,17 +4,17 @@ import type { LayoutServerLoad } from './$types';
 export const load: LayoutServerLoad = async ({ cookies }) => {
 	const sessionCookie = cookies.get('session');
 
-	let schemesInBasket = null;
+	let productsInBasket = null;
 	if (sessionCookie) {
-		schemesInBasket = await fetchSchemesInBasket(sessionCookie);
+		productsInBasket = await fetchProductsInBasket(sessionCookie);
 	}
 
 	return {
-		schemesInBasket
+		productsInBasket
 	};
 };
 
-const fetchSchemesInBasket = async (sessionId: string) => {
+const fetchProductsInBasket = async (sessionId: string) => {
 	const basket = await prisma.basket.findUnique({
 		where: { sessionId: sessionId }
 	});
@@ -23,12 +23,12 @@ const fetchSchemesInBasket = async (sessionId: string) => {
 		return null;
 	}
 
-	const schemes = await prisma.schemesInBasket.findMany({
+	const products = await prisma.productsInBasket.findMany({
 		where: { basketId: basket.id },
 		select: {
-			schemeId: true,
+			productId: true,
 			basketId: true,
-			scheme: {
+			product: {
 				select: {
 					name: true,
 					images: true,
@@ -44,5 +44,5 @@ const fetchSchemesInBasket = async (sessionId: string) => {
 		}
 	});
 
-	return schemes;
+	return products;
 };

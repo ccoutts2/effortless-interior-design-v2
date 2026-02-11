@@ -2,10 +2,11 @@ import { faker } from '@faker-js/faker';
 
 faker.seed(123);
 
-export const schemes = (roomTypeNames: string[]) => {
+export const products = (roomTypeNames: string[]) => {
 	return {
 		id: `prod_${faker.string.alphanumeric(14)}`,
 		name: faker.commerce.productName(),
+		isScheme: true,
 		description: faker.commerce.productDescription(),
 		active: true,
 		features: [faker.commerce.productMaterial(), faker.commerce.productAdjective()],

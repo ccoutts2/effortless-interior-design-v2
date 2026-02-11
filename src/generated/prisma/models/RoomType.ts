@@ -173,7 +173,7 @@ export type RoomTypeWhereInput = {
   slug?: Prisma.StringFilter<"RoomType"> | string
   createdAt?: Prisma.DateTimeFilter<"RoomType"> | Date | string
   updatedAt?: Prisma.DateTimeFilter<"RoomType"> | Date | string
-  schemes?: Prisma.SchemeListRelationFilter
+  schemes?: Prisma.ProductListRelationFilter
 }
 
 export type RoomTypeOrderByWithRelationInput = {
@@ -181,7 +181,7 @@ export type RoomTypeOrderByWithRelationInput = {
   slug?: Prisma.SortOrder
   createdAt?: Prisma.SortOrder
   updatedAt?: Prisma.SortOrder
-  schemes?: Prisma.SchemeOrderByRelationAggregateInput
+  schemes?: Prisma.ProductOrderByRelationAggregateInput
 }
 
 export type RoomTypeWhereUniqueInput = Prisma.AtLeast<{
@@ -192,7 +192,7 @@ export type RoomTypeWhereUniqueInput = Prisma.AtLeast<{
   NOT?: Prisma.RoomTypeWhereInput | Prisma.RoomTypeWhereInput[]
   createdAt?: Prisma.DateTimeFilter<"RoomType"> | Date | string
   updatedAt?: Prisma.DateTimeFilter<"RoomType"> | Date | string
-  schemes?: Prisma.SchemeListRelationFilter
+  schemes?: Prisma.ProductListRelationFilter
 }, "name" | "slug">
 
 export type RoomTypeOrderByWithAggregationInput = {
@@ -220,7 +220,7 @@ export type RoomTypeCreateInput = {
   slug: string
   createdAt?: Date | string
   updatedAt?: Date | string
-  schemes?: Prisma.SchemeCreateNestedManyWithoutRoomTypeInput
+  schemes?: Prisma.ProductCreateNestedManyWithoutRoomTypeInput
 }
 
 export type RoomTypeUncheckedCreateInput = {
@@ -228,7 +228,7 @@ export type RoomTypeUncheckedCreateInput = {
   slug: string
   createdAt?: Date | string
   updatedAt?: Date | string
-  schemes?: Prisma.SchemeUncheckedCreateNestedManyWithoutRoomTypeInput
+  schemes?: Prisma.ProductUncheckedCreateNestedManyWithoutRoomTypeInput
 }
 
 export type RoomTypeUpdateInput = {
@@ -236,7 +236,7 @@ export type RoomTypeUpdateInput = {
   slug?: Prisma.StringFieldUpdateOperationsInput | string
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  schemes?: Prisma.SchemeUpdateManyWithoutRoomTypeNestedInput
+  schemes?: Prisma.ProductUpdateManyWithoutRoomTypeNestedInput
 }
 
 export type RoomTypeUncheckedUpdateInput = {
@@ -244,7 +244,7 @@ export type RoomTypeUncheckedUpdateInput = {
   slug?: Prisma.StringFieldUpdateOperationsInput | string
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  schemes?: Prisma.SchemeUncheckedUpdateManyWithoutRoomTypeNestedInput
+  schemes?: Prisma.ProductUncheckedUpdateManyWithoutRoomTypeNestedInput
 }
 
 export type RoomTypeCreateManyInput = {
@@ -381,7 +381,7 @@ export type RoomTypeCountOutputTypeDefaultArgs<ExtArgs extends runtime.Types.Ext
  * RoomTypeCountOutputType without action
  */
 export type RoomTypeCountOutputTypeCountSchemesArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
-  where?: Prisma.SchemeWhereInput
+  where?: Prisma.ProductWhereInput
 }
 
 
@@ -426,7 +426,7 @@ export type RoomTypeIncludeUpdateManyAndReturn<ExtArgs extends runtime.Types.Ext
 export type $RoomTypePayload<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   name: "RoomType"
   objects: {
-    schemes: Prisma.$SchemePayload<ExtArgs>[]
+    schemes: Prisma.$ProductPayload<ExtArgs>[]
   }
   scalars: runtime.Types.Extensions.GetPayloadResult<{
     name: string
@@ -827,7 +827,7 @@ readonly fields: RoomTypeFieldRefs;
  */
 export interface Prisma__RoomTypeClient<T, Null = never, ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs, GlobalOmitOptions = {}> extends Prisma.PrismaPromise<T> {
   readonly [Symbol.toStringTag]: "PrismaPromise"
-  schemes<T extends Prisma.RoomType$schemesArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.RoomType$schemesArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$SchemePayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+  schemes<T extends Prisma.RoomType$schemesArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.RoomType$schemesArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$ProductPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   /**
    * Attaches callbacks for the resolution and/or rejection of the Promise.
    * @param onfulfilled The callback to execute when the Promise is resolved.
@@ -1253,23 +1253,23 @@ export type RoomTypeDeleteManyArgs<ExtArgs extends runtime.Types.Extensions.Inte
  */
 export type RoomType$schemesArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   /**
-   * Select specific fields to fetch from the Scheme
+   * Select specific fields to fetch from the Product
    */
-  select?: Prisma.SchemeSelect<ExtArgs> | null
+  select?: Prisma.ProductSelect<ExtArgs> | null
   /**
-   * Omit specific fields from the Scheme
+   * Omit specific fields from the Product
    */
-  omit?: Prisma.SchemeOmit<ExtArgs> | null
+  omit?: Prisma.ProductOmit<ExtArgs> | null
   /**
    * Choose, which related nodes to fetch as well
    */
-  include?: Prisma.SchemeInclude<ExtArgs> | null
-  where?: Prisma.SchemeWhereInput
-  orderBy?: Prisma.SchemeOrderByWithRelationInput | Prisma.SchemeOrderByWithRelationInput[]
-  cursor?: Prisma.SchemeWhereUniqueInput
+  include?: Prisma.ProductInclude<ExtArgs> | null
+  where?: Prisma.ProductWhereInput
+  orderBy?: Prisma.ProductOrderByWithRelationInput | Prisma.ProductOrderByWithRelationInput[]
+  cursor?: Prisma.ProductWhereUniqueInput
   take?: number
   skip?: number
-  distinct?: Prisma.SchemeScalarFieldEnum | Prisma.SchemeScalarFieldEnum[]
+  distinct?: Prisma.ProductScalarFieldEnum | Prisma.ProductScalarFieldEnum[]
 }
 
 /**

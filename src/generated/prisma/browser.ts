@@ -17,15 +17,15 @@ export { Prisma }
 export * as $Enums from './enums'
 export * from './enums';
 /**
- * Model Scheme
+ * Model Product
  * 
  */
-export type Scheme = Prisma.SchemeModel
+export type Product = Prisma.ProductModel
 /**
- * Model SchemePrice
+ * Model ProductPrice
  * 
  */
-export type SchemePrice = Prisma.SchemePriceModel
+export type ProductPrice = Prisma.ProductPriceModel
 /**
  * Model RoomType
  * 
@@ -42,20 +42,20 @@ export type User = Prisma.UserModel
  */
 export type Order = Prisma.OrderModel
 /**
- * Model OrdersOnSchemes
+ * Model OrdersOnProducts
  * 
  */
-export type OrdersOnSchemes = Prisma.OrdersOnSchemesModel
+export type OrdersOnProducts = Prisma.OrdersOnProductsModel
 /**
  * Model Basket
  * 
  */
 export type Basket = Prisma.BasketModel
 /**
- * Model SchemesInBasket
+ * Model ProductsInBasket
  * 
  */
-export type SchemesInBasket = Prisma.SchemesInBasketModel
+export type ProductsInBasket = Prisma.ProductsInBasketModel
 /**
  * Model Session
  * 

@@ -14,24 +14,24 @@
 	import Button from '$lib/components/ui/buttons/Button.svelte';
 	import LineBreak from '$lib/components/LineBreak.svelte';
 
-	interface SchemeProps {
+	interface PageProps {
 		data: PageData;
 	}
 
-	let { data }: SchemeProps = $props();
+	let { data }: PageProps = $props();
 
 	let isPageReady: boolean = $state(false);
 
-	const schemeInfoTab = $derived(data.schemeInfoTab);
+	const productInfoTab = $derived(data.productInfoTab);
 
 	// Retreive specific product
-	const scheme = $derived(data.scheme);
+	const product = $derived(data.product);
 
-	// Retrieve all products related to scheme;
-	const allRelatedSchemes = $derived(data.relatedSchemes);
+	// Retrieve all products related to product;
+	const allRelatedProducts = $derived(data.relatedProducts);
 
-	// Retreive all available schemes
-	const allAvailableSchemes = $derived(data.allSchemes);
+	// Retreive all available products
+	const allAvailableProducts = $derived(data.allProducts);
 
 	onMount(() => {
 		isPageReady = true;
@@ -39,18 +39,18 @@
 </script>
 
 <main class="Scheme">
-	{#if scheme}
+	{#if product}
 		<SchemeWrapper>
 			<SchemeInfoWrapper>
-				{#if scheme.prices && scheme.prices.length > 0}
+				{#if product.prices && product.prices.length > 0}
 					<SchemeInfo
-						id={scheme.id}
-						name={scheme.name}
-						description={scheme.description}
-						features={scheme.features}
-						price={scheme.prices[0].unitAmount}
-						currency={scheme.prices[0].currency}
-						priceId={scheme.prices[0].id}
+						id={product.id}
+						name={product.name}
+						description={product.description}
+						features={product.features}
+						price={product.prices[0].unitAmount}
+						currency={product.prices[0].currency}
+						priceId={product.prices[0].id}
 					/>
 				{:else}
 					<p>Price information unavailable.</p>
@@ -58,7 +58,7 @@
 				<Accordion {accordionData} />
 			</SchemeInfoWrapper>
 
-			<SchemeCarousel roomType={scheme.roomType?.name.toLowerCase()} />
+			<SchemeCarousel roomType={product.roomType?.name.toLowerCase()} />
 		</SchemeWrapper>
 
 		<LineBreak />
@@ -71,7 +71,7 @@
 							href="?information=included"
 							data-sveltekit-noscroll
 							data-sveltekit-replacestate
-							class:active={schemeInfoTab === 'included'}>What's included?</a
+							class:active={productInfoTab === 'included'}>What's included?</a
 						>
 					</li>
 					<li class="Tabs__item">
@@ -80,7 +80,7 @@
 							href="?information=benefits"
 							data-sveltekit-noscroll
 							data-sveltekit-replacestate
-							class:active={schemeInfoTab === 'benefits'}>What are the benefits?</a
+							class:active={productInfoTab === 'benefits'}>What are the benefits?</a
 						>
 					</li>
 					<li class="Tabs__item">
@@ -89,12 +89,12 @@
 							href="?information=important"
 							data-sveltekit-noscroll
 							data-sveltekit-replacestate
-							class:active={schemeInfoTab === 'important'}>Important info</a
+							class:active={productInfoTab === 'important'}>Important info</a
 						>
 					</li>
 				</ul>
 			</nav>
-			{#if schemeInfoTab === 'included'}
+			{#if productInfoTab === 'included'}
 				<div>
 					<p class="mb-4!">
 						This Off-the-Peg Design Scheme takes the form of a PDF file which contains:
@@ -109,7 +109,7 @@
 					</ul>
 					<a href="/">View all information</a>
 				</div>
-			{:else if schemeInfoTab === 'important'}
+			{:else if productInfoTab === 'important'}
 				<div>
 					<p>
 						While we strive to make our renderings as accurate as possible, please be aware that
@@ -120,7 +120,7 @@
 					</p>
 					<a href="/">View all information</a>
 				</div>
-			{:else if schemeInfoTab === 'benefits'}
+			{:else if productInfoTab === 'benefits'}
 				<div>
 					<ul>
 						<CheckList
@@ -141,14 +141,14 @@
 		<section>
 			<SectionHeader
 				headerTag="h2"
-				header="Related {scheme.roomTypeName} Schemes"
+				header="Related {product.roomTypeName} Schemes"
 				textCenter={true}
 			/>
 
 			<div class="MoreSchemes">
 				<div class="MoreSchemes__viewport">
 					<ul class="MoreSchemes__list">
-						{#each allRelatedSchemes as product}
+						{#each allRelatedProducts as product}
 							<li class="MoreSchemes__item">
 								<article class="MoreSchemes__product">
 									<div class="MoreSchemes__info">

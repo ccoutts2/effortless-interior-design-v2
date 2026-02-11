@@ -1,14 +1,14 @@
 import prisma from '$lib/server/prisma';
 import type { PageServerLoad } from './$types';
 
-interface RoomSchemeProps {
+interface RoomProductProps {
 	params: {
 		roomType: string;
 	};
 }
 
-const fetchSchemes = async (roomTypeSlug: string) => {
-	const schemes = await prisma.scheme.findMany({
+const fetchProducts = async (roomTypeSlug: string) => {
+	const products = await prisma.product.findMany({
 		where: {
 			roomType: {
 				slug: {
@@ -31,13 +31,13 @@ const fetchSchemes = async (roomTypeSlug: string) => {
 			}
 		}
 	});
-	return schemes;
+	return products;
 };
 
-export const load: PageServerLoad = async ({ params }: RoomSchemeProps) => {
-	const schemes = await fetchSchemes(params.roomType);
+export const load: PageServerLoad = async ({ params }: RoomProductProps) => {
+	const products = await fetchProducts(params.roomType);
 
 	return {
-		schemes
+		products
 	};
 };

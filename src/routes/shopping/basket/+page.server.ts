@@ -15,9 +15,9 @@ export const actions = {
 		const basket = await prisma.basket.findUnique({
 			where: { sessionId },
 			include: {
-				schemes: {
+				products: {
 					include: {
-						scheme: {
+						product: {
 							include: {
 								prices: {
 									where: { active: true },
@@ -30,14 +30,14 @@ export const actions = {
 			}
 		});
 
-		if (!basket || basket.schemes.length === 0) {
+		if (!basket || basket.products.length === 0) {
 			throw redirect(302, '/shopping/error');
 		}
 
-		const itemsToPurchase = basket.schemes.map((scheme) => {
+		const itemsToPurchase = basket.products.map((product) => {
 			return {
-				priceId: scheme.scheme.prices[0].id,
-				schemeId: scheme.schemeId
+				priceId: product.product.prices[0].id,
+				productId: product.productId
 			};
 		});
 
@@ -57,10 +57,10 @@ export const actions = {
 	deleteItem: async ({ cookies, request }) => {
 		const form = await request.formData();
 
-		const schemeId = form.get('schemeId') as string;
+		const productId = form.get('productId') as string;
 
-		if (!schemeId) {
-			return { status: 400, body: { message: 'Invalid schemeId' } };
+		if (!productId) {
+			return { status: 400, body: { message: 'Invalid productId' } };
 		}
 
 		const sessionId = cookies.get('session');
@@ -80,10 +80,10 @@ export const actions = {
 				return fail(404, { message: 'Basket not found' });
 			}
 
-			await prisma.schemesInBasket.delete({
+			await prisma.productsInBasket.delete({
 				where: {
-					schemeId_basketId: {
-						schemeId: schemeId,
+					productId_basketId: {
+						productId: productId,
 						basketId: basket.id
 					}
 				}

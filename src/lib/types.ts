@@ -13,6 +13,7 @@ export type Product = {
 	id: string;
 	name: string;
 	active: boolean;
+	isScheme: boolean;
 	description?: string | null;
 	features: string[];
 	images: string[];
@@ -28,7 +29,7 @@ export type Product = {
 
 export type Price = {
 	id: string;
-	schemeId: string;
+	productId: string;
 	active: boolean;
 	currency: string;
 	unitAmount: number | null;
@@ -39,4 +40,5 @@ export type Price = {
 export type ProductMetaData = {
 	altDescription?: string;
 	roomTypeName?: string;
+	isScheme?: string;
 };

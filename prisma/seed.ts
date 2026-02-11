@@ -1,13 +1,12 @@
 import { PrismaClient } from '../src/generated/prisma/client';
 
-import { roomType, schemes } from './generators';
+import { roomType, products } from './generators';
 import { roomTypeNames } from './generators/roomType';
 import { resetDatabase } from './generators/resetDatabase';
-import { faker } from '@faker-js/faker';
 
 export const prisma = new PrismaClient();
 
-let schemeArray = [] as any;
+let productArray = [] as any;
 
 async function createRoomTypes() {
 	console.log('Creating room types');
@@ -27,14 +26,14 @@ async function createRoomTypes() {
 	console.log('Finished creating rooms');
 }
 
-async function createSchemes() {
-	console.log('Creating schemes');
+async function createProducts() {
+	console.log('Creating products');
 
 	for (let i = 0; i < 10; i++) {
-		const schemeData = schemes(roomTypeNames);
-		const newScheme = await prisma.scheme.create({
+		const productData = products(roomTypeNames);
+		const newProduct = await prisma.product.create({
 			data: {
-				...schemeData,
+				...productData,
 				prices: {
 					create: {
 						id: `price_${Math.random().toString(36)}`,
@@ -46,10 +45,10 @@ async function createSchemes() {
 				}
 			}
 		});
-		schemeArray.push(newScheme);
+		productArray.push(newProduct);
 	}
 
-	console.log('Finished creating schemes');
+	console.log('Finished creating products');
 }
 
 const main = async () => {
@@ -57,7 +56,7 @@ const main = async () => {
 	await resetDatabase();
 
 	await createRoomTypes();
-	await createSchemes();
+	await createProducts();
 };
 
 main()

@@ -7,13 +7,13 @@
  *
  * 🟢 You can import this file directly.
  */
-export type * from './models/Scheme'
-export type * from './models/SchemePrice'
+export type * from './models/Product'
+export type * from './models/ProductPrice'
 export type * from './models/RoomType'
 export type * from './models/User'
 export type * from './models/Order'
-export type * from './models/OrdersOnSchemes'
+export type * from './models/OrdersOnProducts'
 export type * from './models/Basket'
-export type * from './models/SchemesInBasket'
+export type * from './models/ProductsInBasket'
 export type * from './models/Session'
 export type * from './commonInputTypes'

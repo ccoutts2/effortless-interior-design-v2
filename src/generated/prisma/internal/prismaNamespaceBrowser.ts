@@ -19,14 +19,14 @@ export type * from '../models'
 export type * from './prismaNamespace'
 export const Decimal = runtime.Decimal
 export const ModelName = {
-  Scheme: 'Scheme',
-  SchemePrice: 'SchemePrice',
+  Product: 'Product',
+  ProductPrice: 'ProductPrice',
   RoomType: 'RoomType',
   User: 'User',
   Order: 'Order',
-  OrdersOnSchemes: 'OrdersOnSchemes',
+  OrdersOnProducts: 'OrdersOnProducts',
   Basket: 'Basket',
-  SchemesInBasket: 'SchemesInBasket',
+  ProductsInBasket: 'ProductsInBasket',
   Session: 'Session'
 } as const
 
@@ -45,10 +45,11 @@ export const TransactionIsolationLevel = runtime.makeStrictEnum({
 export type TransactionIsolationLevel = (typeof TransactionIsolationLevel)[keyof typeof TransactionIsolationLevel]
 
 
-export const SchemeScalarFieldEnum = {
+export const ProductScalarFieldEnum = {
   id: 'id',
   name: 'name',
   description: 'description',
+  isScheme: 'isScheme',
   active: 'active',
   features: 'features',
   images: 'images',
@@ -58,10 +59,10 @@ export const SchemeScalarFieldEnum = {
   roomTypeName: 'roomTypeName'
 } as const
 
-export type SchemeScalarFieldEnum = (typeof SchemeScalarFieldEnum)[keyof typeof SchemeScalarFieldEnum]
+export type ProductScalarFieldEnum = (typeof ProductScalarFieldEnum)[keyof typeof ProductScalarFieldEnum]
 
 
-export const SchemePriceScalarFieldEnum = {
+export const ProductPriceScalarFieldEnum = {
   id: 'id',
   active: 'active',
   currency: 'currency',
@@ -69,10 +70,10 @@ export const SchemePriceScalarFieldEnum = {
   unitAmount: 'unitAmount',
   createdAt: 'createdAt',
   updatedAt: 'updatedAt',
-  schemeId: 'schemeId'
+  productId: 'productId'
 } as const
 
-export type SchemePriceScalarFieldEnum = (typeof SchemePriceScalarFieldEnum)[keyof typeof SchemePriceScalarFieldEnum]
+export type ProductPriceScalarFieldEnum = (typeof ProductPriceScalarFieldEnum)[keyof typeof ProductPriceScalarFieldEnum]
 
 
 export const RoomTypeScalarFieldEnum = {
@@ -112,14 +113,14 @@ export const OrderScalarFieldEnum = {
 export type OrderScalarFieldEnum = (typeof OrderScalarFieldEnum)[keyof typeof OrderScalarFieldEnum]
 
 
-export const OrdersOnSchemesScalarFieldEnum = {
-  schemeId: 'schemeId',
+export const OrdersOnProductsScalarFieldEnum = {
+  productId: 'productId',
   orderId: 'orderId',
   createdAt: 'createdAt',
   updatedAt: 'updatedAt'
 } as const
 
-export type OrdersOnSchemesScalarFieldEnum = (typeof OrdersOnSchemesScalarFieldEnum)[keyof typeof OrdersOnSchemesScalarFieldEnum]
+export type OrdersOnProductsScalarFieldEnum = (typeof OrdersOnProductsScalarFieldEnum)[keyof typeof OrdersOnProductsScalarFieldEnum]
 
 
 export const BasketScalarFieldEnum = {
@@ -132,14 +133,14 @@ export const BasketScalarFieldEnum = {
 export type BasketScalarFieldEnum = (typeof BasketScalarFieldEnum)[keyof typeof BasketScalarFieldEnum]
 
 
-export const SchemesInBasketScalarFieldEnum = {
-  schemeId: 'schemeId',
+export const ProductsInBasketScalarFieldEnum = {
+  productId: 'productId',
   basketId: 'basketId',
   createdAt: 'createdAt',
   updatedAt: 'updatedAt'
 } as const
 
-export type SchemesInBasketScalarFieldEnum = (typeof SchemesInBasketScalarFieldEnum)[keyof typeof SchemesInBasketScalarFieldEnum]
+export type ProductsInBasketScalarFieldEnum = (typeof ProductsInBasketScalarFieldEnum)[keyof typeof ProductsInBasketScalarFieldEnum]
 
 
 export const SessionScalarFieldEnum = {

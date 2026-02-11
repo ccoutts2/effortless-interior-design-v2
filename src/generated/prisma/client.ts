@@ -28,8 +28,8 @@ export * from "./enums"
  * @example
  * ```
  * const prisma = new PrismaClient()
- * // Fetch zero or more Schemes
- * const schemes = await prisma.scheme.findMany()
+ * // Fetch zero or more Products
+ * const products = await prisma.product.findMany()
  * ```
  * 
  * Read more in our [docs](https://www.prisma.io/docs/reference/tools-and-interfaces/prisma-client).
@@ -44,15 +44,15 @@ path.join(__dirname, "libquery_engine-darwin-arm64.dylib.node")
 path.join(process.cwd(), "src/generated/prisma/libquery_engine-darwin-arm64.dylib.node")
 
 /**
- * Model Scheme
+ * Model Product
  * 
  */
-export type Scheme = Prisma.SchemeModel
+export type Product = Prisma.ProductModel
 /**
- * Model SchemePrice
+ * Model ProductPrice
  * 
  */
-export type SchemePrice = Prisma.SchemePriceModel
+export type ProductPrice = Prisma.ProductPriceModel
 /**
  * Model RoomType
  * 
@@ -69,20 +69,20 @@ export type User = Prisma.UserModel
  */
 export type Order = Prisma.OrderModel
 /**
- * Model OrdersOnSchemes
+ * Model OrdersOnProducts
  * 
  */
-export type OrdersOnSchemes = Prisma.OrdersOnSchemesModel
+export type OrdersOnProducts = Prisma.OrdersOnProductsModel
 /**
  * Model Basket
  * 
  */
 export type Basket = Prisma.BasketModel
 /**
- * Model SchemesInBasket
+ * Model ProductsInBasket
  * 
  */
-export type SchemesInBasket = Prisma.SchemesInBasketModel
+export type ProductsInBasket = Prisma.ProductsInBasketModel
 /**
  * Model Session
  * 
