@@ -13,6 +13,7 @@
 	import { superForm } from 'sveltekit-superforms';
 	import TextField from '$lib/components/form/inputs/TextField.svelte';
 	import SlideIn from '$lib/components/SlideIn.svelte';
+	import Modal from '$lib/components/ui/Modal.svelte';
 
 	interface CustomerTestimonial {
 		text: string;

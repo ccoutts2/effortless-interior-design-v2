@@ -23,7 +23,7 @@
 			<div class="flex w-full items-center justify-between">
 				<NavLink isMobileMenu={true} href="/off-the-peg-schemes">Off-The-Peg-Schemes</NavLink>
 
-				<PlusMinusButton isOpen={isSubMenuOpen} onClick={openSubMenu} />
+				<PlusMinusButton decorator={false} isOpen={isSubMenuOpen} onClick={openSubMenu} />
 			</div>
 
 			<SubMenu {isSubMenuOpen} direction="vertical" />

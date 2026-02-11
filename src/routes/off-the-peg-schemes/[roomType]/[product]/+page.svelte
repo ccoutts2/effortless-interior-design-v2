@@ -13,6 +13,7 @@
 	import Price from '$lib/components/Price.svelte';
 	import Button from '$lib/components/ui/buttons/Button.svelte';
 	import LineBreak from '$lib/components/LineBreak.svelte';
+	import Modal from '$lib/components/ui/Modal.svelte';
 
 	interface PageProps {
 		data: PageData;
@@ -32,6 +33,8 @@
 
 	// Retreive all available products
 	const allAvailableProducts = $derived(data.allProducts);
+
+	let showModal: boolean = $state(false);
 
 	onMount(() => {
 		isPageReady = true;

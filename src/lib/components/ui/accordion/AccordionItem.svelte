@@ -26,7 +26,7 @@
 		<span class="AccordionItem__title">
 			{title}
 		</span>
-		<PlusMinusButton isOpen={toggled} />
+		<PlusMinusButton isOpen={toggled} decorator={true} />
 	</summary>
 	{#if toggled}
 		<div class="AccordionItem__content" transition:slide={{ duration: 500 }}>

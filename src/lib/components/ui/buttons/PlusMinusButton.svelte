@@ -2,14 +2,21 @@
 	interface PlusMinusButtonProps {
 		isOpen: boolean;
 		onClick?: () => void;
+		decorator: boolean;
 	}
 
-	let { isOpen, onClick }: PlusMinusButtonProps = $props();
+	let { isOpen, decorator, onClick }: PlusMinusButtonProps = $props();
 </script>
 
-<button type="button" onclick={onClick} class="Plus {isOpen ? 'Minus' : ''}"
-	><span class="visually-hidden">{isOpen ? 'Collapse' : 'Expand'}</span></button
->
+{#if !decorator}
+	<button type="button" onclick={onClick} class="Plus {isOpen ? 'Minus' : ''}"
+		><span class="visually-hidden">{isOpen ? 'Collapse' : 'Expand'}</span></button
+	>
+{:else}
+	<span class="Plus {isOpen ? 'Minus' : ''}" aria-hidden="true"
+		><span class="visually-hidden">{isOpen ? 'Collapse' : 'Expand'}</span></span
+	>
+{/if}
 
 <style lang="scss">
 	.Plus {
