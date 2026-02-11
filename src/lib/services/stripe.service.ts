@@ -1,3 +1,4 @@
+import { STRIPE_CONSULTATION_PRICE_ID } from '$env/static/private';
 import { PUBLIC_DOMAIN } from '$env/static/public';
 import { stripe } from '$lib/server/stripe/stripe';
 
@@ -16,7 +17,7 @@ export const StripeService = {
 				})),
 				optional_items: [
 					{
-						price: 'price_1SzNUbFDhgGDMpbYzt5jzsVD',
+						price: STRIPE_CONSULTATION_PRICE_ID,
 						quantity: 1
 					}
 				],

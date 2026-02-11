@@ -1,6 +1,8 @@
 import type Stripe from 'stripe';
 import type { Price, Product, ProductMetaData } from '$lib/types';
 import prisma from '$lib/server/prisma';
+import { StripeService } from '$lib/services/stripe.service';
+import { STRIPE_CONSULTATION_PRICE_ID } from '$env/static/private';
 
 const mapStripeProductToDbProduct = ({
 	id,
@@ -140,11 +142,18 @@ export const upsertCustomer = async (session: Stripe.Checkout.Session) => {
 	const email = session.customer_details?.email;
 	const name = session.customer_details?.name;
 	const productId = session.metadata?.productId;
-	const productIdList = productId?.split(',');
+	const productIdList = productId?.split(',') || [];
 
 	if (!email) {
 		return;
 	}
+
+	const expandedSession = await StripeService.retrieveSession(session.id);
+
+	const hasConsultation =
+		expandedSession.line_items?.data.some(
+			(item) => item.price?.id === STRIPE_CONSULTATION_PRICE_ID
+		) || false;
 
 	try {
 		const user = await prisma.user.upsert({
@@ -162,7 +171,7 @@ export const upsertCustomer = async (session: Stripe.Checkout.Session) => {
 				data: {
 					userId: user.id,
 					totalPrice: session.amount_total || 0,
-					withConsultation: false,
+					withConsultation: hasConsultation,
 					products: {
 						create: productIdList?.map((id) => ({ productId: id.trim() }))
 					}

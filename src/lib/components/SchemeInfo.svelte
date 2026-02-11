@@ -62,12 +62,12 @@
 			}}
 			buttonLabel={addingToBasket ? 'Adding' : 'Add to basket'}
 		>
-			<input type="hidden" name="schemeId" value={id} />
+			<input type="hidden" name="productId" value={id} />
 		</AddBasketForm>
 
 		<Form action="?/purchaseProduct" buttonLabel="Checkout Now">
 			<input type="hidden" name="price_id" value={priceId} />
-			<input type="hidden" name="scheme_id" value={id} />
+			<input type="hidden" name="product_id" value={id} />
 		</Form>
 	</div>
 </article>

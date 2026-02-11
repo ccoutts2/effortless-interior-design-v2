@@ -27,21 +27,21 @@
 						<article class="ShoppingBasket__item">
 							<div class="ShoppingBasket__productContainer">
 								<div class="ShoppingBasket__productInfo">
-									<span>{item.scheme.name}</span>
+									<span>{item.product.name}</span>
 									<span
 										><Price
-											price={item.scheme.prices[0].unitAmount}
-											currency={item.scheme.prices[0].currency}
+											price={item.product.prices[0].unitAmount}
+											currency={item.product.prices[0].currency}
 										/></span
 									>
 								</div>
 								<form method="POST" action="/shopping/basket?/deleteItem" use:enhance>
-									<input type="hidden" name="schemeId" value={item.schemeId} />
+									<input type="hidden" name="productId" value={item.productId} />
 									<button type="submit" class="ShoppingBasket__removeButton">Remove</button>
 								</form>
 							</div>
-							{#if item.scheme.images[0]}
-								<div class="ShoppingBasket__image"><img src={item.scheme.images[0]} alt="" /></div>
+							{#if item.product.images[0]}
+								<div class="ShoppingBasket__image"><img src={item.product.images[0]} alt="" /></div>
 							{/if}
 						</article>
 					</li>
