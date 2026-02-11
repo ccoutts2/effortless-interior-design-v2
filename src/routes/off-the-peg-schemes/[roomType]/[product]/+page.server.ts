@@ -1,5 +1,5 @@
 import prisma from '$lib/server/prisma';
-import { redirect, type Actions } from '@sveltejs/kit';
+import { fail, redirect, type Actions } from '@sveltejs/kit';
 import type { PageServerLoad } from './$types';
 import { StripeService } from '$lib/services/stripe.service';
 
@@ -98,7 +98,7 @@ export const actions = {
 		const productId = form.get('productId') as string;
 
 		if (!productId) {
-			return { status: 400, body: { message: 'Invalid productId' } };
+			return fail(400, { message: 'Invalid productId' });
 		}
 
 		const sessionCookie = cookies.get('session');
@@ -155,16 +155,10 @@ export const actions = {
 				}
 			});
 
-			return {
-				status: 200,
-				body: { message: 'Item added to basket successfully.', productsInBasket }
-			};
+			return { success: true, message: 'Item added to basket successfully.', productsInBasket };
 		} catch (error) {
 			console.log(error);
-			return {
-				status: 500,
-				body: { message: 'Failed to add item to basket.' }
-			};
+			return fail(500, { message: 'Failed to add item to basket.' });
 		}
 	},
 	purchaseProduct: async ({ request, cookies }) => {
@@ -175,17 +169,25 @@ export const actions = {
 		if (!priceId || !productId) {
 			throw redirect(302, '/shopping/error');
 		}
-		const session = await StripeService.stripePayment([{ priceId, productId }]);
 
-		if (session?.client_secret) {
-			cookies.set('client-secret', session.client_secret, {
-				path: '/',
-				httpOnly: true,
-				secure: true,
-				sameSite: 'strict'
-			});
-			throw redirect(302, '/shopping/checkout');
+		try {
+			const session = await StripeService.stripePayment([{ priceId, productId }]);
+
+			if (session?.client_secret) {
+				cookies.set('client-secret', session.client_secret, {
+					path: '/',
+					httpOnly: true,
+					secure: true,
+					sameSite: 'strict'
+				});
+				throw redirect(302, '/shopping/checkout');
+			}
+		} catch (error) {
+			if (error instanceof Response) throw error;
+
+			+console.error('Stripe payment error:', error);
 		}
+
 		throw redirect(302, '/shopping/error');
 	}
 } satisfies Actions;

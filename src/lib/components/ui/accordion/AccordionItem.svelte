@@ -1,5 +1,6 @@
 <script lang="ts">
 	import { slide } from 'svelte/transition';
+	import PlusMinusButton from '../buttons/PlusMinusButton.svelte';
 
 	let { title, content, name }: { title: string; content: string; name?: string } = $props();
 
@@ -25,13 +26,7 @@
 		<span class="AccordionItem__title">
 			{title}
 		</span>
-		<span
-			class="AccordionItem__icon"
-			aria-label="Icon toggle for accordion item."
-			aria-hidden="true"
-			data-is-toggled={toggled}
-		>
-		</span>
+		<PlusMinusButton isOpen={toggled} />
 	</summary>
 	{#if toggled}
 		<div class="AccordionItem__content" transition:slide={{ duration: 500 }}>
@@ -81,49 +76,6 @@
 			margin: 0;
 			padding-block: 0.25rem;
 			z-index: 10;
-		}
-
-		&__icon {
-			height: 14px;
-			position: relative;
-			width: 14px;
-
-			&::before,
-			&::after {
-				content: '';
-				background-color: black;
-				left: 50%;
-				position: absolute;
-				top: 50%;
-				transition:
-					transform 0.3s ease-in-out,
-					opacity 0.3s;
-			}
-
-			&::before {
-				height: 14px;
-				transform: translate(-50%, -50%);
-				width: 1px;
-			}
-
-			&::after {
-				height: 1px;
-				transform: translate(-50%, -50%);
-				width: 14px;
-			}
-
-			&[data-is-toggled='true'] {
-				&::before {
-					opacity: 1;
-					transform: translate(-50%, -50%) rotate(270deg);
-				}
-			}
-
-			&[data-is-toggled='true'] {
-				&::after {
-					opacity: 0;
-				}
-			}
 		}
 
 		&__content {

@@ -89,8 +89,8 @@ model OrdersOnProducts {
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
 
-  order  Order  @relation(fields: [orderId], references: [id])
-  product Product @relation(fields: [productId], references: [id])
+  order   Order   @relation(fields: [orderId], references: [id], onDelete: Cascade)
+ product Product @relation(fields: [productId], references: [id], onDelete: Cascade)
 
   @@id([productId, orderId])
 }
@@ -114,8 +114,8 @@ model ProductsInBasket {
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
 
-  product Product @relation(fields: [productId], references: [id])
-  basket Basket @relation(fields: [basketId], references: [id])
+  product Product @relation(fields: [productId], references: [id], onDelete: Cascade)
+  basket  Basket  @relation(fields: [basketId], references: [id], onDelete: Cascade)
 
   @@id([productId, basketId])
 }

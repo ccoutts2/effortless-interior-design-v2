@@ -11,6 +11,6 @@ export const products = (roomTypeNames: string[]) => {
 		active: true,
 		features: [faker.commerce.productMaterial(), faker.commerce.productAdjective()],
 		images: [faker.image.avatarGitHub()],
-		roomTypeName: faker.helpers.arrayElement(roomTypeNames)
+		roomTypeName: roomTypeNames.length > 0 ? faker.helpers.arrayElement(roomTypeNames) : undefined
 	};
 };

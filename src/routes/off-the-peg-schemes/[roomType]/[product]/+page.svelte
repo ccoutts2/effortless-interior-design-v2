@@ -116,7 +116,7 @@
 						they are not to be relied upon as precise indicators of the size, scale, or pattern of
 						products. We recommend always ordering samples, reviewing product images on supplier
 						websites (provided in the Design Specification), and checking measurements before making
-						any final
+						any final purchases.
 					</p>
 					<a href="/">View all information</a>
 				</div>
@@ -148,16 +148,16 @@
 			<div class="MoreSchemes">
 				<div class="MoreSchemes__viewport">
 					<ul class="MoreSchemes__list">
-						{#each allRelatedProducts as product}
+						{#each allRelatedProducts as relatedProduct}
 							<li class="MoreSchemes__item">
 								<article class="MoreSchemes__product">
 									<div class="MoreSchemes__info">
-										<h4>{product.name}</h4>
-										{#if product.prices && product.prices.length > 0}
+										<h4>{relatedProduct.name}</h4>
+										{#if relatedProduct.prices && relatedProduct.prices.length > 0}
 											<span
 												><Price
-													price={product.prices[0].unitAmount}
-													currency={product.prices[0].currency}
+													price={relatedProduct.prices[0].unitAmount}
+													currency={relatedProduct.prices[0].currency}
 												/></span
 											>
 										{:else}
@@ -166,12 +166,15 @@
 									</div>
 
 									<div class="MoreSchemes__image">
-										<img src={product.images[0]} alt={`${product.name} design scheme.`} />
+										<img
+											src={relatedProduct.images[0]}
+											alt={`${relatedProduct.name} design scheme.`}
+										/>
 									</div>
 
-									<a href="/off-the-peg-schemes/{product.roomType?.slug}/{product.id}"
+									<a href="/off-the-peg-schemes/{relatedProduct.roomType?.slug}/{relatedProduct.id}"
 										><span class="visually-hidden"
-											>View the {product.roomType?.name} product page.</span
+											>View the {relatedProduct.roomType?.name} product page.</span
 										></a
 									>
 								</article>

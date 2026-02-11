@@ -10,7 +10,9 @@
 
 <div class="Overlay {overlay.isOpen ? 'reveal' : ''}">
 	<div class="Overlay__button {overlay.overlayContent === MobileMenu ? 'bottom' : 'top'}">
-		<button onclick={() => (overlay.isOpen = false)} type="button"><X /></button>
+		<button onclick={() => (overlay.isOpen = false)} type="button" aria-label="Close overlay"
+			><X /></button
+		>
 	</div>
 	{#if overlay.overlayContent}
 		<svelte:component this={overlay.overlayContent} />

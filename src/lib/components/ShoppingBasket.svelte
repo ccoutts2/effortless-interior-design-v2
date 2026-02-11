@@ -1,19 +1,11 @@
 <script lang="ts">
 	import type { OverlayProps } from '$lib/types';
 	import { getContext } from 'svelte';
-	import LineBreak from './LineBreak.svelte';
+
 	import Price from './Price.svelte';
 	import { enhance } from '$app/forms';
-	import { goto } from '$app/navigation';
-	import Button from './ui/buttons/Button.svelte';
 
 	const context = getContext<OverlayProps>('overlay-ctx');
-
-	const goToBasket = () => {
-		goto('/shopping/basket');
-
-		context.isOpen = false;
-	};
 </script>
 
 {#if context?.data}
@@ -28,12 +20,12 @@
 							<div class="ShoppingBasket__productContainer">
 								<div class="ShoppingBasket__productInfo">
 									<span>{item.product.name}</span>
-									<span
-										><Price
+									{#if item.product.prices[0]}
+										<Price
 											price={item.product.prices[0].unitAmount}
 											currency={item.product.prices[0].currency}
-										/></span
-									>
+										/>
+									{/if}
 								</div>
 								<form method="POST" action="/shopping/basket?/deleteItem" use:enhance>
 									<input type="hidden" name="productId" value={item.productId} />
@@ -50,9 +42,8 @@
 		</div>
 		<div class="ShoppingBasket__button">
 			<form method="POST" action="/shopping/basket?/purchaseBasket">
-				<button type="submit"> Buy </button>
+				<button type="submit">Buy</button>
 			</form>
-			<!-- <Button data-content="View Basket" onclick={() => goToBasket()}>View Basket</Button> -->
 		</div>
 	</div>
 {/if}

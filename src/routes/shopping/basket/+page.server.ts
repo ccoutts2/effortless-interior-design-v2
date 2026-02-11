@@ -34,12 +34,16 @@ export const actions = {
 			throw redirect(302, '/shopping/error');
 		}
 
-		const itemsToPurchase = basket.products.map((product) => {
-			return {
+		const itemsToPurchase = basket.products
+			.filter((product) => product.product.prices.length > 0)
+			.map((product) => ({
 				priceId: product.product.prices[0].id,
 				productId: product.productId
-			};
-		});
+			}));
+
+		if (itemsToPurchase.length === 0) {
+			throw redirect(302, '/shopping/error');
+		}
 
 		const session = await StripeService.stripePayment(itemsToPurchase);
 
@@ -68,7 +72,7 @@ export const actions = {
 		// TODO: redirect to appropriate page
 
 		if (!sessionId) {
-			redirect(302, '/');
+			throw redirect(302, '/');
 		}
 
 		try {
@@ -88,10 +92,10 @@ export const actions = {
 					}
 				}
 			});
+			return { success: true };
 		} catch (error) {
-			console.log(error);
+			console.error('Failed to delete item from basket:', error);
+			return fail(500, { message: 'Failed to remove item from basket' });
 		}
-
-		return { success: true };
 	}
 } satisfies Actions;

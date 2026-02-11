@@ -13,7 +13,7 @@
 	});
 </script>
 
-{#if data && data.products.length > 0}
+{#if data?.products?.length > 0}
 	<main class="RoomTypeName">
 		<PageHeader title={data.products[0].roomType?.name ?? 'Schemes'}>
 			<p class="my-8 italic">

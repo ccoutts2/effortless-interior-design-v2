@@ -41,16 +41,10 @@
 
 			return () => {
 				clearTimeout(timeout);
+				document.body.classList.remove('overlay-open');
+				document.removeEventListener('click', handleOutsideClick);
 			};
-		} else {
-			document.body.classList.remove('overlay-open');
 		}
-
-		return () => {
-			document.body.classList.remove('overlay-open');
-
-			document.removeEventListener('click', handleOutsideClick);
-		};
 	});
 
 	let isActive: boolean = $state(false);

@@ -1,4 +1,4 @@
-<div class="LineBreak" aria-label="A divider to break up different page content."></div>
+<hr class="LineBreak" />
 
 <style lang="scss">
 	@use '$lib/styles/partials/breakpoints';

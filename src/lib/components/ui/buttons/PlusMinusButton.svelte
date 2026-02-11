@@ -7,9 +7,8 @@
 	let { isOpen, onClick }: PlusMinusButtonProps = $props();
 </script>
 
-<button onclick={onClick} class="Plus {isOpen ? 'Minus' : ''}"
-	><span class="visually-hidden">A button which animates from plus to minus when opening menus</span
-	></button
+<button type="button" onclick={onClick} class="Plus {isOpen ? 'Minus' : ''}"
+	><span class="visually-hidden">{isOpen ? 'Collapse' : 'Expand'}</span></button
 >
 
 <style lang="scss">
@@ -23,6 +22,8 @@
 			content: '';
 			background-color: currentColor;
 			position: absolute;
+			top: 50%;
+			left: 50%;
 			transform: translate(-50%, -50%) rotate(-90deg);
 			transition: all 0.5s cubic-bezier(0.76, 0, 0.24, 1);
 		}

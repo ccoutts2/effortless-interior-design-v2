@@ -173,7 +173,10 @@ export const upsertCustomer = async (session: Stripe.Checkout.Session) => {
 					totalPrice: session.amount_total || 0,
 					withConsultation: hasConsultation,
 					products: {
-						create: productIdList?.map((id) => ({ productId: id.trim() }))
+						create: productIdList
+							.map((id) => id.trim())
+							.filter((id) => id.length > 0)
+							.map((id) => ({ productId: id }))
 					}
 				}
 			});

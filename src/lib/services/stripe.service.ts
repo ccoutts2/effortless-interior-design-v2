@@ -5,7 +5,7 @@ import { stripe } from '$lib/server/stripe/stripe';
 export const StripeService = {
 	async stripePayment(items: { priceId: string; productId: string }[]) {
 		if (!items || items.length === 0) {
-			throw new Error('Invalid priceId: must be a non-empty string');
+			throw new Error('Invalid items: must be a non-empty string');
 		}
 
 		try {
