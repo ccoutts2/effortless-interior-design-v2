@@ -3,10 +3,8 @@ import { StripeService } from '$lib/services/stripe.service';
 import { fail, redirect, type Actions } from '@sveltejs/kit';
 
 export const actions = {
-	purchaseBasket: async ({ cookies }) => {
-		const sessionId = cookies.get('session');
-
-		// TODO: redirect to appropriate page
+	purchaseBasket: async ({ locals, cookies }) => {
+		const sessionId = locals.session.id;
 
 		if (!sessionId) {
 			throw redirect(302, '/');
@@ -58,7 +56,7 @@ export const actions = {
 		}
 		throw redirect(302, '/shopping/error');
 	},
-	deleteItem: async ({ cookies, request }) => {
+	deleteItem: async ({ locals, request }) => {
 		const form = await request.formData();
 
 		const productId = form.get('productId') as string;
@@ -67,9 +65,7 @@ export const actions = {
 			return { status: 400, body: { message: 'Invalid productId' } };
 		}
 
-		const sessionId = cookies.get('session');
-
-		// TODO: redirect to appropriate page
+		const sessionId = locals.session.id;
 
 		if (!sessionId) {
 			throw redirect(302, '/');

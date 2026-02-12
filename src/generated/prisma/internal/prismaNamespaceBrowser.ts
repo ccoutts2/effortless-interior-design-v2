@@ -78,9 +78,9 @@ export type ProductPriceScalarFieldEnum = (typeof ProductPriceScalarFieldEnum)[k
 
 export const RoomTypeScalarFieldEnum = {
   name: 'name',
-  slug: 'slug',
   createdAt: 'createdAt',
-  updatedAt: 'updatedAt'
+  updatedAt: 'updatedAt',
+  slug: 'slug'
 } as const
 
 export type RoomTypeScalarFieldEnum = (typeof RoomTypeScalarFieldEnum)[keyof typeof RoomTypeScalarFieldEnum]
@@ -125,9 +125,9 @@ export type OrdersOnProductsScalarFieldEnum = (typeof OrdersOnProductsScalarFiel
 
 export const BasketScalarFieldEnum = {
   id: 'id',
+  sessionId: 'sessionId',
   createdAt: 'createdAt',
-  updatedAt: 'updatedAt',
-  sessionId: 'sessionId'
+  updatedAt: 'updatedAt'
 } as const
 
 export type BasketScalarFieldEnum = (typeof BasketScalarFieldEnum)[keyof typeof BasketScalarFieldEnum]
@@ -145,9 +145,8 @@ export type ProductsInBasketScalarFieldEnum = (typeof ProductsInBasketScalarFiel
 
 export const SessionScalarFieldEnum = {
   id: 'id',
-  secretHash: 'secretHash',
-  lastVerifiedAt: 'lastVerifiedAt',
-  createdAt: 'createdAt'
+  expiresAt: 'expiresAt',
+  userId: 'userId'
 } as const
 
 export type SessionScalarFieldEnum = (typeof SessionScalarFieldEnum)[keyof typeof SessionScalarFieldEnum]

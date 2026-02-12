@@ -9,24 +9,21 @@ datasource db {
 }
 
 model Product {
-  id          String   @id
-  name        String
-  description String?
-  isScheme    Boolean  @default(true)
-  active      Boolean  @default(false)
-  features    String[]
-  images      String[]
-  metadata    Json?
-
-  createdAt DateTime @default(now())
-  updatedAt DateTime @updatedAt
-
+  id           String             @id
+  name         String
+  description  String?
+  isScheme     Boolean            @default(true)
+  active       Boolean            @default(false)
+  features     String[]
+  images       String[]
+  metadata     Json?
+  createdAt    DateTime           @default(now())
+  updatedAt    DateTime           @updatedAt
   roomTypeName String?
-  roomType     RoomType? @relation(fields: [roomTypeName], references: [name], onDelete: Cascade)
-
-  orders  OrdersOnProducts[]
-  baskets ProductsInBasket[]
-  prices  ProductPrice[]
+  orders       OrdersOnProducts[]
+  roomType     RoomType?          @relation(fields: [roomTypeName], references: [name], onDelete: Cascade)
+  prices       ProductPrice[]
+  baskets      ProductsInBasket[]
 }
 
 model ProductPrice {
@@ -34,100 +31,85 @@ model ProductPrice {
   active     Boolean      @default(false)
   currency   String
   type       PaymentType?
-  unitAmount Int       @default(0)
-
-  createdAt DateTime @default(now())
-  updatedAt DateTime @updatedAt
-
-  productId String
-  product   Product @relation(fields: [productId], references: [id], onDelete: Cascade)
+  unitAmount Int          @default(0)
+  createdAt  DateTime     @default(now())
+  updatedAt  DateTime     @updatedAt
+  productId  String
+  product    Product      @relation(fields: [productId], references: [id], onDelete: Cascade)
 }
 
 model RoomType {
-  name String @id
-  slug String @unique
-
-  createdAt DateTime @default(now())
-  updatedAt DateTime @updatedAt
-
-  schemes Product[]
+  name      String    @id
+  createdAt DateTime  @default(now())
+  updatedAt DateTime  @updatedAt
+  slug      String    @unique
+  schemes   Product[]
 }
 
 model User {
-  id            Int     @id @default(autoincrement())
-  email         String  @unique
+  id            String       @id @default(cuid())
+  email         String    @unique
   name          String?
   password      String?
-  isActive      Boolean @default(false)
-  newsletterSub Boolean @default(false)
-  isAdmin       Boolean @default(false)
-
-  createdAt DateTime @default(now())
-  updatedAt DateTime @updatedAt
-
-  orders Order[]
+  isActive      Boolean   @default(false)
+  newsletterSub Boolean   @default(false)
+  isAdmin       Boolean   @default(false)
+  createdAt     DateTime  @default(now())
+  updatedAt     DateTime  @updatedAt
+  orders        Order[]
+  Session       Session[]
 }
 
 model Order {
-  id               Int     @id @default(autoincrement())
+  id               Int                @id @default(autoincrement())
   totalPrice       Int
-  withConsultation Boolean @default(false)
-
-  createdAt DateTime @default(now())
-  updatedAt DateTime @updatedAt
-
-  userId Int
-  user   User? @relation(fields: [userId], references: [id], onDelete: Cascade)
-
-  products OrdersOnProducts[]
+  withConsultation Boolean            @default(false)
+  createdAt        DateTime           @default(now())
+  updatedAt        DateTime           @updatedAt
+  userId           String
+  user             User               @relation(fields: [userId], references: [id], onDelete: Cascade)
+  products         OrdersOnProducts[]
 }
 
 model OrdersOnProducts {
   productId String
-  orderId  Int
-
+  orderId   Int
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
-
-  order   Order   @relation(fields: [orderId], references: [id], onDelete: Cascade)
- product Product @relation(fields: [productId], references: [id], onDelete: Cascade)
+  order     Order    @relation(fields: [orderId], references: [id], onDelete: Cascade)
+  product   Product  @relation(fields: [productId], references: [id], onDelete: Cascade)
 
   @@id([productId, orderId])
 }
 
 model Basket {
-  id Int @id @default(autoincrement())
-
-  createdAt DateTime @default(now())
-  updatedAt DateTime @updatedAt
-
-  sessionId String?  @unique
-  session   Session? @relation(fields: [sessionId], references: [id])
-
-  products ProductsInBasket[]
+  id        Int                @id @default(autoincrement())
+  sessionId String?            @unique
+  createdAt DateTime           @default(now())
+  updatedAt DateTime           @updatedAt
+  session   Session?           @relation(fields: [sessionId], references: [id])
+  products  ProductsInBasket[]
 }
 
 model ProductsInBasket {
   productId String
-  basketId Int
-
+  basketId  Int
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
-
-  product Product @relation(fields: [productId], references: [id], onDelete: Cascade)
-  basket  Basket  @relation(fields: [basketId], references: [id], onDelete: Cascade)
+  basket    Basket   @relation(fields: [basketId], references: [id], onDelete: Cascade)
+  product   Product  @relation(fields: [productId], references: [id], onDelete: Cascade)
 
   @@id([productId, basketId])
 }
 
 model Session {
-  id             String   @id
-  secretHash     Bytes
-  lastVerifiedAt DateTime
+  id        String   @id
+  expiresAt DateTime
 
-  createdAt DateTime
+  userId         String?
+  user           User?    @relation(fields: [userId], references: [id], onDelete: Cascade)
 
-  basket Basket?
+  basket         Basket?
 }
 
 enum PaymentType {

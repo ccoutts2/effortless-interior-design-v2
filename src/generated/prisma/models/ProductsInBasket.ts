@@ -207,8 +207,8 @@ export type ProductsInBasketWhereInput = {
   basketId?: Prisma.IntFilter<"ProductsInBasket"> | number
   createdAt?: Prisma.DateTimeFilter<"ProductsInBasket"> | Date | string
   updatedAt?: Prisma.DateTimeFilter<"ProductsInBasket"> | Date | string
-  product?: Prisma.XOR<Prisma.ProductScalarRelationFilter, Prisma.ProductWhereInput>
   basket?: Prisma.XOR<Prisma.BasketScalarRelationFilter, Prisma.BasketWhereInput>
+  product?: Prisma.XOR<Prisma.ProductScalarRelationFilter, Prisma.ProductWhereInput>
 }
 
 export type ProductsInBasketOrderByWithRelationInput = {
@@ -216,8 +216,8 @@ export type ProductsInBasketOrderByWithRelationInput = {
   basketId?: Prisma.SortOrder
   createdAt?: Prisma.SortOrder
   updatedAt?: Prisma.SortOrder
-  product?: Prisma.ProductOrderByWithRelationInput
   basket?: Prisma.BasketOrderByWithRelationInput
+  product?: Prisma.ProductOrderByWithRelationInput
 }
 
 export type ProductsInBasketWhereUniqueInput = Prisma.AtLeast<{
@@ -229,8 +229,8 @@ export type ProductsInBasketWhereUniqueInput = Prisma.AtLeast<{
   basketId?: Prisma.IntFilter<"ProductsInBasket"> | number
   createdAt?: Prisma.DateTimeFilter<"ProductsInBasket"> | Date | string
   updatedAt?: Prisma.DateTimeFilter<"ProductsInBasket"> | Date | string
-  product?: Prisma.XOR<Prisma.ProductScalarRelationFilter, Prisma.ProductWhereInput>
   basket?: Prisma.XOR<Prisma.BasketScalarRelationFilter, Prisma.BasketWhereInput>
+  product?: Prisma.XOR<Prisma.ProductScalarRelationFilter, Prisma.ProductWhereInput>
 }, "productId_basketId">
 
 export type ProductsInBasketOrderByWithAggregationInput = {
@@ -258,8 +258,8 @@ export type ProductsInBasketScalarWhereWithAggregatesInput = {
 export type ProductsInBasketCreateInput = {
   createdAt?: Date | string
   updatedAt?: Date | string
-  product: Prisma.ProductCreateNestedOneWithoutBasketsInput
   basket: Prisma.BasketCreateNestedOneWithoutProductsInput
+  product: Prisma.ProductCreateNestedOneWithoutBasketsInput
 }
 
 export type ProductsInBasketUncheckedCreateInput = {
@@ -272,8 +272,8 @@ export type ProductsInBasketUncheckedCreateInput = {
 export type ProductsInBasketUpdateInput = {
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  product?: Prisma.ProductUpdateOneRequiredWithoutBasketsNestedInput
   basket?: Prisma.BasketUpdateOneRequiredWithoutProductsNestedInput
+  product?: Prisma.ProductUpdateOneRequiredWithoutBasketsNestedInput
 }
 
 export type ProductsInBasketUncheckedUpdateInput = {
@@ -571,8 +571,8 @@ export type ProductsInBasketSelect<ExtArgs extends runtime.Types.Extensions.Inte
   basketId?: boolean
   createdAt?: boolean
   updatedAt?: boolean
-  product?: boolean | Prisma.ProductDefaultArgs<ExtArgs>
   basket?: boolean | Prisma.BasketDefaultArgs<ExtArgs>
+  product?: boolean | Prisma.ProductDefaultArgs<ExtArgs>
 }, ExtArgs["result"]["productsInBasket"]>
 
 export type ProductsInBasketSelectCreateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetSelect<{
@@ -580,8 +580,8 @@ export type ProductsInBasketSelectCreateManyAndReturn<ExtArgs extends runtime.Ty
   basketId?: boolean
   createdAt?: boolean
   updatedAt?: boolean
-  product?: boolean | Prisma.ProductDefaultArgs<ExtArgs>
   basket?: boolean | Prisma.BasketDefaultArgs<ExtArgs>
+  product?: boolean | Prisma.ProductDefaultArgs<ExtArgs>
 }, ExtArgs["result"]["productsInBasket"]>
 
 export type ProductsInBasketSelectUpdateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetSelect<{
@@ -589,8 +589,8 @@ export type ProductsInBasketSelectUpdateManyAndReturn<ExtArgs extends runtime.Ty
   basketId?: boolean
   createdAt?: boolean
   updatedAt?: boolean
-  product?: boolean | Prisma.ProductDefaultArgs<ExtArgs>
   basket?: boolean | Prisma.BasketDefaultArgs<ExtArgs>
+  product?: boolean | Prisma.ProductDefaultArgs<ExtArgs>
 }, ExtArgs["result"]["productsInBasket"]>
 
 export type ProductsInBasketSelectScalar = {
@@ -602,23 +602,23 @@ export type ProductsInBasketSelectScalar = {
 
 export type ProductsInBasketOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"productId" | "basketId" | "createdAt" | "updatedAt", ExtArgs["result"]["productsInBasket"]>
 export type ProductsInBasketInclude<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
-  product?: boolean | Prisma.ProductDefaultArgs<ExtArgs>
   basket?: boolean | Prisma.BasketDefaultArgs<ExtArgs>
+  product?: boolean | Prisma.ProductDefaultArgs<ExtArgs>
 }
 export type ProductsInBasketIncludeCreateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
-  product?: boolean | Prisma.ProductDefaultArgs<ExtArgs>
   basket?: boolean | Prisma.BasketDefaultArgs<ExtArgs>
+  product?: boolean | Prisma.ProductDefaultArgs<ExtArgs>
 }
 export type ProductsInBasketIncludeUpdateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
-  product?: boolean | Prisma.ProductDefaultArgs<ExtArgs>
   basket?: boolean | Prisma.BasketDefaultArgs<ExtArgs>
+  product?: boolean | Prisma.ProductDefaultArgs<ExtArgs>
 }
 
 export type $ProductsInBasketPayload<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   name: "ProductsInBasket"
   objects: {
-    product: Prisma.$ProductPayload<ExtArgs>
     basket: Prisma.$BasketPayload<ExtArgs>
+    product: Prisma.$ProductPayload<ExtArgs>
   }
   scalars: runtime.Types.Extensions.GetPayloadResult<{
     productId: string
@@ -1019,8 +1019,8 @@ readonly fields: ProductsInBasketFieldRefs;
  */
 export interface Prisma__ProductsInBasketClient<T, Null = never, ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs, GlobalOmitOptions = {}> extends Prisma.PrismaPromise<T> {
   readonly [Symbol.toStringTag]: "PrismaPromise"
-  product<T extends Prisma.ProductDefaultArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.ProductDefaultArgs<ExtArgs>>): Prisma.Prisma__ProductClient<runtime.Types.Result.GetResult<Prisma.$ProductPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
   basket<T extends Prisma.BasketDefaultArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.BasketDefaultArgs<ExtArgs>>): Prisma.Prisma__BasketClient<runtime.Types.Result.GetResult<Prisma.$BasketPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
+  product<T extends Prisma.ProductDefaultArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.ProductDefaultArgs<ExtArgs>>): Prisma.Prisma__ProductClient<runtime.Types.Result.GetResult<Prisma.$ProductPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
   /**
    * Attaches callbacks for the resolution and/or rejection of the Promise.
    * @param onfulfilled The callback to execute when the Promise is resolved.

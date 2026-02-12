@@ -10,6 +10,7 @@
 	import NavLink from '$lib/components/navigation/NavLink.svelte';
 	import Overlay from '$lib/components/ui/Overlay.svelte';
 	import type { PageData } from './$types';
+	import { userInfo } from 'os';
 
 	let { children, data }: { children: Snippet; data: PageData } = $props();
 
