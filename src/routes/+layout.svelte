@@ -82,7 +82,7 @@
 		});
 	});
 
-	let showModal = $derived(data.showNewsleterPopup);
+	let showModal = $derived(data.showNewsletterPopup);
 </script>
 
 <svelte:head>

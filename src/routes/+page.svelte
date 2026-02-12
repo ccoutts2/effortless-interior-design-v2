@@ -1,5 +1,5 @@
 <script lang="ts">
-	import { customerTestimonial } from '$lib/constants/testimonialData';
+	import { customerTestimonials } from '$lib/constants/testimonialData';
 	import { onMount } from 'svelte';
 	import { ScrollTrigger } from 'gsap/ScrollTrigger';
 	import { superForm } from 'sveltekit-superforms';
@@ -25,7 +25,7 @@
 	let cont: HTMLElement;
 	let panels: HTMLElement[];
 
-	const testimonialsCount: number = $state(customerTestimonial.length);
+	const testimonialsCount: number = $state(customerTestimonials.length);
 	const width = testimonialsCount * 50;
 
 	// onMount(() => {
@@ -136,7 +136,7 @@
 	</SlideIn>
 
 	<!-- <TestimonialWrapper>
-		{#each customerTestimonial as testimonial}
+		{#each customerTestimonials as testimonial}
 			<li><Testimonial text={testimonial.text} /></li>
 		{/each}
 	</TestimonialWrapper> -->
@@ -144,7 +144,7 @@
 	<!-- be able to navigate between testimonials -->
 	<!-- <section id="panels">
 		<ul id="panels-container" style="width: {width}%" bind:this={cont}>
-			{#each customerTestimonial as testimonial, i}
+			{#each customerTestimonials as testimonial, i}
 				<li id="panel-{i + 1}" class="panel red">
 					<Testimonial text={testimonial.text} />
 				</li>

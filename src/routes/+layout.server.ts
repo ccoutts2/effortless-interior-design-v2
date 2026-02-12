@@ -21,12 +21,12 @@ export const load: LayoutServerLoad = async ({ locals, cookies }) => {
 		productsInBasket = await fetchProductsInBasket(session.id);
 	}
 
-	const showNewsleterPopup = user ? !user.newsletterSub : !dismissNewsletter;
+	const showNewsletterPopup = user ? !user.newsletterSub : !dismissNewsletter;
 
 	return {
 		productsInBasket,
 		user,
-		showNewsleterPopup,
+		showNewsletterPopup,
 		form
 	};
 };

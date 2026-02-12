@@ -54,16 +54,17 @@ export const actions = {
 						userId: user.id
 					}
 				});
+				locals.session.userId = user.id;
 			}
 
 			locals.user = user;
-			locals.session.userId = user.id;
 
 			cookies.set('newsletter_dismissed', 'true', {
 				httpOnly: true,
 				path: '/',
 				maxAge: 60 * 60 * 24 * 365,
-				sameSite: 'lax'
+				sameSite: 'lax',
+				secure: true
 			});
 		} catch (error) {
 			console.log(error);
@@ -86,7 +87,8 @@ export const actions = {
 			httpOnly: true,
 			path: '/',
 			maxAge: 60 * 60 * 24 * 7,
-			sameSite: 'lax'
+			sameSite: 'lax',
+			secure: true
 		});
 	}
 } satisfies Actions;

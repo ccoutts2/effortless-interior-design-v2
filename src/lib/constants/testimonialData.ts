@@ -1,7 +1,7 @@
 export interface CustomerTestimonial {
 	text: string;
 }
-export const customerTestimonial: CustomerTestimonial[] = [
+export const customerTestimonials: CustomerTestimonial[] = [
 	{
 		text: "I've tried countless products, but this is the first one that genuinely delivered on its promise. It's an absolute game-changer!"
 	},
