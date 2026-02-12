@@ -31,7 +31,7 @@
 		width: 100%;
 
 		@include breakpoints.tablet {
-			max-width: 20rem;
+			max-width: 35rem;
 		}
 	}
 </style>

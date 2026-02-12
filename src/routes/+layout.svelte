@@ -1,14 +1,13 @@
 <script lang="ts">
-	import '../lib/styles/globals.css';
-	import favicon from '$lib/assets/favicon.svg';
-	import { type Snippet } from 'svelte';
-	import { setContext } from 'svelte';
-	import type { OverlayProps } from '$lib/types';
+	import '$lib/styles/globals.css';
 	import { onNavigate } from '$app/navigation';
-
+	import { setContext } from 'svelte';
+	import { type Snippet } from 'svelte';
+	import favicon from '$lib/assets/favicon.svg';
 	import Header from '$lib/components/layout/Header.svelte';
 	import NavLink from '$lib/components/navigation/NavLink.svelte';
 	import Overlay from '$lib/components/ui/Overlay.svelte';
+	import type { OverlayProps } from '$lib/types';
 	import type { PageData } from './$types';
 
 	let { children, data }: { children: Snippet; data: PageData } = $props();
@@ -19,7 +18,7 @@
 		data: data.productsInBasket ?? null
 	});
 
-	setContext('overlay-ctx', overlayState);
+	const user = $derived(data.userSession);
 
 	const handleOutsideClick = (e: MouseEvent) => {
 		const target = e.target as HTMLElement;
@@ -30,6 +29,8 @@
 			}
 		}
 	};
+
+	setContext('overlay-ctx', overlayState);
 
 	$effect(() => {
 		overlayState.data = data.productsInBasket ?? null;
@@ -83,8 +84,9 @@
 		<li><NavLink isMobileMenu={false} href="/contact">Contact</NavLink></li>
 	</ul>
 </Header>
-
 {@render children?.()}
+
+<pre>{JSON.stringify(user, null, 2)}</pre>
 
 <Overlay />
 

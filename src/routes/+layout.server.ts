@@ -4,13 +4,29 @@ import type { LayoutServerLoad } from './$types';
 export const load: LayoutServerLoad = async ({ cookies }) => {
 	const sessionCookie = cookies.get('session');
 
+	const userSession = await prisma.session.findUnique({
+		where: { id: sessionCookie },
+		include: {
+			user: true
+		}
+	});
+
+	console.log(userSession);
+
+	const user = userSession?.user;
+
+	const showNewsletterPopup = !user || !user.newsletterSub;
+
 	let productsInBasket = null;
 	if (sessionCookie) {
 		productsInBasket = await fetchProductsInBasket(sessionCookie);
 	}
 
 	return {
-		productsInBasket
+		productsInBasket,
+		user,
+		showNewsletterPopup,
+		userSession
 	};
 };
 

@@ -45,10 +45,9 @@
 		}
 
 		&__input {
-			background-color: #fff5f5;
 			border-bottom: 1px solid black;
 			border-radius: 0.25rem 0.25rem 0 0;
-			padding: 0.25rem;
+			padding: 0.5rem 0.25rem;
 		}
 	}
 	.Error {

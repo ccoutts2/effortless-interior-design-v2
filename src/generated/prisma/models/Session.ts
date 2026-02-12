@@ -19,8 +19,18 @@ export type SessionModel = runtime.Types.Result.DefaultSelection<Prisma.$Session
 
 export type AggregateSession = {
   _count: SessionCountAggregateOutputType | null
+  _avg: SessionAvgAggregateOutputType | null
+  _sum: SessionSumAggregateOutputType | null
   _min: SessionMinAggregateOutputType | null
   _max: SessionMaxAggregateOutputType | null
+}
+
+export type SessionAvgAggregateOutputType = {
+  userId: number | null
+}
+
+export type SessionSumAggregateOutputType = {
+  userId: number | null
 }
 
 export type SessionMinAggregateOutputType = {
@@ -28,6 +38,7 @@ export type SessionMinAggregateOutputType = {
   secretHash: Uint8Array | null
   lastVerifiedAt: Date | null
   createdAt: Date | null
+  userId: number | null
 }
 
 export type SessionMaxAggregateOutputType = {
@@ -35,6 +46,7 @@ export type SessionMaxAggregateOutputType = {
   secretHash: Uint8Array | null
   lastVerifiedAt: Date | null
   createdAt: Date | null
+  userId: number | null
 }
 
 export type SessionCountAggregateOutputType = {
@@ -42,15 +54,25 @@ export type SessionCountAggregateOutputType = {
   secretHash: number
   lastVerifiedAt: number
   createdAt: number
+  userId: number
   _all: number
 }
 
+
+export type SessionAvgAggregateInputType = {
+  userId?: true
+}
+
+export type SessionSumAggregateInputType = {
+  userId?: true
+}
 
 export type SessionMinAggregateInputType = {
   id?: true
   secretHash?: true
   lastVerifiedAt?: true
   createdAt?: true
+  userId?: true
 }
 
 export type SessionMaxAggregateInputType = {
@@ -58,6 +80,7 @@ export type SessionMaxAggregateInputType = {
   secretHash?: true
   lastVerifiedAt?: true
   createdAt?: true
+  userId?: true
 }
 
 export type SessionCountAggregateInputType = {
@@ -65,6 +88,7 @@ export type SessionCountAggregateInputType = {
   secretHash?: true
   lastVerifiedAt?: true
   createdAt?: true
+  userId?: true
   _all?: true
 }
 
@@ -106,6 +130,18 @@ export type SessionAggregateArgs<ExtArgs extends runtime.Types.Extensions.Intern
   /**
    * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
    * 
+   * Select which fields to average
+  **/
+  _avg?: SessionAvgAggregateInputType
+  /**
+   * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+   * 
+   * Select which fields to sum
+  **/
+  _sum?: SessionSumAggregateInputType
+  /**
+   * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+   * 
    * Select which fields to find the minimum value
   **/
   _min?: SessionMinAggregateInputType
@@ -136,6 +172,8 @@ export type SessionGroupByArgs<ExtArgs extends runtime.Types.Extensions.Internal
   take?: number
   skip?: number
   _count?: SessionCountAggregateInputType | true
+  _avg?: SessionAvgAggregateInputType
+  _sum?: SessionSumAggregateInputType
   _min?: SessionMinAggregateInputType
   _max?: SessionMaxAggregateInputType
 }
@@ -145,7 +183,10 @@ export type SessionGroupByOutputType = {
   secretHash: Uint8Array
   lastVerifiedAt: Date
   createdAt: Date
+  userId: number | null
   _count: SessionCountAggregateOutputType | null
+  _avg: SessionAvgAggregateOutputType | null
+  _sum: SessionSumAggregateOutputType | null
   _min: SessionMinAggregateOutputType | null
   _max: SessionMaxAggregateOutputType | null
 }
@@ -173,6 +214,8 @@ export type SessionWhereInput = {
   secretHash?: Prisma.BytesFilter<"Session"> | Uint8Array
   lastVerifiedAt?: Prisma.DateTimeFilter<"Session"> | Date | string
   createdAt?: Prisma.DateTimeFilter<"Session"> | Date | string
+  userId?: Prisma.IntNullableFilter<"Session"> | number | null
+  user?: Prisma.XOR<Prisma.UserNullableScalarRelationFilter, Prisma.UserWhereInput> | null
   basket?: Prisma.XOR<Prisma.BasketNullableScalarRelationFilter, Prisma.BasketWhereInput> | null
 }
 
@@ -181,6 +224,8 @@ export type SessionOrderByWithRelationInput = {
   secretHash?: Prisma.SortOrder
   lastVerifiedAt?: Prisma.SortOrder
   createdAt?: Prisma.SortOrder
+  userId?: Prisma.SortOrderInput | Prisma.SortOrder
+  user?: Prisma.UserOrderByWithRelationInput
   basket?: Prisma.BasketOrderByWithRelationInput
 }
 
@@ -192,6 +237,8 @@ export type SessionWhereUniqueInput = Prisma.AtLeast<{
   secretHash?: Prisma.BytesFilter<"Session"> | Uint8Array
   lastVerifiedAt?: Prisma.DateTimeFilter<"Session"> | Date | string
   createdAt?: Prisma.DateTimeFilter<"Session"> | Date | string
+  userId?: Prisma.IntNullableFilter<"Session"> | number | null
+  user?: Prisma.XOR<Prisma.UserNullableScalarRelationFilter, Prisma.UserWhereInput> | null
   basket?: Prisma.XOR<Prisma.BasketNullableScalarRelationFilter, Prisma.BasketWhereInput> | null
 }, "id">
 
@@ -200,9 +247,12 @@ export type SessionOrderByWithAggregationInput = {
   secretHash?: Prisma.SortOrder
   lastVerifiedAt?: Prisma.SortOrder
   createdAt?: Prisma.SortOrder
+  userId?: Prisma.SortOrderInput | Prisma.SortOrder
   _count?: Prisma.SessionCountOrderByAggregateInput
+  _avg?: Prisma.SessionAvgOrderByAggregateInput
   _max?: Prisma.SessionMaxOrderByAggregateInput
   _min?: Prisma.SessionMinOrderByAggregateInput
+  _sum?: Prisma.SessionSumOrderByAggregateInput
 }
 
 export type SessionScalarWhereWithAggregatesInput = {
@@ -213,6 +263,7 @@ export type SessionScalarWhereWithAggregatesInput = {
   secretHash?: Prisma.BytesWithAggregatesFilter<"Session"> | Uint8Array
   lastVerifiedAt?: Prisma.DateTimeWithAggregatesFilter<"Session"> | Date | string
   createdAt?: Prisma.DateTimeWithAggregatesFilter<"Session"> | Date | string
+  userId?: Prisma.IntNullableWithAggregatesFilter<"Session"> | number | null
 }
 
 export type SessionCreateInput = {
@@ -220,6 +271,7 @@ export type SessionCreateInput = {
   secretHash: Uint8Array
   lastVerifiedAt: Date | string
   createdAt: Date | string
+  user?: Prisma.UserCreateNestedOneWithoutSessionsInput
   basket?: Prisma.BasketCreateNestedOneWithoutSessionInput
 }
 
@@ -228,6 +280,7 @@ export type SessionUncheckedCreateInput = {
   secretHash: Uint8Array
   lastVerifiedAt: Date | string
   createdAt: Date | string
+  userId?: number | null
   basket?: Prisma.BasketUncheckedCreateNestedOneWithoutSessionInput
 }
 
@@ -236,6 +289,7 @@ export type SessionUpdateInput = {
   secretHash?: Prisma.BytesFieldUpdateOperationsInput | Uint8Array
   lastVerifiedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  user?: Prisma.UserUpdateOneWithoutSessionsNestedInput
   basket?: Prisma.BasketUpdateOneWithoutSessionNestedInput
 }
 
@@ -244,6 +298,7 @@ export type SessionUncheckedUpdateInput = {
   secretHash?: Prisma.BytesFieldUpdateOperationsInput | Uint8Array
   lastVerifiedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  userId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   basket?: Prisma.BasketUncheckedUpdateOneWithoutSessionNestedInput
 }
 
@@ -252,6 +307,7 @@ export type SessionCreateManyInput = {
   secretHash: Uint8Array
   lastVerifiedAt: Date | string
   createdAt: Date | string
+  userId?: number | null
 }
 
 export type SessionUpdateManyMutationInput = {
@@ -266,6 +322,17 @@ export type SessionUncheckedUpdateManyInput = {
   secretHash?: Prisma.BytesFieldUpdateOperationsInput | Uint8Array
   lastVerifiedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  userId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+}
+
+export type SessionListRelationFilter = {
+  every?: Prisma.SessionWhereInput
+  some?: Prisma.SessionWhereInput
+  none?: Prisma.SessionWhereInput
+}
+
+export type SessionOrderByRelationAggregateInput = {
+  _count?: Prisma.SortOrder
 }
 
 export type SessionNullableScalarRelationFilter = {
@@ -278,6 +345,11 @@ export type SessionCountOrderByAggregateInput = {
   secretHash?: Prisma.SortOrder
   lastVerifiedAt?: Prisma.SortOrder
   createdAt?: Prisma.SortOrder
+  userId?: Prisma.SortOrder
+}
+
+export type SessionAvgOrderByAggregateInput = {
+  userId?: Prisma.SortOrder
 }
 
 export type SessionMaxOrderByAggregateInput = {
@@ -285,6 +357,7 @@ export type SessionMaxOrderByAggregateInput = {
   secretHash?: Prisma.SortOrder
   lastVerifiedAt?: Prisma.SortOrder
   createdAt?: Prisma.SortOrder
+  userId?: Prisma.SortOrder
 }
 
 export type SessionMinOrderByAggregateInput = {
@@ -292,6 +365,53 @@ export type SessionMinOrderByAggregateInput = {
   secretHash?: Prisma.SortOrder
   lastVerifiedAt?: Prisma.SortOrder
   createdAt?: Prisma.SortOrder
+  userId?: Prisma.SortOrder
+}
+
+export type SessionSumOrderByAggregateInput = {
+  userId?: Prisma.SortOrder
+}
+
+export type SessionCreateNestedManyWithoutUserInput = {
+  create?: Prisma.XOR<Prisma.SessionCreateWithoutUserInput, Prisma.SessionUncheckedCreateWithoutUserInput> | Prisma.SessionCreateWithoutUserInput[] | Prisma.SessionUncheckedCreateWithoutUserInput[]
+  connectOrCreate?: Prisma.SessionCreateOrConnectWithoutUserInput | Prisma.SessionCreateOrConnectWithoutUserInput[]
+  createMany?: Prisma.SessionCreateManyUserInputEnvelope
+  connect?: Prisma.SessionWhereUniqueInput | Prisma.SessionWhereUniqueInput[]
+}
+
+export type SessionUncheckedCreateNestedManyWithoutUserInput = {
+  create?: Prisma.XOR<Prisma.SessionCreateWithoutUserInput, Prisma.SessionUncheckedCreateWithoutUserInput> | Prisma.SessionCreateWithoutUserInput[] | Prisma.SessionUncheckedCreateWithoutUserInput[]
+  connectOrCreate?: Prisma.SessionCreateOrConnectWithoutUserInput | Prisma.SessionCreateOrConnectWithoutUserInput[]
+  createMany?: Prisma.SessionCreateManyUserInputEnvelope
+  connect?: Prisma.SessionWhereUniqueInput | Prisma.SessionWhereUniqueInput[]
+}
+
+export type SessionUpdateManyWithoutUserNestedInput = {
+  create?: Prisma.XOR<Prisma.SessionCreateWithoutUserInput, Prisma.SessionUncheckedCreateWithoutUserInput> | Prisma.SessionCreateWithoutUserInput[] | Prisma.SessionUncheckedCreateWithoutUserInput[]
+  connectOrCreate?: Prisma.SessionCreateOrConnectWithoutUserInput | Prisma.SessionCreateOrConnectWithoutUserInput[]
+  upsert?: Prisma.SessionUpsertWithWhereUniqueWithoutUserInput | Prisma.SessionUpsertWithWhereUniqueWithoutUserInput[]
+  createMany?: Prisma.SessionCreateManyUserInputEnvelope
+  set?: Prisma.SessionWhereUniqueInput | Prisma.SessionWhereUniqueInput[]
+  disconnect?: Prisma.SessionWhereUniqueInput | Prisma.SessionWhereUniqueInput[]
+  delete?: Prisma.SessionWhereUniqueInput | Prisma.SessionWhereUniqueInput[]
+  connect?: Prisma.SessionWhereUniqueInput | Prisma.SessionWhereUniqueInput[]
+  update?: Prisma.SessionUpdateWithWhereUniqueWithoutUserInput | Prisma.SessionUpdateWithWhereUniqueWithoutUserInput[]
+  updateMany?: Prisma.SessionUpdateManyWithWhereWithoutUserInput | Prisma.SessionUpdateManyWithWhereWithoutUserInput[]
+  deleteMany?: Prisma.SessionScalarWhereInput | Prisma.SessionScalarWhereInput[]
+}
+
+export type SessionUncheckedUpdateManyWithoutUserNestedInput = {
+  create?: Prisma.XOR<Prisma.SessionCreateWithoutUserInput, Prisma.SessionUncheckedCreateWithoutUserInput> | Prisma.SessionCreateWithoutUserInput[] | Prisma.SessionUncheckedCreateWithoutUserInput[]
+  connectOrCreate?: Prisma.SessionCreateOrConnectWithoutUserInput | Prisma.SessionCreateOrConnectWithoutUserInput[]
+  upsert?: Prisma.SessionUpsertWithWhereUniqueWithoutUserInput | Prisma.SessionUpsertWithWhereUniqueWithoutUserInput[]
+  createMany?: Prisma.SessionCreateManyUserInputEnvelope
+  set?: Prisma.SessionWhereUniqueInput | Prisma.SessionWhereUniqueInput[]
+  disconnect?: Prisma.SessionWhereUniqueInput | Prisma.SessionWhereUniqueInput[]
+  delete?: Prisma.SessionWhereUniqueInput | Prisma.SessionWhereUniqueInput[]
+  connect?: Prisma.SessionWhereUniqueInput | Prisma.SessionWhereUniqueInput[]
+  update?: Prisma.SessionUpdateWithWhereUniqueWithoutUserInput | Prisma.SessionUpdateWithWhereUniqueWithoutUserInput[]
+  updateMany?: Prisma.SessionUpdateManyWithWhereWithoutUserInput | Prisma.SessionUpdateManyWithWhereWithoutUserInput[]
+  deleteMany?: Prisma.SessionScalarWhereInput | Prisma.SessionScalarWhereInput[]
 }
 
 export type SessionCreateNestedOneWithoutBasketInput = {
@@ -314,11 +434,73 @@ export type BytesFieldUpdateOperationsInput = {
   set?: Uint8Array
 }
 
+export type NullableIntFieldUpdateOperationsInput = {
+  set?: number | null
+  increment?: number
+  decrement?: number
+  multiply?: number
+  divide?: number
+}
+
+export type SessionCreateWithoutUserInput = {
+  id: string
+  secretHash: Uint8Array
+  lastVerifiedAt: Date | string
+  createdAt: Date | string
+  basket?: Prisma.BasketCreateNestedOneWithoutSessionInput
+}
+
+export type SessionUncheckedCreateWithoutUserInput = {
+  id: string
+  secretHash: Uint8Array
+  lastVerifiedAt: Date | string
+  createdAt: Date | string
+  basket?: Prisma.BasketUncheckedCreateNestedOneWithoutSessionInput
+}
+
+export type SessionCreateOrConnectWithoutUserInput = {
+  where: Prisma.SessionWhereUniqueInput
+  create: Prisma.XOR<Prisma.SessionCreateWithoutUserInput, Prisma.SessionUncheckedCreateWithoutUserInput>
+}
+
+export type SessionCreateManyUserInputEnvelope = {
+  data: Prisma.SessionCreateManyUserInput | Prisma.SessionCreateManyUserInput[]
+  skipDuplicates?: boolean
+}
+
+export type SessionUpsertWithWhereUniqueWithoutUserInput = {
+  where: Prisma.SessionWhereUniqueInput
+  update: Prisma.XOR<Prisma.SessionUpdateWithoutUserInput, Prisma.SessionUncheckedUpdateWithoutUserInput>
+  create: Prisma.XOR<Prisma.SessionCreateWithoutUserInput, Prisma.SessionUncheckedCreateWithoutUserInput>
+}
+
+export type SessionUpdateWithWhereUniqueWithoutUserInput = {
+  where: Prisma.SessionWhereUniqueInput
+  data: Prisma.XOR<Prisma.SessionUpdateWithoutUserInput, Prisma.SessionUncheckedUpdateWithoutUserInput>
+}
+
+export type SessionUpdateManyWithWhereWithoutUserInput = {
+  where: Prisma.SessionScalarWhereInput
+  data: Prisma.XOR<Prisma.SessionUpdateManyMutationInput, Prisma.SessionUncheckedUpdateManyWithoutUserInput>
+}
+
+export type SessionScalarWhereInput = {
+  AND?: Prisma.SessionScalarWhereInput | Prisma.SessionScalarWhereInput[]
+  OR?: Prisma.SessionScalarWhereInput[]
+  NOT?: Prisma.SessionScalarWhereInput | Prisma.SessionScalarWhereInput[]
+  id?: Prisma.StringFilter<"Session"> | string
+  secretHash?: Prisma.BytesFilter<"Session"> | Uint8Array
+  lastVerifiedAt?: Prisma.DateTimeFilter<"Session"> | Date | string
+  createdAt?: Prisma.DateTimeFilter<"Session"> | Date | string
+  userId?: Prisma.IntNullableFilter<"Session"> | number | null
+}
+
 export type SessionCreateWithoutBasketInput = {
   id: string
   secretHash: Uint8Array
   lastVerifiedAt: Date | string
   createdAt: Date | string
+  user?: Prisma.UserCreateNestedOneWithoutSessionsInput
 }
 
 export type SessionUncheckedCreateWithoutBasketInput = {
@@ -326,6 +508,7 @@ export type SessionUncheckedCreateWithoutBasketInput = {
   secretHash: Uint8Array
   lastVerifiedAt: Date | string
   createdAt: Date | string
+  userId?: number | null
 }
 
 export type SessionCreateOrConnectWithoutBasketInput = {
@@ -349,9 +532,41 @@ export type SessionUpdateWithoutBasketInput = {
   secretHash?: Prisma.BytesFieldUpdateOperationsInput | Uint8Array
   lastVerifiedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  user?: Prisma.UserUpdateOneWithoutSessionsNestedInput
 }
 
 export type SessionUncheckedUpdateWithoutBasketInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  secretHash?: Prisma.BytesFieldUpdateOperationsInput | Uint8Array
+  lastVerifiedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  userId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+}
+
+export type SessionCreateManyUserInput = {
+  id: string
+  secretHash: Uint8Array
+  lastVerifiedAt: Date | string
+  createdAt: Date | string
+}
+
+export type SessionUpdateWithoutUserInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  secretHash?: Prisma.BytesFieldUpdateOperationsInput | Uint8Array
+  lastVerifiedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  basket?: Prisma.BasketUpdateOneWithoutSessionNestedInput
+}
+
+export type SessionUncheckedUpdateWithoutUserInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  secretHash?: Prisma.BytesFieldUpdateOperationsInput | Uint8Array
+  lastVerifiedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  basket?: Prisma.BasketUncheckedUpdateOneWithoutSessionNestedInput
+}
+
+export type SessionUncheckedUpdateManyWithoutUserInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   secretHash?: Prisma.BytesFieldUpdateOperationsInput | Uint8Array
   lastVerifiedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -365,6 +580,8 @@ export type SessionSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs 
   secretHash?: boolean
   lastVerifiedAt?: boolean
   createdAt?: boolean
+  userId?: boolean
+  user?: boolean | Prisma.Session$userArgs<ExtArgs>
   basket?: boolean | Prisma.Session$basketArgs<ExtArgs>
 }, ExtArgs["result"]["session"]>
 
@@ -373,6 +590,8 @@ export type SessionSelectCreateManyAndReturn<ExtArgs extends runtime.Types.Exten
   secretHash?: boolean
   lastVerifiedAt?: boolean
   createdAt?: boolean
+  userId?: boolean
+  user?: boolean | Prisma.Session$userArgs<ExtArgs>
 }, ExtArgs["result"]["session"]>
 
 export type SessionSelectUpdateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetSelect<{
@@ -380,6 +599,8 @@ export type SessionSelectUpdateManyAndReturn<ExtArgs extends runtime.Types.Exten
   secretHash?: boolean
   lastVerifiedAt?: boolean
   createdAt?: boolean
+  userId?: boolean
+  user?: boolean | Prisma.Session$userArgs<ExtArgs>
 }, ExtArgs["result"]["session"]>
 
 export type SessionSelectScalar = {
@@ -387,18 +608,25 @@ export type SessionSelectScalar = {
   secretHash?: boolean
   lastVerifiedAt?: boolean
   createdAt?: boolean
+  userId?: boolean
 }
 
-export type SessionOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "secretHash" | "lastVerifiedAt" | "createdAt", ExtArgs["result"]["session"]>
+export type SessionOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "secretHash" | "lastVerifiedAt" | "createdAt" | "userId", ExtArgs["result"]["session"]>
 export type SessionInclude<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  user?: boolean | Prisma.Session$userArgs<ExtArgs>
   basket?: boolean | Prisma.Session$basketArgs<ExtArgs>
 }
-export type SessionIncludeCreateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {}
-export type SessionIncludeUpdateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {}
+export type SessionIncludeCreateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  user?: boolean | Prisma.Session$userArgs<ExtArgs>
+}
+export type SessionIncludeUpdateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  user?: boolean | Prisma.Session$userArgs<ExtArgs>
+}
 
 export type $SessionPayload<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   name: "Session"
   objects: {
+    user: Prisma.$UserPayload<ExtArgs> | null
     basket: Prisma.$BasketPayload<ExtArgs> | null
   }
   scalars: runtime.Types.Extensions.GetPayloadResult<{
@@ -406,6 +634,7 @@ export type $SessionPayload<ExtArgs extends runtime.Types.Extensions.InternalArg
     secretHash: Uint8Array
     lastVerifiedAt: Date
     createdAt: Date
+    userId: number | null
   }, ExtArgs["result"]["session"]>
   composites: {}
 }
@@ -800,6 +1029,7 @@ readonly fields: SessionFieldRefs;
  */
 export interface Prisma__SessionClient<T, Null = never, ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs, GlobalOmitOptions = {}> extends Prisma.PrismaPromise<T> {
   readonly [Symbol.toStringTag]: "PrismaPromise"
+  user<T extends Prisma.Session$userArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Session$userArgs<ExtArgs>>): Prisma.Prisma__UserClient<runtime.Types.Result.GetResult<Prisma.$UserPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
   basket<T extends Prisma.Session$basketArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Session$basketArgs<ExtArgs>>): Prisma.Prisma__BasketClient<runtime.Types.Result.GetResult<Prisma.$BasketPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
   /**
    * Attaches callbacks for the resolution and/or rejection of the Promise.
@@ -834,6 +1064,7 @@ export interface SessionFieldRefs {
   readonly secretHash: Prisma.FieldRef<"Session", 'Bytes'>
   readonly lastVerifiedAt: Prisma.FieldRef<"Session", 'DateTime'>
   readonly createdAt: Prisma.FieldRef<"Session", 'DateTime'>
+  readonly userId: Prisma.FieldRef<"Session", 'Int'>
 }
     
 
@@ -1083,6 +1314,10 @@ export type SessionCreateManyAndReturnArgs<ExtArgs extends runtime.Types.Extensi
    */
   data: Prisma.SessionCreateManyInput | Prisma.SessionCreateManyInput[]
   skipDuplicates?: boolean
+  /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.SessionIncludeCreateManyAndReturn<ExtArgs> | null
 }
 
 /**
@@ -1153,6 +1388,10 @@ export type SessionUpdateManyAndReturnArgs<ExtArgs extends runtime.Types.Extensi
    * Limit how many Sessions to update.
    */
   limit?: number
+  /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.SessionIncludeUpdateManyAndReturn<ExtArgs> | null
 }
 
 /**
@@ -1219,6 +1458,25 @@ export type SessionDeleteManyArgs<ExtArgs extends runtime.Types.Extensions.Inter
    * Limit how many Sessions to delete.
    */
   limit?: number
+}
+
+/**
+ * Session.user
+ */
+export type Session$userArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  /**
+   * Select specific fields to fetch from the User
+   */
+  select?: Prisma.UserSelect<ExtArgs> | null
+  /**
+   * Omit specific fields from the User
+   */
+  omit?: Prisma.UserOmit<ExtArgs> | null
+  /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.UserInclude<ExtArgs> | null
+  where?: Prisma.UserWhereInput
 }
 
 /**

@@ -19,7 +19,7 @@ export const load: PageServerLoad = async () => {
 };
 
 export const actions = {
-	default: async ({ request }) => {
+	newsletterRegister: async ({ request }) => {
 		const form = await superValidate(request, zod(schema));
 
 		if (!form.valid) {

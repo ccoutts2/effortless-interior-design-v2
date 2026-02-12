@@ -1,40 +1,19 @@
 <script lang="ts">
-	import TestimonialWrapper from '$lib/components/ui/TestimonialWrapper.svelte';
-	import Testimonial from '$lib/components/ui/Testimonial.svelte';
-	import SectionHeader from '$lib/components/SectionHeader.svelte';
-	import TextWithCta from '$lib/components/ui/TextWithCta.svelte';
-	import gsap from 'gsap';
-	import { ScrollTrigger } from 'gsap/ScrollTrigger';
+	import { customerTestimonial } from '$lib/constants/testimonialData';
 	import { onMount } from 'svelte';
-	import type { PageData } from './$types';
-	import NavLink from '$lib/components/navigation/NavLink.svelte';
-	import Form from '$lib/components/form/Form.svelte';
-	import EmailField from '$lib/components/form/inputs/EmailField.svelte';
+	import { ScrollTrigger } from 'gsap/ScrollTrigger';
 	import { superForm } from 'sveltekit-superforms';
-	import TextField from '$lib/components/form/inputs/TextField.svelte';
+	import EmailField from '$lib/components/form/inputs/EmailField.svelte';
+	import Form from '$lib/components/form/Form.svelte';
+	import gsap from 'gsap';
+	import NavLink from '$lib/components/navigation/NavLink.svelte';
+	import SectionHeader from '$lib/components/SectionHeader.svelte';
 	import SlideIn from '$lib/components/SlideIn.svelte';
-	import Modal from '$lib/components/ui/Modal.svelte';
-
-	interface CustomerTestimonial {
-		text: string;
-	}
-	const customerTestimonial: CustomerTestimonial[] = [
-		{
-			text: "I've tried countless products, but this is the first one that genuinely delivered on its promise. It's an absolute game-changer!"
-		},
-		{
-			text: 'Exceptional quality and incredible service. The team was so helpful and went above and beyond to make sure I was happy with my purchase. Highly recommend!'
-		},
-		{
-			text: "I was a bit skeptical at first, but this product completely blew me away. It's easy to use and the results are even better than I expected. I'm a customer for life."
-		},
-		{
-			text: "This is by far the best [product/service category] I've ever used. The attention to detail is remarkable, and it has made a huge difference in my daily routine."
-		},
-		{
-			text: "From the moment I placed my order, the experience was seamless. The product arrived quickly, and it's even better in person. I can't wait to see what they come out with next!"
-		}
-	];
+	import Testimonial from '$lib/components/ui/Testimonial.svelte';
+	import TestimonialWrapper from '$lib/components/ui/TestimonialWrapper.svelte';
+	import TextField from '$lib/components/form/inputs/TextField.svelte';
+	import TextWithCta from '$lib/components/ui/TextWithCta.svelte';
+	import type { PageData } from './$types';
 
 	let { data }: { data: PageData } = $props();
 
@@ -49,45 +28,45 @@
 	const testimonialsCount: number = $state(customerTestimonial.length);
 	const width = testimonialsCount * 50;
 
-	onMount(() => {
-		gsap.registerPlugin(ScrollTrigger);
+	// onMount(() => {
+	// 	gsap.registerPlugin(ScrollTrigger);
 
-		// gsap.set(scrollContainer, {
-		// 	clipPath: 'polygon(15% 10%, 85% 10%, 85% 90%, 15% 90%)'
-		// });
+	// 	// gsap.set(scrollContainer, {
+	// 	// 	clipPath: 'polygon(15% 10%, 85% 10%, 85% 90%, 15% 90%)'
+	// 	// });
 
-		// if (!scrollContainer) return;
+	// 	// if (!scrollContainer) return;
 
-		// tl = gsap.timeline().to(scrollContainer, {
-		// 	clipPath: 'polygon(0% 0%, 100% 0%, 100% 100%, 0% 100%)',
-		// 	ease: 'none',
-		// 	scrollTrigger: {
-		// 		trigger: scrollContainer,
-		// 		start: 'top bottom',
-		// 		end: 'bottom bottom',
-		// 		scrub: true
-		// 	}
-		// });
+	// 	// tl = gsap.timeline().to(scrollContainer, {
+	// 	// 	clipPath: 'polygon(0% 0%, 100% 0%, 100% 100%, 0% 100%)',
+	// 	// 	ease: 'none',
+	// 	// 	scrollTrigger: {
+	// 	// 		trigger: scrollContainer,
+	// 	// 		start: 'top bottom',
+	// 	// 		end: 'bottom bottom',
+	// 	// 		scrub: true
+	// 	// 	}
+	// 	// });
 
-		// doesnt work for tablet or mobile and laptop
+	// 	// doesnt work for tablet or mobile and laptop
 
-		panels = gsap.utils.toArray('#panels-container .panel');
+	// 	panels = gsap.utils.toArray('#panels-container .panel');
 
-		tl = gsap.timeline();
+	// 	tl = gsap.timeline();
 
-		tl.to(panels, {
-			x: () => -1 * (cont.scrollWidth - innerWidth),
-			ease: 'none',
-			scrollTrigger: {
-				trigger: cont,
-				pin: true,
-				markers: true,
-				start: 'center center',
-				scrub: 1,
-				end: () => '+=' + (cont.scrollWidth - innerWidth)
-			}
-		});
-	});
+	// 	tl.to(panels, {
+	// 		x: () => -1 * (cont.scrollWidth - innerWidth),
+	// 		ease: 'none',
+	// 		scrollTrigger: {
+	// 			trigger: cont,
+	// 			pin: true,
+	// 			markers: true,
+	// 			start: 'center center',
+	// 			scrub: 1,
+	// 			end: () => '+=' + (cont.scrollWidth - innerWidth)
+	// 		}
+	// 	});
+	// });
 </script>
 
 <svelte:head>
@@ -222,10 +201,10 @@
 		</div>
 	</SlideIn>
 
-	<aside class="Home__newsletterSub">
+	<aside class="Home__newsletterRegister">
 		<SectionHeader headerTag="h2" textCenter={true} header="Sign up to our newsletter" />
 		<p>For insights & behind the scenes updates, sign up for our newsletter</p>
-		<Form {enhance} buttonLabel="Sign up">
+		<Form {enhance} buttonLabel="Sign up" action="?/newsletterRegister">
 			{#if $message}
 				<span class="Error text-lg">{$message.text}</span>
 			{/if}
@@ -308,7 +287,7 @@
 			flex: 1;
 		}
 
-		&__newsletterSub {
+		&__newsletterRegister {
 			margin: 0 auto;
 		}
 	}
