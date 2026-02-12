@@ -9,7 +9,12 @@
 	import Overlay from '$lib/components/ui/Overlay.svelte';
 	import type { OverlayProps } from '$lib/types';
 	import type { PageData } from './$types';
-	import { userInfo } from 'os';
+	import Modal from '$lib/components/ui/Modal.svelte';
+	import EmailField from '$lib/components/form/inputs/EmailField.svelte';
+	import TextField from '$lib/components/form/inputs/TextField.svelte';
+	import Form from '$lib/components/form/Form.svelte';
+	import { superForm } from 'sveltekit-superforms';
+	import { enhance as svelteEnhance } from '$app/forms';
 
 	let { children, data }: { children: Snippet; data: PageData } = $props();
 
@@ -18,8 +23,6 @@
 		overlayContent: null,
 		data: data.productsInBasket ?? null
 	});
-
-	const user = $derived(data.userSession);
 
 	const handleOutsideClick = (e: MouseEvent) => {
 		const target = e.target as HTMLElement;
@@ -30,6 +33,8 @@
 			}
 		}
 	};
+
+	const { form, enhance, message, errors } = superForm(data.form);
 
 	setContext('overlay-ctx', overlayState);
 
@@ -69,6 +74,8 @@
 			});
 		});
 	});
+
+	let showModal = $derived(data.showNewsleterPopup);
 </script>
 
 <svelte:head>
@@ -87,8 +94,46 @@
 </Header>
 {@render children?.()}
 
-<pre>{JSON.stringify(user, null, 2)}</pre>
-
+<Modal bind:showModal>
+	{#snippet header()}
+		<h2>Newsletter signup</h2>
+		<small><em>do you want to keep up to date with trends?</em></small>
+		<hr />
+	{/snippet}
+	<div>
+		<form method="POST" action="?/dismissNewsletter" use:svelteEnhance>
+			<button type="submit">No</button>
+		</form>
+		<button type="button">Yes</button>
+		<div>
+			<Form {enhance} buttonLabel="Sign up" action="?/newsletterRegister">
+				{#if $message}
+					<span class="Error text-lg">{$message.text}</span>
+				{/if}
+				<fieldset class="flex w-full flex-col items-center justify-between">
+					<legend class="visually-hidden"
+						>Enter your email, optionally your name too, to sign up to the newsletter</legend
+					>
+					<EmailField
+						fieldName="modalEmail"
+						label="Your email"
+						value={$form.email}
+						errors={$errors.email}
+						autocomplete="email"
+						required
+					/>
+					<TextField
+						fieldName="modalName"
+						label="Your name (optional)"
+						value={$form.name ?? ''}
+						errors={$errors.name}
+						autocomplete="name"
+					/>
+				</fieldset>
+			</Form>
+		</div>
+	</div>
+</Modal>
 <Overlay />
 
 <style lang="scss">

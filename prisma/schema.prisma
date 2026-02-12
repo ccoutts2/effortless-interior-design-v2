@@ -47,19 +47,17 @@ model RoomType {
 }
 
 model User {
-  id            String       @id @default(cuid())
   email         String    @unique
   name          String?
   password      String?
-  isActive      Boolean @default(false)
-  newsletterSub Boolean @default(false)
-  isAdmin       Boolean @default(false)
-
-  createdAt DateTime @default(now())
-  updatedAt DateTime @updatedAt
-
-  orders Order[]
-  sessions Session[]
+  isActive      Boolean   @default(false)
+  newsletterSub Boolean   @default(false)
+  isAdmin       Boolean   @default(false)
+  createdAt     DateTime  @default(now())
+  updatedAt     DateTime  @updatedAt
+  id            String    @id @default(cuid())
+  orders        Order[]
+  sessions      Session[]
 }
 
 model Order {
@@ -107,11 +105,9 @@ model ProductsInBasket {
 model Session {
   id        String   @id
   expiresAt DateTime
-
-  userId         String?
-  user           User?    @relation(fields: [userId], references: [id], onDelete: Cascade)
-
-  basket         Basket?
+  userId    String?
+  basket    Basket?
+  user      User?    @relation(fields: [userId], references: [id], onDelete: Cascade)
 }
 
 enum PaymentType {

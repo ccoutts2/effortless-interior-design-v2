@@ -1,21 +1,19 @@
+import { superValidate } from 'sveltekit-superforms';
+import { zod } from 'sveltekit-superforms/adapters';
 import prisma from '$lib/server/prisma';
 import type { LayoutServerLoad } from './$types';
+import z from 'zod';
+
+const schema = z.object({
+	modalEmail: z.string().email(),
+	modalName: z.string().min(1, 'Please enter a valid name').optional()
+});
 
 export const load: LayoutServerLoad = async ({ locals, cookies }) => {
-	const { session } = locals;
+	const { session, user } = locals;
+	const form = await superValidate(zod(schema));
 
-	const userSession = await prisma.session.findUnique({
-		where: { id: sessionCookie },
-		include: {
-			user: true
-		}
-	});
-
-	console.log(userSession);
-
-	const user = userSession?.user;
-
-	const showNewsletterPopup = !user || !user.newsletterSub;
+	const dismissNewsletter = cookies.get('newsletter_dismissed') === 'true';
 
 	let productsInBasket = null;
 
@@ -23,11 +21,13 @@ export const load: LayoutServerLoad = async ({ locals, cookies }) => {
 		productsInBasket = await fetchProductsInBasket(session.id);
 	}
 
+	const showNewsleterPopup = user ? !user.newsletterSub : !dismissNewsletter;
+
 	return {
 		productsInBasket,
 		user,
-		showNewsletterPopup,
-		userSession
+		showNewsleterPopup,
+		form
 	};
 };
 

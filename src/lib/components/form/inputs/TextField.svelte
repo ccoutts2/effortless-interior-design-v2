@@ -41,14 +41,14 @@
 
 		&__label {
 			font-size: 0.875rem;
-			padding-block: 0.5rem;
+			padding-block: 0.25rem;
 			text-transform: uppercase;
 		}
 
 		&__input {
 			border-bottom: 1px solid black;
 			border-radius: 0.25rem 0.25rem 0 0;
-			padding: 0.5rem 0.25rem;
+			padding: 0.25rem;
 		}
 	}
 	.Error {

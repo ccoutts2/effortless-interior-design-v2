@@ -1,5 +1,5 @@
 import type { PageServerLoad } from './$types';
-import type { Actions } from '@sveltejs/kit';
+import { redirect, type Actions } from '@sveltejs/kit';
 import { zod } from 'sveltekit-superforms/adapters';
 import { message, superValidate, setError } from 'sveltekit-superforms';
 import z from 'zod';
@@ -19,7 +19,7 @@ export const load: PageServerLoad = async () => {
 };
 
 export const actions = {
-	newsletterRegister: async ({ request }) => {
+	newsletterRegister: async ({ request, cookies }) => {
 		const form = await superValidate(request, zod(schema));
 
 		if (!form.valid) {
@@ -46,6 +46,13 @@ export const actions = {
 				update: { newsletterSub: true },
 				create: { email: form.data.email, name: form.data.name, newsletterSub: true }
 			});
+
+			cookies.set('newsletter_dismissed', 'true', {
+				httpOnly: true,
+				path: '/',
+				maxAge: 60 * 60 * 24 * 365,
+				sameSite: 'lax'
+			});
 		} catch (error) {
 			console.log(error);
 			return message(
@@ -61,5 +68,13 @@ export const actions = {
 		}
 
 		return message(form, { text: 'Newsletter subscribed to successfully!' });
+	},
+	dismissNewsletter: async ({ cookies }) => {
+		cookies.set('newsletter_dismissed', 'true', {
+			httpOnly: true,
+			path: '/',
+			maxAge: 60 * 60 * 24 * 7,
+			sameSite: 'lax'
+		});
 	}
 } satisfies Actions;
