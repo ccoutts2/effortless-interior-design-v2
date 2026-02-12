@@ -93,7 +93,7 @@ export const load: PageServerLoad = async ({ params, url }: ProductProps) => {
 };
 
 export const actions = {
-	addToBasket: async ({ request, cookies }) => {
+	addToBasket: async ({ request, locals }) => {
 		const form = await request.formData();
 		const productId = form.get('productId') as string;
 
@@ -101,31 +101,17 @@ export const actions = {
 			return fail(400, { message: 'Invalid productId' });
 		}
 
-		const sessionCookie = cookies.get('session');
+		const session = locals.session;
 
-		// TODO: redirect to appropriate page
-		if (!sessionCookie) {
-			throw redirect(302, '/');
+		if (!session) {
+			return fail(401, { message: 'Session not found.' });
 		}
 
 		try {
-			const session = await prisma.session.upsert({
-				where: { id: sessionCookie },
-				update: {},
-				create: {
-					id: sessionCookie,
-					secretHash: new Uint8Array(),
-					lastVerifiedAt: new Date(),
-					createdAt: new Date()
-				}
-			});
-
 			const basket = await prisma.basket.upsert({
 				where: { sessionId: session.id },
 				update: {},
-				create: {
-					sessionId: session.id
-				}
+				create: { sessionId: session.id }
 			});
 
 			const productInBasketId = {

@@ -28,13 +28,11 @@ export type AggregateOrder = {
 export type OrderAvgAggregateOutputType = {
   id: number | null
   totalPrice: number | null
-  userId: number | null
 }
 
 export type OrderSumAggregateOutputType = {
   id: number | null
   totalPrice: number | null
-  userId: number | null
 }
 
 export type OrderMinAggregateOutputType = {
@@ -43,7 +41,7 @@ export type OrderMinAggregateOutputType = {
   withConsultation: boolean | null
   createdAt: Date | null
   updatedAt: Date | null
-  userId: number | null
+  userId: string | null
 }
 
 export type OrderMaxAggregateOutputType = {
@@ -52,7 +50,7 @@ export type OrderMaxAggregateOutputType = {
   withConsultation: boolean | null
   createdAt: Date | null
   updatedAt: Date | null
-  userId: number | null
+  userId: string | null
 }
 
 export type OrderCountAggregateOutputType = {
@@ -69,13 +67,11 @@ export type OrderCountAggregateOutputType = {
 export type OrderAvgAggregateInputType = {
   id?: true
   totalPrice?: true
-  userId?: true
 }
 
 export type OrderSumAggregateInputType = {
   id?: true
   totalPrice?: true
-  userId?: true
 }
 
 export type OrderMinAggregateInputType = {
@@ -198,7 +194,7 @@ export type OrderGroupByOutputType = {
   withConsultation: boolean
   createdAt: Date
   updatedAt: Date
-  userId: number
+  userId: string
   _count: OrderCountAggregateOutputType | null
   _avg: OrderAvgAggregateOutputType | null
   _sum: OrderSumAggregateOutputType | null
@@ -230,8 +226,8 @@ export type OrderWhereInput = {
   withConsultation?: Prisma.BoolFilter<"Order"> | boolean
   createdAt?: Prisma.DateTimeFilter<"Order"> | Date | string
   updatedAt?: Prisma.DateTimeFilter<"Order"> | Date | string
-  userId?: Prisma.IntFilter<"Order"> | number
-  user?: Prisma.XOR<Prisma.UserNullableScalarRelationFilter, Prisma.UserWhereInput> | null
+  userId?: Prisma.StringFilter<"Order"> | string
+  user?: Prisma.XOR<Prisma.UserScalarRelationFilter, Prisma.UserWhereInput>
   products?: Prisma.OrdersOnProductsListRelationFilter
 }
 
@@ -255,8 +251,8 @@ export type OrderWhereUniqueInput = Prisma.AtLeast<{
   withConsultation?: Prisma.BoolFilter<"Order"> | boolean
   createdAt?: Prisma.DateTimeFilter<"Order"> | Date | string
   updatedAt?: Prisma.DateTimeFilter<"Order"> | Date | string
-  userId?: Prisma.IntFilter<"Order"> | number
-  user?: Prisma.XOR<Prisma.UserNullableScalarRelationFilter, Prisma.UserWhereInput> | null
+  userId?: Prisma.StringFilter<"Order"> | string
+  user?: Prisma.XOR<Prisma.UserScalarRelationFilter, Prisma.UserWhereInput>
   products?: Prisma.OrdersOnProductsListRelationFilter
 }, "id">
 
@@ -283,7 +279,7 @@ export type OrderScalarWhereWithAggregatesInput = {
   withConsultation?: Prisma.BoolWithAggregatesFilter<"Order"> | boolean
   createdAt?: Prisma.DateTimeWithAggregatesFilter<"Order"> | Date | string
   updatedAt?: Prisma.DateTimeWithAggregatesFilter<"Order"> | Date | string
-  userId?: Prisma.IntWithAggregatesFilter<"Order"> | number
+  userId?: Prisma.StringWithAggregatesFilter<"Order"> | string
 }
 
 export type OrderCreateInput = {
@@ -291,7 +287,7 @@ export type OrderCreateInput = {
   withConsultation?: boolean
   createdAt?: Date | string
   updatedAt?: Date | string
-  user?: Prisma.UserCreateNestedOneWithoutOrdersInput
+  user: Prisma.UserCreateNestedOneWithoutOrdersInput
   products?: Prisma.OrdersOnProductsCreateNestedManyWithoutOrderInput
 }
 
@@ -301,7 +297,7 @@ export type OrderUncheckedCreateInput = {
   withConsultation?: boolean
   createdAt?: Date | string
   updatedAt?: Date | string
-  userId: number
+  userId: string
   products?: Prisma.OrdersOnProductsUncheckedCreateNestedManyWithoutOrderInput
 }
 
@@ -310,7 +306,7 @@ export type OrderUpdateInput = {
   withConsultation?: Prisma.BoolFieldUpdateOperationsInput | boolean
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  user?: Prisma.UserUpdateOneWithoutOrdersNestedInput
+  user?: Prisma.UserUpdateOneRequiredWithoutOrdersNestedInput
   products?: Prisma.OrdersOnProductsUpdateManyWithoutOrderNestedInput
 }
 
@@ -320,7 +316,7 @@ export type OrderUncheckedUpdateInput = {
   withConsultation?: Prisma.BoolFieldUpdateOperationsInput | boolean
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  userId?: Prisma.IntFieldUpdateOperationsInput | number
+  userId?: Prisma.StringFieldUpdateOperationsInput | string
   products?: Prisma.OrdersOnProductsUncheckedUpdateManyWithoutOrderNestedInput
 }
 
@@ -330,7 +326,7 @@ export type OrderCreateManyInput = {
   withConsultation?: boolean
   createdAt?: Date | string
   updatedAt?: Date | string
-  userId: number
+  userId: string
 }
 
 export type OrderUpdateManyMutationInput = {
@@ -346,7 +342,7 @@ export type OrderUncheckedUpdateManyInput = {
   withConsultation?: Prisma.BoolFieldUpdateOperationsInput | boolean
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  userId?: Prisma.IntFieldUpdateOperationsInput | number
+  userId?: Prisma.StringFieldUpdateOperationsInput | string
 }
 
 export type OrderListRelationFilter = {
@@ -371,7 +367,6 @@ export type OrderCountOrderByAggregateInput = {
 export type OrderAvgOrderByAggregateInput = {
   id?: Prisma.SortOrder
   totalPrice?: Prisma.SortOrder
-  userId?: Prisma.SortOrder
 }
 
 export type OrderMaxOrderByAggregateInput = {
@@ -395,7 +390,6 @@ export type OrderMinOrderByAggregateInput = {
 export type OrderSumOrderByAggregateInput = {
   id?: Prisma.SortOrder
   totalPrice?: Prisma.SortOrder
-  userId?: Prisma.SortOrder
 }
 
 export type OrderScalarRelationFilter = {
@@ -511,7 +505,7 @@ export type OrderScalarWhereInput = {
   withConsultation?: Prisma.BoolFilter<"Order"> | boolean
   createdAt?: Prisma.DateTimeFilter<"Order"> | Date | string
   updatedAt?: Prisma.DateTimeFilter<"Order"> | Date | string
-  userId?: Prisma.IntFilter<"Order"> | number
+  userId?: Prisma.StringFilter<"Order"> | string
 }
 
 export type OrderCreateWithoutProductsInput = {
@@ -519,7 +513,7 @@ export type OrderCreateWithoutProductsInput = {
   withConsultation?: boolean
   createdAt?: Date | string
   updatedAt?: Date | string
-  user?: Prisma.UserCreateNestedOneWithoutOrdersInput
+  user: Prisma.UserCreateNestedOneWithoutOrdersInput
 }
 
 export type OrderUncheckedCreateWithoutProductsInput = {
@@ -528,7 +522,7 @@ export type OrderUncheckedCreateWithoutProductsInput = {
   withConsultation?: boolean
   createdAt?: Date | string
   updatedAt?: Date | string
-  userId: number
+  userId: string
 }
 
 export type OrderCreateOrConnectWithoutProductsInput = {
@@ -552,7 +546,7 @@ export type OrderUpdateWithoutProductsInput = {
   withConsultation?: Prisma.BoolFieldUpdateOperationsInput | boolean
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  user?: Prisma.UserUpdateOneWithoutOrdersNestedInput
+  user?: Prisma.UserUpdateOneRequiredWithoutOrdersNestedInput
 }
 
 export type OrderUncheckedUpdateWithoutProductsInput = {
@@ -561,7 +555,7 @@ export type OrderUncheckedUpdateWithoutProductsInput = {
   withConsultation?: Prisma.BoolFieldUpdateOperationsInput | boolean
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  userId?: Prisma.IntFieldUpdateOperationsInput | number
+  userId?: Prisma.StringFieldUpdateOperationsInput | string
 }
 
 export type OrderCreateManyUserInput = {
@@ -635,7 +629,7 @@ export type OrderSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = 
   createdAt?: boolean
   updatedAt?: boolean
   userId?: boolean
-  user?: boolean | Prisma.Order$userArgs<ExtArgs>
+  user?: boolean | Prisma.UserDefaultArgs<ExtArgs>
   products?: boolean | Prisma.Order$productsArgs<ExtArgs>
   _count?: boolean | Prisma.OrderCountOutputTypeDefaultArgs<ExtArgs>
 }, ExtArgs["result"]["order"]>
@@ -647,7 +641,7 @@ export type OrderSelectCreateManyAndReturn<ExtArgs extends runtime.Types.Extensi
   createdAt?: boolean
   updatedAt?: boolean
   userId?: boolean
-  user?: boolean | Prisma.Order$userArgs<ExtArgs>
+  user?: boolean | Prisma.UserDefaultArgs<ExtArgs>
 }, ExtArgs["result"]["order"]>
 
 export type OrderSelectUpdateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetSelect<{
@@ -657,7 +651,7 @@ export type OrderSelectUpdateManyAndReturn<ExtArgs extends runtime.Types.Extensi
   createdAt?: boolean
   updatedAt?: boolean
   userId?: boolean
-  user?: boolean | Prisma.Order$userArgs<ExtArgs>
+  user?: boolean | Prisma.UserDefaultArgs<ExtArgs>
 }, ExtArgs["result"]["order"]>
 
 export type OrderSelectScalar = {
@@ -671,21 +665,21 @@ export type OrderSelectScalar = {
 
 export type OrderOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "totalPrice" | "withConsultation" | "createdAt" | "updatedAt" | "userId", ExtArgs["result"]["order"]>
 export type OrderInclude<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
-  user?: boolean | Prisma.Order$userArgs<ExtArgs>
+  user?: boolean | Prisma.UserDefaultArgs<ExtArgs>
   products?: boolean | Prisma.Order$productsArgs<ExtArgs>
   _count?: boolean | Prisma.OrderCountOutputTypeDefaultArgs<ExtArgs>
 }
 export type OrderIncludeCreateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
-  user?: boolean | Prisma.Order$userArgs<ExtArgs>
+  user?: boolean | Prisma.UserDefaultArgs<ExtArgs>
 }
 export type OrderIncludeUpdateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
-  user?: boolean | Prisma.Order$userArgs<ExtArgs>
+  user?: boolean | Prisma.UserDefaultArgs<ExtArgs>
 }
 
 export type $OrderPayload<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   name: "Order"
   objects: {
-    user: Prisma.$UserPayload<ExtArgs> | null
+    user: Prisma.$UserPayload<ExtArgs>
     products: Prisma.$OrdersOnProductsPayload<ExtArgs>[]
   }
   scalars: runtime.Types.Extensions.GetPayloadResult<{
@@ -694,7 +688,7 @@ export type $OrderPayload<ExtArgs extends runtime.Types.Extensions.InternalArgs 
     withConsultation: boolean
     createdAt: Date
     updatedAt: Date
-    userId: number
+    userId: string
   }, ExtArgs["result"]["order"]>
   composites: {}
 }
@@ -1089,7 +1083,7 @@ readonly fields: OrderFieldRefs;
  */
 export interface Prisma__OrderClient<T, Null = never, ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs, GlobalOmitOptions = {}> extends Prisma.PrismaPromise<T> {
   readonly [Symbol.toStringTag]: "PrismaPromise"
-  user<T extends Prisma.Order$userArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Order$userArgs<ExtArgs>>): Prisma.Prisma__UserClient<runtime.Types.Result.GetResult<Prisma.$UserPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+  user<T extends Prisma.UserDefaultArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.UserDefaultArgs<ExtArgs>>): Prisma.Prisma__UserClient<runtime.Types.Result.GetResult<Prisma.$UserPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
   products<T extends Prisma.Order$productsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Order$productsArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$OrdersOnProductsPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   /**
    * Attaches callbacks for the resolution and/or rejection of the Promise.
@@ -1125,7 +1119,7 @@ export interface OrderFieldRefs {
   readonly withConsultation: Prisma.FieldRef<"Order", 'Boolean'>
   readonly createdAt: Prisma.FieldRef<"Order", 'DateTime'>
   readonly updatedAt: Prisma.FieldRef<"Order", 'DateTime'>
-  readonly userId: Prisma.FieldRef<"Order", 'Int'>
+  readonly userId: Prisma.FieldRef<"Order", 'String'>
 }
     
 
@@ -1519,25 +1513,6 @@ export type OrderDeleteManyArgs<ExtArgs extends runtime.Types.Extensions.Interna
    * Limit how many Orders to delete.
    */
   limit?: number
-}
-
-/**
- * Order.user
- */
-export type Order$userArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
-  /**
-   * Select specific fields to fetch from the User
-   */
-  select?: Prisma.UserSelect<ExtArgs> | null
-  /**
-   * Omit specific fields from the User
-   */
-  omit?: Prisma.UserOmit<ExtArgs> | null
-  /**
-   * Choose, which related nodes to fetch as well
-   */
-  include?: Prisma.UserInclude<ExtArgs> | null
-  where?: Prisma.UserWhereInput
 }
 
 /**

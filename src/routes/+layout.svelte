@@ -9,6 +9,7 @@
 	import Overlay from '$lib/components/ui/Overlay.svelte';
 	import type { OverlayProps } from '$lib/types';
 	import type { PageData } from './$types';
+	import { userInfo } from 'os';
 
 	let { children, data }: { children: Snippet; data: PageData } = $props();
 

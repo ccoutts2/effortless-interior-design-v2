@@ -217,10 +217,10 @@ export type ProductWhereInput = {
   createdAt?: Prisma.DateTimeFilter<"Product"> | Date | string
   updatedAt?: Prisma.DateTimeFilter<"Product"> | Date | string
   roomTypeName?: Prisma.StringNullableFilter<"Product"> | string | null
-  roomType?: Prisma.XOR<Prisma.RoomTypeNullableScalarRelationFilter, Prisma.RoomTypeWhereInput> | null
   orders?: Prisma.OrdersOnProductsListRelationFilter
-  baskets?: Prisma.ProductsInBasketListRelationFilter
+  roomType?: Prisma.XOR<Prisma.RoomTypeNullableScalarRelationFilter, Prisma.RoomTypeWhereInput> | null
   prices?: Prisma.ProductPriceListRelationFilter
+  baskets?: Prisma.ProductsInBasketListRelationFilter
 }
 
 export type ProductOrderByWithRelationInput = {
@@ -235,10 +235,10 @@ export type ProductOrderByWithRelationInput = {
   createdAt?: Prisma.SortOrder
   updatedAt?: Prisma.SortOrder
   roomTypeName?: Prisma.SortOrderInput | Prisma.SortOrder
-  roomType?: Prisma.RoomTypeOrderByWithRelationInput
   orders?: Prisma.OrdersOnProductsOrderByRelationAggregateInput
-  baskets?: Prisma.ProductsInBasketOrderByRelationAggregateInput
+  roomType?: Prisma.RoomTypeOrderByWithRelationInput
   prices?: Prisma.ProductPriceOrderByRelationAggregateInput
+  baskets?: Prisma.ProductsInBasketOrderByRelationAggregateInput
 }
 
 export type ProductWhereUniqueInput = Prisma.AtLeast<{
@@ -256,10 +256,10 @@ export type ProductWhereUniqueInput = Prisma.AtLeast<{
   createdAt?: Prisma.DateTimeFilter<"Product"> | Date | string
   updatedAt?: Prisma.DateTimeFilter<"Product"> | Date | string
   roomTypeName?: Prisma.StringNullableFilter<"Product"> | string | null
-  roomType?: Prisma.XOR<Prisma.RoomTypeNullableScalarRelationFilter, Prisma.RoomTypeWhereInput> | null
   orders?: Prisma.OrdersOnProductsListRelationFilter
-  baskets?: Prisma.ProductsInBasketListRelationFilter
+  roomType?: Prisma.XOR<Prisma.RoomTypeNullableScalarRelationFilter, Prisma.RoomTypeWhereInput> | null
   prices?: Prisma.ProductPriceListRelationFilter
+  baskets?: Prisma.ProductsInBasketListRelationFilter
 }, "id">
 
 export type ProductOrderByWithAggregationInput = {
@@ -307,10 +307,10 @@ export type ProductCreateInput = {
   metadata?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
   createdAt?: Date | string
   updatedAt?: Date | string
-  roomType?: Prisma.RoomTypeCreateNestedOneWithoutSchemesInput
   orders?: Prisma.OrdersOnProductsCreateNestedManyWithoutProductInput
-  baskets?: Prisma.ProductsInBasketCreateNestedManyWithoutProductInput
+  roomType?: Prisma.RoomTypeCreateNestedOneWithoutSchemesInput
   prices?: Prisma.ProductPriceCreateNestedManyWithoutProductInput
+  baskets?: Prisma.ProductsInBasketCreateNestedManyWithoutProductInput
 }
 
 export type ProductUncheckedCreateInput = {
@@ -326,8 +326,8 @@ export type ProductUncheckedCreateInput = {
   updatedAt?: Date | string
   roomTypeName?: string | null
   orders?: Prisma.OrdersOnProductsUncheckedCreateNestedManyWithoutProductInput
-  baskets?: Prisma.ProductsInBasketUncheckedCreateNestedManyWithoutProductInput
   prices?: Prisma.ProductPriceUncheckedCreateNestedManyWithoutProductInput
+  baskets?: Prisma.ProductsInBasketUncheckedCreateNestedManyWithoutProductInput
 }
 
 export type ProductUpdateInput = {
@@ -341,10 +341,10 @@ export type ProductUpdateInput = {
   metadata?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  roomType?: Prisma.RoomTypeUpdateOneWithoutSchemesNestedInput
   orders?: Prisma.OrdersOnProductsUpdateManyWithoutProductNestedInput
-  baskets?: Prisma.ProductsInBasketUpdateManyWithoutProductNestedInput
+  roomType?: Prisma.RoomTypeUpdateOneWithoutSchemesNestedInput
   prices?: Prisma.ProductPriceUpdateManyWithoutProductNestedInput
+  baskets?: Prisma.ProductsInBasketUpdateManyWithoutProductNestedInput
 }
 
 export type ProductUncheckedUpdateInput = {
@@ -360,8 +360,8 @@ export type ProductUncheckedUpdateInput = {
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   roomTypeName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   orders?: Prisma.OrdersOnProductsUncheckedUpdateManyWithoutProductNestedInput
-  baskets?: Prisma.ProductsInBasketUncheckedUpdateManyWithoutProductNestedInput
   prices?: Prisma.ProductPriceUncheckedUpdateManyWithoutProductNestedInput
+  baskets?: Prisma.ProductsInBasketUncheckedUpdateManyWithoutProductNestedInput
 }
 
 export type ProductCreateManyInput = {
@@ -593,8 +593,8 @@ export type ProductCreateWithoutPricesInput = {
   metadata?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
   createdAt?: Date | string
   updatedAt?: Date | string
-  roomType?: Prisma.RoomTypeCreateNestedOneWithoutSchemesInput
   orders?: Prisma.OrdersOnProductsCreateNestedManyWithoutProductInput
+  roomType?: Prisma.RoomTypeCreateNestedOneWithoutSchemesInput
   baskets?: Prisma.ProductsInBasketCreateNestedManyWithoutProductInput
 }
 
@@ -641,8 +641,8 @@ export type ProductUpdateWithoutPricesInput = {
   metadata?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  roomType?: Prisma.RoomTypeUpdateOneWithoutSchemesNestedInput
   orders?: Prisma.OrdersOnProductsUpdateManyWithoutProductNestedInput
+  roomType?: Prisma.RoomTypeUpdateOneWithoutSchemesNestedInput
   baskets?: Prisma.ProductsInBasketUpdateManyWithoutProductNestedInput
 }
 
@@ -674,8 +674,8 @@ export type ProductCreateWithoutRoomTypeInput = {
   createdAt?: Date | string
   updatedAt?: Date | string
   orders?: Prisma.OrdersOnProductsCreateNestedManyWithoutProductInput
-  baskets?: Prisma.ProductsInBasketCreateNestedManyWithoutProductInput
   prices?: Prisma.ProductPriceCreateNestedManyWithoutProductInput
+  baskets?: Prisma.ProductsInBasketCreateNestedManyWithoutProductInput
 }
 
 export type ProductUncheckedCreateWithoutRoomTypeInput = {
@@ -690,8 +690,8 @@ export type ProductUncheckedCreateWithoutRoomTypeInput = {
   createdAt?: Date | string
   updatedAt?: Date | string
   orders?: Prisma.OrdersOnProductsUncheckedCreateNestedManyWithoutProductInput
-  baskets?: Prisma.ProductsInBasketUncheckedCreateNestedManyWithoutProductInput
   prices?: Prisma.ProductPriceUncheckedCreateNestedManyWithoutProductInput
+  baskets?: Prisma.ProductsInBasketUncheckedCreateNestedManyWithoutProductInput
 }
 
 export type ProductCreateOrConnectWithoutRoomTypeInput = {
@@ -749,8 +749,8 @@ export type ProductCreateWithoutOrdersInput = {
   createdAt?: Date | string
   updatedAt?: Date | string
   roomType?: Prisma.RoomTypeCreateNestedOneWithoutSchemesInput
-  baskets?: Prisma.ProductsInBasketCreateNestedManyWithoutProductInput
   prices?: Prisma.ProductPriceCreateNestedManyWithoutProductInput
+  baskets?: Prisma.ProductsInBasketCreateNestedManyWithoutProductInput
 }
 
 export type ProductUncheckedCreateWithoutOrdersInput = {
@@ -765,8 +765,8 @@ export type ProductUncheckedCreateWithoutOrdersInput = {
   createdAt?: Date | string
   updatedAt?: Date | string
   roomTypeName?: string | null
-  baskets?: Prisma.ProductsInBasketUncheckedCreateNestedManyWithoutProductInput
   prices?: Prisma.ProductPriceUncheckedCreateNestedManyWithoutProductInput
+  baskets?: Prisma.ProductsInBasketUncheckedCreateNestedManyWithoutProductInput
 }
 
 export type ProductCreateOrConnectWithoutOrdersInput = {
@@ -797,8 +797,8 @@ export type ProductUpdateWithoutOrdersInput = {
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   roomType?: Prisma.RoomTypeUpdateOneWithoutSchemesNestedInput
-  baskets?: Prisma.ProductsInBasketUpdateManyWithoutProductNestedInput
   prices?: Prisma.ProductPriceUpdateManyWithoutProductNestedInput
+  baskets?: Prisma.ProductsInBasketUpdateManyWithoutProductNestedInput
 }
 
 export type ProductUncheckedUpdateWithoutOrdersInput = {
@@ -813,8 +813,8 @@ export type ProductUncheckedUpdateWithoutOrdersInput = {
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   roomTypeName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  baskets?: Prisma.ProductsInBasketUncheckedUpdateManyWithoutProductNestedInput
   prices?: Prisma.ProductPriceUncheckedUpdateManyWithoutProductNestedInput
+  baskets?: Prisma.ProductsInBasketUncheckedUpdateManyWithoutProductNestedInput
 }
 
 export type ProductCreateWithoutBasketsInput = {
@@ -828,8 +828,8 @@ export type ProductCreateWithoutBasketsInput = {
   metadata?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
   createdAt?: Date | string
   updatedAt?: Date | string
-  roomType?: Prisma.RoomTypeCreateNestedOneWithoutSchemesInput
   orders?: Prisma.OrdersOnProductsCreateNestedManyWithoutProductInput
+  roomType?: Prisma.RoomTypeCreateNestedOneWithoutSchemesInput
   prices?: Prisma.ProductPriceCreateNestedManyWithoutProductInput
 }
 
@@ -876,8 +876,8 @@ export type ProductUpdateWithoutBasketsInput = {
   metadata?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  roomType?: Prisma.RoomTypeUpdateOneWithoutSchemesNestedInput
   orders?: Prisma.OrdersOnProductsUpdateManyWithoutProductNestedInput
+  roomType?: Prisma.RoomTypeUpdateOneWithoutSchemesNestedInput
   prices?: Prisma.ProductPriceUpdateManyWithoutProductNestedInput
 }
 
@@ -922,8 +922,8 @@ export type ProductUpdateWithoutRoomTypeInput = {
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   orders?: Prisma.OrdersOnProductsUpdateManyWithoutProductNestedInput
-  baskets?: Prisma.ProductsInBasketUpdateManyWithoutProductNestedInput
   prices?: Prisma.ProductPriceUpdateManyWithoutProductNestedInput
+  baskets?: Prisma.ProductsInBasketUpdateManyWithoutProductNestedInput
 }
 
 export type ProductUncheckedUpdateWithoutRoomTypeInput = {
@@ -938,8 +938,8 @@ export type ProductUncheckedUpdateWithoutRoomTypeInput = {
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   orders?: Prisma.OrdersOnProductsUncheckedUpdateManyWithoutProductNestedInput
-  baskets?: Prisma.ProductsInBasketUncheckedUpdateManyWithoutProductNestedInput
   prices?: Prisma.ProductPriceUncheckedUpdateManyWithoutProductNestedInput
+  baskets?: Prisma.ProductsInBasketUncheckedUpdateManyWithoutProductNestedInput
 }
 
 export type ProductUncheckedUpdateManyWithoutRoomTypeInput = {
@@ -962,14 +962,14 @@ export type ProductUncheckedUpdateManyWithoutRoomTypeInput = {
 
 export type ProductCountOutputType = {
   orders: number
-  baskets: number
   prices: number
+  baskets: number
 }
 
 export type ProductCountOutputTypeSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   orders?: boolean | ProductCountOutputTypeCountOrdersArgs
-  baskets?: boolean | ProductCountOutputTypeCountBasketsArgs
   prices?: boolean | ProductCountOutputTypeCountPricesArgs
+  baskets?: boolean | ProductCountOutputTypeCountBasketsArgs
 }
 
 /**
@@ -992,15 +992,15 @@ export type ProductCountOutputTypeCountOrdersArgs<ExtArgs extends runtime.Types.
 /**
  * ProductCountOutputType without action
  */
-export type ProductCountOutputTypeCountBasketsArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
-  where?: Prisma.ProductsInBasketWhereInput
+export type ProductCountOutputTypeCountPricesArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  where?: Prisma.ProductPriceWhereInput
 }
 
 /**
  * ProductCountOutputType without action
  */
-export type ProductCountOutputTypeCountPricesArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
-  where?: Prisma.ProductPriceWhereInput
+export type ProductCountOutputTypeCountBasketsArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  where?: Prisma.ProductsInBasketWhereInput
 }
 
 
@@ -1016,10 +1016,10 @@ export type ProductSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs 
   createdAt?: boolean
   updatedAt?: boolean
   roomTypeName?: boolean
-  roomType?: boolean | Prisma.Product$roomTypeArgs<ExtArgs>
   orders?: boolean | Prisma.Product$ordersArgs<ExtArgs>
-  baskets?: boolean | Prisma.Product$basketsArgs<ExtArgs>
+  roomType?: boolean | Prisma.Product$roomTypeArgs<ExtArgs>
   prices?: boolean | Prisma.Product$pricesArgs<ExtArgs>
+  baskets?: boolean | Prisma.Product$basketsArgs<ExtArgs>
   _count?: boolean | Prisma.ProductCountOutputTypeDefaultArgs<ExtArgs>
 }, ExtArgs["result"]["product"]>
 
@@ -1069,10 +1069,10 @@ export type ProductSelectScalar = {
 
 export type ProductOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "name" | "description" | "isScheme" | "active" | "features" | "images" | "metadata" | "createdAt" | "updatedAt" | "roomTypeName", ExtArgs["result"]["product"]>
 export type ProductInclude<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
-  roomType?: boolean | Prisma.Product$roomTypeArgs<ExtArgs>
   orders?: boolean | Prisma.Product$ordersArgs<ExtArgs>
-  baskets?: boolean | Prisma.Product$basketsArgs<ExtArgs>
+  roomType?: boolean | Prisma.Product$roomTypeArgs<ExtArgs>
   prices?: boolean | Prisma.Product$pricesArgs<ExtArgs>
+  baskets?: boolean | Prisma.Product$basketsArgs<ExtArgs>
   _count?: boolean | Prisma.ProductCountOutputTypeDefaultArgs<ExtArgs>
 }
 export type ProductIncludeCreateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
@@ -1085,10 +1085,10 @@ export type ProductIncludeUpdateManyAndReturn<ExtArgs extends runtime.Types.Exte
 export type $ProductPayload<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   name: "Product"
   objects: {
-    roomType: Prisma.$RoomTypePayload<ExtArgs> | null
     orders: Prisma.$OrdersOnProductsPayload<ExtArgs>[]
-    baskets: Prisma.$ProductsInBasketPayload<ExtArgs>[]
+    roomType: Prisma.$RoomTypePayload<ExtArgs> | null
     prices: Prisma.$ProductPricePayload<ExtArgs>[]
+    baskets: Prisma.$ProductsInBasketPayload<ExtArgs>[]
   }
   scalars: runtime.Types.Extensions.GetPayloadResult<{
     id: string
@@ -1496,10 +1496,10 @@ readonly fields: ProductFieldRefs;
  */
 export interface Prisma__ProductClient<T, Null = never, ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs, GlobalOmitOptions = {}> extends Prisma.PrismaPromise<T> {
   readonly [Symbol.toStringTag]: "PrismaPromise"
-  roomType<T extends Prisma.Product$roomTypeArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Product$roomTypeArgs<ExtArgs>>): Prisma.Prisma__RoomTypeClient<runtime.Types.Result.GetResult<Prisma.$RoomTypePayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
   orders<T extends Prisma.Product$ordersArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Product$ordersArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$OrdersOnProductsPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
-  baskets<T extends Prisma.Product$basketsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Product$basketsArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$ProductsInBasketPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+  roomType<T extends Prisma.Product$roomTypeArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Product$roomTypeArgs<ExtArgs>>): Prisma.Prisma__RoomTypeClient<runtime.Types.Result.GetResult<Prisma.$RoomTypePayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
   prices<T extends Prisma.Product$pricesArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Product$pricesArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$ProductPricePayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+  baskets<T extends Prisma.Product$basketsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Product$basketsArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$ProductsInBasketPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   /**
    * Attaches callbacks for the resolution and/or rejection of the Promise.
    * @param onfulfilled The callback to execute when the Promise is resolved.
@@ -1936,25 +1936,6 @@ export type ProductDeleteManyArgs<ExtArgs extends runtime.Types.Extensions.Inter
 }
 
 /**
- * Product.roomType
- */
-export type Product$roomTypeArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
-  /**
-   * Select specific fields to fetch from the RoomType
-   */
-  select?: Prisma.RoomTypeSelect<ExtArgs> | null
-  /**
-   * Omit specific fields from the RoomType
-   */
-  omit?: Prisma.RoomTypeOmit<ExtArgs> | null
-  /**
-   * Choose, which related nodes to fetch as well
-   */
-  include?: Prisma.RoomTypeInclude<ExtArgs> | null
-  where?: Prisma.RoomTypeWhereInput
-}
-
-/**
  * Product.orders
  */
 export type Product$ordersArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
@@ -1979,27 +1960,22 @@ export type Product$ordersArgs<ExtArgs extends runtime.Types.Extensions.Internal
 }
 
 /**
- * Product.baskets
+ * Product.roomType
  */
-export type Product$basketsArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+export type Product$roomTypeArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   /**
-   * Select specific fields to fetch from the ProductsInBasket
+   * Select specific fields to fetch from the RoomType
    */
-  select?: Prisma.ProductsInBasketSelect<ExtArgs> | null
+  select?: Prisma.RoomTypeSelect<ExtArgs> | null
   /**
-   * Omit specific fields from the ProductsInBasket
+   * Omit specific fields from the RoomType
    */
-  omit?: Prisma.ProductsInBasketOmit<ExtArgs> | null
+  omit?: Prisma.RoomTypeOmit<ExtArgs> | null
   /**
    * Choose, which related nodes to fetch as well
    */
-  include?: Prisma.ProductsInBasketInclude<ExtArgs> | null
-  where?: Prisma.ProductsInBasketWhereInput
-  orderBy?: Prisma.ProductsInBasketOrderByWithRelationInput | Prisma.ProductsInBasketOrderByWithRelationInput[]
-  cursor?: Prisma.ProductsInBasketWhereUniqueInput
-  take?: number
-  skip?: number
-  distinct?: Prisma.ProductsInBasketScalarFieldEnum | Prisma.ProductsInBasketScalarFieldEnum[]
+  include?: Prisma.RoomTypeInclude<ExtArgs> | null
+  where?: Prisma.RoomTypeWhereInput
 }
 
 /**
@@ -2024,6 +2000,30 @@ export type Product$pricesArgs<ExtArgs extends runtime.Types.Extensions.Internal
   take?: number
   skip?: number
   distinct?: Prisma.ProductPriceScalarFieldEnum | Prisma.ProductPriceScalarFieldEnum[]
+}
+
+/**
+ * Product.baskets
+ */
+export type Product$basketsArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  /**
+   * Select specific fields to fetch from the ProductsInBasket
+   */
+  select?: Prisma.ProductsInBasketSelect<ExtArgs> | null
+  /**
+   * Omit specific fields from the ProductsInBasket
+   */
+  omit?: Prisma.ProductsInBasketOmit<ExtArgs> | null
+  /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.ProductsInBasketInclude<ExtArgs> | null
+  where?: Prisma.ProductsInBasketWhereInput
+  orderBy?: Prisma.ProductsInBasketOrderByWithRelationInput | Prisma.ProductsInBasketOrderByWithRelationInput[]
+  cursor?: Prisma.ProductsInBasketWhereUniqueInput
+  take?: number
+  skip?: number
+  distinct?: Prisma.ProductsInBasketScalarFieldEnum | Prisma.ProductsInBasketScalarFieldEnum[]
 }
 
 /**

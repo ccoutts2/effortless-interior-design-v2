@@ -1,8 +1,8 @@
 import prisma from '$lib/server/prisma';
 import type { LayoutServerLoad } from './$types';
 
-export const load: LayoutServerLoad = async ({ cookies }) => {
-	const sessionCookie = cookies.get('session');
+export const load: LayoutServerLoad = async ({ locals, cookies }) => {
+	const { session } = locals;
 
 	const userSession = await prisma.session.findUnique({
 		where: { id: sessionCookie },
@@ -18,8 +18,9 @@ export const load: LayoutServerLoad = async ({ cookies }) => {
 	const showNewsletterPopup = !user || !user.newsletterSub;
 
 	let productsInBasket = null;
-	if (sessionCookie) {
-		productsInBasket = await fetchProductsInBasket(sessionCookie);
+
+	if (session) {
+		productsInBasket = await fetchProductsInBasket(session.id);
 	}
 
 	return {

@@ -1,35 +1,41 @@
+import { sequence } from '@sveltejs/kit/hooks';
 import {
-	createSession,
 	validateSessionToken,
+	setSessionTokenCookie,
 	deleteSessionTokenCookie,
-	setSessionTokenCookie
+	generateSessionToken,
+	createSession
 } from '$lib/server/session';
+
 import type { Handle } from '@sveltejs/kit';
 
 const authHandle: Handle = async ({ event, resolve }) => {
 	const token = event.cookies.get('session') ?? null;
+	if (token === null) {
+		const newToken = await generateSessionToken();
+		const session = await createSession(newToken, null);
 
-	let session = null;
-
-	if (token) {
-		session = await validateSessionToken(token);
+		if (session) {
+			await setSessionTokenCookie(event, newToken, session.expiresAt);
+			event.locals.session = session;
+		} else {
+			event.locals.session = null;
+		}
+		event.locals.user = null;
+		return resolve(event);
 	}
 
-	if (!session) {
-		if (token) {
-			deleteSessionTokenCookie(event);
-		}
+	const { session, user } = await validateSessionToken(token);
 
-		const newSession = await createSession();
-		session = newSession;
-
-		const expiresAt = new Date(Date.now() + 60 * 60 * 24 * 30 * 1000);
-		setSessionTokenCookie(event, newSession.token, expiresAt);
+	if (session !== null) {
+		await setSessionTokenCookie(event, token, session.expiresAt);
+	} else {
+		deleteSessionTokenCookie(event);
 	}
 
 	event.locals.session = session;
-
+	event.locals.user = user;
 	return resolve(event);
 };
 
-export const handle = authHandle;
+export const handle = sequence(authHandle);
