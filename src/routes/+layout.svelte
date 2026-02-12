@@ -34,7 +34,14 @@
 		}
 	};
 
-	const { form, enhance, message, errors } = superForm(data.form);
+	const { form, enhance, message, errors } = superForm(data.form, {
+		id: 'modal',
+		onUpdated: ({ form }) => {
+			if (form.valid) {
+				showModal = false;
+			}
+		}
+	});
 
 	setContext('overlay-ctx', overlayState);
 
@@ -115,7 +122,7 @@
 						>Enter your email, optionally your name too, to sign up to the newsletter</legend
 					>
 					<EmailField
-						fieldName="modalEmail"
+						fieldName="email"
 						label="Your email"
 						value={$form.email}
 						errors={$errors.email}
@@ -123,7 +130,7 @@
 						required
 					/>
 					<TextField
-						fieldName="modalName"
+						fieldName="name"
 						label="Your name (optional)"
 						value={$form.name ?? ''}
 						errors={$errors.name}

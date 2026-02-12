@@ -5,13 +5,13 @@ import type { LayoutServerLoad } from './$types';
 import z from 'zod';
 
 const schema = z.object({
-	modalEmail: z.string().email(),
-	modalName: z.string().min(1, 'Please enter a valid name').optional()
+	email: z.string().email(),
+	name: z.string().min(1, 'Please enter a valid name').optional()
 });
 
 export const load: LayoutServerLoad = async ({ locals, cookies }) => {
 	const { session, user } = locals;
-	const form = await superValidate(zod(schema));
+	const form = await superValidate(zod(schema), { id: 'modal' });
 
 	const dismissNewsletter = cookies.get('newsletter_dismissed') === 'true';
 

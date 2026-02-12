@@ -19,7 +19,7 @@ export const load: PageServerLoad = async () => {
 };
 
 export const actions = {
-	newsletterRegister: async ({ request, cookies }) => {
+	newsletterRegister: async ({ request, cookies, locals }) => {
 		const form = await superValidate(request, zod(schema));
 
 		if (!form.valid) {
@@ -41,11 +41,23 @@ export const actions = {
 		}
 
 		try {
-			await prisma.user.upsert({
+			const user = await prisma.user.upsert({
 				where: { email: form.data.email },
 				update: { newsletterSub: true },
 				create: { email: form.data.email, name: form.data.name, newsletterSub: true }
 			});
+
+			if (locals.session) {
+				await prisma.session.update({
+					where: { id: locals.session.id },
+					data: {
+						userId: user.id
+					}
+				});
+			}
+
+			locals.user = user;
+			locals.session.userId = user.id;
 
 			cookies.set('newsletter_dismissed', 'true', {
 				httpOnly: true,
