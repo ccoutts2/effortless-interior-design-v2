@@ -1,6 +1,7 @@
-import { verifyPasswordHash } from '$lib/server/password';
+import { hashPassword, verifyPasswordHash } from '$lib/server/password';
 import prisma from '$lib/server/prisma';
 import { createSession, generateSessionToken, setSessionTokenCookie } from '$lib/server/session';
+import type { User } from '../../../../generated/prisma/client';
 import type { PageServerLoad } from './$types';
 import { redirect, type Actions } from '@sveltejs/kit';
 import { message, superValidate } from 'sveltekit-superforms';
@@ -9,12 +10,12 @@ import { z } from 'zod/v4';
 
 const schema = z.object({
 	email: z.email(),
-	password: z.string().min(8, 'Password is incorrect.')
+	name: z.string().min(1, 'Please enter a name.'),
+	password: z.string().min(8, 'Password is not long enough.')
 });
 
 export const load: PageServerLoad = async ({ locals }) => {
 	const { user } = locals;
-
 	const form = await superValidate(zod4(schema));
 
 	if (user !== null && user.password !== null) {
@@ -30,37 +31,44 @@ export const actions = {
 	default: async (event) => {
 		const form = await superValidate(event.request, zod4(schema));
 
-		let user;
-		let passwordMatch: boolean = false;
+		let user: User;
+		const email = form.data.email;
+		const passwordHash = await hashPassword(form.data.password);
 
 		if (!form.valid) {
 			return message(form, {
-				status: 'invalid',
+				status: 500,
 				text: 'Form was invalid. Please check the form for errors.'
 			});
 		}
 
 		try {
-			user = await prisma.user.findUnique({
-				where: { email: form.data.email }
+			const emailCheck = await prisma.user.findUnique({
+				where: { email }
 			});
 
-			if (!user || !passwordMatch) {
+			if (emailCheck) {
 				return message(
 					form,
 					{
 						status: 'error',
-						text: 'Invalid email or password.'
+						text: 'Email already exists. Please login.'
 					},
-					{ status: 400 }
+					{
+						status: 400
+					}
 				);
 			}
 
-			if (user.password) {
-				passwordMatch = await verifyPasswordHash(user.password, form.data.password);
-			}
+			user = await prisma.user.create({
+				data: {
+					email: email,
+					name: form.data.name,
+					password: passwordHash
+				}
+			});
 
-			if (event.locals.session) {
+			if (event.locals.user) {
 				await prisma.session.update({
 					where: { id: event.locals.session.id },
 					data: { userId: user.id }
@@ -84,6 +92,6 @@ export const actions = {
 			);
 		}
 
-		return redirect(302, '/');
+		throw redirect(302, '/admin/dashboard');
 	}
 } satisfies Actions;
