@@ -1,3 +1,5 @@
+import 'dotenv/config';
+import Stripe from 'stripe';
 import { PrismaClient } from '../src/generated/prisma/client';
 
 import { roomType, products } from './generators';
@@ -5,6 +7,8 @@ import { roomTypeNames } from './generators/roomType';
 import { resetDatabase } from './generators/resetDatabase';
 
 export const prisma = new PrismaClient();
+
+const stripe = new Stripe(process.env.SECRET_STRIPE_KEY as string);
 
 let productArray = [] as any;
 
@@ -31,15 +35,31 @@ async function createProducts() {
 
 	for (let i = 0; i < 10; i++) {
 		const productData = products(roomTypeNames);
+		const unitAmount = 75000;
+
+		const stripeProduct = await stripe.products.create({
+			name: productData.name,
+			description: productData.description ?? undefined,
+			default_price_data: {
+				currency: 'gbp',
+				unit_amount: unitAmount
+			}
+		});
+
+		const stripePriceId = stripeProduct.default_price as string;
+
+		console.log('DEBUG productData:', JSON.stringify(productData));
+
 		const newProduct = await prisma.product.create({
 			data: {
 				...productData,
+				id: stripeProduct.id,
 				prices: {
 					create: {
-						id: `price_${Math.random().toString(36)}`,
+						id: stripePriceId,
 						active: true,
 						currency: 'gbp',
-						unitAmount: 75000,
+						unitAmount,
 						type: 'one_time'
 					}
 				}

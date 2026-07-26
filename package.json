@@ -51,10 +51,12 @@
 	},
 	"dependencies": {
 		"@lucide/svelte": "^0.543.0",
+		"@neondatabase/serverless": "^1.1.0",
 		"@prisma/client": "^6.16.1",
 		"@stripe/stripe-js": "^8.7.0",
 		"gsap": "^3.13.0",
 		"sass": "^1.92.1",
-		"stripe": "^20.3.0"
+		"stripe": "^20.3.0",
+		"vercel": "^57.0.0"
 	}
 }

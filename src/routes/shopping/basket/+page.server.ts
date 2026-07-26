@@ -1,6 +1,6 @@
 import prisma from '$lib/server/prisma';
 import { StripeService } from '$lib/services/stripe.service';
-import { fail, redirect, type Actions } from '@sveltejs/kit';
+import { fail, isRedirect, redirect, type Actions } from '@sveltejs/kit';
 
 export const actions = {
 	purchaseBasket: async ({ cookies }) => {
@@ -45,16 +45,21 @@ export const actions = {
 			throw redirect(302, '/shopping/error');
 		}
 
-		const session = await StripeService.stripePayment(itemsToPurchase);
+		try {
+			const session = await StripeService.stripePayment(itemsToPurchase);
 
-		if (session?.client_secret) {
-			cookies.set('client-secret', session.client_secret, {
-				path: '/',
-				httpOnly: true,
-				secure: true,
-				sameSite: 'strict'
-			});
-			throw redirect(302, '/shopping/checkout');
+			if (session?.client_secret) {
+				cookies.set('client-secret', session.client_secret, {
+					path: '/',
+					httpOnly: true,
+					secure: true,
+					sameSite: 'strict'
+				});
+				throw redirect(302, '/shopping/checkout');
+			}
+		} catch (error) {
+			if (isRedirect(error)) throw error;
+			console.error('Stripe payment error:', error);
 		}
 		throw redirect(302, '/shopping/error');
 	},

@@ -1,5 +1,5 @@
 import prisma from '$lib/server/prisma';
-import { fail, redirect, type Actions } from '@sveltejs/kit';
+import { fail, isRedirect, redirect, type Actions } from '@sveltejs/kit';
 import type { PageServerLoad } from './$types';
 import { StripeService } from '$lib/services/stripe.service';
 
@@ -183,9 +183,9 @@ export const actions = {
 				throw redirect(302, '/shopping/checkout');
 			}
 		} catch (error) {
-			if (error instanceof Response) throw error;
+			if (isRedirect(error)) throw error;
 
-			+console.error('Stripe payment error:', error);
+			console.error('Stripe payment error:', error);
 		}
 
 		throw redirect(302, '/shopping/error');
