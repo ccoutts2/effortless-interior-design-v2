@@ -48,8 +48,6 @@ async function createProducts() {
 
 		const stripePriceId = stripeProduct.default_price as string;
 
-		console.log('DEBUG productData:', JSON.stringify(productData));
-
 		const newProduct = await prisma.product.create({
 			data: {
 				...productData,
